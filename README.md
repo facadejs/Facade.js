@@ -182,13 +182,13 @@ new Facade.Circle([options]);
 ```javascript
 Facade.Circle.getOption(key);
 Facade.Circle.getAllOptions();
-Facade.Circle.setOptions([options]);
+Facade.Circle.setOptions(options);
 ```
 
 ```javascript
 Facade.Circle.getMetric(key);
 Facade.Circle.getAllMetrics();
-Facade.Circle.setMetrics([metrics]);
+Facade.Circle.setMetrics(metrics);
 ```
 
 ### Facade.Image
@@ -236,13 +236,13 @@ new Facade.Image(file, [options]);
 ```javascript
 Facade.Image.getOption(key);
 Facade.Image.getAllOptions();
-Facade.Image.setOptions([options]);
+Facade.Image.setOptions(options);
 ```
 
 ```javascript
 Facade.Image.getMetric(key);
 Facade.Image.getAllMetrics();
-Facade.Image.setMetrics([metrics]);
+Facade.Image.setMetrics(metrics);
 ```
 
 ### Facade.Line
@@ -276,13 +276,13 @@ new Facade.Line([options]);
 ```javascript
 Facade.Line.getOption(key);
 Facade.Line.getAllOptions();
-Facade.Line.setOptions([options]);
+Facade.Line.setOptions(options);
 ```
 
 ```javascript
 Facade.Line.getMetric(key);
 Facade.Line.getAllMetrics();
-Facade.Line.setMetrics([metrics]);
+Facade.Line.setMetrics(metrics);
 ```
 
 ### Facade.Rect
@@ -316,13 +316,13 @@ new Facade.Rect([options]);
 ```javascript
 Facade.Rect.getOption(key);
 Facade.Rect.getAllOptions();
-Facade.Rect.setOptions([options]);
+Facade.Rect.setOptions(options);
 ```
 
 ```javascript
 Facade.Rect.getMetric(key);
 Facade.Rect.getAllMetrics();
-Facade.Rect.setMetrics([metrics]);
+Facade.Rect.setMetrics(metrics);
 ```
 
 ### Facade.Text
@@ -357,13 +357,13 @@ new Facade.Text([options]);
 ```javascript
 Facade.Text.getOption(key);
 Facade.Text.getAllOptions();
-Facade.Text.setOptions([options]);
+Facade.Text.setOptions(options);
 ```
 
 ```javascript
 Facade.Text.getMetric(key);
 Facade.Text.getAllMetrics();
-Facade.Text.setMetrics([metrics]);
+Facade.Text.setMetrics(metrics);
 ```
 
 ## Options
