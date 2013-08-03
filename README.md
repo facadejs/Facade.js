@@ -212,7 +212,7 @@ new Facade.Image(file, [options]);
 - [`frame`](#frame-array) : Array of frames for sprite animation.
 - [`speed`](#speed-integer) : Speed of sprite animation.
 - [`loop`](#loop-boolean) : Loop the sprite animation.
-- [`callback`](#callback) : Function called for every frame of a sprite animation.
+- [`callback`](#callback-function) : Function called for every frame of a sprite animation.
 - [`shadowBlur`](#shadowblur-integer) : Blur level for drop shadow.
 - [`shadowColor`](#shadowcolor-string) : Color of drop shadow.
 - [`shadowOffsetX`](#shadowoffsetx-integer) : X offset of drop shadow.
@@ -660,7 +660,7 @@ Currently Facade.js works in Chrome 10+, Safari 6+, Firefox 4+ and Internet Expl
 
 ### Minify
 
-[Uglifyjs2](https://github.com/mishoo/UglifyJS2) is used to minify Facade.js. The below command and corresponding flags should be used.
+[UglifyJS2](https://github.com/mishoo/UglifyJS2) is used to minify Facade.js. The below command and corresponding flags should be used.
 
 ```shell
 uglifyjs facade.js -o facade.min.js --mangle --comments all
