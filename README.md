@@ -71,10 +71,18 @@ document.body.appendChild(stage.canvas);
 
 #### Facade.context
 
-Reference to the canvas' 2d context.
+Reference to the canvas 2d context.
 
 ```javascript
 console.log(stage.context);
+```
+
+#### Facade.dt
+
+Current time in milliseconds since last canvas draw.
+
+```javascript
+console.log(stage.dt);
 ```
 
 #### Facade.fps
@@ -87,7 +95,7 @@ console.log(stage.fps);
 
 #### Facade.ftime
 
-Current time in milliseconds since last canvas draw.
+Current time of last canvas draw.
 
 ```javascript
 console.log(stage.ftime);
@@ -132,7 +140,7 @@ Exports a base64 encoded string in the type (options) and quality specified. The
 - image/png
 - image/jpeg
 
-Quality is an float between 0 and 1.
+Quality is an integer between 1 and 100.
 
 #### Facade.start();
 
@@ -172,7 +180,15 @@ new Facade.Circle([options]);
 #### Methods
 
 ```javascript
+Facade.Circle.getOption(key);
+Facade.Circle.getAllOptions();
 Facade.Circle.setOptions([options]);
+```
+
+```javascript
+Facade.Circle.getMetric(key);
+Facade.Circle.getAllMetrics();
+Facade.Circle.setMetrics([metrics]);
 ```
 
 ### Facade.Image
@@ -196,6 +212,7 @@ new Facade.Image(file, [options]);
 - [`frame`](#frame-array) : Array of frames for sprite animation.
 - [`speed`](#speed-integer) : Speed of sprite animation.
 - [`loop`](#loop-boolean) : Loop the sprite animation.
+- [`callback`](#callback) : Function called for every frame of a sprite animation.
 - [`shadowBlur`](#shadowblur-integer) : Blur level for drop shadow.
 - [`shadowColor`](#shadowcolor-string) : Color of drop shadow.
 - [`shadowOffsetX`](#shadowoffsetx-integer) : X offset of drop shadow.
@@ -217,7 +234,15 @@ new Facade.Image(file, [options]);
 #### Methods
 
 ```javascript
+Facade.Image.getOption(key);
+Facade.Image.getAllOptions();
 Facade.Image.setOptions([options]);
+```
+
+```javascript
+Facade.Image.getMetric(key);
+Facade.Image.getAllMetrics();
+Facade.Image.setMetrics([metrics]);
 ```
 
 ### Facade.Line
@@ -249,7 +274,15 @@ new Facade.Line([options]);
 #### Methods
 
 ```javascript
+Facade.Line.getOption(key);
+Facade.Line.getAllOptions();
 Facade.Line.setOptions([options]);
+```
+
+```javascript
+Facade.Line.getMetric(key);
+Facade.Line.getAllMetrics();
+Facade.Line.setMetrics([metrics]);
 ```
 
 ### Facade.Rect
@@ -281,7 +314,15 @@ new Facade.Rect([options]);
 #### Methods
 
 ```javascript
+Facade.Rect.getOption(key);
+Facade.Rect.getAllOptions();
 Facade.Rect.setOptions([options]);
+```
+
+```javascript
+Facade.Rect.getMetric(key);
+Facade.Rect.getAllMetrics();
+Facade.Rect.setMetrics([metrics]);
 ```
 
 ### Facade.Text
@@ -314,7 +355,15 @@ new Facade.Text([options]);
 #### Methods
 
 ```javascript
+Facade.Text.getOption(key);
+Facade.Text.getAllOptions();
 Facade.Text.setOptions([options]);
+```
+
+```javascript
+Facade.Text.getMetric(key);
+Facade.Text.getAllMetrics();
+Facade.Text.setMetrics([metrics]);
 ```
 
 ## Options
@@ -340,6 +389,12 @@ Position to anchor the object at.
 _Default: `0`_
 
 Radius of the rectangle's corners.
+
+#### callback _(Function)_
+
+_Default: `function (frame) { }`_
+
+Function called for every frame of a sprite animation. Function's only parameter is the frame number currently being drawn.
 
 #### counterclockwise _(Boolean)_
 

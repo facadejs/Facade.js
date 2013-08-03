@@ -4,7 +4,10 @@
  * Dual-licensed under both MIT and BSD licenses.
  */
 
-!function () {
+/*jslint browser: true*/
+/*jslint nomen: true*/
+
+window.Facade = (function () {
 
 	'use strict';
 
@@ -17,7 +20,13 @@
 
 	var Facade = function (canvas, width, height) {
 
-		if (canvas && typeof canvas == 'object' && canvas.nodeType == 1) {
+		if (!(this instanceof Facade)) {
+
+			return new Facade(canvas, width, height);
+
+		}
+
+		if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
 
 			this.canvas = canvas;
 
@@ -25,7 +34,7 @@
 
 			this.canvas = document.createElement('canvas');
 
-			if (typeof canvas == 'string') {
+			if (typeof canvas === 'string') {
 
 				this.canvas.setAttribute('id', canvas);
 
@@ -58,175 +67,186 @@
 
 		this.requestAnimation = null;
 
-		this.addToStage = function (obj, options) {
+	};
 
-			options = Facade.prototype.setOptions(obj.options, options);
+	Facade.prototype.addToStage = function (obj, options) {
 
-			this.context.save();
+		var border_radius,
+			frame_offset_x,
+			metrics,
+			x,
+			y;
 
-			Facade.prototype.setAnchorPoint.call(this, obj, options);
+		options = obj.setOptions(options, true);
 
-			if (!(obj instanceof Facade.Image)) {
+		this.context.save();
 
-				if (obj.metrics.x + obj.metrics.width < 0 ||
-					obj.metrics.y + obj.metrics.height < 0 ||
-					obj.metrics.x > this.canvas.width ||
-					obj.metrics.y > this.canvas.height) {
+		this.setAnchorPoint.call(this, obj, options);
 
-						this.context.restore();
+		metrics = obj.getAllMetrics();
 
-						return this;
+		if (!(obj instanceof Facade.Image)) {
 
-				}
+			if (metrics.x + metrics.width < 0 || metrics.y + metrics.height < 0 || metrics.x > this.canvas.width || metrics.y > this.canvas.height) {
+
+				this.context.restore();
+
+				return this;
 
 			}
 
-			this.context.scale(options.scale, options.scale);
+		}
 
-			Facade.prototype.setRotate.call(this, obj, options);
+		this.context.scale(options.scale, options.scale);
+
+		this.setRotate.call(this, obj, options);
+
+		if (options.fillStyle) {
+
+			this.context.fillStyle = options.fillStyle;
+
+		}
+
+		this.context.globalAlpha = options.opacity / 100;
+
+		if (options.lineCap) {
+
+			this.context.lineCap = options.lineCap;
+
+		}
+
+		if (options.lineWidth) {
+
+			this.context.strokeStyle = options.strokeStyle;
+			this.context.lineWidth = options.lineWidth;
+
+		}
+
+		if (options.shadowBlur) {
+
+			this.context.shadowBlur = options.shadowBlur;
+			this.context.shadowColor = options.shadowColor;
+			this.context.shadowOffsetX = options.shadowOffsetX;
+			this.context.shadowOffsetY = options.shadowOffsetY;
+
+		}
+
+		if (obj instanceof Facade.Circle) {
+
+			this.context.beginPath();
+
+			this.context.arc(
+				0,
+				0,
+				options.radius,
+				options.start * Math.PI / 180,
+				options.end * Math.PI / 180,
+				options.counterclockwise
+			);
 
 			if (options.fillStyle) {
 
-				this.context.fillStyle = options.fillStyle;
+				this.context.fill();
 
 			}
 
-			this.context.globalAlpha = options.opacity / 100;
+			if (options.strokePosition === 'inset') {
 
-			if (options.lineCap) {
-
-				this.context.lineCap = options.lineCap;
-
-			}
-
-			if (options.lineWidth) {
-
-				this.context.strokeStyle = options.strokeStyle;
-				this.context.lineWidth = options.lineWidth;
-
-			}
-
-			if (options.shadowBlur) {
-
-				this.context.shadowBlur = options.shadowBlur;
-				this.context.shadowColor = options.shadowColor;
-				this.context.shadowOffsetX = options.shadowOffsetX;
-				this.context.shadowOffsetY = options.shadowOffsetY;
-
-			}
-
-			if (obj instanceof Facade.Circle) {
-
+				this.context.closePath();
 				this.context.beginPath();
 
 				this.context.arc(
 					0,
 					0,
-					options.radius,
-					options.start * Math.PI/180,
-					options.end * Math.PI/180,
+					options.radius - (options.lineWidth / 2),
+					options.start * Math.PI / 180,
+					options.end * Math.PI / 180,
 					options.counterclockwise
 				);
 
-				if (options.fillStyle) {
-
-					this.context.fill();
-
-				}
-
-				if (options.strokePosition == 'inset') {
-
-					this.context.closePath();
-					this.context.beginPath();
-
-					this.context.arc(
-						0,
-						0,
-						options.radius - (options.lineWidth / 2),
-						options.start * Math.PI/180,
-						options.end * Math.PI/180,
-						options.counterclockwise
-					);
-
-				} else if (options.strokePosition == 'outset') {
-
-					this.context.closePath();
-					this.context.beginPath();
-
-					this.context.arc(
-						0,
-						0,
-						options.radius + (options.lineWidth / 2),
-						options.start * Math.PI/180,
-						options.end * Math.PI/180,
-						options.counterclockwise
-					);
-
-				}
-
-				if (options.lineWidth) {
-
-					this.context.stroke();
-
-				}
+			} else if (options.strokePosition === 'outset') {
 
 				this.context.closePath();
+				this.context.beginPath();
 
-			} else if (obj instanceof Facade.Image && obj.isLoaded) {
+				this.context.arc(
+					0,
+					0,
+					options.radius + (options.lineWidth / 2),
+					options.start * Math.PI / 180,
+					options.end * Math.PI / 180,
+					options.counterclockwise
+				);
 
-				var frame_offset_x = 0;
+			}
 
-				if (options.frames.length) {
+			if (options.lineWidth) {
 
-					frame_offset_x = options.frames[obj.frame];
+				this.context.stroke();
+
+			}
+
+			this.context.closePath();
+
+		} else if (obj instanceof Facade.Image && obj.isLoaded) {
+
+			frame_offset_x = 0;
+
+			if (options.frames.length) {
+
+				frame_offset_x = options.frames[obj.frame];
+
+			}
+
+			for (x = 0; x < options.tileX; x += 1) {
+
+				for (y = 0; y < options.tileY; y += 1) {
+
+					if (metrics.x + options.width * (x + 1) < 0 || metrics.y + options.height * (y + 1) < 0 || metrics.x + options.width * x > this.canvas.width || metrics.y + options.height * y > this.canvas.height) {
+
+						break;
+
+					}
+
+					obj.setMetrics({
+						width: metrics.width * (x + 1),
+						height: metrics.height * (y + 1)
+					});
+
+					this.context.drawImage(
+						obj.img,
+						(options.width * frame_offset_x) + options.offsetX,
+						options.offsetY,
+						options.width,
+						options.height,
+						options.width * x,
+						options.height * y,
+						options.width,
+						options.height
+					);
 
 				}
 
-				for (var x = 0; x < options.tileX; x++) {
+			}
 
-					for (var y = 0; y < options.tileY; y++) {
+			if (options.frames.length) {
 
-						if (obj.metrics.x + options.width * (x + 1) < 0 ||
-							obj.metrics.y + options.height * (y + 1) < 0 ||
-							obj.metrics.x + options.width * x > this.canvas.width ||
-							obj.metrics.y + options.height * y > this.canvas.height) {
+				if (!obj.ftime) {
 
-							break;
+					obj.ftime = this.ftime;
 
-						}
+					if (typeof options.callback === 'function') {
 
-						obj.metrics.width = options.width * (x + 1);
-						obj.metrics.height = options.height * (y + 1);
-
-						this.context.drawImage(
-							obj.elem,
-							(options.width * frame_offset_x) + options.offsetX,
-							options.offsetY,
-							options.width,
-							options.height,
-							options.width * x,
-							options.height * y,
-							options.width,
-							options.height);
+						options.callback.call(obj, options.frames[obj.frame]);
 
 					}
 
 				}
 
-				if (options.frames.length) {
+				if (this.ftime - obj.ftime >= options.speed) {
 
-					if (!obj.ftime) {
-
-						obj.ftime = this.ftime;
-
-					}
-
-					if (this.ftime - obj.ftime >= options.speed) {
-
-						obj.ftime = this.ftime;
-						obj.frame++;
-
-					}
+					obj.ftime = this.ftime;
+					obj.frame += 1;
 
 					if (obj.frame >= options.frames.length) {
 
@@ -236,244 +256,230 @@
 
 						} else {
 
-							obj.frame = options.frames.length -1;
+							obj.frame = options.frames.length - 1;
 
 						}
 
 					}
 
+					if (typeof options.callback === 'function') {
+
+						options.callback.call(obj, options.frames[obj.frame]);
+
+					}
+
 				}
 
-			} else if (obj instanceof Facade.Line) {
+			}
 
-				this.context.beginPath();
+		} else if (obj instanceof Facade.Line) {
 
-				this.context.moveTo(0, 0);
-				this.context.lineTo(
-					options.endX - options.startX,
-					options.endY - options.startY
+			this.context.beginPath();
+
+			this.context.moveTo(0, 0);
+			this.context.lineTo(
+				options.endX - options.startX,
+				options.endY - options.startY
+			);
+
+			this.context.stroke();
+
+			this.context.closePath();
+
+		} else if (obj instanceof Facade.Rect) {
+
+			this.context.beginPath();
+
+			if (options.borderRadius) {
+
+				border_radius = Math.min(
+					options.borderRadius,
+					options.height / 2,
+					options.width / 2
 				);
 
-				this.context.stroke();
+				this.context.moveTo(border_radius, 0);
 
-				this.context.closePath();
+				this.context.arc(
+					options.width - border_radius,
+					border_radius,
+					border_radius,
+					Math.PI * 1.5,
+					0
+				);
 
-			} else if (obj instanceof Facade.Rect) {
+				this.context.arc(
+					options.width - border_radius,
+					options.height - border_radius,
+					border_radius,
+					0,
+					Math.PI * 0.5
+				);
 
-				this.context.beginPath();
+				this.context.arc(
+					border_radius,
+					options.height - border_radius,
+					border_radius,
+					Math.PI * 0.5,
+					Math.PI
+				);
 
-				if (options.borderRadius) {
-
-					var borderRadius = Math.min(
-						options.borderRadius,
-						options.height / 2,
-						options.width / 2
-					);
-
-					this.context.moveTo(borderRadius, 0);
-
-					this.context.arc(
-						options.width - borderRadius,
-						borderRadius,
-						borderRadius,
-						Math.PI*1.5,
-						0
-					);
-
-					this.context.arc(
-						options.width - borderRadius,
-						options.height - borderRadius,
-						borderRadius,
-						0,
-						Math.PI*0.5
-					);
-
-					this.context.arc(
-						borderRadius,
-						options.height - borderRadius,
-						borderRadius,
-						Math.PI*0.5,
-						Math.PI
-					);
-
-					this.context.arc(
-						borderRadius,
-						borderRadius,
-						borderRadius,
-						Math.PI,
-						Math.PI*1.5
-					);
-
-					if (options.fillStyle) {
-
-						this.context.fill();
-
-					}
-
-					if (options.lineWidth) {
-
-						this.context.stroke();
-
-					}
-
-				} else {
-
-					if (options.fillStyle) {
-
-						this.context.fillRect(0, 0, options.width, options.height);
-
-						this.context.fill();
-
-					}
-
-					if (options.lineWidth) {
-
-						if (options.strokePosition == 'inset') {
-
-							this.context.closePath();
-							this.context.beginPath();
-
-							this.context.strokeRect(
-								options.lineWidth / 2,
-								options.lineWidth / 2,
-								options.width - options.lineWidth,
-								options.height - options.lineWidth
-							);
-
-						} else if (options.strokePosition == 'outset') {
-
-							this.context.closePath();
-							this.context.beginPath();
-
-							this.context.strokeRect(
-								-options.lineWidth / 2,
-								-options.lineWidth / 2,
-								options.width + options.lineWidth,
-								options.height + options.lineWidth
-							);
-
-						} else {
-
-							this.context.strokeRect(0, 0, options.width, options.height);
-
-						}
-
-						this.context.stroke();
-
-					}
-
-				}
-
-				this.context.closePath();
-
-			} else if (obj instanceof Facade.Text) {
-
-				this.context.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
-				this.context.textBaseline = options.textBaseline;
+				this.context.arc(
+					border_radius,
+					border_radius,
+					border_radius,
+					Math.PI,
+					Math.PI * 1.5
+				);
 
 				if (options.fillStyle) {
 
-					this.context.fillText(options.value, 0, 0);
+					this.context.fill();
 
 				}
 
 				if (options.lineWidth) {
 
-					this.context.strokeText(options.value, 0, 0);
+					this.context.stroke();
 
 				}
-
-			}
-
-			this.context.restore();
-
-			return this;
-
-		};
-
-		this.animate = function (time) {
-
-			if (typeof this.callback == 'function') {
-
-				if (this.ftime) {
-
-					this.dt = time - this.ftime;
-
-					this.fps = (1000 / this.dt).toFixed(2) / 1;
-
-				}
-
-				this.requestAnimation = requestAnimationFrame(this.animate.bind(this));
-
-				this.callback.call(this);
-
-				this.ftime = time;
 
 			} else {
 
-				this.stop();
+				if (options.fillStyle) {
+
+					this.context.fillRect(0, 0, options.width, options.height);
+
+				}
+
+				if (options.lineWidth) {
+
+					if (options.strokePosition === 'inset') {
+
+						this.context.closePath();
+						this.context.beginPath();
+
+						this.context.strokeRect(
+							options.lineWidth / 2,
+							options.lineWidth / 2,
+							options.width - options.lineWidth,
+							options.height - options.lineWidth
+						);
+
+					} else if (options.strokePosition === 'outset') {
+
+						this.context.closePath();
+						this.context.beginPath();
+
+						this.context.strokeRect(
+							-options.lineWidth / 2,
+							-options.lineWidth / 2,
+							options.width + options.lineWidth,
+							options.height + options.lineWidth
+						);
+
+					} else {
+
+						this.context.strokeRect(0, 0, options.width, options.height);
+
+					}
+
+				}
 
 			}
 
-			return this;
+			this.context.closePath();
 
-		};
+		} else if (obj instanceof Facade.Text) {
 
-		this.clear = function () {
+			this.context.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
+			this.context.textBaseline = options.textBaseline;
 
-			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+			if (options.fillStyle) {
 
-			return this;
-
-		};
-
-		this.draw = function (callback) {
-
-			this.callback = callback;
-
-			this.start();
-
-			return this;
-
-		};
-
-		this.exportBase64 = function (type, quality) {
-
-			if (!type) {
-
-				type = 'image/png';
+				this.context.fillText(options.value, 0, 0);
 
 			}
 
-			if (typeof quality != 'number') {
+			if (options.lineWidth) {
 
-				quality = 1;
+				this.context.strokeText(options.value, 0, 0);
 
 			}
 
-			return this.canvas.toDataURL(type, quality);
+		}
 
-		};
+		this.context.restore();
 
-		this.start = function () {
+		return this;
 
-			this.animate();
+	};
 
-			return this;
+	Facade.prototype.animate = function (time) {
 
-		};
+		if (typeof this.callback === 'function') {
 
-		this.stop = function () {
+			if (this.ftime) {
 
-			this.dt = 0;
-			this.fps = 0;
-			this.ftime = 0;
+				this.dt = time - this.ftime;
 
-			this.requestAnimation = cancelAnimationFrame(this.requestAnimation);
+				this.fps = (1000 / this.dt).toFixed(2);
 
-			return this;
+			}
 
-		};
+			this.requestAnimation = window.requestAnimationFrame(this.animate.bind(this));
+
+			this.ftime = time;
+
+			this.callback.call(this);
+
+		} else {
+
+			this.stop();
+
+		}
+
+		return this;
+
+	};
+
+	Facade.prototype.clear = function () {
+
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+		return this;
+
+	};
+
+	Facade.prototype.draw = function (callback) {
+
+		this.callback = callback;
+
+		this.start();
+
+		return this;
+
+	};
+
+	Facade.prototype.exportBase64 = function (type, quality) {
+
+		if (!type) {
+
+			type = 'image/png';
+
+		}
+
+		if (typeof quality === 'number') {
+
+			quality = quality / 100;
+
+		} else {
+
+			quality = 1;
+
+		}
+
+		return this.canvas.toDataURL(type, quality);
 
 	};
 
@@ -484,7 +490,8 @@
 
 		if (obj instanceof Facade.Circle) {
 
-			options.width = options.height = options.radius * 2;
+			options.width = options.radius * 2;
+			options.height = options.radius * 2;
 
 		} else if (obj instanceof Facade.Line) {
 
@@ -493,27 +500,33 @@
 
 		} else if (obj instanceof Facade.Text) {
 
-			this.context.font = parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
+			this.context.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
 
-			options.height = parseInt(options.fontSize, 10);
 			options.width = this.context.measureText(options.value).width;
+			options.height = parseInt(options.fontSize, 10);
 
 		}
 
-		obj.metrics.width = options.width * options.scale;
-		obj.metrics.height = options.height * options.scale;
+		obj.setMetrics({
+			width: options.width * options.scale,
+			height: options.height * options.scale
+		});
 
-		if (typeof options.lineWidth != 'undefined') {
+		if (typeof options.lineWidth !== 'undefined') {
 
-			if (options.strokePosition == 'default') {
+			if (options.strokePosition === 'default') {
 
-				obj.metrics.width += options.lineWidth;
-				obj.metrics.height += options.lineWidth;
+				obj.setMetrics({
+					width: obj.getMetric('width') + options.lineWidth / 2,
+					height: obj.getMetric('height') + options.lineWidth / 2,
+				});
 
-			} else if (options.strokePosition == 'outset') {
+			} else if (options.strokePosition === 'outset') {
 
-				obj.metrics.width += options.lineWidth * 2;
-				obj.metrics.height += options.lineWidth * 2;
+				obj.setMetrics({
+					width: obj.getMetric('width') + options.lineWidth,
+					height: obj.getMetric('height') + options.lineWidth,
+				});
 
 			}
 
@@ -521,19 +534,19 @@
 
 		if (options.anchor.match(/^top/)) {
 
-			if (typeof options.radius != 'undefined') {
+			if (typeof options.radius !== 'undefined') {
 
 				y = options.radius;
 
 			}
 
-			if (typeof options.lineWidth != 'undefined') {
+			if (typeof options.lineWidth !== 'undefined') {
 
-				if (options.strokePosition == 'default') {
+				if (options.strokePosition === 'default') {
 
 					y += options.lineWidth / 2;
 
-				} else if (options.strokePosition == 'outset') {
+				} else if (options.strokePosition === 'outset') {
 
 					y += options.lineWidth;
 
@@ -543,7 +556,7 @@
 
 		} else if (options.anchor.match(/^bottom/)) {
 
-			if (typeof options.radius != 'undefined') {
+			if (typeof options.radius !== 'undefined') {
 
 				y = -options.radius;
 
@@ -553,13 +566,13 @@
 
 			}
 
-			if (typeof options.lineWidth != 'undefined') {
+			if (typeof options.lineWidth !== 'undefined') {
 
-				if (options.strokePosition == 'default') {
+				if (options.strokePosition === 'default') {
 
 					y -= options.lineWidth / 2;
 
-				} else if (options.strokePosition == 'outset') {
+				} else if (options.strokePosition === 'outset') {
 
 					y -= options.lineWidth;
 
@@ -569,7 +582,7 @@
 
 		} else if (options.anchor.match(/^center/)) {
 
-			if (typeof options.radius == 'undefined') {
+			if (typeof options.radius === 'undefined') {
 
 				y = -(options.height / 2);
 
@@ -579,19 +592,19 @@
 
 		if (options.anchor.match(/left$/)) {
 
-			if (typeof options.radius != 'undefined') {
+			if (typeof options.radius !== 'undefined') {
 
 				x = options.radius;
 
 			}
 
-			if (typeof options.lineWidth != 'undefined') {
+			if (typeof options.lineWidth !== 'undefined') {
 
-				if (options.strokePosition == 'default') {
+				if (options.strokePosition === 'default') {
 
 					x += options.lineWidth / 2;
 
-				} else if (options.strokePosition == 'outset') {
+				} else if (options.strokePosition === 'outset') {
 
 					x += options.lineWidth;
 
@@ -601,7 +614,7 @@
 
 		} else if (options.anchor.match(/right$/)) {
 
-			if (typeof options.radius != 'undefined') {
+			if (typeof options.radius !== 'undefined') {
 
 				x = -options.radius;
 
@@ -611,13 +624,13 @@
 
 			}
 
-			if (typeof options.lineWidth != 'undefined') {
+			if (typeof options.lineWidth !== 'undefined') {
 
-				if (options.strokePosition == 'default') {
+				if (options.strokePosition === 'default') {
 
 					x -= options.lineWidth / 2;
 
-				} else if (options.strokePosition == 'outset') {
+				} else if (options.strokePosition === 'outset') {
 
 					x -= options.lineWidth;
 
@@ -627,7 +640,7 @@
 
 		} else if (options.anchor.match(/center$/)) {
 
-			if (typeof options.radius == 'undefined') {
+			if (typeof options.radius === 'undefined') {
 
 				x = -(options.width / 2);
 
@@ -635,50 +648,56 @@
 
 		}
 
-		x *= options.scale;
-		y *= options.scale;
-
-		x += options.x;
-		y += options.y;
+		x = x * options.scale + options.x;
+		y = y * options.scale + options.y;
 
 		if (obj instanceof Facade.Circle) {
 
-			obj.metrics.x = x - (obj.metrics.width / 2);
-			obj.metrics.y = y - (obj.metrics.width / 2);
+			obj.setMetrics({
+				x: x - (obj.getMetric('width') / 2),
+				y: y - (obj.getMetric('height') / 2),
+			});
 
 		} else {
 
-			obj.metrics.x = x;
-			obj.metrics.y = y;
+			obj.setMetrics({
+				x: x,
+				y: y,
+			});
 
 		}
 
 		this.context.translate(x, y);
 
+		return this;
+
 	};
 
 	Facade.prototype.setRotate = function (obj, options) {
 
-		var x = 0,
+		var metrics,
+			x = 0,
 			y = 0;
+
+		metrics = obj.getAllMetrics();
 
 		if (options.anchor.match(/^bottom/)) {
 
-			y = obj.metrics.height;
+			y = metrics.height;
 
 		} else if (options.anchor.match(/^center/)) {
 
-			y = obj.metrics.height / 2;
+			y = metrics.height / 2;
 
 		}
 
 		if (options.anchor.match(/right$/)) {
 
-			x = obj.metrics.width;
+			x = metrics.width;
 
 		} else if (options.anchor.match(/center$/)) {
 
-			x = obj.metrics.width / 2;
+			x = metrics.width / 2;
 
 		}
 
@@ -686,110 +705,290 @@
 
 			this.context.translate(x, y);
 
-			this.context.rotate(options.rotate * Math.PI/180);
+			this.context.rotate(options.rotate * Math.PI / 180);
 
 			this.context.translate(-x, -y);
 
 		}
 
+		return this;
+
 	};
 
-	Facade.prototype.setOptions = function (options, custom) {
+	Facade.prototype.start = function () {
 
-		if (!custom) {
+		this.requestAnimation = window.requestAnimationFrame(this.animate.bind(this));
 
-			return options;
+		return this;
+
+	};
+
+	Facade.prototype.stop = function () {
+
+		this.dt = 0;
+		this.fps = 0;
+		this.ftime = 0;
+
+		this.requestAnimation = window.cancelAnimationFrame(this.requestAnimation);
+
+		return this;
+
+	};
+
+	Facade.Entity = function () { };
+
+	Facade.Entity.prototype.defaultOptions = function () {
+
+		var options = {
+				x: 0,
+				y: 0,
+				shadowBlur: 0,
+				shadowColor: '#000',
+				shadowOffsetX: 0,
+				shadowOffsetY: 0,
+				anchor: 'top/left',
+				opacity: 100,
+				rotate: 0,
+				scale: 1
+			};
+
+		if (this instanceof Facade.Circle) {
+
+			options.radius = 10;
+			options.start = 0;
+			options.end = 360;
+			options.counterclockwise = false;
+			options.fillStyle = '#000';
+			options.strokeStyle = '#000';
+			options.strokePosition = 'default';
+			options.lineWidth = 0;
+
+		} else if (this instanceof Facade.Image) {
+
+			options.width = null;
+			options.height = null;
+			options.offsetX = 0;
+			options.offsetY = 0;
+			options.tileX = 1;
+			options.tileY = 1;
+			options.frames = [];
+			options.speed = 120;
+			options.loop = true;
+			options.callback = function (frame) { };
+
+		} else if (this instanceof Facade.Line) {
+
+			options.startX = 0;
+			options.startY = 0;
+			options.endX = 0;
+			options.endY = 0;
+			options.strokeStyle = '#000';
+			options.lineWidth = 0;
+			options.lineCap = null;
+
+		} else if (this instanceof Facade.Rect) {
+
+			options.width = 100;
+			options.height = 100;
+			options.fillStyle = '#000';
+			options.strokeStyle = '#000';
+			options.strokePosition = 'default';
+			options.lineWidth = 0;
+			options.borderRadius = 0;
+
+		} else if (this instanceof Facade.Text) {
+
+			options.value = '';
+			options.fontFamily = 'Arial';
+			options.fontSize = 30;
+			options.fontStyle = 'normal';
+			options.textBaseline = 'top';
+			options.fillStyle = '#000';
+			options.strokeStyle = '#000';
+			options.lineWidth = 0;
 
 		}
 
-		var updated_options = {};
+		return options;
 
-		for (var key in options) {
+	};
 
-			if (custom.hasOwnProperty(key)) {
+	Facade.Entity.prototype.getOption = function (key) {
 
-				updated_options[key] = custom[key];
+		if (this._options.hasOwnProperty(key)) {
 
-			} else {
+			return this._options[key];
 
-				updated_options[key] = options[key];
+		}
+
+		return false;
+
+	};
+
+	Facade.Entity.prototype.getAllOptions = function () {
+
+		var options = {},
+			key;
+
+		for (key in this._options) {
+
+			if (this._options.hasOwnProperty(key)) {
+
+				options[key] = this._options[key];
 
 			}
 
 		}
 
-		return updated_options;
+		return options;
 
 	};
 
-	Facade.Circle = function (options) {
+	Facade.Entity.prototype.setOptions = function (updated, test) {
 
-		this.options = Facade.prototype.setOptions({
+		var options = {},
+			key;
 
-			x: 0,
-			y: 0,
-			radius: 10,
-			start: 0,
-			end: 360,
-			counterclockwise: false,
-			fillStyle: '#000',
-			strokeStyle: '#000',
-			strokePosition: 'default',
-			lineWidth: 0,
-			shadowBlur: 0,
-			shadowColor: '#000',
-			shadowOffsetX: 0,
-			shadowOffsetY: 0,
-			anchor: 'top/left',
-			opacity: 100,
-			rotate: 0,
-			scale: 1
+		for (key in this._options) {
 
-		}, options);
+			if (this._options.hasOwnProperty(key)) {
 
-		this.metrics = {
+				if (updated && updated.hasOwnProperty(key)) {
+
+					options[key] = updated[key];
+
+					if (test !== true) {
+
+						this._options[key] = updated[key];
+
+					}
+
+				} else {
+
+					options[key] = this._options[key];
+
+				}
+
+			}
+
+		}
+
+		return options;
+
+	};
+
+	Facade.Entity.prototype.defaultMetrics = function () {
+
+		var metrics = {
 			x: null,
 			y: null,
 			width: null,
 			height: null
 		};
 
-		this.setOptions = function (options) {
-
-			this.options = Facade.prototype.setOptions(this.options, options);
-
-			return this;
-
-		};
+		return metrics;
 
 	};
 
+	Facade.Entity.prototype.getMetric = function (key) {
+
+		if (this._metrics.hasOwnProperty(key)) {
+
+			return this._metrics[key];
+
+		}
+
+		return false;
+
+	};
+
+	Facade.Entity.prototype.getAllMetrics = function () {
+
+		var metrics = {},
+			key;
+
+		for (key in this._metrics) {
+
+			if (this._metrics.hasOwnProperty(key)) {
+
+				metrics[key] = this._metrics[key];
+
+			}
+
+		}
+
+		return metrics;
+
+	};
+
+	Facade.Entity.prototype.setMetrics = function (updated, test) {
+
+		var metrics = {},
+			key;
+
+		for (key in this._metrics) {
+
+			if (this._metrics.hasOwnProperty(key)) {
+
+				if (updated && updated.hasOwnProperty(key)) {
+
+					metrics[key] = updated[key];
+
+					if (test !== true) {
+
+						this._metrics[key] = updated[key];
+
+					}
+
+				} else {
+
+					metrics[key] = this._metrics[key];
+
+				}
+
+			}
+
+		}
+
+		return metrics;
+
+	};
+
+	Facade.Circle = function (options) {
+
+		if (!(this instanceof Facade.Circle)) {
+
+			return new Facade.Circle(options);
+
+		}
+
+		this._options = this.defaultOptions();
+		this._metrics = this.defaultMetrics();
+
+		this.setOptions(options);
+
+	};
+
+	Facade.Circle.prototype = Object.create(Facade.Entity.prototype);
+
 	Facade.Image = function (source, options) {
 
-		this.options = Facade.prototype.setOptions({
+		if (!(this instanceof Facade.Image)) {
 
-			x: 0,
-			y: 0,
-			width: null,
-			height: null,
-			offsetX: 0,
-			offsetY: 0,
-			tileX: 1,
-			tileY: 1,
-			frames: [],
-			speed: 120,
-			loop: true,
-			shadowBlur: 0,
-			shadowColor: '#000',
-			shadowOffsetX: 0,
-			shadowOffsetY: 0,
-			anchor: 'top/left',
-			opacity: 100,
-			rotate: 0,
-			scale: 1
+			return new Facade.Image(options);
 
-		}, options);
+		}
 
+		this._options = this.defaultOptions();
+		this._metrics = this.defaultMetrics();
+
+		if (source === undefined) {
+
+			throw new Error('No image was passed to Facade.Image.');
+
+		}
+
+		this.img = null;
 		this.frame = 0;
 		this.ftime = null;
 
@@ -797,191 +996,111 @@
 
 		this.size = { width: null, height: null };
 
-		this.metrics = {
-			x: null,
-			y: null,
-			width: null,
-			height: null
-		};
-
 		this.loaded = function () {
+
+			var options = this.getAllOptions();
 
 			this.isLoaded = true;
 
-			this.size = { width: this.elem.width, height: this.elem.height };
+			this.size = { width: this.img.width, height: this.img.height };
 
-			if (!this.options.width ||
-				this.options.width + this.options.offsetX > this.size.width) {
+			if (!options.width || options.width + options.offsetX > this.size.width) {
 
-				this.options.width = this.size.width - this.options.offsetX;
+				this.setOptions({
+					width: this.size.width - this._options.offsetX
+				});
 
 			}
 
-			if (!this.options.height ||
-				this.options.height + this.options.offsetY > this.size.height) {
+			if (!options.height || options.height + options.offsetY > this.size.height) {
 
-				this.options.height = this.size.height - this.options.offsetY;
+				this.setOptions({
+					height: this.size.height - this._options.offsetY
+				});
 
 			}
 
 		};
 
-		this.setOptions = function (options) {
+		if (typeof source === 'object' && source.nodeType === 1) {
 
-			this.options = Facade.prototype.setOptions(this.options, options);
+			this.img = source;
 
-			return this;
-
-		};
-
-		if (source && typeof source == 'object' && source.nodeType == 1) {
-
-			this.elem = source;
-
-			if (this.elem.complete) {
+			if (this.img.complete) {
 
 				this.loaded.call(this);
 
 			} else {
 
-				this.elem.addEventListener('load', this.loaded.bind(this));
+				this.img.addEventListener('load', this.loaded.bind(this));
 
 			}
 
 		} else {
 
-			this.elem = document.createElement('img');
-			this.elem.setAttribute('src', source);
-			this.elem.addEventListener('load', this.loaded.bind(this));
+			this.img = document.createElement('img');
+			this.img.setAttribute('src', source);
+			this.img.addEventListener('load', this.loaded.bind(this));
 
 		}
 
+		this.setOptions(options);
+
 	};
+
+	Facade.Image.prototype = Object.create(Facade.Entity.prototype);
 
 	Facade.Line = function (options) {
 
-		this.options = Facade.prototype.setOptions({
+		if (!(this instanceof Facade.Line)) {
 
-			x: 0,
-			y: 0,
-			startX: 0,
-			startY: 0,
-			endX: 0,
-			endY: 0,
-			strokeStyle: '#000',
-			lineWidth: 0,
-			lineCap: null,
-			shadowBlur: 0,
-			shadowColor: '#000',
-			shadowOffsetX: 0,
-			shadowOffsetY: 0,
-			anchor: 'top/left',
-			opacity: 100,
-			rotate: 0,
-			scale: 1
+			return new Facade.Line(options);
 
-		}, options);
+		}
 
-		this.metrics = {
-			x: null,
-			y: null,
-			width: null,
-			height: null
-		};
+		this._options = this.defaultOptions();
+		this._metrics = this.defaultMetrics();
 
-		this.setOptions = function (options) {
-
-			this.options = Facade.prototype.setOptions(this.options, options);
-
-			return this;
-
-		};
+		this.setOptions(options);
 
 	};
+
+	Facade.Line.prototype = Object.create(Facade.Entity.prototype);
 
 	Facade.Rect = function (options) {
 
-		this.options = Facade.prototype.setOptions({
+		if (!(this instanceof Facade.Rect)) {
 
-			x: 0,
-			y: 0,
-			width: 100,
-			height: 100,
-			fillStyle: '#000',
-			strokeStyle: '#000',
-			strokePosition: 'default',
-			lineWidth: 0,
-			borderRadius: 0,
-			shadowBlur: 0,
-			shadowColor: '#000',
-			shadowOffsetX: 0,
-			shadowOffsetY: 0,
-			anchor: 'top/left',
-			opacity: 100,
-			rotate: 0,
-			scale: 1
+			return new Facade.Rect(options);
 
-		}, options);
+		}
 
-		this.metrics = {
-			x: null,
-			y: null,
-			width: null,
-			height: null
-		};
+		this._options = this.defaultOptions();
+		this._metrics = this.defaultMetrics();
 
-		this.setOptions = function (options) {
-
-			this.options = Facade.prototype.setOptions(this.options, options);
-
-			return this;
-
-		};
+		this.setOptions(options);
 
 	};
+
+	Facade.Rect.prototype = Object.create(Facade.Entity.prototype);
 
 	Facade.Text = function (options) {
 
-		this.options = Facade.prototype.setOptions({
+		if (!(this instanceof Facade.Text)) {
 
-			x: 0,
-			y: 0,
-			value: '',
-			fontFamily: 'Arial',
-			fontSize: 30,
-			fontStyle: 'normal',
-			textBaseline: 'top',
-			fillStyle: '#000',
-			strokeStyle: '#000',
-			lineWidth: 0,
-			shadowBlur: 0,
-			shadowColor: '#000',
-			shadowOffsetX: 0,
-			shadowOffsetY: 0,
-			anchor: 'top/left',
-			opacity: 100,
-			rotate: 0,
-			scale: 1
+			return new Facade.Text(options);
 
-		}, options);
+		}
 
-		this.metrics = {
-			x: null,
-			y: null,
-			width: null,
-			height: null
-		};
+		this._options = this.defaultOptions();
+		this._metrics = this.defaultMetrics();
 
-		this.setOptions = function (options) {
-
-			this.options = Facade.prototype.setOptions(this.options, options);
-
-			return this;
-
-		};
+		this.setOptions(options);
 
 	};
 
-	window.Facade = Facade;
+	Facade.Text.prototype = Object.create(Facade.Entity.prototype);
 
-}();
+	return Facade;
+
+}());
