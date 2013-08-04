@@ -71,9 +71,17 @@ window.Facade = (function () {
 
 	Facade.prototype.addToStage = function (obj, options) {
 
-		var border_radius,
+		if (!(obj instanceof Facade.Entity)) {
+
+			throw new Error('Object passed to Facade.addToStage is not a valid Facade.js object.');
+
+		}
+
+		var metrics,
+			border_radius,
 			frame_offset_x,
-			metrics,
+			line,
+			length,
 			x,
 			y;
 
@@ -395,15 +403,31 @@ window.Facade = (function () {
 			this.context.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
 			this.context.textBaseline = options.textBaseline;
 
-			if (options.fillStyle) {
+			if (typeof options.value === 'string') {
 
-				this.context.fillText(options.value, 0, 0);
+				options.value = options.value.split(/[ ]*\n[ ]*/);
 
 			}
 
-			if (options.lineWidth) {
+			if (options.lineHeight === null) {
 
-				this.context.strokeText(options.value, 0, 0);
+				options.lineHeight = options.fontSize;
+
+			}
+
+			for (line = 0, length = options.value.length; line < length; line += 1) {
+
+				if (options.fillStyle) {
+
+					this.context.fillText(options.value[line], 0, line * parseInt(options.lineHeight, 10));
+
+				}
+
+				if (options.lineWidth) {
+
+					this.context.strokeText(options.value[line], 0, line * parseInt(options.lineHeight, 10));
+
+				}
 
 			}
 
@@ -486,7 +510,9 @@ window.Facade = (function () {
 	Facade.prototype.setAnchorPoint = function (obj, options) {
 
 		var x = 0,
-			y = 0;
+			y = 0,
+			line,
+			length;
 
 		if (obj instanceof Facade.Circle) {
 
@@ -502,8 +528,27 @@ window.Facade = (function () {
 
 			this.context.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
 
-			options.width = this.context.measureText(options.value).width;
-			options.height = parseInt(options.fontSize, 10);
+			if (typeof options.value === 'string') {
+
+				options.value = options.value.split(/[ ]*\n[ ]*/);
+
+			}
+
+			if (options.lineHeight === null) {
+
+				options.lineHeight = options.fontSize;
+
+			}
+
+			options.width = 0;
+
+			for (line = 0, length = options.value.length; line < length; line += 1) {
+
+				options.width = Math.max(options.width, this.context.measureText(options.value[line]).width);
+
+			}
+
+			options.height = length * parseInt(options.lineHeight, 10);
 
 		}
 
@@ -802,6 +847,7 @@ window.Facade = (function () {
 			options.fontFamily = 'Arial';
 			options.fontSize = 30;
 			options.fontStyle = 'normal';
+			options.lineHeight = null;
 			options.textBaseline = 'top';
 			options.fillStyle = '#000';
 			options.strokeStyle = '#000';
@@ -984,7 +1030,7 @@ window.Facade = (function () {
 
 		if (source === undefined) {
 
-			throw new Error('No image was passed to Facade.Image.');
+			throw new Error('Required parameter "source" missing from Facade.Image call.');
 
 		}
 

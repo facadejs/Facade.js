@@ -194,7 +194,7 @@ Facade.Circle.setMetrics(metrics);
 ### Facade.Image
 
 ```javascript
-new Facade.Image(file, [options]);
+new Facade.Image(source, [options]);
 ```
 
 **Note:** Images must first be loaded before being drawn to the canvas. Because of this it is best to wrap the `addToStage` call in a function set through `Facade.draw`.
@@ -339,6 +339,7 @@ new Facade.Text([options]);
 - [`fontFamily`](#fontfamily-string) : Font family of the text.
 - [`fontSize`](#fontsize-integer) : Font size of the text.
 - [`fontStyle`](#fontstyle-string) : Font style of the text.
+- [`lineHeight`](#lineheight-integer) : Line height of the text.
 - [`textBaseline`](#textbaseline-string) : Baseline of the text.
 - [`fillStyle`](#fillstyle-string) : Color of the text.
 - [`strokeStyle`](#strokestyle-string) : Color of the stroke on the text.
@@ -478,6 +479,12 @@ The style of line cap (end of line).
 - butt
 - round
 - square
+
+#### lineHeight _(Integer)_
+
+_Default: `null`_
+
+Line height of the text drawn on multiple lines. New lines are delimited with `\n`.
 
 #### lineWidth _(Integer)_
 
