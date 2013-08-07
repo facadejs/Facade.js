@@ -335,11 +335,13 @@ new Facade.Text([options]);
 
 - [`x`](#x-integer) : X coordinate.
 - [`y`](#y-integer) : Y coordinate.
+- [`width`](#width-integer) : Width of the text.
 - [`value`](#value-string) : Value of the text object.
 - [`fontFamily`](#fontfamily-string) : Font family of the text.
 - [`fontSize`](#fontsize-integer) : Font size of the text.
 - [`fontStyle`](#fontstyle-string) : Font style of the text.
 - [`lineHeight`](#lineheight-integer) : Line height of the text.
+- [`textAlign`](#textalign-string) : Horizontal alignment of the text.
 - [`textBaseline`](#textbaseline-string) : Baseline of the text.
 - [`fillStyle`](#fillstyle-string) : Color of the text.
 - [`strokeStyle`](#strokestyle-string) : Color of the stroke on the text.
@@ -607,6 +609,16 @@ Color of an object's stroke. Can be a text representation of a color, a HEX valu
 - `#F00`
 - `rgb(255, 0, 0);`
 - `rgba(255, 0, 0, 1);`
+
+#### textAlign _(String)_
+
+_Default: `left`_
+
+Horizontal alignment of the text drawn.
+
+- left
+- center
+- right
 
 #### textBaseline _(String)_
 

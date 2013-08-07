@@ -79,7 +79,7 @@ window.Facade = (function () {
 
 		var metrics,
 			border_radius,
-			frame_offset_x,
+			offset_x = 0,
 			line,
 			length,
 			x,
@@ -198,11 +198,9 @@ window.Facade = (function () {
 
 		} else if (obj instanceof Facade.Image && obj.isLoaded) {
 
-			frame_offset_x = 0;
-
 			if (options.frames.length) {
 
-				frame_offset_x = options.frames[obj.frame];
+				offset_x = options.frames[obj.frame];
 
 			}
 
@@ -223,7 +221,7 @@ window.Facade = (function () {
 
 					this.context.drawImage(
 						obj.img,
-						(options.width * frame_offset_x) + options.offsetX,
+						(options.width * offset_x) + options.offsetX,
 						options.offsetY,
 						options.width,
 						options.height,
@@ -417,15 +415,25 @@ window.Facade = (function () {
 
 			for (line = 0, length = options.value.length; line < length; line += 1) {
 
+				if (options.textAlign === 'center') {
+
+					offset_x = (options.width - this.context.measureText(options.value[line]).width) / 2;
+
+				} else if (options.textAlign === 'right') {
+
+					offset_x = options.width - this.context.measureText(options.value[line]).width;
+
+				}
+
 				if (options.fillStyle) {
 
-					this.context.fillText(options.value[line], 0, line * parseInt(options.lineHeight, 10));
+					this.context.fillText(options.value[line], offset_x, line * parseInt(options.lineHeight, 10));
 
 				}
 
 				if (options.lineWidth) {
 
-					this.context.strokeText(options.value[line], 0, line * parseInt(options.lineHeight, 10));
+					this.context.strokeText(options.value[line], offset_x, line * parseInt(options.lineHeight, 10));
 
 				}
 
@@ -539,8 +547,6 @@ window.Facade = (function () {
 				options.lineHeight = options.fontSize;
 
 			}
-
-			options.width = 0;
 
 			for (line = 0, length = options.value.length; line < length; line += 1) {
 
@@ -843,11 +849,13 @@ window.Facade = (function () {
 
 		} else if (this instanceof Facade.Text) {
 
+			options.width = 0;
 			options.value = '';
 			options.fontFamily = 'Arial';
 			options.fontSize = 30;
 			options.fontStyle = 'normal';
 			options.lineHeight = null;
+			options.textAlign = 'left';
 			options.textBaseline = 'top';
 			options.fillStyle = '#000';
 			options.strokeStyle = '#000';
