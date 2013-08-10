@@ -12,10 +12,8 @@ window.Facade = (function () {
 	'use strict';
 
 	(['webkit', 'moz']).forEach(function (key) {
-		window.requestAnimationFrame = window.requestAnimationFrame ||
-			window[key + 'RequestAnimationFrame'] || null;
-		window.cancelAnimationFrame = window.cancelAnimationFrame ||
-			window[key + 'CancelAnimationFrame'] || null;
+		window.requestAnimationFrame = window.requestAnimationFrame || window[key + 'RequestAnimationFrame'] || null;
+		window.cancelAnimationFrame = window.cancelAnimationFrame || window[key + 'CancelAnimationFrame'] || null;
 	});
 
 	var Facade = function (canvas, width, height) {
@@ -401,9 +399,9 @@ window.Facade = (function () {
 			this.context.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
 			this.context.textBaseline = options.textBaseline;
 
-			if (typeof options.value === 'string') {
+			if (Object.prototype.toString.call(options.value) !== '[object Array]') {
 
-				options.value = options.value.split(/[ ]*\n[ ]*/);
+				options.value = options.value.toString().split(/[ ]*\n[ ]*/);
 
 			}
 
@@ -536,9 +534,9 @@ window.Facade = (function () {
 
 			this.context.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
 
-			if (typeof options.value === 'string') {
+			if (Object.prototype.toString.call(options.value) !== '[object Array]') {
 
-				options.value = options.value.split(/[ ]*\n[ ]*/);
+				options.value = options.value.toString().split(/[ ]*\n[ ]*/);
 
 			}
 
