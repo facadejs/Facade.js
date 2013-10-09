@@ -778,7 +778,7 @@
 	};
 
 	/**
-	 * Create a circle object.
+	 * Create a circle object. Inherits all methods from <b>Facade.Entity</b>.
 	 *
 	 *	var circle = new Facade.Circle({ x: 250, y: 250, radius: 50, anchor: 'center' });
 	 *
@@ -936,7 +936,7 @@
 	};
 
 	/**
-	 * Create an image object.
+	 * Create an image object. Inherits all methods from <b>Facade.Entity</b>.
 	 *
 	 *	var image = new Facade.Image('images/player.png', { width: 50, height: 90, anchor: 'bottom/center' });
 	 *
@@ -1245,7 +1245,7 @@
 	};
 
 	/**
-	 * Create a line object.
+	 * Create a line object. Inherits all methods from <b>Facade.Entity</b>.
 	 *
 	 *	var line = new Facade.Line({ x: 250, y: 250, startX: 250, startY: 0, endX: 250, endY: 250, lineWidth: 1, anchor: 'center' });
 	 *
@@ -1350,7 +1350,7 @@
 	};
 
 	/**
-	 * Create a rectangle object.
+	 * Create a rectangle object. Inherits all methods from <b>Facade.Entity</b>.
 	 *
 	 *	var rect = new Facade.Rect({ width: 100, height: 100, fillStyle: '#f00' });
 	 *
@@ -1541,10 +1541,32 @@
 	};
 
 	/**
-	 * Create a text object.
+	 * Create a text object. Inherits all methods from <b>Facade.Entity</b>.
 	 *
 	 *	var text = new Facade.Text({ value: 'Hello World!', x: 250, y: 250, anchor: 'center' });
 	 *
+	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
+	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
+	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
+	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
+	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
+	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
+	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
+	 * @options {Integer?} width Width of the object.
+	 * @options {String?} value Value of the text object.
+	 * @options {String?} fontFamily Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
+	 * @options {Integer?} fontSize Font size in pixels. <i>Default:</i> 30
+	 * @options {String?} fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
+	 * @options {String?} lineHeight Line height of the text drawn on multiple lines. New lines are delimited with <code>\n</code>. <i>Default:</i> Inherits from <code>fontSize</code>
+	 * @options {String?} textAlign Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
+	 * @options {String?} textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
+	 * @options {String?} fillStyle Fill color for the object. Can be a text representation of a color, a HEX value or RBG(A). <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
+	 * @options {String?} strokeStyle Color of an object's stroke. Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
+	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
 	 * @param {Object} options Options to create the text with.
 	 * @return {Object} Reference to the new Facade.js text object.
 	 * @api public
