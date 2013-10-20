@@ -782,6 +782,26 @@
 	 *
 	 *	var circle = new Facade.Circle({ x: 250, y: 250, radius: 50, anchor: 'center' });
 	 *
+	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
+	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
+	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
+	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
+	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
+	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
+	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
+	 * @options {Integer?} radius Radius of the circle. <i>Default:</i> 10
+	 * @options {Integer?} start Degree at which the circle begins. <i>Default:</i> 0
+	 * @options {Integer?} end Degree at which the circle ends. <i>Default:</i> 360
+	 * @options {Boolean?} counterclockwise Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
+	 * @options {String?} fillStyle Fill color for the object. <i>Default:</i> "#000"
+	 * @options {String?} strokeStyle Color of an object's stroke. <i>Default:</i> "#000"
+	 * @options {String?} strokePosition Position to draw the stroke. <i>Default:</i> "default"
+	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+	 * @options {String?} lineCap The style of line cap (end of line). <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
 	 * @param {Object?} options Options to create the circle with.
 	 * @return {Object} Reference to the new Facade.js circle object.
 	 * @api public
@@ -940,6 +960,27 @@
 	 *
 	 *	var image = new Facade.Image('images/player.png', { width: 50, height: 90, anchor: 'bottom/center' });
 	 *
+	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
+	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
+	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
+	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
+	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
+	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
+	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
+	 * @options {Integer?} width Width of the object. <i>Default:</i> 0
+	 * @options {Integer?} height Height of the object. <i>Default:</i> 0
+	 * @options {Integer?} offsetX X coordinate within the image where rendering begins. <i>Default:</i> 0
+	 * @options {Integer?} offsetY Y coordinate within the image where rendering begins. <i>Default:</i> 0
+	 * @options {Integer?} tileX Number of times to tile the image horizontally. <i>Default:</i> 1
+	 * @options {Integer?} tileY Number of times to tile the image vertically. <i>Default:</i> 1
+	 * @options {Array?} frames Array of frames for sprite animation. <i>Default:</i> []
+	 * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
+	 * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
+	 * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
 	 * @property {Object} image Reference to the image element.
 	 * @property {Integer} currentFrame Current frame of sprite animation.
 	 * @property {Boolean} isAnimating Boolean state of sprite animation.
@@ -1249,6 +1290,24 @@
 	 *
 	 *	var line = new Facade.Line({ x: 250, y: 250, startX: 250, startY: 0, endX: 250, endY: 250, lineWidth: 1, anchor: 'center' });
 	 *
+	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
+	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
+	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
+	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
+	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
+	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
+	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
+	 * @options {Integer?} startX X coordinate where line starts. <i>Default:</i> 0
+	 * @options {Integer?} startY Y coordinate where line starts. <i>Default:</i> 0
+	 * @options {Integer?} endX X coordinate where line ends. <i>Default:</i> 0
+	 * @options {Integer?} endY Y coordinate where line ends. <i>Default:</i> 0
+	 * @options {String?} strokeStyle Color of an object's stroke. <i>Default:</i> "#000"
+	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+	 * @options {String?} lineCap The style of line cap (end of line). <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
 	 * @param {Object} options Options to create the line with.
 	 * @return {Object} Reference to the new Facade.js line object.
 	 * @api public
@@ -1354,6 +1413,24 @@
 	 *
 	 *	var rect = new Facade.Rect({ width: 100, height: 100, fillStyle: '#f00' });
 	 *
+	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
+	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
+	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
+	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
+	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
+	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
+	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
+	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
+	 * @options {Integer?} width Width of the object. <i>Default:</i> 100
+	 * @options {Integer?} height Height of the object. <i>Default:</i> 100
+	 * @options {String?} fillStyle Fill color for the object. <i>Default:</i> "#000"
+	 * @options {String?} strokeStyle Color of an object's stroke. <i>Default:</i> "#000"
+	 * @options {String?} strokePosition Position to draw the stroke. <i>Default:</i> "default"
+	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+	 * @options {Integer?} borderRadius Radius of the rectangle's corners. <i>Default:</i> 0
 	 * @param {Object} options Options to create the rectangle with.
 	 * @return {Object} Reference to the new Facade.js rectangle object.
 	 * @api public
