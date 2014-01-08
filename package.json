@@ -1,0 +1,13 @@
+{
+    "name": "Facade.js",
+    "version": "0.3.0beta",
+    "devDependencies": {
+        "grunt": "0.4.2",
+        "grunt-casperjs": "1.4.0",
+        "grunt-contrib-watch": "0.5.3",
+        "grunt-contrib-uglify": "0.2.7",
+        "grunt-jslint": "1.1.2",
+        "grunt-notify": "0.2.17",
+        "matchdep": "0.3.0"
+    }
+}

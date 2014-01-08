@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1" />
+<title>Facade.js 0.3beta</title>
+<style>
+
+body {
+    background-color: #eee;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1140px;
+    height: auto;
+    background: #fff;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgoJPGxpbmUgeDE9IjAiIHkxPSI1MCUiIHgyPSIxMDAlIiB5Mj0iNTAlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iIzdmZWNmZiIgLz4KCTxsaW5lIHgxPSI1MCUiIHkxPSIwIiB4Mj0iNTAlIiB5Mj0iMTAwJSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiM3ZmVjZmYiIC8+Cjwvc3ZnPg==);
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas width="1140" height="600"></canvas>
+
+<script src="facade.min.js"></script>
+<script>
+
+(function () {
+
+    var stage = new Facade(document.querySelector('canvas')),
+        circle = new Facade.Circle({ x: 120, y: 120, radius: 100, lineWidth: 10, strokeStyle: '#000', fillStyle: '#0f0'}),
+        line = new Facade.Line({ x1: 570, y1: 300, x2: 770, y2: 100, lineWidth: 10, strokeStyle: '#000' }),
+        rect = new Facade.Rect({ x: 800, y: 200, width: 200, height: 200, lineWidth: 0, strokeStyle: '#000', fillStyle: '#0f0' }),
+        polygon = new Facade.Polygon({ x: 200, y: 350, points: [ [0, 0], [200, 0], [100, 200], [0, 150] ], lineWidth: 10, strokeStyle: '#000', fillStyle: '#0f0' }),
+        group = new Facade.Group({ }),
+        group_metrics = null;
+
+    group.addToGroup(circle);
+    group.addToGroup(line);
+    group.addToGroup(rect);
+    group.addToGroup(polygon);
+
+    stage.addToStage(group);
+
+    group_metrics = group._setMetrics();
+
+    stage.addToStage(new Facade.Rect({
+        x: group_metrics.x,
+        y: group_metrics.y,
+        width: group_metrics.width,
+        height: group_metrics.height,
+        fillStyle: '#f00',
+        lineWidth: 0,
+        opacity: 40
+    }));
+
+}());
+
+</script>
+
+</body>
+</html>
