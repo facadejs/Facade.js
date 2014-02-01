@@ -47,6 +47,16 @@ module.exports = function (grunt) {
 
         },
 
+        shell: {
+
+            buildDoc: {
+
+                command: 'dox < facade.js > docs/facade.json; cd docs/; doxdox.py --title="Facade.js" --description="Drawing shapes, images and text in HTML5 canvas made easy." > index.html; rm facade.json;'
+
+            }
+
+        },
+
         watch: {
 
             jslint: {
@@ -69,5 +79,6 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', [ 'uglify', 'casperjs', 'jslint' ]);
+    grunt.registerTask('docs', [ 'shell' ]);
 
 };

@@ -1,0 +1,3119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Facade.js - Drawing shapes, images and text in HTML5 canvas made easy.</title>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/css/bootstrap.min.css" />
+<style>
+
+.hll{background-color:#ffc}.c{color:#998;font-style:italic}.err{color:#a61717;background-color:#e3d2d2}.k{color:#000;font-weight:700}.o{color:#000;font-weight:700}.cm{color:#998;font-style:italic}.cp{color:#999;font-weight:700;font-style:italic}.c1{color:#998;font-style:italic}.cs{color:#999;font-weight:700;font-style:italic}.gd{color:#000;background-color:#fdd}.ge{color:#000;font-style:italic}.gr{color:#a00}.gh{color:#999}.gi{color:#000;background-color:#dfd}.go{color:#888}.gp{color:#555}.gs{font-weight:700}.gu{color:#aaa}.gt{color:#a00}.kc{color:#000;font-weight:700}.kd{color:#000;font-weight:700}.kn{color:#000;font-weight:700}.kp{color:#000;font-weight:700}.kr{color:#000;font-weight:700}.kt{color:#458;font-weight:700}.m{color:#099}.s{color:#d01040}.na{color:teal}.nb{color:#0086B3}.nc{color:#458;font-weight:700}.no{color:teal}.nd{color:#3c5d5d;font-weight:700}.ni{color:purple}.ne{color:#900;font-weight:700}.nf{color:#900;font-weight:700}.nl{color:#900;font-weight:700}.nn{color:#555}.nt{color:navy}.nv{color:teal}.ow{color:#000;font-weight:700}.w{color:#bbb}.mf{color:#099}.mh{color:#099}.mi{color:#099}.mo{color:#099}.sb{color:#d01040}.sc{color:#d01040}.sd{color:#d01040}.s2{color:#d01040}.se{color:#d01040}.sh{color:#d01040}.si{color:#d01040}.sx{color:#d01040}.sr{color:#009926}.s1{color:#d01040}.ss{color:#990073}.bp{color:#999}.vc{color:teal}.vg{color:teal}.vi{color:teal}.il{color:#099}
+
+@media (max-width: 992px) {
+
+    .container {
+        width: 970px !important;
+        max-width: none !important;
+    }
+    .col-md-3 {
+        width: 25% !important;
+        float: left;
+    }
+    .col-md-9 {
+        width: 75% !important;
+        float: left;
+    }
+
+}
+
+.method {
+    margin-bottom: 40px;
+}
+
+.permalink {
+    position: absolute;
+    margin-left: -25px;
+    font-weight: normal;
+    color: #eee;
+}
+
+.permalink:hover {
+    color: #666;
+    text-decoration: none;
+}
+
+.bs-footer {
+    margin: 50px auto;
+    color: #777;
+    text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+    <div class="container">
+
+        <div class="page-header">
+            <div class="pull-right">
+                <label><input type="checkbox" name="toggle-code" class="toggle-code-blocks" /> Toggle Code Blocks</label><br />
+                <label><input type="checkbox" name="toggle-private" class="toggle-private" /> Toggle Private Methods/Function</label>
+            </div>
+            <h1>Facade.js <small>Drawing shapes, images and text in HTML5 canvas made easy.</small></h1>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <ul class="nav">
+
+                
+
+                <li class="scope-private"><a href="#isarray">isArray()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#isfunction">isFunction()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade">Facade()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.addtostage">Facade.addToStage()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.clear">Facade.clear()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.draw">Facade.draw()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.exportbase64">Facade.exportBase64()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.height">Facade.height()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.renderwithcontext">Facade.renderWithContext()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.start">Facade.start()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.stop">Facade.stop()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.prototype.width">Facade.width()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.prototype.animate">Facade._animate()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.entity">Facade.Entity()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.entity.prototype.defaultoptions">Facade.Entity._defaultOptions()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.entity.prototype.defaultmetrics">Facade.Entity._defaultMetrics()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.entity.prototype.getoption">Facade.Entity.getOption()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.entity.prototype.getalloptions">Facade.Entity.getAllOptions()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.entity.prototype.setoption">Facade.Entity.setOption()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.entity.prototype.setoptions">Facade.Entity.setOptions()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.entity.prototype.getmetric">Facade.Entity.getMetric()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.entity.prototype.getallmetrics">Facade.Entity.getAllMetrics()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.entity.prototype.draw">Facade.Entity.draw()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.polygon">Facade.Polygon()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.polygon.prototype.defaultoptions">Facade.Polygon._defaultOptions()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.polygon.prototype.draw">Facade.Polygon._draw()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.polygon.prototype.configoptions">Facade.Polygon._configOptions()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.polygon.prototype.setmetrics">Facade.Polygon._setMetrics()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.circle">Facade.Circle()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.circle.prototype.configoptions">Facade.Circle._configOptions()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.line">Facade.Line()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.line.prototype.configoptions">Facade.Line._configOptions()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.rect">Facade.Rect()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.rect.prototype.configoptions">Facade.Rect._configOptions()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.group">Facade.Group()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.group.prototype.draw">Facade.Group._draw()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.group.prototype.configoptions">Facade.Group._configOptions()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.group.prototype.addtogroup">Facade.Group.addToGroup()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.group.prototype.removefromgroup">Facade.Group.removeFromGroup()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.group.prototype.setmetrics">Facade.Group._setMetrics()</a></li>
+
+                
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-9">
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="isarray"><a href="#isarray" class="permalink">#</a>isArray() <span class="label label-default">private</span></h2>
+
+                    <p>Checks an object to see if it is an array. Returns a boolean result.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>obj</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>The object to be checked.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]));</span> <span class="c1">// true&lt;br /&gt; console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false&lt;/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="kd">function</span> <span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;[object Array]&#39;</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="p">}</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Boolean</code> Result of the test.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="isfunction"><a href="#isfunction" class="permalink">#</a>isFunction() <span class="label label-default">private</span></h2>
+
+                    <p>Checks an object to see if it is a function. Returns a boolean result.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>obj</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>The object to be checked.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">));</span> <span class="c1">// true&lt;/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="kd">function</span> <span class="nx">isFunction</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;[object Function]&#39;</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="p">}</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Boolean</code> Result of the test.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade"><a href="#facade" class="permalink">#</a>Facade() </h2>
+
+                    <p>Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>canvas</b>
+                        <code>Object|String</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Reference to an HTML canvas element or a unique name.</p>
+
+                    
+
+                    <p>
+                        <b>width</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Width of the canvas.</p>
+
+                    
+
+                    <p>
+                        <b>height</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Height of the canvas.</p>
+
+                    
+
+                    
+
+                    
+
+                    <h3>Properties</h3>
+
+                    
+
+                    <p><b>canvas</b> <code>Object</code></p>
+                    <p>Reference to the canvas element.</p>
+
+                    
+
+                    <p><b>context</b> <code>Object</code></p>
+                    <p>Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.</p>
+
+                    
+
+                    <p><b>dt</b> <code>Integer</code></p>
+                    <p>Current time in milliseconds since last canvas draw.</p>
+
+                    
+
+                    <p><b>fps</b> <code>Integer</code></p>
+                    <p>Current frames per second.</p>
+
+                    
+
+                    <p><b>ftime</b> <code>Integer</code></p>
+                    <p>Time of last canvas draw.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span> <span class="kd">var</span> <span class="nx">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">(</span><span class="s1">&#39;stage&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="kd">function</span> <span class="nx">Facade</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">canvas</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">;</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">canvas</span> <span class="o">===</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nx">canvas</span><span class="p">);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">width</span> <span class="o">&amp;&amp;</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+
+        <span class="p">}</span>
+
+        <span class="k">try</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">context</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Canvas passed to Facade.js was not a valid canvas element.&#39;</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">dt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">fps</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_callback</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="p">}</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> New Facade.js object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.addtostage"><a href="#facade.prototype.addtostage" class="permalink">#</a>Facade.addToStage() </h2>
+
+                    <p>Draws a Facade.js object to the stage.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>obj</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js entity object.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addToStage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Parameter passed to Facade.addToStage is not a valid Facade.js entity object&#39;</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="nx">obj</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.clear"><a href="#facade.prototype.clear" class="permalink">#</a>Facade.clear() </h2>
+
+                    <p>Clears the canvas.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.draw"><a href="#facade.prototype.draw" class="permalink">#</a>Facade.draw() </h2>
+
+                    <p>Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or avalible polyfill.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>callback</b>
+                        <code>Function</code>
+                        
+                    </p>
+                    <p>Function callback.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+
+ <span class="k">this</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+
+ <span class="k">this</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span> <span class="p">});</span>
+
+
+<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">callback</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">_callback</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">;</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Parameter passed to Facade.draw is not a valid function&#39;</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.exportbase64"><a href="#facade.prototype.exportbase64" class="permalink">#</a>Facade.exportBase64() </h2>
+
+                    <p>Exports a base64 encoded representation of the current rendered canvas.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>type</b>
+                        <code>String</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)</p>
+
+                    
+
+                    <p>
+                        <b>quality</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Number between 0 and 100.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">exportBase64</span><span class="p">(</span><span class="s1">&#39;image/png&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">exportBase64</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">quality</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;image/png&#39;</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">quality</span> <span class="o">===</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">quality</span> <span class="o">=</span> <span class="nx">quality</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="nx">quality</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">quality</span><span class="p">);</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>String</code> Base64 encoded string.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.height"><a href="#facade.prototype.height" class="permalink">#</a>Facade.height() </h2>
+
+                    <p>Gets and sets the canvas height.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>height</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Height in pixels.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">height</span><span class="p">());</span> <span class="c1">// 300&lt;br /&gt; console.log(stage.height(600)); // 600&lt;/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Integer</code> Height in pixels.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.renderwithcontext"><a href="#facade.prototype.renderwithcontext" class="permalink">#</a>Facade.renderWithContext() </h2>
+
+                    <p>Applys key and value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Context property or method names with corresponding values.</p>
+
+                    
+
+                    <p>
+                        <b>callback</b>
+                        <code>Function</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Function to be called when context options have been rendered to the canvas.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">({</span> <span class="nx">fillStyle</span><span class="o">:</span> <span class="err">&#39;</span><span class="cp">#f</span><span class="mo">00</span><span class="s">&#39;, globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]}));&lt;/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">renderWithContext</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">key</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">key</span><span class="p">]))</span> <span class="p">{</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+
+                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">_contextProperties</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">callback</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.start"><a href="#facade.prototype.start" class="permalink">#</a>Facade.start() </h2>
+
+                    <p>Starts the callback supplied in <code>Facade.draw</code>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="nx">_requestAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_animate</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.stop"><a href="#facade.prototype.stop" class="permalink">#</a>Facade.stop() </h2>
+
+                    <p>Stops the callback supplied in <code>Facade.draw</code>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">dt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">fps</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+        <span class="nx">_cancelAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.width"><a href="#facade.prototype.width" class="permalink">#</a>Facade.width() </h2>
+
+                    <p>Gets and sets the canvas width.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>width</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Width in pixels.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">width</span><span class="p">());</span> <span class="c1">// 400&lt;br /&gt; console.log(stage.width(800)); // 800&lt;/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Integer</code> Width in pixels.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.prototype.animate"><a href="#facade.prototype.animate" class="permalink">#</a>Facade._animate() <span class="label label-default">private</span></h2>
+
+                    <p>Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code> and <code>Facade.fps</code>.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>time</b>
+                        <code>Integer</code>
+                        
+                    </p>
+                    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp" target="_blank">DOMTimeStamp</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp" target="_blank">DOMHighResTimeStamp</a> (Google Chrome Only)</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="o">&lt;</span><span class="nx">em</span><span class="o">&gt;</span><span class="nx">requestAnimation</span> <span class="o">=</span> <span class="nx">_requestAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="o">&lt;</span><span class="err">/em&gt;animate.bind(this));&lt;/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_animate</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_callback</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">dt</span> <span class="o">=</span> <span class="nx">time</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span><span class="p">;</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">fps</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="k">this</span><span class="p">.</span><span class="nx">dt</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+            <span class="p">}</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="nx">_requestAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_animate</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">time</span><span class="p">;</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">_callback</span><span class="p">();</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.entity"><a href="#facade.entity" class="permalink">#</a>Facade.Entity() <span class="label label-default">private</span></h2>
+
+                    <p>The constructor for all Facade.js shapes, images and text objects.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span> <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p>False</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.entity.prototype.defaultoptions"><a href="#facade.entity.prototype.defaultoptions" class="permalink">#</a>Facade.Entity._defaultOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Returns a default set of options common to all Facade.js entities.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Additional options key/value pairs.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">options</span><span class="p">,</span>
+            <span class="nx">key</span><span class="p">;</span>
+
+        <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="p">};</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Default set of options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.entity.prototype.defaultmetrics"><a href="#facade.entity.prototype.defaultmetrics" class="permalink">#</a>Facade.Entity._defaultMetrics() <span class="label label-default">private</span></h2>
+
+                    <p>Returns a default set of metrics common to all Facade.js entities.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Additional metric key/value pairs.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
+            <span class="nx">key</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Default set of metrics.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.entity.prototype.getoption"><a href="#facade.entity.prototype.getoption" class="permalink">#</a>Facade.Entity.getOption() </h2>
+
+                    <p>Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>key</b>
+                        <code>String</code>
+                        
+                    </p>
+                    <p>The name of the option.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getOption</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getOption</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Value of the option requested.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.entity.prototype.getalloptions"><a href="#facade.entity.prototype.getalloptions" class="permalink">#</a>Facade.Entity.getAllOptions() </h2>
+
+                    <p>Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getAllOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{},</span>
+            <span class="nx">key</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Object containing all options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.entity.prototype.setoption"><a href="#facade.entity.prototype.setoption" class="permalink">#</a>Facade.Entity.setOption() </h2>
+
+                    <p>Sets an option for a given object.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>key</b>
+                        <code>String</code>
+                        
+                    </p>
+                    <p>The option to update.</p>
+
+                    
+
+                    <p>
+                        <b>value</b>
+                        <code>Object|Function|String|Integer</code>
+                        
+                    </p>
+                    <p>The new value of the specified option.</p>
+
+                    
+
+                    <p>
+                        <b>test</b>
+                        <code>Boolean</code>
+                        
+                    </p>
+                    <p>Flag to determine if options are to be saved or not.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setOption</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="o">===</span> <span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">test</span> <span class="o">!==</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;The value for &#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39; (&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;) was a &#39;</span> <span class="o">+</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39; not a &#39;</span> <span class="o">+</span> <span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Returns value of the updated option.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.entity.prototype.setoptions"><a href="#facade.entity.prototype.setoptions" class="permalink">#</a>Facade.Entity.setOptions() </h2>
+
+                    <p>Sets a group of option key/value pairs to an object.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>The options to update. Does not need to be entire set of options.</p>
+
+                    
+
+                    <p>
+                        <b>test</b>
+                        <code>Boolean</code>
+                        
+                    </p>
+                    <p>Flag to determine if options are to be saved or not.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">,</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Georgia&#39;</span> <span class="p">}));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
+            <span class="nx">key</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOption</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span> <span class="nx">test</span><span class="p">);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Updated options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.entity.prototype.getmetric"><a href="#facade.entity.prototype.getmetric" class="permalink">#</a>Facade.Entity.getMetric() </h2>
+
+                    <p>Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>key</b>
+                        <code>String</code>
+                        
+                    </p>
+                    <p>The name of the metric.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getMetric</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getMetric</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Integer</code> Value of the metric requested.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.entity.prototype.getallmetrics"><a href="#facade.entity.prototype.getallmetrics" class="permalink">#</a>Facade.Entity.getAllMetrics() </h2>
+
+                    <p>Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getAllMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{},</span>
+            <span class="nx">key</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Object containing all metrics.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.entity.prototype.draw"><a href="#facade.entity.prototype.draw" class="permalink">#</a>Facade.Entity.draw() </h2>
+
+                    <p>Renders an entity to a canvas.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>facade</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js object.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">));</span>
+
+        <span class="p">}</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.polygon"><a href="#facade.polygon" class="permalink">#</a>Facade.Polygon() </h2>
+
+                    <p>Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p>False</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.polygon.prototype.defaultoptions"><a href="#facade.polygon.prototype.defaultoptions" class="permalink">#</a>Facade.Polygon._defaultOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Returns a default set of options common to all Facade.js polygon entities.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Additional option key/value pairs.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">options</span><span class="p">,</span>
+            <span class="nx">key</span><span class="p">;</span>
+
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+            <span class="nx">opacity</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">shadowColor</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+            <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">points</span><span class="o">:</span> <span class="p">[],</span>
+            <span class="nx">fillStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="nx">strokeStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nx">lineCap</span><span class="o">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+            <span class="nx">lineJoin</span><span class="o">:</span> <span class="s1">&#39;miter&#39;</span><span class="p">,</span>
+            <span class="nx">closePath</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">});</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Default set of options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.polygon.prototype.draw"><a href="#facade.polygon.prototype.draw" class="permalink">#</a>Facade.Polygon._draw() <span class="label label-default">private</span></h2>
+
+                    <p>Renders a polygon entity to a canvas.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>facade</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js object.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+            <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
+            <span class="nx">point</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="nx">point</span> <span class="k">in</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">point</span><span class="p">))</span> <span class="p">{</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+
+                        <span class="nx">context</span><span class="p">.</span><span class="nx">bezierCurveTo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">]);</span>
+
+                    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+
+                        <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">]);</span>
+
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+                        <span class="nx">context</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">]);</span>
+
+                    <span class="p">}</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">closePath</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">();</span>
+
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+                <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">]);</span>
+
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.polygon.prototype.configoptions"><a href="#facade.polygon.prototype.configoptions" class="permalink">#</a>Facade.Polygon._configOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Custom configuration for options specific to a polygon entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Complete set of polygon specific options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.polygon.prototype.setmetrics"><a href="#facade.polygon.prototype.setmetrics" class="permalink">#</a>Facade.Polygon._setMetrics() <span class="label label-default">private</span></h2>
+
+                    <p>Set metrics based on the polygon's current options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
+            <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
+            <span class="nx">bounds</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">left</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
+            <span class="nx">point</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">point</span> <span class="k">in</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">point</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">point</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">};</span>
+
+                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+
+                    <span class="nx">point</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="nx">x</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+                        <span class="nx">y</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="p">};</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">-</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+            <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">-</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+            <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">;</span>
+            <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Object with metric key/value pairs.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.circle"><a href="#facade.circle" class="permalink">#</a>Facade.Circle() </h2>
+
+                    <p>Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">radius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">begin</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span> <span class="mi">360</span> <span class="p">});</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p>False</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.circle.prototype.configoptions"><a href="#facade.circle.prototype.configoptions" class="permalink">#</a>Facade.Circle._configOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Custom configuration for options specific to a circle entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Complete set of circle specific options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">circle</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">begin</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">end</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span> <span class="p">]</span> <span class="p">];</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.line"><a href="#facade.line" class="permalink">#</a>Facade.Line() </h2>
+
+                    <p>Create a line object. Inherits all methods from <b>Facade.Polygon</b>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Line</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Line</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Line</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">x1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span> <span class="mi">0</span> <span class="p">});</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p>False</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.line.prototype.configoptions"><a href="#facade.line.prototype.configoptions" class="permalink">#</a>Facade.Line._configOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Custom configuration for options specific to a line entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Complete set of line specific options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">line</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y1</span> <span class="p">],</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x2</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y2</span> <span class="p">]</span> <span class="p">];</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.rect"><a href="#facade.rect" class="permalink">#</a>Facade.Rect() </h2>
+
+                    <p>Create a rectangle object. Inherits all methods from <b>Facade.Polygon</b>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Rect</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Rect</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Rect</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span> <span class="p">});</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p>False</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.rect.prototype.configoptions"><a href="#facade.rect.prototype.configoptions" class="permalink">#</a>Facade.Rect._configOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Custom configuration for options specific to a rectangle entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Complete set of rectangle specific options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Rect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
+        <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">],</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="mi">0</span> <span class="p">],</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="p">],</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="p">]</span> <span class="p">];</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.group"><a href="#facade.group" class="permalink">#</a>Facade.Group() </h2>
+
+                    <p>Create a group object. Inherits all methods from <b>Facade.Entity</b>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p>False</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.group.prototype.draw"><a href="#facade.group.prototype.draw" class="permalink">#</a>Facade.Group._draw() <span class="label label-default">private</span></h2>
+
+                    <p>Renders a group of entities to a canvas.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>facade</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js object.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">key</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">facade</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.group.prototype.configoptions"><a href="#facade.group.prototype.configoptions" class="permalink">#</a>Facade.Group._configOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Custom configuration for options specific to a group entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Complete set of group specific options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
+
+        <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.group.prototype.addtogroup"><a href="#facade.group.prototype.addtogroup" class="permalink">#</a>Facade.Group.addToGroup() <span class="label label-default">private</span></h2>
+
+                    <p>Add a Facade.js entity to a group.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>obj</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js entitiy.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">addToGroup</span><span class="p">(</span><span class="nx">circle</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addToGroup</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.group.prototype.removefromgroup"><a href="#facade.group.prototype.removefromgroup" class="permalink">#</a>Facade.Group.removeFromGroup() <span class="label label-default">private</span></h2>
+
+                    <p>Remove a Facade.js entity to a group.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>obj</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js entitiy.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">removeFromGroup</span><span class="p">(</span><span class="nx">circle</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">removeFromGroup</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.group.prototype.setmetrics"><a href="#facade.group.prototype.setmetrics" class="permalink">#</a>Facade.Group._setMetrics() <span class="label label-default">private</span></h2>
+
+                    <p>Set metrics based on the groups's entities.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
+            <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
+            <span class="nx">key</span><span class="p">,</span>
+            <span class="nx">obj_metrics</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+                <span class="nx">obj_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">_setMetrics</span><span class="p">();</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">||</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">||</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+
+                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Object with metric key/value pairs.</p>
+
+                </div>
+
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="bs-footer">
+
+    <div class="container">
+
+        <p>Documentation generated with <a href="https://github.com/visionmedia/dox">dox</a> and <a href="https://github.com/neogeek/doxdox">doxdox</a>.
+
+    </div>
+
+</footer>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+
+(function () {
+
+    var hash = window.location.hash,
+        $hash_elem = $('[id="' + hash.replace(/#/, '') + '"]'),
+        $code_block = $('.code'),
+        $scope_private = $('.scope-private'),
+        $toggle_code_blocks = $('.toggle-code-blocks')
+        $toggle_private = $('.toggle-private');
+
+    $toggle_code_blocks.on('click', function () {
+
+        if ($toggle_code_blocks.is(':checked')) {
+            $code_block.show();
+        } else {
+            $code_block.hide();
+        }
+
+    });
+
+    $toggle_private.on('click', function () {
+
+        if ($toggle_private.is(':checked')) {
+            $scope_private.show();
+        } else {
+            $scope_private.hide();
+        }
+
+    });
+
+    $code_block.hide();
+    $scope_private.hide();
+
+    if ($hash_elem.length && !$hash_elem.is(':visible')) {
+
+        $toggle_private.trigger('click');
+
+    }
+
+}());
+
+</script>
+
+</body>
+</html>
