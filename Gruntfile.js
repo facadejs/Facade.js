@@ -8,12 +8,6 @@ module.exports = function (grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        casperjs: {
-
-            files: ['tests/**/*.js']
-
-        },
-
         jslint: {
 
             client: {
@@ -45,16 +39,28 @@ module.exports = function (grunt) {
 
         },
 
+        casperjs: {
+
+            files: ['tests/**/*.js']
+
+        },
+
         watch: {
+
+            jslint: {
+                files: ['facade.js', 'tests/**/*.js'],
+                tasks: ['jslint']
+            },
+
+            uglify: {
+                files: ['facade.js', 'tests/**/*.js'],
+                tasks: ['uglify']
+            },
 
             casperjs: {
                 files: ['facade.js', 'tests/**/*.js'],
                 tasks: ['casperjs']
             },
-            jslint: {
-                files: ['facade.js', 'tests/**/*.js'],
-                tasks: ['jslint']
-            }
 
         }
 
