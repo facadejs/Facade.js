@@ -45,19 +45,25 @@ canvas {
     group.addToGroup(rect);
     group.addToGroup(polygon);
 
-    stage.addToStage(group);
-
     group_metrics = group._setMetrics();
 
-    stage.addToStage(new Facade.Rect({
-        x: group_metrics.x,
-        y: group_metrics.y,
-        width: group_metrics.width,
-        height: group_metrics.height,
-        fillStyle: '#f00',
-        lineWidth: 0,
-        opacity: 40
-    }));
+    stage.draw(function () {
+
+        this.clear();
+
+        stage.addToStage(group);
+
+        stage.addToStage(new Facade.Rect({
+            x: group_metrics.x,
+            y: group_metrics.y,
+            width: group_metrics.width,
+            height: group_metrics.height,
+            fillStyle: '#f00',
+            lineWidth: 0,
+            opacity: 40
+        }));
+
+    });
 
 }());
 
