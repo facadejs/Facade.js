@@ -273,7 +273,7 @@
 
                     this.context[key].apply(this.context, options[key]);
 
-                } else if (_contextProperties.hasOwnProperty(key)) {
+                } else if (_contextProperties.indexOf(key) !== -1) {
 
                     this.context[key] = options[key];
 
