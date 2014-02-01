@@ -12,9 +12,8 @@
 
     var _requestAnimationFrame,
         _cancelAnimationFrame,
-        _context = document.createElement('canvas').getContext('2d'),
+        // _context = document.createElement('canvas').getContext('2d'),
         _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
-        _contextMethods = [],
         _TO_RADIANS = Math.PI / 180;
 
     /*!
@@ -46,7 +45,7 @@
     /**
      * Checks an object to see if it is a function. Returns a boolean result.
      *
-     *  console.log(isisFunction(this._draw)); // true
+     *  console.log(isFunction(this._draw)); // true
      *
      * @param {Object} obj The object to be checked.
      * @return {Boolean} Result of the test.
@@ -62,7 +61,7 @@
     /**
      * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
      *
-     *  var stage = new Facade(document.getElementById('stage'));
+     *  var stage = new Facade(document.querySelector('canvas'));
      *  var stage = new Facade('stage', 500, 300);
      *
      * @property {Object} canvas Reference to the canvas element.
@@ -170,7 +169,7 @@
     };
 
     /**
-     * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>.
+     * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or avalible polyfill.
      *
      *  stage.draw(function () {
      *
@@ -258,6 +257,17 @@
         return this.canvas.height;
 
     };
+
+    /**
+     * Applys key and value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.
+     *
+     *  console.log(stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]}));
+     *
+     * @param {Object?} options Context property or method names with corresponding values.
+     * @param {Function?} callback Function to be called when context options have been rendered to the canvas.
+     * @return {void}
+     * @api public
+     */
 
     Facade.prototype.renderWithContext = function (options, callback) {
 
@@ -525,7 +535,7 @@
      *  console.log(text.setOptions('value', 'Hello world!'));
      *
      * @param {String} key The option to update.
-     * @param {Object|Function|String|Integer} value Flag to determine if options are to be saved or not.
+     * @param {Object|Function|String|Integer} value The new value of the specified option.
      * @param {Boolean} test Flag to determine if options are to be saved or not.
      * @return {Object|Function|String|Integer} Returns value of the updated option.
      * @api public
@@ -560,7 +570,7 @@
     };
 
     /**
-     * Sets all options for a given object.
+     * Sets a group of option key/value pairs to an object.
      *
      *  console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
      *
@@ -639,6 +649,16 @@
 
     };
 
+    /**
+     * Renders an entity to a canvas.
+     *
+     *  console.log(entity.draw(stage));
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api public
+     */
+
     Facade.Entity.prototype.draw = function (facade) {
 
         var options = this.getAllOptions();
@@ -683,6 +703,16 @@
     Facade.Polygon.prototype = Object.create(Facade.Entity.prototype);
     Facade.Polygon.constructor = Facade.Entity;
 
+    /**
+     * Returns a default set of options common to all Facade.js polygon entities.
+     *
+     *  console.log(Facade.Polygon.prototype._defaultOptions());
+     *
+     * @param {Object} updated Additional option key/value pairs.
+     * @return {Object} Default set of options.
+     * @api private
+     */
+
     Facade.Polygon.prototype._defaultOptions = function (updated) {
 
         var options,
@@ -716,6 +746,16 @@
         return options;
 
     };
+
+    /**
+     * Renders a polygon entity to a canvas.
+     *
+     *  console.log(entity.draw(stage));
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api private
+     */
 
     Facade.Polygon.prototype._draw = function (facade) {
 
@@ -777,6 +817,16 @@
 
     };
 
+    /**
+     * Custom configuration for options specific to a polygon entity.
+     *
+     *  console.log(polygon._configOptions(options));
+     *
+     * @param {Object} options Complete set of polygon specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
+
     Facade.Polygon.prototype._configOptions = function (options) {
 
         options.translate = [ options.x, options.y ];
@@ -785,6 +835,15 @@
         return options;
 
     };
+
+    /**
+     * Set metrics based on the polygon's current options.
+     *
+     *  console.log(polygon._setMetrics());
+     *
+     * @return {Object} Object with metric key/value pairs.
+     * @api private
+     */
 
     Facade.Polygon.prototype._setMetrics = function () {
 
@@ -897,6 +956,16 @@
     Facade.Circle.prototype = Object.create(Facade.Polygon.prototype);
     Facade.Circle.constructor = Facade.Polygon;
 
+    /**
+     * Custom configuration for options specific to a circle entity.
+     *
+     *  console.log(circle._configOptions(options));
+     *
+     * @param {Object} options Complete set of circle specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
+
     Facade.Circle.prototype._configOptions = function (options) {
 
         options.translate = [ options.x, options.y ];
@@ -933,6 +1002,16 @@
 
     Facade.Line.prototype = Object.create(Facade.Polygon.prototype);
     Facade.Line.constructor = Facade.Polygon;
+
+    /**
+     * Custom configuration for options specific to a line entity.
+     *
+     *  console.log(line._configOptions(options));
+     *
+     * @param {Object} options Complete set of line specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
 
     Facade.Line.prototype._configOptions = function (options) {
 
@@ -971,6 +1050,16 @@
     Facade.Rect.prototype = Object.create(Facade.Polygon.prototype);
     Facade.Rect.constructor = Facade.Polygon;
 
+    /**
+     * Custom configuration for options specific to a rectangle entity.
+     *
+     *  console.log(rect._configOptions(options));
+     *
+     * @param {Object} options Complete set of rectangle specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
+
     Facade.Rect.prototype._configOptions = function (options) {
 
         options.translate = [ options.x, options.y ];
@@ -999,7 +1088,7 @@
 
         this.setOptions(options);
 
-        this.objects = [];
+        this._objects = [];
 
     };
 
@@ -1010,21 +1099,41 @@
     Facade.Group.prototype = Object.create(Facade.Entity.prototype);
     Facade.Group.constructor = Facade.Entity;
 
+    /**
+     * Renders a group of entities to a canvas.
+     *
+     *  console.log(group.draw(stage));
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api private
+     */
+
     Facade.Group.prototype._draw = function (facade) {
 
         var key;
 
-        for (key in this.objects) {
+        for (key in this._objects) {
 
-            if (this.objects.hasOwnProperty(key)) {
+            if (this._objects.hasOwnProperty(key)) {
 
-                facade.addToStage(this.objects[key]);
+                facade.addToStage(this._objects[key]);
 
             }
 
         }
 
     };
+
+    /**
+     * Custom configuration for options specific to a group entity.
+     *
+     *  console.log(group._configOptions(options));
+     *
+     * @param {Object} options Complete set of group specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
 
     Facade.Group.prototype._configOptions = function (options) {
 
@@ -1034,33 +1143,62 @@
 
     };
 
+    /**
+     * Add a Facade entity to a group.
+     *
+     *  console.log(group.addToGroup(circle));
+     *
+     * @param {Object} obj Facade.js entitiy.
+     * @return {void}
+     * @api private
+     */
+
     Facade.Group.prototype.addToGroup = function (obj) {
 
         if (obj instanceof Facade.Entity) {
 
-            if (this.objects.indexOf(obj) === -1) {
+            if (this._objects.indexOf(obj) === -1) {
 
-                this.objects.push(obj);
+                this._objects.push(obj);
 
             }
 
         }
 
     };
+
+    /**
+     * Remove a Facade entity to a group.
+     *
+     *  console.log(group.removeFromGroup(circle));
+     *
+     * @param {Object} obj Facade.js entitiy.
+     * @return {void}
+     * @api private
+     */
 
     Facade.Group.prototype.removeFromGroup = function (obj) {
 
         if (obj instanceof Facade.Entity) {
 
-            if (this.objects.indexOf(obj) !== -1) {
+            if (this._objects.indexOf(obj) !== -1) {
 
-                this.objects.slice(this.objects.indexOf(obj), 1);
+                this._objects.splice(this._objects.indexOf(obj), 1);
 
             }
 
         }
 
     };
+
+    /**
+     * Set metrics based on the groups's entities.
+     *
+     *  console.log(group._setMetrics());
+     *
+     * @return {Object} Object with metric key/value pairs.
+     * @api private
+     */
 
     Facade.Group.prototype._setMetrics = function () {
 
@@ -1069,11 +1207,11 @@
             key,
             obj_metrics;
 
-        for (key in this.objects) {
+        for (key in this._objects) {
 
-            if (this.objects.hasOwnProperty(key)) {
+            if (this._objects.hasOwnProperty(key)) {
 
-                obj_metrics = this.objects[key]._setMetrics();
+                obj_metrics = this._objects[key]._setMetrics();
 
                 if (obj_metrics.x < metrics.x || metrics.x === null) {
 
