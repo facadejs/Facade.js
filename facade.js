@@ -13,6 +13,8 @@
     var _requestAnimationFrame,
         _cancelAnimationFrame,
         _context = document.createElement('canvas').getContext('2d'),
+        _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
+        _contextMethods = [],
         _TO_RADIANS = Math.PI / 180;
 
     /*!
@@ -271,7 +273,7 @@
 
                     this.context[key].apply(this.context, options[key]);
 
-                } else if (this.context.hasOwnProperty(key)) {
+                } else if (_contextProperties.hasOwnProperty(key)) {
 
                     this.context[key] = options[key];
 
@@ -1036,7 +1038,25 @@
 
         if (obj instanceof Facade.Entity) {
 
-            this.objects.push(obj);
+            if (this.objects.indexOf(obj) === -1) {
+
+                this.objects.push(obj);
+
+            }
+
+        }
+
+    };
+
+    Facade.Group.prototype.removeFromGroup = function (obj) {
+
+        if (obj instanceof Facade.Entity) {
+
+            if (this.objects.indexOf(obj) !== -1) {
+
+                this.objects.slice(this.objects.indexOf(obj), 1);
+
+            }
 
         }
 
