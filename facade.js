@@ -1144,7 +1144,7 @@
     };
 
     /**
-     * Add a Facade entity to a group.
+     * Add a Facade.js entity to a group.
      *
      *  console.log(group.addToGroup(circle));
      *
@@ -1168,7 +1168,7 @@
     };
 
     /**
-     * Remove a Facade entity to a group.
+     * Remove a Facade.js entity to a group.
      *
      *  console.log(group.removeFromGroup(circle));
      *
