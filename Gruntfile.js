@@ -29,7 +29,9 @@ module.exports = function (grunt) {
 
             my_target: {
                 options: {
-                    sourceMap: 'facade.min.map.js',
+                    mangle: true,
+                    report: 'gzip',
+                    sourceMap: true,
                     banner: '/*!\n * <%= pkg.name %> v<%= pkg.version %>\n * https://github.com/neogeek/facade.js\n * \n * Copyright (c) <%= grunt.template.today("yyyy") %> Scott Doxey\n * Dual-licensed under both MIT and BSD licenses.\n */\n'
                 },
                 files: {
