@@ -27,7 +27,7 @@ canvas {
 
 <canvas width="1140" height="600"></canvas>
 
-<script src="facade.min.js"></script>
+<script src="facade.js"></script>
 <script>
 
 (function () {
@@ -39,6 +39,54 @@ canvas {
         polygon = new Facade.Polygon({ x: 200, y: 350, points: [ [0, 0], [200, 0], [100, 200], [0, 150] ], lineWidth: 10, strokeStyle: '#000', fillStyle: '#0f0' }),
         group = new Facade.Group({ }),
         group_metrics = null;
+
+    function debugMetrics(obj, facade) {
+
+        var metrics = obj._setMetrics();
+
+        facade.renderWithContext({
+            strokeStyle: '#f00', lineWidth: 1,
+            beginPath: [],
+            moveTo: [ metrics.x, 0 ],
+            lineTo: [ metrics.x, facade.canvas.height ],
+            stroke: [],
+            closePath: []
+        });
+
+        facade.renderWithContext({
+            strokeStyle: '#f00', lineWidth: 1,
+            beginPath: [],
+            moveTo: [ metrics.x + metrics.width, 0 ],
+            lineTo: [ metrics.x + metrics.width, facade.canvas.height ],
+            stroke: [],
+            closePath: []
+        });
+
+        facade.renderWithContext({
+            strokeStyle: '#f00', lineWidth: 1,
+            beginPath: [],
+            moveTo: [ 0, metrics.y + metrics.height ],
+            lineTo: [ facade.canvas.width, metrics.y + metrics.height ],
+            stroke: [],
+            closePath: []
+        });
+
+        facade.renderWithContext({
+            strokeStyle: '#f00', lineWidth: 1,
+            beginPath: [],
+            moveTo: [ 0, metrics.y ],
+            lineTo: [ facade.canvas.width, metrics.y ],
+            stroke: [],
+            closePath: []
+        });
+
+        facade.renderWithContext({
+            fillStyle: '#f00',
+            globalAlpha: 0.40,
+            fillRect: [ metrics.x, metrics.y, metrics.width, metrics.height ]
+        });
+
+    }
 
     group.addToGroup(circle);
     group.addToGroup(line);
@@ -53,15 +101,9 @@ canvas {
 
         stage.addToStage(group);
 
-        stage.addToStage(new Facade.Rect({
-            x: group_metrics.x,
-            y: group_metrics.y,
-            width: group_metrics.width,
-            height: group_metrics.height,
-            fillStyle: '#f00',
-            lineWidth: 0,
-            opacity: 40
-        }));
+        debugMetrics(polygon, this);
+
+        debugMetrics(group, this);
 
     });
 
