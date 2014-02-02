@@ -272,7 +272,8 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]));</span> <span class="c1">// true&lt;br /&gt; console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false&lt;/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isArray</span><span class="p">({</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}));</span> <span class="c1">// false</span>
 </pre></div>
 
 
@@ -331,7 +332,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">));</span> <span class="c1">// true&lt;/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">));</span> <span class="c1">// true</span>
 </pre></div>
 
 
@@ -445,7 +446,8 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="nx">br</span> <span class="o">/&gt;</span> <span class="kd">var</span> <span class="nx">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">(</span><span class="s1">&#39;stage&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="kd">var</span> <span class="nx">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">stage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">(</span><span class="s1">&#39;stage&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
 </pre></div>
 
 
@@ -549,7 +551,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
 </pre></div>
 
 
@@ -601,7 +603,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre> <span class="nx">stage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </pre></div>
 
 
@@ -662,14 +664,13 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
- <span class="k">this</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 
- <span class="k">this</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span> <span class="p">});</span>
 
-
-<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+<span class="p">});</span>
 </pre></div>
 
 
@@ -753,7 +754,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">exportBase64</span><span class="p">(</span><span class="s1">&#39;image/png&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">exportBase64</span><span class="p">(</span><span class="s1">&#39;image/png&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
 </pre></div>
 
 
@@ -830,7 +831,8 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">height</span><span class="p">());</span> <span class="c1">// 300&lt;br /&gt; console.log(stage.height(600)); // 600&lt;/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">height</span><span class="p">());</span> <span class="c1">// 300</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="mi">600</span><span class="p">));</span> <span class="c1">// 600</span>
 </pre></div>
 
 
@@ -908,7 +910,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">({</span> <span class="nx">fillStyle</span><span class="o">:</span> <span class="err">&#39;</span><span class="cp">#f</span><span class="mo">00</span><span class="s">&#39;, globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]}));&lt;/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">({</span> <span class="nx">fillStyle</span><span class="o">:</span> <span class="err">&#39;</span><span class="cp">#f</span><span class="mo">00</span><span class="s">&#39;, globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});</span>
 </pre></div>
 
 
@@ -980,7 +982,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 </pre></div>
 
 
@@ -1026,7 +1028,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">stage</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </pre></div>
 
 
@@ -1095,7 +1097,8 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">width</span><span class="p">());</span> <span class="c1">// 400&lt;br /&gt; console.log(stage.width(800)); // 800&lt;/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">width</span><span class="p">());</span> <span class="c1">// 400</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stage</span><span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mi">800</span><span class="p">));</span> <span class="c1">// 800</span>
 </pre></div>
 
 
@@ -1160,7 +1163,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="o">&lt;</span><span class="nx">em</span><span class="o">&gt;</span><span class="nx">requestAnimation</span> <span class="o">=</span> <span class="nx">_requestAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="o">&lt;</span><span class="err">/em&gt;animate.bind(this));&lt;/p&gt;</span>
+                    <div class="highlight"><pre><span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="nx">_requestAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_animate</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
 </pre></div>
 
 
@@ -1240,7 +1243,7 @@
 
                     <h3>Returns</h3>
 
-                    <p>False</p>
+                    <p><code>Object</code> New Facade.Entity object.</p>
 
                 </div>
 
@@ -1277,7 +1280,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">());</span>
 </pre></div>
 
 
@@ -1354,7 +1357,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">());</span>
 </pre></div>
 
 
@@ -1426,7 +1429,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getOption</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getOption</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">));</span>
 </pre></div>
 
 
@@ -1476,7 +1479,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">());</span>
 </pre></div>
 
 
@@ -1566,7 +1569,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span>
 </pre></div>
 
 
@@ -1656,7 +1659,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">,</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Georgia&#39;</span> <span class="p">}));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">,</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Georgia&#39;</span> <span class="p">}));</span>
 </pre></div>
 
 
@@ -1728,7 +1731,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getMetric</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getMetric</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">));</span>
 </pre></div>
 
 
@@ -1778,7 +1781,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">());</span>
 </pre></div>
 
 
@@ -1850,7 +1853,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
 </pre></div>
 
 
@@ -1929,7 +1932,7 @@
 
                     <h3>Returns</h3>
 
-                    <p>False</p>
+                    <p><code>Object</code> New Facade.Polygon object.</p>
 
                 </div>
 
@@ -1966,7 +1969,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">());</span>
 </pre></div>
 
 
@@ -2053,7 +2056,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
 </pre></div>
 
 
@@ -2166,7 +2169,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2213,7 +2216,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
 </pre></div>
 
 
@@ -2359,7 +2362,7 @@
 
                     <h3>Returns</h3>
 
-                    <p>False</p>
+                    <p><code>Object</code> New Facade.Circle object.</p>
 
                 </div>
 
@@ -2396,7 +2399,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">circle</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">circle</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2468,7 +2471,7 @@
 
                     <h3>Returns</h3>
 
-                    <p>False</p>
+                    <p><code>Object</code> New Facade.Line object.</p>
 
                 </div>
 
@@ -2505,7 +2508,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">line</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">line</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2577,7 +2580,7 @@
 
                     <h3>Returns</h3>
 
-                    <p>False</p>
+                    <p><code>Object</code> New Facade.Rect object.</p>
 
                 </div>
 
@@ -2614,7 +2617,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2688,7 +2691,7 @@
 
                     <h3>Returns</h3>
 
-                    <p>False</p>
+                    <p><code>Object</code> New Facade.Group object.</p>
 
                 </div>
 
@@ -2725,7 +2728,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
 </pre></div>
 
 
@@ -2794,7 +2797,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2855,7 +2858,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">addToGroup</span><span class="p">(</span><span class="nx">circle</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">addToGroup</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
 </pre></div>
 
 
@@ -2922,7 +2925,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">removeFromGroup</span><span class="p">(</span><span class="nx">circle</span><span class="p">));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">removeFromGroup</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
 </pre></div>
 
 
@@ -2974,7 +2977,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
 </pre></div>
 
 
