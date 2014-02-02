@@ -28,8 +28,8 @@
     /**
      * Checks an object to see if it is an array. Returns a boolean result.
      *
-     *  console.log(isArray([1, 2, 3, 4, 5])); // true
-     *  console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false
+     *     console.log(isArray([1, 2, 3, 4, 5])); // true
+     *     console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false
      *
      * @param {Object} obj The object to be checked.
      * @return {Boolean} Result of the test.
@@ -45,7 +45,7 @@
     /**
      * Checks an object to see if it is a function. Returns a boolean result.
      *
-     *  console.log(isFunction(this._draw)); // true
+     *     console.log(isFunction(this._draw)); // true
      *
      * @param {Object} obj The object to be checked.
      * @return {Boolean} Result of the test.
@@ -61,8 +61,8 @@
     /**
      * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
      *
-     *  var stage = new Facade(document.querySelector('canvas'));
-     *  var stage = new Facade('stage', 500, 300);
+     *     var stage = new Facade(document.querySelector('canvas'));
+     *     var stage = new Facade('stage', 500, 300);
      *
      * @property {Object} canvas Reference to the canvas element.
      * @property {Object} context Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
@@ -130,7 +130,7 @@
     /**
      * Draws a Facade.js object to the stage.
      *
-     *  stage.addToStage(circle);
+     *     stage.addToStage(circle);
      *
      * @param {Object} obj Facade.js entity object.
      * @return {Object} Facade.js object.
@@ -154,7 +154,7 @@
     /**
      * Clears the canvas.
      *
-     *  stage.clear();
+     *      stage.clear();
      *
      * @return {Object} Facade.js object.
      * @api public
@@ -171,13 +171,13 @@
     /**
      * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or avalible polyfill.
      *
-     *  stage.draw(function () {
+     *     stage.draw(function () {
      *
-     *      this.clear();
+     *         this.clear();
      *
-     *      this.addToStage(circle, { x: 100, y: 100 });
+     *         this.addToStage(circle, { x: 100, y: 100 });
      *
-     *  });
+     *     });
      *
      * @param {Function} callback Function callback.
      * @return {Object} Facade.js object.
@@ -205,7 +205,7 @@
     /**
      * Exports a base64 encoded representation of the current rendered canvas.
      *
-     *  console.log(stage.exportBase64('image/png', 100));
+     *     console.log(stage.exportBase64('image/png', 100));
      *
      * @param {String?} type Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)
      * @param {Integer?} quality Number between 0 and 100.
@@ -238,8 +238,8 @@
     /**
      * Gets and sets the canvas height.
      *
-     *  console.log(stage.height()); // 300
-     *  console.log(stage.height(600)); // 600
+     *     console.log(stage.height()); // 300
+     *     console.log(stage.height(600)); // 600
      *
      * @param {Integer?} height Height in pixels.
      * @return {Integer} Height in pixels.
@@ -261,7 +261,7 @@
     /**
      * Applys key and value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.
      *
-     *  console.log(stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]}));
+     *     stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});
      *
      * @param {Object?} options Context property or method names with corresponding values.
      * @param {Function?} callback Function to be called when context options have been rendered to the canvas.
@@ -306,7 +306,7 @@
     /**
      * Starts the callback supplied in <code>Facade.draw</code>.
      *
-     *  stage.start();
+     *     stage.start();
      *
      * @return {Object} Facade.js object.
      * @api public
@@ -323,7 +323,7 @@
     /**
      * Stops the callback supplied in <code>Facade.draw</code>.
      *
-     *  stage.stop();
+     *     stage.stop();
      *
      * @return {Object} Facade.js object.
      * @api public
@@ -346,8 +346,8 @@
     /**
      * Gets and sets the canvas width.
      *
-     *  console.log(stage.width()); // 400
-     *  console.log(stage.width(800)); // 800
+     *     console.log(stage.width()); // 400
+     *     console.log(stage.width(800)); // 800
      *
      * @param {Integer?} width Width in pixels.
      * @return {Integer} Width in pixels.
@@ -369,7 +369,7 @@
     /**
      * Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code> and <code>Facade.fps</code>.
      *
-     *  this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
+     *     this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
      *
      * @param {Integer} time <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp" target="_blank">DOMTimeStamp</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp" target="_blank">DOMHighResTimeStamp</a> (Google Chrome Only)
      * @return {Object} Facade.js object.
@@ -411,6 +411,7 @@
     /**
      * The constructor for all Facade.js shapes, images and text objects.
      *
+     * @return {Object} New Facade.Entity object.
      * @api private
      */
 
@@ -419,7 +420,7 @@
     /**
      * Returns a default set of options common to all Facade.js entities.
      *
-     *  console.log(Facade.Entity.prototype._defaultOptions());
+     *     console.log(Facade.Entity.prototype._defaultOptions());
      *
      * @param {Object} updated Additional options key/value pairs.
      * @return {Object} Default set of options.
@@ -453,7 +454,7 @@
     /**
      * Returns a default set of metrics common to all Facade.js entities.
      *
-     *  console.log(Facade.Entity.prototype._defaultMetrics());
+     *     console.log(Facade.Entity.prototype._defaultMetrics());
      *
      * @param {Object} updated Additional metric key/value pairs.
      * @return {Object} Default set of metrics.
@@ -482,7 +483,7 @@
     /**
      * Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
-     *  console.log(text.getOption('value'));
+     *     console.log(text.getOption('value'));
      *
      * @param {String} key The name of the option.
      * @return {Object|Function|String|Integer} Value of the option requested.
@@ -504,7 +505,7 @@
     /**
      * Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
-     *  console.log(text.getAllOptions());
+     *     console.log(text.getAllOptions());
      *
      * @return {Object} Object containing all options.
      * @api public
@@ -532,7 +533,7 @@
     /**
      * Sets an option for a given object.
      *
-     *  console.log(text.setOptions('value', 'Hello world!'));
+     *     console.log(text.setOptions('value', 'Hello world!'));
      *
      * @param {String} key The option to update.
      * @param {Object|Function|String|Integer} value The new value of the specified option.
@@ -572,7 +573,7 @@
     /**
      * Sets a group of option key/value pairs to an object.
      *
-     *  console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
+     *     console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
      *
      * @param {Object} updated The options to update. Does not need to be entire set of options.
      * @param {Boolean} test Flag to determine if options are to be saved or not.
@@ -602,7 +603,7 @@
     /**
      * Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
-     *  console.log(text.getMetric('width'));
+     *     console.log(text.getMetric('width'));
      *
      * @param {String} key The name of the metric.
      * @return {Integer} Value of the metric requested.
@@ -624,7 +625,7 @@
     /**
      * Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
-     *  console.log(text.getAllMetrics());
+     *     console.log(text.getAllMetrics());
      *
      * @return {Object} Object containing all metrics.
      * @api public
@@ -652,7 +653,7 @@
     /**
      * Renders an entity to a canvas.
      *
-     *  console.log(entity.draw(stage));
+     *     entity.draw(stage);
      *
      * @param {Object} facade Facade.js object.
      * @return {void}
@@ -679,6 +680,9 @@
 
     /**
      * Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     * @return {Object} New Facade.Polygon object.
+     * @api public
      */
 
     Facade.Polygon = function (options) {
@@ -706,7 +710,7 @@
     /**
      * Returns a default set of options common to all Facade.js polygon entities.
      *
-     *  console.log(Facade.Polygon.prototype._defaultOptions());
+     *     console.log(Facade.Polygon.prototype._defaultOptions());
      *
      * @param {Object} updated Additional option key/value pairs.
      * @return {Object} Default set of options.
@@ -750,7 +754,7 @@
     /**
      * Renders a polygon entity to a canvas.
      *
-     *  console.log(entity.draw(stage));
+     *     entity.draw(stage);
      *
      * @param {Object} facade Facade.js object.
      * @return {void}
@@ -820,7 +824,7 @@
     /**
      * Custom configuration for options specific to a polygon entity.
      *
-     *  console.log(polygon._configOptions(options));
+     *     console.log(polygon._configOptions(options));
      *
      * @param {Object} options Complete set of polygon specific options.
      * @return {Object} Converted options.
@@ -839,7 +843,7 @@
     /**
      * Set metrics based on the polygon's current options.
      *
-     *  console.log(polygon._setMetrics());
+     *     console.log(polygon._setMetrics());
      *
      * @return {Object} Object with metric key/value pairs.
      * @api private
@@ -932,6 +936,9 @@
 
     /**
      * Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.
+     *
+     * @return {Object} New Facade.Circle object.
+     * @api public
      */
 
     Facade.Circle = function (options) {
@@ -959,7 +966,7 @@
     /**
      * Custom configuration for options specific to a circle entity.
      *
-     *  console.log(circle._configOptions(options));
+     *     console.log(circle._configOptions(options));
      *
      * @param {Object} options Complete set of circle specific options.
      * @return {Object} Converted options.
@@ -979,6 +986,9 @@
 
     /**
      * Create a line object. Inherits all methods from <b>Facade.Polygon</b>.
+     *
+     * @return {Object} New Facade.Line object.
+     * @api public
      */
 
     Facade.Line = function (options) {
@@ -1006,7 +1016,7 @@
     /**
      * Custom configuration for options specific to a line entity.
      *
-     *  console.log(line._configOptions(options));
+     *     console.log(line._configOptions(options));
      *
      * @param {Object} options Complete set of line specific options.
      * @return {Object} Converted options.
@@ -1026,6 +1036,9 @@
 
     /**
      * Create a rectangle object. Inherits all methods from <b>Facade.Polygon</b>.
+     *
+     * @return {Object} New Facade.Rect object.
+     * @api public
      */
 
     Facade.Rect = function (options) {
@@ -1053,7 +1066,7 @@
     /**
      * Custom configuration for options specific to a rectangle entity.
      *
-     *  console.log(rect._configOptions(options));
+     *     console.log(rect._configOptions(options));
      *
      * @param {Object} options Complete set of rectangle specific options.
      * @return {Object} Converted options.
@@ -1073,6 +1086,9 @@
 
     /**
      * Create a group object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     * @return {Object} New Facade.Group object.
+     * @api public
      */
 
     Facade.Group = function (options) {
@@ -1102,7 +1118,7 @@
     /**
      * Renders a group of entities to a canvas.
      *
-     *  console.log(group.draw(stage));
+     *     group.draw(stage);
      *
      * @param {Object} facade Facade.js object.
      * @return {void}
@@ -1128,7 +1144,7 @@
     /**
      * Custom configuration for options specific to a group entity.
      *
-     *  console.log(group._configOptions(options));
+     *     console.log(group._configOptions(options));
      *
      * @param {Object} options Complete set of group specific options.
      * @return {Object} Converted options.
@@ -1146,7 +1162,7 @@
     /**
      * Add a Facade.js entity to a group.
      *
-     *  console.log(group.addToGroup(circle));
+     *     group.addToGroup(circle);
      *
      * @param {Object} obj Facade.js entitiy.
      * @return {void}
@@ -1170,7 +1186,7 @@
     /**
      * Remove a Facade.js entity to a group.
      *
-     *  console.log(group.removeFromGroup(circle));
+     *     group.removeFromGroup(circle);
      *
      * @param {Object} obj Facade.js entitiy.
      * @return {void}
@@ -1194,7 +1210,7 @@
     /**
      * Set metrics based on the groups's entities.
      *
-     *  console.log(group._setMetrics());
+     *     console.log(group._setMetrics());
      *
      * @return {Object} Object with metric key/value pairs.
      * @api private
