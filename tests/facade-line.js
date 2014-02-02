@@ -94,7 +94,7 @@ casper.test.begin('Running _configOptions on line options.', function suite(test
         lineWidth: 1,
         lineCap: 'default',
         lineJoin: 'miter',
-        closePath: true,
+        closePath: false,
         translate: [ 10, 10 ],
         globalAlpha: 0.5,
         x1: 100,

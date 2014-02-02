@@ -1027,6 +1027,7 @@
 
         options.translate = [ options.x, options.y ];
         options.globalAlpha = options.opacity / 100;
+        options.closePath = false;
 
         options.points = [ [ options.x1, options.y1 ], [ options.x2, options.y2 ] ];
 
