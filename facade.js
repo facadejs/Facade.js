@@ -1221,6 +1221,7 @@
 
         var metrics = this.getAllMetrics(),
             options = this.getAllOptions(),
+            bounds = { top: null, right: null, bottom: null, left: null },
             key,
             obj_metrics;
 
@@ -1230,35 +1231,27 @@
 
                 obj_metrics = this._objects[key]._setMetrics();
 
-                if (obj_metrics.x < metrics.x || metrics.x === null) {
+                if (obj_metrics.x < bounds.left || bounds.left === null) {
 
-                    metrics.x = obj_metrics.x;
-
-                }
-
-                if (obj_metrics.y < metrics.y || metrics.y === null) {
-
-                    metrics.y = obj_metrics.y;
+                    bounds.left = obj_metrics.x;
 
                 }
 
-                if (metrics.width === null) {
+                if (obj_metrics.y < bounds.top || bounds.top === null) {
 
-                    metrics.width = obj_metrics.width;
-
-                } else if (obj_metrics.x - metrics.x + obj_metrics.width > metrics.width) {
-
-                    metrics.width = obj_metrics.x - metrics.x + obj_metrics.width;
+                    bounds.top = obj_metrics.y;
 
                 }
 
-                if (metrics.height === null) {
+                if (obj_metrics.x + obj_metrics.width > bounds.right || bounds.right === null) {
 
-                    metrics.height = obj_metrics.height;
+                    bounds.right = obj_metrics.x + obj_metrics.width;
 
-                } else if (obj_metrics.y - metrics.y + obj_metrics.width > metrics.height) {
+                }
 
-                    metrics.height = obj_metrics.y - metrics.y + obj_metrics.width;
+                if (obj_metrics.y + obj_metrics.height > bounds.bottom || bounds.bottom === null) {
+
+                    bounds.bottom = obj_metrics.y + obj_metrics.height;
 
                 }
 
@@ -1266,8 +1259,10 @@
 
         }
 
-        metrics.x = options.x + metrics.x;
-        metrics.y = options.y + metrics.y;
+        metrics.x = options.x + bounds.left;
+        metrics.y = options.y + bounds.top;
+        metrics.width = bounds.right - bounds.left;
+        metrics.height = bounds.bottom - bounds.top;
 
         return metrics;
 

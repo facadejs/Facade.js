@@ -2522,6 +2522,7 @@
 
     <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">closePath</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
     <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y1</span> <span class="p">],</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x2</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y2</span> <span class="p">]</span> <span class="p">];</span>
 
@@ -2991,6 +2992,7 @@
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
+        <span class="nx">bounds</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">left</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
         <span class="nx">key</span><span class="p">,</span>
         <span class="nx">obj_metrics</span><span class="p">;</span>
 
@@ -3000,35 +3002,27 @@
 
             <span class="nx">obj_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">_setMetrics</span><span class="p">();</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">||</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">||</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-
-                <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+                <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 
             <span class="p">}</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
-
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
-
-                <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+                <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 
             <span class="p">}</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+                <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}</span>
 
-                <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">&gt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 
             <span class="p">}</span>
 
@@ -3036,8 +3030,10 @@
 
     <span class="p">}</span>
 
-    <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-    <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">-</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">-</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
 

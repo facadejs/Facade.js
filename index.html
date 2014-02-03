@@ -37,8 +37,7 @@ canvas {
         line = new Facade.Line({ x1: 570, y1: 300, x2: 770, y2: 100, lineWidth: 10, strokeStyle: '#000' }),
         rect = new Facade.Rect({ x: 800, y: 200, width: 200, height: 200, lineWidth: 0, strokeStyle: '#000', fillStyle: '#0f0' }),
         polygon = new Facade.Polygon({ x: 200, y: 350, points: [ [0, 0], [200, 0], [100, 200], [0, 150] ], lineWidth: 10, strokeStyle: '#000', fillStyle: '#0f0' }),
-        group = new Facade.Group({ }),
-        group_metrics = null;
+        group = new Facade.Group({ });
 
     function debugMetrics(obj, facade) {
 
@@ -92,8 +91,6 @@ canvas {
     group.addToGroup(line);
     group.addToGroup(rect);
     group.addToGroup(polygon);
-
-    group_metrics = group._setMetrics();
 
     stage.draw(function () {
 
