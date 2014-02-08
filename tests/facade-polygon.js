@@ -26,6 +26,7 @@ casper.test.begin('Setting/getting polygon entity options.', function suite(test
     test.assertEquals(object.getAllOptions(), {
         x: 0,
         y: 0,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -53,6 +54,7 @@ casper.test.begin('Running _configOptions on polygon options.', function suite(t
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,
         y: 10,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -89,8 +91,8 @@ casper.test.begin('Setting metrics for a polygon.', function suite(test) {
     object.setOptions({ lineWidth: 10 });
 
     test.assertEquals(object._setMetrics(), {
-        x: 5,
-        y: 5,
+        x: 10,
+        y: 10,
         width: 210,
         height: 210
     }, 'Polygon metrics have been set correctly.');

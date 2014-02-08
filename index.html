@@ -30,80 +30,43 @@ canvas {
 <script src="facade.js"></script>
 <script>
 
+function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x,0],lineTo:[i.x,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x+i.width,0],lineTo:[i.x+i.width,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y+i.height],lineTo:[t.canvas.width,i.y+i.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y],lineTo:[t.canvas.width,i.y],stroke:[],closePath:[]});t.renderWithContext({fillStyle:"#f00",globalAlpha:.4,fillRect:[i.x,i.y,i.width,i.height]})}
+
 (function () {
 
     var stage = new Facade(document.querySelector('canvas')),
-        circle = new Facade.Circle({ x: 120, y: 120, radius: 100, lineWidth: 10, strokeStyle: '#000', fillStyle: '#0f0'}),
-        line = new Facade.Line({ x1: 570, y1: 300, x2: 770, y2: 100, lineWidth: 10, strokeStyle: '#000' }),
-        rect = new Facade.Rect({ x: 800, y: 200, width: 200, height: 200, lineWidth: 0, strokeStyle: '#000', fillStyle: '#0f0' }),
-        polygon = new Facade.Polygon({ x: 200, y: 350, points: [ [0, 0], [200, 0], [100, 200], [0, 150] ], lineWidth: 10, strokeStyle: '#000', fillStyle: '#0f0' }),
-        group = new Facade.Group({ });
-
-    function debugMetrics(obj, facade) {
-
-        var metrics = obj._setMetrics();
-
-        facade.renderWithContext({
-            strokeStyle: '#f00', lineWidth: 1,
-            beginPath: [],
-            moveTo: [ metrics.x, 0 ],
-            lineTo: [ metrics.x, facade.canvas.height ],
-            stroke: [],
-            closePath: []
+        anchorSet = ['top/left', 'top/center', 'top/right', 'center/right', 'bottom/right', 'bottom/center', 'bottom/left', 'center/left'],
+        anchor = anchorSet[0],
+        rect = new Facade.Rect({
+            x: stage.width() / 2, y: stage.height() / 2,
+            width: 200, height: 200,
+            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
+            anchor: anchor
+        }),
+        polygon = new Facade.Polygon({
+            x: stage.width() / 2, y: stage.height() / 2,
+            points: [ [0, 0], [200, 0], [100, 200], [0, 150] ],
+            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f', lineJoin: 'round',
+            anchor: anchor
+        }),
+        circle = new Facade.Circle({
+            x: stage.width() / 2, y: stage.height() / 2,
+            radius: 100,
+            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
+            anchor: anchor
         });
 
-        facade.renderWithContext({
-            strokeStyle: '#f00', lineWidth: 1,
-            beginPath: [],
-            moveTo: [ metrics.x + metrics.width, 0 ],
-            lineTo: [ metrics.x + metrics.width, facade.canvas.height ],
-            stroke: [],
-            closePath: []
-        });
+    (function (obj) {
 
-        facade.renderWithContext({
-            strokeStyle: '#f00', lineWidth: 1,
-            beginPath: [],
-            moveTo: [ 0, metrics.y + metrics.height ],
-            lineTo: [ facade.canvas.width, metrics.y + metrics.height ],
-            stroke: [],
-            closePath: []
-        });
+        console.log(obj.getAllOptions());
+        console.log(obj._setMetrics());
+        console.log(obj._getAnchorPoint(obj.getAllOptions(), obj._setMetrics()));
 
-        facade.renderWithContext({
-            strokeStyle: '#f00', lineWidth: 1,
-            beginPath: [],
-            moveTo: [ 0, metrics.y ],
-            lineTo: [ facade.canvas.width, metrics.y ],
-            stroke: [],
-            closePath: []
-        });
+        stage.addToStage(obj);
 
-        facade.renderWithContext({
-            fillStyle: '#f00',
-            globalAlpha: 0.40,
-            fillRect: [ metrics.x, metrics.y, metrics.width, metrics.height ]
-        });
+        debugMetrics(obj, stage);
 
-    }
-
-    group.addToGroup(circle);
-    group.addToGroup(line);
-    group.addToGroup(rect);
-    group.addToGroup(polygon);
-
-    stage.draw(function () {
-
-        this.clear();
-
-        stage.addToStage(group);
-
-        debugMetrics(polygon, this);
-
-        debugMetrics(group, this);
-
-    });
-
+    }(rect));
 }());
 
 </script>

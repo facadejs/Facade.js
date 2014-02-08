@@ -137,6 +137,14 @@
 
                 
 
+                <li class="scope-private"><a href="#facade.entity.prototype.getanchorpoint">Facade.Entity._getAnchorPoint()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.entity.prototype.getstrokewidthoffset">Facade.Entity._getStrokeWidthOffset()</a></li>
+
+                
+
                 <li class="scope-public"><a href="#facade.entity.prototype.getoption">Facade.Entity.getOption()</a></li>
 
                 
@@ -1297,7 +1305,8 @@
 
     <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">anchor</span><span class="o">:</span> <span class="s1">&#39;top/left&#39;</span>
     <span class="p">};</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
@@ -1393,6 +1402,166 @@
                     <h3>Returns</h3>
 
                     <p><code>Object</code> Default set of metrics.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.entity.prototype.getanchorpoint"><a href="#facade.entity.prototype.getanchorpoint" class="permalink">#</a>Facade.Entity._getAnchorPoint() <span class="label label-default">private</span></h2>
+
+                    <p>Returns an array of the x and y anchor positions based on given options and metrics.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.Entity options.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.Entity metrics.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getAnchorPoint</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/center$/</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="nx">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/right$/</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="nx">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="nx">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^center/</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="nx">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^bottom/</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="nx">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="nx">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">pos</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Array with x and y anchor positions.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.entity.prototype.getstrokewidthoffset"><a href="#facade.entity.prototype.getstrokewidthoffset" class="permalink">#</a>Facade.Entity._getStrokeWidthOffset() <span class="label label-default">private</span></h2>
+
+                    <p>Returns an integer for the stroke width offset. Used to calculate metrics.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.Entity options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Integer representing the stroke width offset.</p>
 
                 </div>
 
@@ -2070,13 +2239,17 @@
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
-        <span class="nx">point</span><span class="p">;</span>
+        <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(),</span>
+        <span class="nx">point</span><span class="p">,</span>
+        <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
     <span class="p">}</span>
+
+    <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
@@ -2231,7 +2404,9 @@
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">bounds</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">left</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
-        <span class="nx">point</span><span class="p">;</span>
+        <span class="nx">point</span><span class="p">,</span>
+        <span class="nx">anchor</span><span class="p">,</span>
+        <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
 
@@ -2297,13 +2472,18 @@
 
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">strokeWidthOffset</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">strokeWidthOffset</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
 
-        <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-        <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
-        <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">;</span>
-        <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+        <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
 
     <span class="p">}</span>
 
@@ -2411,7 +2591,7 @@
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span> <span class="p">];</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
 
     <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">begin</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">end</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span> <span class="p">]</span> <span class="p">];</span>

@@ -27,6 +27,7 @@ casper.test.begin('Setting/getting circle entity options.', function suite(test)
     test.assertEquals(object.getAllOptions(), {
         x: 0,
         y: 0,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -47,6 +48,7 @@ casper.test.begin('Setting/getting circle entity options.', function suite(test)
     test.assertEquals(object.setOptions({ radius: 20 }), {
         x: 0,
         y: 0,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -81,6 +83,7 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,
         y: 10,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -93,7 +96,7 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
         lineCap: 'default',
         lineJoin: 'miter',
         closePath: true,
-        translate: [ 10, 10 ],
+        translate: [ 10 + 20, 10 + 20 ],
         globalAlpha: 0.5,
         radius: 20,
         begin: 0,
@@ -108,22 +111,22 @@ casper.test.begin('Setting metrics for a circle.', function suite(test) {
 
     'use strict';
 
-    var object = new Facade.Circle({ x: 10, y: 10, radius: 20, lineWidth: 0 });
+    var object = new Facade.Circle({ x: 10, y: 10, radius: 100, lineWidth: 0 });
 
     test.assertEquals(object._setMetrics(), {
-        x: -10,
-        y: -10,
-        width: 40,
-        height: 40
+        x: 10,
+        y: 10,
+        width: 200,
+        height: 200
     }, 'Circle metrics have been set correctly.');
 
     object.setOptions({ lineWidth: 10 });
 
     test.assertEquals(object._setMetrics(), {
-        x: -15,
-        y: -15,
-        width: 50,
-        height: 50
+        x: 10,
+        y: 10,
+        width: 210,
+        height: 210
     }, 'Circle metrics have been set correctly.');
 
     test.done();

@@ -25,7 +25,8 @@ casper.test.begin('Setting/getting group options.', function suite(test) {
 
     test.assertEquals(object.getAllOptions(), {
         x: 0,
-        y: 0
+        y: 0,
+        anchor: 'top/left'
     }, 'Group default options.');
 
     test.assertEquals(object.getAllMetrics(), {
@@ -48,6 +49,7 @@ casper.test.begin('Running _configOptions on group options.', function suite(tes
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,
         y: 10,
+        anchor: 'top/left',
         translate: [ 10, 10 ]
     }, 'Custom config options have been set correctly.');
 

@@ -27,6 +27,7 @@ casper.test.begin('Setting/getting line entity options.', function suite(test) {
     test.assertEquals(object.getAllOptions(), {
         x: 0,
         y: 0,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -48,6 +49,7 @@ casper.test.begin('Setting/getting line entity options.', function suite(test) {
     test.assertEquals(object.setOptions({ x1: 100, y1: 100, x2: 200, y2: 200 }), {
         x: 0,
         y: 0,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -83,6 +85,7 @@ casper.test.begin('Running _configOptions on line options.', function suite(test
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,
         y: 10,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -114,8 +117,8 @@ casper.test.begin('Setting metrics for a line.', function suite(test) {
     var object = new Facade.Line({ x: 10, y: 10, x1: 100, y1: 100, x2: 200, y2: 200, lineWidth: 1 });
 
     test.assertEquals(object._setMetrics(), {
-        x: 109.5,
-        y: 109.5,
+        x: 110,
+        y: 110,
         width: 101,
         height: 101
     }, 'Line metrics have been set correctly.');
@@ -123,8 +126,8 @@ casper.test.begin('Setting metrics for a line.', function suite(test) {
     object.setOptions({ lineWidth: 10 });
 
     test.assertEquals(object._setMetrics(), {
-        x: 105,
-        y: 105,
+        x: 110,
+        y: 110,
         width: 110,
         height: 110
     }, 'Line metrics have been set correctly.');

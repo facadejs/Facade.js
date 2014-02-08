@@ -434,7 +434,8 @@
 
         options = {
             x: 0,
-            y: 0
+            y: 0,
+            anchor: 'top/left'
         };
 
         for (key in updated) {
@@ -477,6 +478,72 @@
         }
 
         return metrics;
+
+    };
+
+    /**
+     * Returns an array of the x and y anchor positions based on given options and metrics.
+     *
+     *     console.log(Facade.Entity.prototype._getAnchorPoint(options, metrics));
+     *
+     * @param {Object} options Facade.Entity options.
+     * @param {Object} metrics Facade.Entity metrics.
+     * @return {Array} Array with the x and y anchor positions.
+     * @api private
+     */
+
+    Facade.Entity.prototype._getAnchorPoint = function (options, metrics) {
+
+        var pos = [0, 0],
+            strokeWidthOffset = this._getStrokeWidthOffset(options);
+
+        if (options.anchor.match(/center$/)) {
+
+            pos[0] = -metrics.width / 2 + strokeWidthOffset;
+
+        } else if (options.anchor.match(/right$/)) {
+
+            pos[0] = -metrics.width + strokeWidthOffset;
+
+        } else {
+
+            pos[0] = strokeWidthOffset;
+
+        }
+
+        if (options.anchor.match(/^center/)) {
+
+            pos[1] = -metrics.height / 2 + strokeWidthOffset;
+
+        } else if (options.anchor.match(/^bottom/)) {
+
+            pos[1] = -metrics.height + strokeWidthOffset;
+
+        } else {
+
+            pos[1] = strokeWidthOffset;
+
+        }
+
+        return pos;
+
+    };
+
+    /**
+     * Returns an integer for the stroke width offset. Used to calculate metrics.
+     *
+     *     console.log(Facade.Entity.prototype._getStrokeWidthOffset(options));
+     *
+     * @param {Object} options Facade.Entity options.
+     * @return {Integer} Integer representing the stroke width offset.
+     * @api private
+     */
+
+    Facade.Entity.prototype._getStrokeWidthOffset = function (options) {
+
+        var strokeWidthOffset = options.lineWidth / 2;
+
+        return strokeWidthOffset;
 
     };
 
@@ -765,13 +832,17 @@
 
         var context = facade.context,
             options = this.getAllOptions(),
-            point;
+            metrics = this._setMetrics(),
+            point,
+            anchor = this._getAnchorPoint(options, metrics);
 
         if (isFunction(this._configOptions)) {
 
             options = this._configOptions(options);
 
         }
+
+        context.translate.apply(context, anchor);
 
         if (options.points.length) {
 
@@ -854,7 +925,9 @@
         var metrics = this.getAllMetrics(),
             options = this.getAllOptions(),
             bounds = { top: null, right: null, bottom: null, left: null },
-            point;
+            point,
+            anchor,
+            strokeWidthOffset = this._getStrokeWidthOffset(options);
 
         if (isFunction(this._configOptions)) {
 
@@ -920,13 +993,18 @@
 
         }
 
-        if (options.lineWidth) {
+        metrics.width = metrics.width + strokeWidthOffset * 2;
+        metrics.height = metrics.height + strokeWidthOffset * 2;
 
-            metrics.x = metrics.x - options.lineWidth / 2;
-            metrics.y = metrics.y - options.lineWidth / 2;
+        anchor = this._getAnchorPoint(options, metrics);
 
-            metrics.width = metrics.width + options.lineWidth;
-            metrics.height = metrics.height + options.lineWidth;
+        metrics.x = metrics.x + anchor[0] - strokeWidthOffset;
+        metrics.y = metrics.y + anchor[1] - strokeWidthOffset;
+
+        if (this instanceof Facade.Circle) {
+
+            metrics.x = metrics.x + options.radius;
+            metrics.y = metrics.y + options.radius;
 
         }
 
@@ -975,7 +1053,7 @@
 
     Facade.Circle.prototype._configOptions = function (options) {
 
-        options.translate = [ options.x, options.y ];
+        options.translate = [ options.x + options.radius, options.y + options.radius ];
         options.globalAlpha = options.opacity / 100;
 
         options.points = [ [ 0, 0, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];

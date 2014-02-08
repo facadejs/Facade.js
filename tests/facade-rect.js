@@ -27,6 +27,7 @@ casper.test.begin('Setting/getting rect entity options.', function suite(test) {
     test.assertEquals(object.getAllOptions(), {
         x: 0,
         y: 0,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -46,6 +47,7 @@ casper.test.begin('Setting/getting rect entity options.', function suite(test) {
     test.assertEquals(object.setOptions({ width: 200, height: 200 }), {
         x: 0,
         y: 0,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -75,6 +77,7 @@ casper.test.begin('Running _configOptions on rect options.', function suite(test
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,
         y: 10,
+        anchor: 'top/left',
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -108,16 +111,16 @@ casper.test.begin('Setting metrics for a rect.', function suite(test) {
         y: 10,
         width: 200,
         height: 200
-    }, 'Polygon metrics have been set correctly.');
+    }, 'Rect metrics have been set correctly.');
 
     object.setOptions({ lineWidth: 10 });
 
     test.assertEquals(object._setMetrics(), {
-        x: 5,
-        y: 5,
+        x: 10,
+        y: 10,
         width: 210,
         height: 210
-    }, 'Polygon metrics have been set correctly.');
+    }, 'Rect metrics have been set correctly.');
 
     test.done();
 
