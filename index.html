@@ -54,6 +54,12 @@ function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyl
             radius: 100,
             lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
             anchor: anchor
+        }),
+        line = new Facade.Line({
+            x: stage.width() / 2, y: stage.height() / 2,
+            x2: 250,
+            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
+            anchor: anchor
         });
 
     (function (obj) {
@@ -67,6 +73,7 @@ function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyl
         debugMetrics(obj, stage);
 
     }(rect));
+
 }());
 
 </script>
