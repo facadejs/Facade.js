@@ -84,7 +84,7 @@
 
         }
 
-        if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
+        if (canvas && String(typeof canvas) === 'object' && canvas.nodeType === 1) {
 
             this.canvas = canvas;
 
@@ -92,7 +92,7 @@
 
             this.canvas = document.createElement('canvas');
 
-            if (typeof canvas === 'string') {
+            if (String(typeof canvas) === 'string') {
 
                 this.canvas.setAttribute('id', canvas);
 
@@ -186,7 +186,7 @@
 
     Facade.prototype.draw = function (callback) {
 
-        if (typeof callback === 'function') {
+        if (String(typeof callback) === 'function') {
 
             this._callback = callback;
 
@@ -221,7 +221,7 @@
 
         }
 
-        if (typeof quality === 'number') {
+        if (String(typeof quality) === 'number') {
 
             quality = quality / 100;
 
@@ -378,7 +378,7 @@
 
     Facade.prototype._animate = function (time) {
 
-        if (typeof this._callback === 'function') {
+        if (String(typeof this._callback) === 'function') {
 
             if (this.ftime) {
 
@@ -625,7 +625,7 @@
 
             } else {
 
-                throw new Error('The value for ' + key + ' (' + value + ') was a ' + typeof value + ' not a ' + typeof this._options[key]);
+                throw new Error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + typeof this._options[key]);
 
             }
 
@@ -1350,7 +1350,7 @@
      * AMD Support
      */
 
-    if (typeof window.define === 'function' && window.define.hasOwnProperty('amd')) {
+    if (String(typeof window.define) === 'function' && window.define.hasOwnProperty('amd')) {
 
         window.define([], function () { return Facade; });
 
