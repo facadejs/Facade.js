@@ -72,7 +72,7 @@ module.exports = function (grunt) {
             casperjs: {
                 files: ['facade.js', 'tests/**/*.js'],
                 tasks: ['casperjs']
-            },
+            }
 
         }
 
