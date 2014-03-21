@@ -717,6 +717,22 @@
 
     };
 
+    Facade.Entity.prototype.calculateRotatedBounds = function (metrics, rotate) {
+
+        var radians = rotate % 90 * _TO_RADIANS,
+            width = metrics.height * Math.sin(radians) + metrics.width * Math.cos(radians),
+            height = metrics.height * Math.cos(radians) + metrics.width * Math.sin(radians);
+
+        metrics.x = metrics.x - (width - metrics.width) / 2;
+        metrics.y = metrics.y - (height - metrics.height) / 2;
+
+        metrics.width = width;
+        metrics.height = height;
+
+        return metrics;
+
+    };
+
     /**
      * Renders an entity to a canvas.
      *
@@ -801,7 +817,8 @@
             lineWidth: 1,
             lineCap: 'default',
             lineJoin: 'miter',
-            closePath: true
+            closePath: true,
+            rotate: 0
         });
 
         for (key in updated) {
@@ -843,6 +860,14 @@
         }
 
         context.translate.apply(context, anchor);
+
+        if (options.rotate) {
+
+            context.translate(options.width / 2, options.height / 2);
+            context.rotate(options.rotate * Math.PI / 180);
+            context.translate(-options.width / 2, -options.height / 2);
+
+        }
 
         if (options.points.length) {
 

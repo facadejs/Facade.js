@@ -30,18 +30,19 @@ canvas {
 <script src="facade.js"></script>
 <script>
 
-function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x,0],lineTo:[i.x,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x+i.width,0],lineTo:[i.x+i.width,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y+i.height],lineTo:[t.canvas.width,i.y+i.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y],lineTo:[t.canvas.width,i.y],stroke:[],closePath:[]});t.renderWithContext({fillStyle:"#f00",globalAlpha:.4,fillRect:[i.x,i.y,i.width,i.height]})}
+function debugMetrics(e,t){var i=e.calculateRotatedBounds(e._setMetrics(),e.getOption('rotate'));t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x,0],lineTo:[i.x,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x+i.width,0],lineTo:[i.x+i.width,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y+i.height],lineTo:[t.canvas.width,i.y+i.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y],lineTo:[t.canvas.width,i.y],stroke:[],closePath:[]});t.renderWithContext({fillStyle:"#f00",globalAlpha:.4,fillRect:[i.x,i.y,i.width,i.height]})}
 
 (function () {
 
     var stage = new Facade(document.querySelector('canvas')),
-        anchorSet = ['top/left', 'top/center', 'top/right', 'center/right', 'bottom/right', 'bottom/center', 'bottom/left', 'center/left'],
-        anchor = anchorSet[0],
+        anchorSet = ['top/left', 'top/center', 'top/right', 'center/right', 'bottom/right', 'bottom/center', 'bottom/left', 'center/left', 'center'],
+        anchor = anchorSet[8],
         rect = new Facade.Rect({
             x: stage.width() / 2, y: stage.height() / 2,
-            width: 200, height: 200,
+            width: 300, height: 200,
             lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
-            anchor: anchor
+            anchor: anchor,
+            rotate: 40
         }),
         polygon = new Facade.Polygon({
             x: stage.width() / 2, y: stage.height() / 2,
