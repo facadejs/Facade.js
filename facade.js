@@ -721,15 +721,16 @@
 
         var radians = rotate % 90 * _TO_RADIANS,
             width = metrics.height * Math.sin(radians) + metrics.width * Math.cos(radians),
-            height = metrics.height * Math.cos(radians) + metrics.width * Math.sin(radians);
+            height = metrics.height * Math.cos(radians) + metrics.width * Math.sin(radians),
+            bounds = { x: null, y: null, width: null, height: null };
 
-        metrics.x = metrics.x - (width - metrics.width) / 2;
-        metrics.y = metrics.y - (height - metrics.height) / 2;
+        bounds.x = metrics.x - (width - metrics.width) / 2;
+        bounds.y = metrics.y - (height - metrics.height) / 2;
 
-        metrics.width = width;
-        metrics.height = height;
+        bounds.width = width;
+        bounds.height = height;
 
-        return metrics;
+        return bounds;
 
     };
 
