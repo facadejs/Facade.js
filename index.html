@@ -42,13 +42,14 @@ function debugMetrics(e,t){var i=e.calculateRotatedBounds(e._setMetrics(),e.getO
             width: 300, height: 200,
             lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
             anchor: anchor,
-            rotate: 40
+            rotate: 45
         }),
         polygon = new Facade.Polygon({
             x: stage.width() / 2, y: stage.height() / 2,
             points: [ [0, 0], [200, 0], [100, 200], [0, 150] ],
             lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f', lineJoin: 'round',
-            anchor: anchor
+            anchor: anchor,
+            rotate: 45
         }),
         circle = new Facade.Circle({
             x: stage.width() / 2, y: stage.height() / 2,
@@ -60,14 +61,15 @@ function debugMetrics(e,t){var i=e.calculateRotatedBounds(e._setMetrics(),e.getO
             x: stage.width() / 2, y: stage.height() / 2,
             x2: 250,
             lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
-            anchor: anchor
+            anchor: anchor,
+            rotate: 45
         });
 
     (function (obj) {
 
-        console.log(obj.getAllOptions());
-        console.log(obj._setMetrics());
-        console.log(obj._getAnchorPoint(obj.getAllOptions(), obj._setMetrics()));
+        console.log('Options', obj.getAllOptions());
+        console.log('Metrics', obj._setMetrics());
+        console.log('Anchor', obj._getAnchorPoint(obj.getAllOptions(), obj._setMetrics()));
 
         stage.addToStage(obj);
 
