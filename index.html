@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1">
 <title>Facade.js 0.3beta</title>
 <style>
 
 body {
-    background-color: #eee;
+    background-color: #fff;
 }
 
 canvas {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1140px;
-    height: auto;
-    background: #fff;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgoJPGxpbmUgeDE9IjAiIHkxPSI1MCUiIHgyPSIxMDAlIiB5Mj0iNTAlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iIzdmZWNmZiIgLz4KCTxsaW5lIHgxPSI1MCUiIHkxPSIwIiB4Mj0iNTAlIiB5Mj0iMTAwJSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiM3ZmVjZmYiIC8+Cjwvc3ZnPg==);
+    margin: 1em;
+    background: #eee url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgoJPGxpbmUgeDE9IjAiIHkxPSI1MCUiIHgyPSIxMDAlIiB5Mj0iNTAlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iIzdmZWNmZiIgLz4KCTxsaW5lIHgxPSI1MCUiIHkxPSIwIiB4Mj0iNTAlIiB5Mj0iMTAwJSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiM3ZmVjZmYiIC8+Cjwvc3ZnPg==);
 }
 
 </style>
@@ -25,57 +20,43 @@ canvas {
 
 <body>
 
-<canvas width="1140" height="600"></canvas>
-
-<script src="facade.js"></script>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="facade.min.js"></script>
 <script>
 
 function debugMetrics(e,t){var i=e.calculateRotatedBounds(e._setMetrics(),e.getOption('rotate'));t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x,0],lineTo:[i.x,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x+i.width,0],lineTo:[i.x+i.width,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y+i.height],lineTo:[t.canvas.width,i.y+i.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y],lineTo:[t.canvas.width,i.y],stroke:[],closePath:[]});t.renderWithContext({fillStyle:"#f00",globalAlpha:.4,fillRect:[i.x,i.y,i.width,i.height]})}
 
 (function () {
 
-    var stage = new Facade(document.querySelector('canvas')),
-        anchorSet = ['top/left', 'top/center', 'top/right', 'center/right', 'bottom/right', 'bottom/center', 'bottom/left', 'center/left', 'center'],
-        anchor = anchorSet[8],
-        rect = new Facade.Rect({
-            x: stage.width() / 2, y: stage.height() / 2,
-            width: 300, height: 200,
-            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
-            anchor: anchor,
-            rotate: 45
-        }),
-        polygon = new Facade.Polygon({
-            x: stage.width() / 2, y: stage.height() / 2,
-            points: [ [0, 0], [200, 0], [100, 200], [0, 150] ],
-            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f', lineJoin: 'round',
-            anchor: anchor,
-            rotate: 45
-        }),
-        circle = new Facade.Circle({
-            x: stage.width() / 2, y: stage.height() / 2,
-            radius: 100,
-            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
-            anchor: anchor
-        }),
-        line = new Facade.Line({
-            x: stage.width() / 2, y: stage.height() / 2,
-            x2: 250,
-            lineWidth: 10, strokeStyle: '#000', fillStyle: '#00f',
-            anchor: anchor,
-            rotate: 45
-        });
+    'use strict';
 
-    (function (obj) {
+    var shapes = [];
 
-        console.log('Options', obj.getAllOptions());
-        console.log('Metrics', obj._setMetrics());
-        console.log('Anchor', obj._getAnchorPoint(obj.getAllOptions(), obj._setMetrics()));
+    shapes.push({ type: Facade.Rect, options: { width: 200, height: 200 } });
+    shapes.push({ type: Facade.Polygon, options: { points: [ [87.1, -0.4], [259.2, 69.8], [234.2, 167.3], [60.6, 217.3], [-0.5, 112.6] ] } });
+    shapes.push({ type: Facade.Circle, options: { radius: 100 } });
+    shapes.push({ type: Facade.Line, options: { x2: 250 } });
+
+    shapes.forEach(function (shape) {
+
+        var stage = new Facade(null, 600, 550),
+            options = { x: stage.width() / 2, y: stage.height() / 2, lineWidth: 5, strokeStyle: '#000', fillStyle: '#00f', anchor: 'center', rotate: 90 },
+            obj = new shape.type($.extend({}, options, shape.options));
 
         stage.addToStage(obj);
 
         debugMetrics(obj, stage);
 
-    }(rect));
+        console.log('Options', obj.getAllOptions());
+        console.log('Metrics', obj._setMetrics());
+        console.log('Anchor', obj._getAnchorPoint(obj.getAllOptions(), obj._setMetrics()));
+        console.log('Bounds', obj.calculateRotatedBounds(obj._setMetrics(), obj.getOption('rotate')));
+
+        console.log('------');
+
+        document.body.appendChild(stage.canvas);
+
+    });
 
 }());
 
