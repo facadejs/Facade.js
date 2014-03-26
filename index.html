@@ -21,10 +21,10 @@ canvas {
 <body>
 
 <script src="//code.jquery.com/jquery.min.js"></script>
-<script src="facade.min.js"></script>
+<script src="facade.js"></script>
 <script>
 
-function debugMetrics(e,t){var i=e.calculateRotatedBounds(e._setMetrics(),e.getOption('rotate'));t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x,0],lineTo:[i.x,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x+i.width,0],lineTo:[i.x+i.width,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y+i.height],lineTo:[t.canvas.width,i.y+i.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y],lineTo:[t.canvas.width,i.y],stroke:[],closePath:[]});t.renderWithContext({fillStyle:"#f00",globalAlpha:.4,fillRect:[i.x,i.y,i.width,i.height]})}
+function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x,0],lineTo:[i.x,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x+i.width,0],lineTo:[i.x+i.width,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y+i.height],lineTo:[t.canvas.width,i.y+i.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y],lineTo:[t.canvas.width,i.y],stroke:[],closePath:[]});t.renderWithContext({fillStyle:"#f00",globalAlpha:.4,fillRect:[i.x,i.y,i.width,i.height]})}
 
 (function () {
 
@@ -40,7 +40,7 @@ function debugMetrics(e,t){var i=e.calculateRotatedBounds(e._setMetrics(),e.getO
     shapes.forEach(function (shape) {
 
         var stage = new Facade(null, 600, 550),
-            options = { x: stage.width() / 2, y: stage.height() / 2, lineWidth: 5, strokeStyle: '#000', fillStyle: '#00f', anchor: 'center', rotate: 90 },
+            options = { x: stage.width() / 2, y: stage.height() / 2, lineWidth: 5, strokeStyle: '#000', fillStyle: '#00f', anchor: 'center', rotate: 170 },
             obj = new shape.type($.extend({}, options, shape.options));
 
         stage.addToStage(obj);
@@ -50,7 +50,6 @@ function debugMetrics(e,t){var i=e.calculateRotatedBounds(e._setMetrics(),e.getO
         console.log('Options', obj.getAllOptions());
         console.log('Metrics', obj._setMetrics());
         console.log('Anchor', obj._getAnchorPoint(obj.getAllOptions(), obj._setMetrics()));
-        console.log('Bounds', obj.calculateRotatedBounds(obj._setMetrics(), obj.getOption('rotate')));
 
         console.log('------');
 

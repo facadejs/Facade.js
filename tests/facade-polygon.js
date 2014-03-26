@@ -38,7 +38,8 @@ casper.test.begin('Setting/getting polygon entity options.', function suite(test
         lineWidth: 1,
         lineCap: 'default',
         lineJoin: 'miter',
-        closePath: true
+        closePath: true,
+        rotate: 0
     }, 'Object options have been set correctly.');
 
     test.done();
@@ -68,7 +69,8 @@ casper.test.begin('Running _configOptions on polygon options.', function suite(t
         lineJoin: 'miter',
         closePath: true,
         translate: [ 10, 10 ],
-        globalAlpha: 0.5
+        globalAlpha: 0.5,
+        rotate: 0
     }, 'Custom config options have been set correctly.');
 
     test.done();
