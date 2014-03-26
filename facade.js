@@ -864,9 +864,9 @@
 
         if (options.rotate) {
 
-            context.translate(options.width / 2, options.height / 2);
+            context.translate(metrics.width / 2, metrics.height / 2);
             context.rotate(options.rotate * Math.PI / 180);
-            context.translate(-options.width / 2, -options.height / 2);
+            context.translate(-metrics.width / 2, -metrics.height / 2);
 
         }
 
@@ -1083,6 +1083,8 @@
         options.globalAlpha = options.opacity / 100;
 
         options.points = [ [ 0, 0, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];
+
+        options.rotate = 0;
 
         return options;
 
