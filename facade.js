@@ -484,7 +484,7 @@
     /**
      * Returns an array of the x and y anchor positions based on given options and metrics.
      *
-     *     console.log(Facade.Entity.prototype._getAnchorPoint(options, metrics));
+     *     console.log(rect._getAnchorPoint(options, metrics));
      *
      * @param {Object} options Facade.Entity options.
      * @param {Object} metrics Facade.Entity metrics.
@@ -532,7 +532,7 @@
     /**
      * Returns an integer for the stroke width offset. Used to calculate metrics.
      *
-     *     console.log(Facade.Entity.prototype._getStrokeWidthOffset(options));
+     *     console.log(rect._getStrokeWidthOffset(options));
      *
      * @param {Object} options Facade.Entity options.
      * @return {Integer} Integer representing the stroke width offset.
@@ -847,9 +847,9 @@
 
         if (options.rotate) {
 
-            context.translate(metrics.width / 2, metrics.height / 2);
+            context.translate(-anchor[0], -anchor[1]);
             context.rotate(options.rotate * Math.PI / 180);
-            context.translate(-metrics.width / 2, -metrics.height / 2);
+            context.translate(anchor[0], anchor[1]);
 
         }
 
