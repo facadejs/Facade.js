@@ -10,5 +10,9 @@
         "grunt-jslint": "1.1.7",
         "grunt-notify": "0.2.20",
         "matchdep": "0.3.0"
+    },
+    "scripts": {
+        "test": "grunt test"
     }
+
 }

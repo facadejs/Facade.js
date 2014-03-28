@@ -80,5 +80,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', [ 'uglify', 'casperjs', 'jslint' ]);
     grunt.registerTask('docs', [ 'shell' ]);
+    grunt.registerTask('test', [ 'casperjs' ]);
 
 };
