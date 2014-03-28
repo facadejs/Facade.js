@@ -128,3 +128,78 @@ casper.test.begin('Setting metrics for a rect.', function suite(test) {
     test.done();
 
 });
+
+casper.test.begin('Setting/getting rect anchor.', function suite(test) {
+
+    'use strict';
+
+    var object = new Facade.Rect({ x: 0, y: 0, width: 100, height: 100, lineWidth: 10 });
+
+    object.setOption('anchor', 'top/left');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        5,
+        5
+    ], 'Rect anchor top/left has been set correctly.');
+
+    object.setOption('anchor', 'top/center');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -50,
+        5
+    ], 'Rect anchor top/center has been set correctly.');
+
+    object.setOption('anchor', 'top/right');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -105,
+        5
+    ], 'Rect anchor top/right has been set correctly.');
+
+
+    object.setOption('anchor', 'center/left');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        5,
+        -50
+    ], 'Rect anchor center/left has been set correctly.');
+
+    object.setOption('anchor', 'center');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -50,
+        -50
+    ], 'Rect anchor center has been set correctly.');
+
+    object.setOption('anchor', 'center/right');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -105,
+        -50
+    ], 'Rect anchor center/right has been set correctly.');
+
+
+    object.setOption('anchor', 'bottom/left');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        5,
+        -105
+    ], 'Rect anchor bottom/left has been set correctly.');
+
+    object.setOption('anchor', 'bottom/center');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -50,
+        -105
+    ], 'Rect anchor bottom/center has been set correctly.');
+
+    object.setOption('anchor', 'bottom/right');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -105,
+        -105
+    ], 'Rect anchor bottom/right has been set correctly.');
+
+    test.done();
+
+});

@@ -138,3 +138,78 @@ casper.test.begin('Setting metrics for a line.', function suite(test) {
     test.done();
 
 });
+
+casper.test.begin('Setting/getting line anchor.', function suite(test) {
+
+    'use strict';
+
+    var object = new Facade.Line({ x: 0, y: 0, x2: 100, lineWidth: 10 });
+
+    object.setOption('anchor', 'top/left');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        5,
+        5
+    ], 'Line anchor top/left has been set correctly.');
+
+    object.setOption('anchor', 'top/center');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -50,
+        5
+    ], 'Line anchor top/center has been set correctly.');
+
+    object.setOption('anchor', 'top/right');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -105,
+        5
+    ], 'Line anchor top/right has been set correctly.');
+
+
+    object.setOption('anchor', 'center/left');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        5,
+        0
+    ], 'Line anchor center/left has been set correctly.');
+
+    object.setOption('anchor', 'center');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -50,
+        0
+    ], 'Line anchor center has been set correctly.');
+
+    object.setOption('anchor', 'center/right');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -105,
+        0
+    ], 'Line anchor center/right has been set correctly.');
+
+
+    object.setOption('anchor', 'bottom/left');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        5,
+        -5
+    ], 'Line anchor bottom/left has been set correctly.');
+
+    object.setOption('anchor', 'bottom/center');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -50,
+        -5
+    ], 'Line anchor bottom/center has been set correctly.');
+
+    object.setOption('anchor', 'bottom/right');
+
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+        -105,
+        -5
+    ], 'Line anchor bottom/right has been set correctly.');
+
+    test.done();
+
+});
