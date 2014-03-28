@@ -59,6 +59,39 @@
     }
 
     /**
+     * Extends the values of one object (a) with the values from another object (b). Note: only values of the same type can be overritten.
+     *
+     *     console.log(extendObject({ test: 'not tested'}, { test: 'tested' })); // { test: 'tested' }
+     *
+     * @param {Object} a The main object.
+     * @param {Object} b The secondary object which will be used to update the main object.
+     * @return {Boolean} Final modified object.
+     * @api private
+     */
+
+    function extendObject(a, b) {
+
+        var key;
+
+        for (key in b) {
+
+            if (b.hasOwnProperty(key) && a.hasOwnProperty(key)) {
+
+                if (String(typeof b[key]) === String(typeof a[key])) {
+
+                    a[key] = b[key];
+
+                }
+
+            }
+
+        }
+
+        return a;
+
+    }
+
+    /**
      * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
      *
      *     var stage = new Facade(document.querySelector('canvas'));
@@ -137,7 +170,7 @@
      * @api public
      */
 
-    Facade.prototype.addToStage = function (obj) {
+    Facade.prototype.addToStage = function (obj, options) {
 
         if (!(obj instanceof Facade.Entity)) {
 
@@ -145,7 +178,7 @@
 
         }
 
-        obj.draw(this);
+        obj.draw(this, options);
 
         return this;
 
@@ -733,9 +766,15 @@
      * @api public
      */
 
-    Facade.Entity.prototype.draw = function (facade) {
+    Facade.Entity.prototype.draw = function (facade, updated) {
 
         var options = this.getAllOptions();
+
+        if (updated) {
+
+            options = extendObject(options, updated);
+
+        }
 
         if (isFunction(this._configOptions)) {
 
@@ -745,7 +784,7 @@
 
         if (isFunction(this._draw)) {
 
-            facade.renderWithContext(options, this._draw.bind(this, facade));
+            facade.renderWithContext(options, this._draw.bind(this, facade, options));
 
         }
 
@@ -835,10 +874,9 @@
      * @api private
      */
 
-    Facade.Polygon.prototype._draw = function (facade) {
+    Facade.Polygon.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            options = this.getAllOptions(),
             metrics = this._setMetrics(),
             point,
             anchor = this._getAnchorPoint(options, metrics);

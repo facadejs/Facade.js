@@ -81,6 +81,10 @@
 
                 
 
+                <li class="scope-private"><a href="#extendobject">extendObject()</a></li>
+
+                
+
                 <li class="scope-public"><a href="#facade">Facade()</a></li>
 
                 
@@ -368,6 +372,90 @@
 
                 
 
+                <div class="method scope-private">
+
+                    <h2 id="extendobject"><a href="#extendobject" class="permalink">#</a>extendObject() <span class="label label-default">private</span></h2>
+
+                    <p>Extends the values of one object (a) with the values from another object (b). Note: only values of the same type can be overritten.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>a</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>The main object.</p>
+
+                    
+
+                    <p>
+                        <b>b</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>The secondary object which will be used to update the main object.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">extendObject</span><span class="p">({</span> <span class="nx">test</span><span class="o">:</span> <span class="s1">&#39;not tested&#39;</span><span class="p">},</span> <span class="p">{</span> <span class="nx">test</span><span class="o">:</span> <span class="s1">&#39;tested&#39;</span> <span class="p">}));</span> <span class="c1">// { test: &#39;tested&#39; }</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="kd">function</span> <span class="nx">extendObject</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">key</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">b</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="o">===</span> <span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">a</span><span class="p">[</span><span class="nx">key</span><span class="p">]))</span> <span class="p">{</span>
+
+                <span class="nx">a</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">b</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Boolean</code> Final modified object.</p>
+
+                </div>
+
+                
+
                 <div class="method scope-public">
 
                     <h2 id="facade"><a href="#facade" class="permalink">#</a>Facade() </h2>
@@ -569,7 +657,7 @@
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addToStage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addToStage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">))</span> <span class="p">{</span>
 
@@ -577,7 +665,7 @@
 
     <span class="p">}</span>
 
-    <span class="nx">obj</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="nx">obj</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 
@@ -1447,7 +1535,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
 </pre></div>
 
 
@@ -1537,7 +1625,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
 </pre></div>
 
 
@@ -1549,7 +1637,13 @@
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="kd">var</span> <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;lineWidth&#39;</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="p">}</span>
 
     <span class="k">return</span> <span class="nx">strokeWidthOffset</span><span class="p">;</span>
 
@@ -2032,9 +2126,15 @@
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">extendObject</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">updated</span><span class="p">);</span>
+
+    <span class="p">}</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
 
@@ -2044,7 +2144,7 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">))</span> <span class="p">{</span>
 
-        <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">));</span>
+        <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">));</span>
 
     <span class="p">}</span>
 
@@ -2236,10 +2336,9 @@
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(),</span>
         <span class="nx">point</span><span class="p">,</span>
         <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
@@ -2254,9 +2353,9 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
         <span class="nx">context</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
-        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
     <span class="p">}</span>
 

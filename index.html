@@ -30,7 +30,8 @@ function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyl
 
     'use strict';
 
-    var shapes = [];
+    var shapes = [],
+        rotate = 0;
 
     shapes.push({ type: Facade.Rect, options: { width: 200, height: 200 } });
     shapes.push({ type: Facade.Polygon, options: { points: [ [87.1, -0.4], [259.2, 69.8], [234.2, 167.3], [60.6, 217.3], [-0.5, 112.6] ] } });
@@ -40,12 +41,18 @@ function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyl
     shapes.forEach(function (shape) {
 
         var stage = new Facade(null, 600, 550),
-            options = { x: stage.width() / 2, y: stage.height() / 2, lineWidth: 5, strokeStyle: '#000', fillStyle: '#00f', anchor: 'center', rotate: 170 },
+            options = { x: stage.width() / 2, y: stage.height() / 2, lineWidth: 5, strokeStyle: '#000', fillStyle: '#00f', anchor: 'top/left', rotate: rotate },
             obj = new shape.type($.extend({}, options, shape.options));
 
-        stage.addToStage(obj);
+        stage.draw(function () {
 
-        debugMetrics(obj, stage);
+            this.clear();
+
+            this.addToStage(obj, { rotate: rotate++ });
+
+            debugMetrics(obj, this);
+
+        });
 
         console.log('Options', obj.getAllOptions());
         console.log('Metrics', obj._setMetrics());
