@@ -541,7 +541,13 @@
 
     Facade.Entity.prototype._getStrokeWidthOffset = function (options) {
 
-        var strokeWidthOffset = options.lineWidth / 2;
+        var strokeWidthOffset = 0;
+
+        if (options.hasOwnProperty('lineWidth')) {
+
+            strokeWidthOffset = options.lineWidth / 2;
+
+        }
 
         return strokeWidthOffset;
 
