@@ -3,7 +3,7 @@
     'use strict';
 
     var files = document.querySelector('.files'),
-        code = document.querySelector('.code'),
+        code = document.querySelector('.ace'),
         stage = document.querySelector('.stage'),
         iframe = document.querySelector('.stage iframe'),
         editor = ace.edit(code),
