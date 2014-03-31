@@ -20,4 +20,6 @@ stage.draw(function () {
 
     this.addToStage(polygon);
 
+    updatefps();
+
 });
