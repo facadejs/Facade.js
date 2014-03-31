@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+<title>Facade.js &mdash; Playground</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+
+<header>
+
+    <a href="#"><b>Facade</b>.js &mdash; Playground</a>
+
+    <a href="http://github.com/neogeek/Facade.js" class="button">Download on GitHub</a>
+
+</header>
+
+<div class="wrapper">
+
+    <div class="editor">
+
+        <div class="files"></div>
+
+        <div class="code"></div>
+
+        <div class="stage">
+
+            <iframe src="stage.html" frameborder="0" scrolling="no"></iframe>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script id="template-file-list" type="text/x-handlebars-template">
+
+<ul>
+{{#each files}}
+    <li><a href="#{{name}}" data-content="{{content}}">{{name}}</a></li>
+{{/each}}
+
+</ul>
+
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
+<script src="demos.js"></script>
+<script src="play.js"></script>
+
+</body>
+</html>

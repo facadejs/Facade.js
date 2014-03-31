@@ -59,6 +59,12 @@ module.exports = function (grunt) {
 
                 command: 'gzip -9 < facade.min.js > facade.min.js.gzip'
 
+            },
+
+            demos: {
+
+                command: 'cd playground; python build.py > demos.js;'
+
             }
 
         },
@@ -68,6 +74,11 @@ module.exports = function (grunt) {
             default: {
                 files: ['facade.js', 'tests/**/*.js'],
                 tasks: ['jslint', 'uglify', 'shell:gzip', 'shell:docs', 'casperjs']
+            },
+
+            demos: {
+                files: ['playground/demos/**/*.js'],
+                tasks: ['shell:demos']
             }
 
         }
@@ -75,6 +86,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', [ 'uglify', 'jslint', 'shell:gzip', 'shell:docs' ]);
+    grunt.registerTask('demos', [ 'shell:demos' ]);
     grunt.registerTask('test', [ 'casperjs' ]);
 
 };

@@ -1,0 +1,121 @@
+* {
+    margin: 0; padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 1em;
+    line-height: 1.3em;
+}
+
+a {
+    color: #00f;
+}
+
+.button {
+    display: inline-block;
+    padding: .6em 1.5em;
+    line-height: 1em;
+    color: #fff;
+    text-align: center;
+    border-radius: .3em;
+    border-bottom: .2em solid #32a374;
+    background: #38B27F;
+}
+
+header {
+    padding: 1em;
+    font-size: 1.1em;
+    line-height: 1.3em;
+    color: #fff;
+    background-color: #371F59;
+    -webkit-font-smoothing: antialiased;
+}
+
+header a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header .button {
+    margin: 1em 0 0;
+    width: 100%;
+}
+
+.files {
+    padding: 1em;
+    font-size: 1.1em;
+    line-height: 1.3em;
+    color: #fff;
+    background-color: #2d2833;
+    -webkit-font-smoothing: antialiased;
+}
+
+.files li {
+    list-style: none;
+}
+
+.files li a {
+    display: inline-block;
+    padding: .2em;
+    color: inherit;
+    text-decoration: none;
+}
+
+.code {
+    width: 100%;
+}
+
+.stage {
+    background-color: #eee;
+}
+
+@media screen and (min-width: 600px) {
+
+    header {
+        height: 60px;
+    }
+
+    header .button {
+        position: absolute;
+        margin: 0;
+        top: .5em;
+        right: .5em;
+        width: auto;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+
+    .wrapper {
+        display: table;
+        width: 100%;
+        height: calc(100% - 60px);
+    }
+
+    .editor {
+        display: table-row;
+    }
+
+    .files,
+    .code,
+    .stage {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    .files {
+        min-width: 200px;
+        max-width: 250px;
+    }
+
+}
