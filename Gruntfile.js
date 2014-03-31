@@ -15,10 +15,10 @@ module.exports = function (grunt) {
                 directives: {
                     nomen: true,
                     globals: {
+                        'document': true,
                         'module': true,
                         'require': true,
-                        'window': true,
-                        'document': true
+                        'window': true
                     }
                 }
             }
@@ -49,9 +49,15 @@ module.exports = function (grunt) {
 
         shell: {
 
-            buildDoc: {
+            docs: {
 
                 command: 'dox < facade.js > docs/facade.json; cd docs/; doxdox.py --title="Facade.js" --description="Drawing shapes, images and text in HTML5 canvas made easy." > index.html; rm facade.json;'
+
+            },
+
+            gzip: {
+
+                command: 'gzip -9 < facade.min.js > facade.min.js.gzip'
 
             }
 
@@ -59,27 +65,16 @@ module.exports = function (grunt) {
 
         watch: {
 
-            jslint: {
+            default: {
                 files: ['facade.js', 'tests/**/*.js'],
-                tasks: ['jslint']
-            },
-
-            uglify: {
-                files: ['facade.js', 'tests/**/*.js'],
-                tasks: ['uglify']
-            },
-
-            casperjs: {
-                files: ['facade.js', 'tests/**/*.js'],
-                tasks: ['casperjs']
+                tasks: ['jslint', 'uglify', 'shell:gzip', 'shell:docs', 'casperjs']
             }
 
         }
 
     });
 
-    grunt.registerTask('default', [ 'uglify', 'casperjs', 'jslint' ]);
-    grunt.registerTask('docs', [ 'shell' ]);
+    grunt.registerTask('default', [ 'uglify', 'jslint', 'shell:gzip', 'shell:docs' ]);
     grunt.registerTask('test', [ 'casperjs' ]);
 
 };
