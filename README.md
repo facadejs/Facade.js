@@ -4,6 +4,10 @@
 
 > Drawing shapes, images and text in HTML5 canvas made easy.
 
+##Editable Demos
+
+<http://playground.facadejs.com>
+
 ##CDN
 
 <http://cdn.facadejs.com/0.3-beta/facade.min.js>
