@@ -135,8 +135,8 @@
 
         if (width && height) {
 
-            this.canvas.setAttribute('width', parseInt(width, 10));
-            this.canvas.setAttribute('height', parseInt(height, 10));
+            this.width(width);
+            this.height(height);
 
         }
 
@@ -528,33 +528,34 @@
     Facade.Entity.prototype._getAnchorPoint = function (options, metrics) {
 
         var pos = [0, 0],
-            strokeWidthOffset = this._getStrokeWidthOffset(options);
+            strokeWidthOffset;
 
         if (options.anchor.match(/center$/)) {
 
-            pos[0] = -metrics.width / 2 + strokeWidthOffset;
+            pos[0] = -metrics.width / 2;
 
         } else if (options.anchor.match(/right$/)) {
 
-            pos[0] = -metrics.width + strokeWidthOffset;
-
-        } else {
-
-            pos[0] = strokeWidthOffset;
+            pos[0] = -metrics.width;
 
         }
 
         if (options.anchor.match(/^center/)) {
 
-            pos[1] = -metrics.height / 2 + strokeWidthOffset;
+            pos[1] = -metrics.height / 2;
 
         } else if (options.anchor.match(/^bottom/)) {
 
-            pos[1] = -metrics.height + strokeWidthOffset;
+            pos[1] = -metrics.height;
 
-        } else {
+        }
 
-            pos[1] = strokeWidthOffset;
+        if (this instanceof Facade.Polygon) {
+
+            strokeWidthOffset = this._getStrokeWidthOffset(options);
+
+            pos[0] = pos[0] + strokeWidthOffset;
+            pos[1] = pos[1] + strokeWidthOffset;
 
         }
 
@@ -841,9 +842,9 @@
             shadowOffsetX: 0,
             shadowOffsetY: 0,
             points: [],
-            fillStyle: '',
+            fillStyle: '#000',
             strokeStyle: '',
-            lineWidth: 1,
+            lineWidth: 0,
             lineCap: 'default',
             lineJoin: 'miter',
             closePath: true,
@@ -1132,7 +1133,7 @@
 
         }
 
-        this._options = this._defaultOptions({ x1: 0, y1: 0, x2: 0, y2: 0 });
+        this._options = this._defaultOptions({ x1: 0, y1: 0, x2: 0, y2: 0, lineWidth: 1 });
         this._metrics = this._defaultMetrics();
 
         this.setOptions(options);
