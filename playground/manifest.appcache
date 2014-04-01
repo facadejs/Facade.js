@@ -1,0 +1,20 @@
+CACHE MANIFEST
+
+# version 0.1
+
+index.html
+stage.html
+
+styles.css
+
+demos.js
+play.js
+
+facade.min.js
+
+http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js
+http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js
+http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/worker-javascript.js
+
+http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js
+http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js

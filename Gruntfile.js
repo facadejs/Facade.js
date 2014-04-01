@@ -63,7 +63,7 @@ module.exports = function (grunt) {
 
             demos: {
 
-                command: 'cd playground; python build.py > demos.js;'
+                command: 'cp facade.min.js playground/; cd playground; python build.py > demos.js;'
 
             }
 

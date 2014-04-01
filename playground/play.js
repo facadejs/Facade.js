@@ -75,7 +75,11 @@
 
     iframe.addEventListener('load', function () {
 
-        iframe.contentDocument.body.appendChild(live_script);
+        if (live_script) {
+
+            iframe.contentDocument.body.appendChild(live_script);
+
+        }
 
     });
 
