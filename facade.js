@@ -1170,6 +1170,45 @@
     };
 
     /**
+     * Returns an array of the x and y anchor positions based on given options and metrics.
+     *
+     *     console.log(line._getAnchorPoint(options, metrics));
+     *
+     * @param {Object} options Facade.Line options.
+     * @param {Object} metrics Facade.Line metrics.
+     * @return {Array} Array with the x and y anchor positions.
+     * @api private
+     */
+
+    Facade.Line.prototype._getAnchorPoint = function (options, metrics) {
+
+        var pos = [0, 0];
+
+        if (options.anchor.match(/center$/)) {
+
+            pos[0] = -(metrics.width / 2 - options.lineWidth / 2);
+
+        } else if (options.anchor.match(/right$/)) {
+
+            pos[0] = -(metrics.width - options.lineWidth);
+
+        }
+
+        if (options.anchor.match(/^center/)) {
+
+            pos[1] = -(metrics.height / 2 - options.lineWidth / 2);
+
+        } else if (options.anchor.match(/^bottom/)) {
+
+            pos[1] = -(metrics.height - options.lineWidth);
+
+        }
+
+        return pos;
+
+    };
+
+    /**
      * Create a rectangle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
      * @return {Object} New Facade.Rect object.
