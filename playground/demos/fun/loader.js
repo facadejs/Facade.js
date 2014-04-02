@@ -8,26 +8,23 @@ var circle = new Facade.Circle({
         closePath: false,
         anchor: 'center'
     }),
-    action = 'load',
     progress = 0;
 
 stage.draw(function () {
 
     this.clear();
 
-    if (action === 'load') {
+    if (progress < 100) {
 
-        if (++progress >= 100) {
+        progress = progress + 1;
 
-            action = 'unload';
+        if (progress >= 100) {
 
-        }
+            setTimeout(function () {
 
-    } else if (action === 'unload') {
+                progress = 0;
 
-        if (--progress <= 0) {
-
-            action = 'load';
+            }, 1000);
 
         }
 
