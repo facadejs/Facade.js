@@ -14,7 +14,7 @@
 
 ##Documentation
 
-<http://docs.facadejs.com/0.3-beta/>
+<http://docs.facadejs.com/0.3.0-beta/>
 
 ##Run Tests
 
