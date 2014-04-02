@@ -1,6 +1,6 @@
 {
     "name": "Facade.js",
-    "version": "0.3.0beta",
+    "version": "0.3.0-beta",
     "devDependencies": {
         "grunt": "0.4.4",
         "grunt-casperjs": "1.4.0",
