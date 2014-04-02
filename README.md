@@ -6,11 +6,11 @@
 
 ##Editable Demos
 
-<http://playground.facadejs.com>
+<http://playground.facadejs.com/>
 
 ##CDN
 
-<http://cdn.facadejs.com/0.3-beta/facade.min.js>
+<http://cdn.facadejs.com/0.3.0-beta/facade.min.js>
 
 ##Documentation
 
