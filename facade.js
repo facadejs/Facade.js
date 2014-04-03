@@ -1276,7 +1276,7 @@
         });
         this._metrics = this._defaultMetrics();
 
-        this.image = this._load(img);
+        this._load(img);
 
         this.setOptions(options);
 
@@ -1291,13 +1291,26 @@
 
     Facade.Image.prototype._load = function (source) {
 
-        var image;
+        if (String(typeof source) === 'object' && source.nodeType === 1) {
 
-        image = document.createElement('img');
-        image.setAttribute('src', source);
-        image.addEventListener('load', this._setMetrics.bind(this));
+            this.image = source;
 
-        return image;
+        } else {
+
+            this.image = document.createElement('img');
+            this.image.setAttribute('src', source);
+
+        }
+
+        if (this.image.complete) {
+
+            this._setMetrics();
+
+        } else {
+
+            this.image.addEventListener('load', this._setMetrics.bind(this));
+
+        }
 
     };
 
