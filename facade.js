@@ -882,12 +882,6 @@
             point,
             anchor = this._getAnchorPoint(options, metrics);
 
-        if (isFunction(this._configOptions)) {
-
-            options = this._configOptions(options);
-
-        }
-
         context.translate.apply(context, anchor);
 
         if (options.rotate) {
@@ -1255,6 +1249,162 @@
         options.points = [ [ 0, 0 ], [ options.width, 0 ], [ options.width, options.height ], [ 0, options.height ] ];
 
         return options;
+
+    };
+
+    /**
+     * Create an image object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     * @return {Object} New Facade.Image object.
+     * @api public
+     */
+
+    Facade.Image = function (img, options) {
+
+        if (!(this instanceof Facade.Image)) {
+
+            return new Facade.Image(options);
+
+        }
+
+        this._options = this._defaultOptions({
+            width: 0,
+            height: 0,
+            tileX: 1,
+            tileY: 1,
+            rotate: 0
+        });
+        this._metrics = this._defaultMetrics();
+
+        this.image = this._load(img);
+
+        this.setOptions(options);
+
+    };
+
+    /*!
+     * Extend from Facade.Entity
+     */
+
+    Facade.Image.prototype = Object.create(Facade.Entity.prototype);
+    Facade.Image.constructor = Facade.Entity;
+
+    Facade.Image.prototype._load = function (source) {
+
+        var image;
+
+        image = document.createElement('img');
+        image.setAttribute('src', source);
+        image.addEventListener('load', this._setMetrics.bind(this));
+
+        return image;
+
+    };
+
+    /**
+     * Custom configuration for options specific to a image entity.
+     *
+     *     console.log(image._configOptions(options));
+     *
+     * @param {Object} options Complete set of image specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
+
+    Facade.Image.prototype._configOptions = function (options) {
+
+        options.translate = [ options.x, options.y ];
+
+        if (!options.width) {
+
+            options.width = this.image.width;
+
+        }
+
+        if (!options.height) {
+
+            options.height = this.image.height;
+
+        }
+
+        return options;
+
+    };
+
+    /**
+     * Set metrics based on the image's current options.
+     *
+     *     console.log(image._setMetrics());
+     *
+     * @return {Object} Object with metric key/value pairs.
+     * @api private
+     */
+
+    Facade.Image.prototype._setMetrics = function () {
+
+        var metrics = this.getAllMetrics(),
+            options = this.getAllOptions(),
+            anchor;
+
+        if (isFunction(this._configOptions)) {
+
+            options = this._configOptions(options);
+
+        }
+
+        metrics.width = options.width * options.tileX;
+        metrics.height = options.height * options.tileY;
+
+        anchor = this._getAnchorPoint(options, metrics);
+
+        metrics.x = options.x + anchor[0];
+        metrics.y = options.y + anchor[1];
+
+        return metrics;
+
+    };
+
+    /**
+     * Renders an image entity to a canvas.
+     *
+     *     entity.draw(stage);
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api private
+     */
+
+    Facade.Image.prototype._draw = function (facade, options) {
+
+        var context = facade.context,
+            metrics = this._setMetrics(),
+            anchor = this._getAnchorPoint(options, metrics),
+            x,
+            y;
+
+        if (this.image.complete) {
+
+            context.translate.apply(context, anchor);
+
+            if (options.rotate) {
+
+                context.translate(-anchor[0], -anchor[1]);
+                context.rotate(options.rotate * Math.PI / 180);
+                context.translate(anchor[0], anchor[1]);
+
+            }
+
+            for (x = 0; x < options.tileX; x = x + 1) {
+
+                for (y = 0; y < options.tileY; y = y + 1) {
+
+                    context.drawImage(this.image, options.width * x, options.height * y);
+
+                }
+
+            }
+
+        }
 
     };
 

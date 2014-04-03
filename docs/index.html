@@ -225,6 +225,22 @@
 
                 
 
+                <li class="scope-public"><a href="#facade.image">Facade.Image()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.image.prototype.configoptions">Facade.Image._configOptions()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.image.prototype.setmetrics">Facade.Image._setMetrics()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.image.prototype.draw">Facade.Image._draw()</a></li>
+
+                
+
                 <li class="scope-public"><a href="#facade.group">Facade.Group()</a></li>
 
                 
@@ -2348,12 +2364,6 @@
         <span class="nx">point</span><span class="p">,</span>
         <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
-
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
-
-    <span class="p">}</span>
-
     <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span><span class="p">)</span> <span class="p">{</span>
@@ -3031,6 +3041,281 @@
                     <h3>Returns</h3>
 
                     <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.image"><a href="#facade.image" class="permalink">#</a>Facade.Image() </h2>
+
+                    <p>Create an image object. Inherits all methods from <b>Facade.Entity</b>.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">tileX</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">tileY</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">rotate</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_load</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> New Facade.Image object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.image.prototype.configoptions"><a href="#facade.image.prototype.configoptions" class="permalink">#</a>Facade.Image._configOptions() <span class="label label-default">private</span></h2>
+
+                    <p>Custom configuration for options specific to a image entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Complete set of image specific options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.image.prototype.setmetrics"><a href="#facade.image.prototype.setmetrics" class="permalink">#</a>Facade.Image._setMetrics() <span class="label label-default">private</span></h2>
+
+                    <p>Set metrics based on the image's current options.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
+        <span class="nx">anchor</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tileX</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tileY</span><span class="p">;</span>
+
+    <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
+
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Object with metric key/value pairs.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.image.prototype.draw"><a href="#facade.image.prototype.draw" class="permalink">#</a>Facade.Image._draw() <span class="label label-default">private</span></h2>
+
+                    <p>Renders an image entity to a canvas.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>facade</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js object.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+        <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(),</span>
+        <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">),</span>
+        <span class="nx">x</span><span class="p">,</span>
+        <span class="nx">y</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+            <span class="nx">context</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
+            <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tileX</span><span class="p">;</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tileY</span><span class="p">;</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">y</span><span class="p">);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
 
                 </div>
 

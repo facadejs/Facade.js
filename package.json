@@ -7,7 +7,7 @@
         "grunt-contrib-watch": "0.6.1",
         "grunt-contrib-uglify": "0.4.0",
         "grunt-shell": "0.6.4",
-        "grunt-jslint": "1.1.7",
+        "grunt-jslint": "1.1.8",
         "grunt-notify": "0.2.20",
         "matchdep": "0.3.0"
     },
