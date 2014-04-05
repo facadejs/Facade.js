@@ -468,7 +468,9 @@
         options = {
             x: 0,
             y: 0,
-            anchor: 'top/left'
+            anchor: 'top/left',
+            rotate: 0,
+            scale: 1
         };
 
         for (key in updated) {
@@ -584,6 +586,42 @@
         }
 
         return strokeWidthOffset;
+
+    };
+
+    /**
+     * Applys transforms (translate, rotate and scale) to an entity.
+     *
+     *     console.log(rect._applyTransforms(context, options, metrics));
+     *
+     * @param {Object} context Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
+     * @param {Object} options Facade.Entity options.
+     * @param {Object} metrics Facade.Entity metrics.
+     * @return {void}
+     * @api private
+     */
+
+    Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
+
+        var anchor = this._getAnchorPoint(options, metrics);
+
+        context.translate.apply(context, anchor);
+
+        if (options.rotate) {
+
+            context.translate(-anchor[0], -anchor[1]);
+            context.rotate(options.rotate * _TO_RADIANS);
+            context.translate(anchor[0], anchor[1]);
+
+        }
+
+        if (options.scale) {
+
+            context.translate(-anchor[0], -anchor[1]);
+            context.scale(options.scale, options.scale);
+            context.translate(anchor[0], anchor[1]);
+
+        }
 
     };
 
@@ -847,8 +885,7 @@
             lineWidth: 0,
             lineCap: 'default',
             lineJoin: 'miter',
-            closePath: true,
-            rotate: 0
+            closePath: true
         });
 
         for (key in updated) {
@@ -879,18 +916,9 @@
 
         var context = facade.context,
             metrics = this._setMetrics(),
-            point,
-            anchor = this._getAnchorPoint(options, metrics);
+            point;
 
-        context.translate.apply(context, anchor);
-
-        if (options.rotate) {
-
-            context.translate(-anchor[0], -anchor[1]);
-            context.rotate(options.rotate * Math.PI / 180);
-            context.translate(anchor[0], anchor[1]);
-
-        }
+        this._applyTransforms(context, options, metrics);
 
         if (options.points.length) {
 
@@ -1271,12 +1299,11 @@
             width: 0,
             height: 0,
             tileX: 1,
-            tileY: 1,
-            rotate: 0
+            tileY: 1
         });
         this._metrics = this._defaultMetrics();
 
-        this._load(img);
+        this.load(img);
 
         this.setOptions(options);
 
@@ -1289,7 +1316,18 @@
     Facade.Image.prototype = Object.create(Facade.Entity.prototype);
     Facade.Image.constructor = Facade.Entity;
 
-    Facade.Image.prototype._load = function (source) {
+    /**
+     * Loads either a reference to an image tag or an image URL into a Facade.Image entity.
+     *
+     *     console.log(image.load(document.querySelector('img')));
+     *     console.log(image.load('images/sprite.png'));
+     *
+     * @param {Object|String} source A reference to an image tag or an image URL
+     * @return {void}
+     * @api public
+     */
+
+    Facade.Image.prototype.load = function (source) {
 
         if (String(typeof source) === 'object' && source.nodeType === 1) {
 
@@ -1391,21 +1429,12 @@
 
         var context = facade.context,
             metrics = this._setMetrics(),
-            anchor = this._getAnchorPoint(options, metrics),
             x,
             y;
 
         if (this.image.complete) {
 
-            context.translate.apply(context, anchor);
-
-            if (options.rotate) {
-
-                context.translate(-anchor[0], -anchor[1]);
-                context.rotate(options.rotate * Math.PI / 180);
-                context.translate(anchor[0], anchor[1]);
-
-            }
+            this._applyTransforms(context, options, metrics);
 
             for (x = 0; x < options.tileX; x = x + 1) {
 
@@ -1455,16 +1484,22 @@
     /**
      * Renders a group of entities to a canvas.
      *
-     *     group.draw(stage);
+     *     group._draw(stage);
      *
      * @param {Object} facade Facade.js object.
      * @return {void}
      * @api private
      */
 
-    Facade.Group.prototype._draw = function (facade) {
+    Facade.Group.prototype._draw = function (facade, options) {
 
-        var key;
+        var context = facade.context,
+            metrics = this._setMetrics(),
+            key;
+
+        context.save();
+
+        this._applyTransforms(context, options, metrics);
 
         for (key in this._objects) {
 
@@ -1475,6 +1510,8 @@
             }
 
         }
+
+        context.restore();
 
     };
 

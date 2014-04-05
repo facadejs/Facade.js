@@ -31,7 +31,9 @@ casper.test.begin('Setting/getting entity options.', function suite(test) {
     test.assertEquals(object._options, {
         x: 0,
         y: 0,
-        anchor: 'top/left'
+        anchor: 'top/left',
+        rotate: 0,
+        scale: 1
     }, 'Object options have been set correctly.');
 
     test.assertEquals(object.getOption('x'), 0, 'Getting object option (single key).');
@@ -41,7 +43,9 @@ casper.test.begin('Setting/getting entity options.', function suite(test) {
     test.assertEquals(object.getAllOptions(), {
         x: 0,
         y: 0,
-        anchor: 'top/left'
+        anchor: 'top/left',
+        rotate: 0,
+        scale: 1
     }, 'Getting object options (mulitple keys).');
 
     test.assertEquals(object.setOption('x', 100), 100, 'Setting and getting an object option (single key, integer).');
@@ -72,23 +76,39 @@ casper.test.begin('Setting/getting entity options.', function suite(test) {
     test.assertEquals(object.setOptions({ x: 500, y: 500 }), {
         x: 500,
         y: 500,
-        anchor: 'top/left'
+        anchor: 'top/left',
+        rotate: 0,
+        scale: 1
     }, 'Setting and getting an object option (multiple keys).');
 
     object.setOptions({ x: 0, y: 0 });
 
-    test.assertEquals(object.getAllOptions(), { x: 0, y: 0, anchor: 'top/left' }, 'Saving multiple options to an entity.');
+    test.assertEquals(object.getAllOptions(), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        rotate: 0,
+        scale: 1
+    }, 'Saving multiple options to an entity.');
 
     object.setOptions({ x: 100, y: 100 }, true);
 
-    test.assertEquals(object.getAllOptions(), { x: 0, y: 0, anchor: 'top/left' }, 'Not saving multiple options to an entity.');
+    test.assertEquals(object.getAllOptions(), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        rotate: 0,
+        scale: 1
+    }, 'Not saving multiple options to an entity.');
 
     try {
 
         test.assertEquals(object.setOptions({ x: '9000' }), {
             x: 500,
             y: 500,
-            anchor: 'top/left'
+            anchor: 'top/left',
+            rotate: 0,
+            scale: 1
         }, 'Testing the validity of an invalid option value (multiple keys).');
 
         test.fail();

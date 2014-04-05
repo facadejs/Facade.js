@@ -149,6 +149,10 @@
 
                 
 
+                <li class="scope-private"><a href="#facade.entity.prototype.applytransforms">Facade.Entity._applyTransforms()</a></li>
+
+                
+
                 <li class="scope-public"><a href="#facade.entity.prototype.getoption">Facade.Entity.getOption()</a></li>
 
                 
@@ -226,6 +230,10 @@
                 
 
                 <li class="scope-public"><a href="#facade.image">Facade.Image()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.image.prototype.load">Facade.Image.load()</a></li>
 
                 
 
@@ -1414,7 +1422,9 @@
     <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">anchor</span><span class="o">:</span> <span class="s1">&#39;top/left&#39;</span>
+        <span class="nx">anchor</span><span class="o">:</span> <span class="s1">&#39;top/left&#39;</span><span class="p">,</span>
+        <span class="nx">rotate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">scale</span><span class="o">:</span> <span class="mi">1</span>
     <span class="p">};</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
@@ -1677,6 +1687,101 @@
                     <h3>Returns</h3>
 
                     <p><code>Integer</code> Integer representing the stroke width offset.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.entity.prototype.applytransforms"><a href="#facade.entity.prototype.applytransforms" class="permalink">#</a>Facade.Entity._applyTransforms() <span class="label label-default">private</span></h2>
+
+                    <p>Applys transforms (translate, rotate and scale) to an entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>context</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.</p>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.Entity options.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.Entity metrics.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">_applyTransforms</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_applyTransforms</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
+
+    <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span><span class="p">);</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">scale</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">scale</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">scale</span><span class="p">);</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+    <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
 
                 </div>
 
@@ -2286,8 +2391,7 @@
         <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">lineCap</span><span class="o">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
         <span class="nx">lineJoin</span><span class="o">:</span> <span class="s1">&#39;miter&#39;</span><span class="p">,</span>
-        <span class="nx">closePath</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">rotate</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">closePath</span><span class="o">:</span> <span class="kc">true</span>
     <span class="p">});</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
@@ -2361,18 +2465,9 @@
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
         <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(),</span>
-        <span class="nx">point</span><span class="p">,</span>
-        <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
+        <span class="nx">point</span><span class="p">;</span>
 
-    <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">);</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-        <span class="nx">context</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
-        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-
-    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_applyTransforms</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
@@ -3076,12 +3171,11 @@
         <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">tileX</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="nx">tileY</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="nx">rotate</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">tileY</span><span class="o">:</span> <span class="mi">1</span>
     <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_load</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -3094,6 +3188,85 @@
                     <h3>Returns</h3>
 
                     <p><code>Object</code> New Facade.Image object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.image.prototype.load"><a href="#facade.image.prototype.load" class="permalink">#</a>Facade.Image.load() </h2>
+
+                    <p>Loads either a reference to an image tag or an image URL into a Facade.Image entity.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>source</b>
+                        <code>Object|String</code>
+                        
+                    </p>
+                    <p>A reference to an image tag or an image URL</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s1">&#39;images/sprite.png&#39;</span><span class="p">));</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">source</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">source</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nx">source</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="nx">source</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+    <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>void</code> </p>
 
                 </div>
 
@@ -3279,21 +3452,12 @@
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
         <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(),</span>
-        <span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">),</span>
         <span class="nx">x</span><span class="p">,</span>
         <span class="nx">y</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">);</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span><span class="p">)</span> <span class="p">{</span>
-
-            <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-            <span class="nx">context</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">);</span>
-            <span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-
-        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_applyTransforms</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
         <span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tileX</span><span class="p">;</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
@@ -3399,7 +3563,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
+                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
 </pre></div>
 
 
@@ -3409,9 +3573,15 @@
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="kd">var</span> <span class="nx">key</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+        <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(),</span>
+        <span class="nx">key</span><span class="p">;</span>
+
+    <span class="nx">context</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_applyTransforms</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">)</span> <span class="p">{</span>
 
@@ -3422,6 +3592,8 @@
         <span class="p">}</span>
 
     <span class="p">}</span>
+
+    <span class="nx">context</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
 
 <span class="p">};</span>
 </pre></div>

@@ -44,7 +44,8 @@ casper.test.begin('Setting/getting line entity options.', function suite(test) {
         y1: 0,
         x2: 0,
         y2: 0,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Object default options have been set correctly.');
 
     test.assertEquals(object.setOptions({ x1: 100, y1: 100, x2: 200, y2: 200 }), {
@@ -67,7 +68,8 @@ casper.test.begin('Setting/getting line entity options.', function suite(test) {
         y1: 100,
         x2: 200,
         y2: 200,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Object custom options have been set correctly.');
 
     test.assertEquals(object._configOptions(object.getAllOptions()).points, [
@@ -106,7 +108,8 @@ casper.test.begin('Running _configOptions on line options.', function suite(test
         y1: 100,
         x2: 200,
         y2: 200,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Custom config options have been set correctly.');
 
     test.done();

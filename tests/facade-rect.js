@@ -42,7 +42,8 @@ casper.test.begin('Setting/getting rect entity options.', function suite(test) {
         closePath: true,
         width: 0,
         height: 0,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Object default options have been set correctly.');
 
     test.assertEquals(object.setOptions({ width: 200, height: 200 }), {
@@ -63,7 +64,8 @@ casper.test.begin('Setting/getting rect entity options.', function suite(test) {
         closePath: true,
         width: 200,
         height: 200,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Object custom options have been set correctly.');
 
     test.done();
@@ -96,7 +98,8 @@ casper.test.begin('Running _configOptions on rect options.', function suite(test
         height: 200,
         translate: [ 10, 10 ],
         globalAlpha: 0.5,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Custom config options have been set correctly.');
 
     test.done();

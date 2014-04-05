@@ -43,7 +43,8 @@ casper.test.begin('Setting/getting circle entity options.', function suite(test)
         radius: 0,
         begin: 0,
         end: 360,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Object default options have been set correctly.');
 
     test.assertEquals(object.setOptions({ radius: 20 }), {
@@ -65,7 +66,8 @@ casper.test.begin('Setting/getting circle entity options.', function suite(test)
         radius: 20,
         begin: 0,
         end: 360,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Object custom options have been set correctly.');
 
     test.assertEquals(object._configOptions(object.getAllOptions()).points, [
@@ -106,7 +108,8 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
         radius: 20,
         begin: 0,
         end: 360,
-        rotate: 0
+        rotate: 0,
+        scale: 1
     }, 'Custom config options have been set correctly.');
 
     test.done();
