@@ -15,9 +15,11 @@ stage.draw(function () {
 
     this.clear();
 
-    if (scale > 100) { scale = 0; }
+    scale = scale + 0.025;
 
-    this.addToStage(rect, { scale: ++scale });
+    if (scale > 1) { scale = 0; }
+
+    this.addToStage(rect, { scale: scale });
 
     updatefps();
 

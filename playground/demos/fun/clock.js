@@ -1,7 +1,7 @@
 var tick = new Facade.Line({
         x: stage.width() / 2,
         y: stage.height() / 2,
-        anchor: 'top/center'
+        anchor: 'top/left'
     }),
     clock_face = new Facade.Circle({
         x: stage.width() / 2,
