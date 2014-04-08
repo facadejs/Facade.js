@@ -25,6 +25,8 @@
 
         if (window.innerWidth >= 800) {
 
+            editor.setOption('maxLines', 0);
+
             iframe.setAttribute('width', (code.clientWidth + stage.clientWidth ) / 2);
 
             if (stage.clientHeight !== iframe.height) {
@@ -36,6 +38,8 @@
             }
 
         } else {
+
+            editor.setOption('maxLines', 30);
 
             iframe.setAttribute('width', window.innerWidth);
             iframe.setAttribute('height', window.innerHeight);
@@ -64,7 +68,6 @@
 
     editor.setOptions({
         highlightActiveLine: true,
-        maxLines: Infinity,
         mode: 'ace/mode/javascript',
         showPrintMargin: false
     });
