@@ -50,6 +50,21 @@ header .button {
     width: 100%;
 }
 
+.docs {
+    float: right;
+}
+
+.docs:before {
+    content: '';
+    display: inline-block;
+    margin: .2em .25em 0 0;
+    vertical-align: top;
+    width: 16px;
+    height: 16px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABbklEQVR4Ae3QYXHbSgCF0WMEXgbWQ2AFwVsGVhFUDLpBEDOIgyAygjoIIjFYM5AZbBGofzIZj0cT2/3bXgBn5n6LaWvCaDS4bZWVCE66xTQBIOvtZcyvsRFVAAbxHAAYbe0BAJUfWgHgEjhKokq0mkGCJwnAUW+UvZ8DgwiotVpL0HuUNV4FcLJzMAKmeQCCJFmiGNXgpNUD1wEIOhsAj3ZwDwDJM36JMteBSpBniAcZAARrR8UlgFoS/LQHEL1bAKhsfNPbKcwBECTRq/0FEDx50Olua9CodcZPIGrsjPc1CMoHEFD+igZBdWODoMw3oFYwzjcQUBuN1y/MAwD+AXNAkWXZUb4KRP+rVOI5AEBxcPA2AwQbjQYAH0CPyuqC2XlRPoHouxYAMCBLiwkgqEWN9RkyePefZw2AN72sB+ATAFBptVagCIoABp2DAnwFAFvJEsBR0gO3AtQ6a7DXwr0AQW/tReLPAILo4Mv9BoSmAhCFAiPvAAAAAElFTkSuQmCC') no-repeat;
+    background-size: cover;
+}
+
 .files {
     padding: 1em;
     font-size: 1.1em;
@@ -64,7 +79,7 @@ header .button {
 }
 
 .files li a {
-    display: inline-block;
+    display: block;
     padding: .2em;
     color: inherit;
     text-decoration: none;
@@ -90,6 +105,12 @@ header .button {
         top: .5em;
         right: .5em;
         width: auto;
+    }
+
+    .docs {
+        position: absolute;
+        top: 1em;
+        right: 14em;
     }
 
 }

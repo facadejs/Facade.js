@@ -70,6 +70,8 @@ function updatefps () {
         stage.width(window.innerWidth);
         stage.height(window.innerHeight);
 
+        stage.resizeForHDPI();
+
     }
 
     window.addEventListener('resize', resize_canvas);

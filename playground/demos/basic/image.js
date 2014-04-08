@@ -13,4 +13,6 @@ stage.draw(function () {
 
     this.addToStage(image);
 
+    updatefps();
+
 });

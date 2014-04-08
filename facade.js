@@ -400,6 +400,34 @@
     };
 
     /**
+     * Resizes the canvas tag to the original width and height multiplied by the device pixel ratio.
+     *
+     *     stage.resizeForHDPI()
+     *
+     * @return {Object} Facade.js object.
+     * @api public
+     */
+
+    Facade.prototype.resizeForHDPI = function () {
+
+        if (window.devicePixelRatio > 1) {
+
+            this.canvas.setAttribute('style', 'width: ' + this.width() + 'px; height: ' + this.height() + 'px;');
+
+            this.canvas.setAttribute('width', this.width() * window.devicePixelRatio);
+            this.canvas.setAttribute('height', this.height() * window.devicePixelRatio);
+
+            this.context.translate(this.width() / 2, this.height() / 2);
+            this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
+            this.context.translate(-this.width() / 2, -this.height() / 2);
+
+        }
+
+        return this;
+
+    };
+
+    /**
      * Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code> and <code>Facade.fps</code>.
      *
      *     this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));

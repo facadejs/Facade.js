@@ -64,6 +64,7 @@
 
     editor.setOptions({
         highlightActiveLine: true,
+        maxLines: Infinity,
         mode: 'ace/mode/javascript',
         showPrintMargin: false
     });
