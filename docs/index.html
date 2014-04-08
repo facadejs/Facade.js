@@ -241,6 +241,22 @@
 
                 
 
+                <li class="scope-public"><a href="#facade.image.prototype.play">Facade.Image.play()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.image.prototype.pause">Facade.Image.pause()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.image.prototype.reset">Facade.Image.reset()</a></li>
+
+                
+
+                <li class="scope-public"><a href="#facade.image.prototype.stop">Facade.Image.stop()</a></li>
+
+                
+
                 <li class="scope-private"><a href="#facade.image.prototype.configoptions">Facade.Image._configOptions()</a></li>
 
                 
@@ -3232,9 +3248,16 @@
         <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">tileX</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="nx">tileY</span><span class="o">:</span> <span class="mi">1</span>
+        <span class="nx">tileY</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">frames</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="nx">speed</span><span class="o">:</span> <span class="mi">120</span><span class="p">,</span>
+        <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span> <span class="p">}</span>
     <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">animating</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
 
@@ -3328,6 +3351,192 @@
                     <h3>Returns</h3>
 
                     <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.image.prototype.play"><a href="#facade.image.prototype.play" class="permalink">#</a>Facade.Image.play() </h2>
+
+                    <p>Starts an image sprite animation.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">image</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">play</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">animating</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js image object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.image.prototype.pause"><a href="#facade.image.prototype.pause" class="permalink">#</a>Facade.Image.pause() </h2>
+
+                    <p>Pauses an image sprite animation.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">image</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">pause</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">animating</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js image object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.image.prototype.reset"><a href="#facade.image.prototype.reset" class="permalink">#</a>Facade.Image.reset() </h2>
+
+                    <p>Resets an image sprite animation.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">image</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reset</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js image object.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.image.prototype.stop"><a href="#facade.image.prototype.stop" class="permalink">#</a>Facade.Image.stop() </h2>
+
+                    <p>Stops and resets an image sprite animation.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">image</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">animating</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js image object.</p>
 
                 </div>
 
@@ -3513,6 +3722,8 @@
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
         <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(),</span>
+        <span class="nx">offsetX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">x</span><span class="p">,</span>
         <span class="nx">y</span><span class="p">;</span>
 
@@ -3520,11 +3731,73 @@
 
         <span class="k">this</span><span class="p">.</span><span class="nx">_applyTransforms</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
+        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">offsetX</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
         <span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tileX</span><span class="p">;</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
             <span class="k">for</span> <span class="p">(</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tileY</span><span class="p">;</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">y</span><span class="p">);</span>
+                <span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">offsetX</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">offsetY</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">x</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">y</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">height</span>
+                <span class="p">);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">animating</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span><span class="p">;</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]);</span>
+
+                <span class="p">}</span>
+
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span><span class="p">;</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">loop</span><span class="p">)</span> <span class="p">{</span>
+
+                        <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+                        <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+                        <span class="k">this</span><span class="p">.</span><span class="nx">isAnimating</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+                    <span class="p">}</span>
+
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]);</span>
+
+                <span class="p">}</span>
 
             <span class="p">}</span>
 

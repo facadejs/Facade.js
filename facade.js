@@ -1327,9 +1327,16 @@
             width: 0,
             height: 0,
             tileX: 1,
-            tileY: 1
+            tileY: 1,
+            frames: [0],
+            speed: 120,
+            loop: true,
+            callback: function () { return undefined; }
         });
         this._metrics = this._defaultMetrics();
+
+        this.animating = false;
+        this.currentFrame = 0;
 
         this.load(img);
 
@@ -1377,6 +1384,76 @@
             this.image.addEventListener('load', this._setMetrics.bind(this));
 
         }
+
+    };
+
+    /**
+     * Starts an image sprite animation.
+     *
+     *  image.play();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
+
+    Facade.Image.prototype.play = function () {
+
+        this.animating = true;
+
+        return this;
+
+    };
+
+    /**
+     * Pauses an image sprite animation.
+     *
+     *  image.pause();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
+
+    Facade.Image.prototype.pause = function () {
+
+        this.animating = false;
+
+        return this;
+
+    };
+
+    /**
+     * Resets an image sprite animation.
+     *
+     *  image.reset();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
+
+    Facade.Image.prototype.reset = function () {
+
+        this.currentFrame = 0;
+
+        return this;
+
+    };
+
+    /**
+     * Stops and resets an image sprite animation.
+     *
+     *  image.stop();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
+
+    Facade.Image.prototype.stop = function () {
+
+        this.currentFrame = 0;
+
+        this.animating = false;
+
+        return this;
 
     };
 
@@ -1457,6 +1534,8 @@
 
         var context = facade.context,
             metrics = this._setMetrics(),
+            offsetX = 0,
+            offsetY = 0,
             x,
             y;
 
@@ -1464,11 +1543,73 @@
 
             this._applyTransforms(context, options, metrics);
 
+            if (options.frames.length) {
+
+                offsetX = options.frames[this.currentFrame] || 0;
+
+            }
+
             for (x = 0; x < options.tileX; x = x + 1) {
 
                 for (y = 0; y < options.tileY; y = y + 1) {
 
-                    context.drawImage(this.image, options.width * x, options.height * y);
+                    context.drawImage(
+                        this.image,
+                        options.width * offsetX,
+                        options.height * offsetY,
+                        options.width,
+                        options.height,
+                        options.width * x,
+                        options.height * y,
+                        options.width,
+                        options.height
+                    );
+
+                }
+
+            }
+
+            if (this.animating) {
+
+                if (!this.ftime) {
+
+                    this.ftime = facade.ftime;
+
+                    if (String(typeof options.callback) === 'function') {
+
+                        options.callback.call(this, options.frames[this.currentFrame]);
+
+                    }
+
+                }
+
+                if (facade.ftime - this.ftime >= options.speed) {
+
+                    this.ftime = facade.ftime;
+
+                    this.currentFrame += 1;
+
+                    if (this.currentFrame >= options.frames.length) {
+
+                        if (options.loop) {
+
+                            this.currentFrame = 0;
+
+                        } else {
+
+                            this.currentFrame = options.frames.length - 1;
+
+                            this.isAnimating = false;
+
+                        }
+
+                    }
+
+                    if (String(typeof options.callback) === 'function') {
+
+                        options.callback.call(this, options.frames[this.currentFrame]);
+
+                    }
 
                 }
 
