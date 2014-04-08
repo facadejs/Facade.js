@@ -81,6 +81,7 @@ module.exports = function (grunt) {
                         'styles.css',
                         'demos.js',
                         'play.js',
+                        'images/scott-pilgrim.png',
                         'facade.min.js',
                         'http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js',
                         'http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js',
