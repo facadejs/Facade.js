@@ -631,7 +631,12 @@
 
     Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
 
-        var anchor = this._getAnchorPoint(options, metrics);
+        var anchor = this._getAnchorPoint(options, {
+            x: metrics.x,
+            y: metrics.y,
+            width: metrics.width / options.scale,
+            height: metrics.height / options.scale
+        });
 
         context.translate.apply(context, anchor);
 
@@ -943,7 +948,7 @@
     Facade.Polygon.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = this._setMetrics(),
+            metrics = this._setMetrics(options),
             point;
 
         this._applyTransforms(context, options, metrics);
@@ -1024,10 +1029,10 @@
      * @api private
      */
 
-    Facade.Polygon.prototype._setMetrics = function () {
+    Facade.Polygon.prototype._setMetrics = function (updated) {
 
         var metrics = this.getAllMetrics(),
-            options = this.getAllOptions(),
+            options = this.setOptions(updated, true),
             bounds = { top: null, right: null, bottom: null, left: null },
             point,
             anchor,
@@ -1097,8 +1102,8 @@
 
         }
 
-        metrics.width = metrics.width + strokeWidthOffset * 2;
-        metrics.height = metrics.height + strokeWidthOffset * 2;
+        metrics.width = (metrics.width + strokeWidthOffset * 2) * options.scale;
+        metrics.height = (metrics.height + strokeWidthOffset * 2) * options.scale;
 
         anchor = this._getAnchorPoint(options, metrics);
 
@@ -1496,10 +1501,10 @@
      * @api private
      */
 
-    Facade.Image.prototype._setMetrics = function () {
+    Facade.Image.prototype._setMetrics = function (updated) {
 
         var metrics = this.getAllMetrics(),
-            options = this.getAllOptions(),
+            options = this.setOptions(updated, true),
             anchor;
 
         if (isFunction(this._configOptions)) {
@@ -1508,8 +1513,8 @@
 
         }
 
-        metrics.width = options.width * options.tileX;
-        metrics.height = options.height * options.tileY;
+        metrics.width = options.width * options.tileX * options.scale;
+        metrics.height = options.height * options.tileY * options.scale;
 
         anchor = this._getAnchorPoint(options, metrics);
 
@@ -1533,7 +1538,7 @@
     Facade.Image.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = this._setMetrics(),
+            metrics = this._setMetrics(options, true),
             offsetX = 0,
             offsetY = 0,
             x,
@@ -1549,9 +1554,9 @@
 
             }
 
-            for (x = 0; x < options.tileX; x = x + 1) {
+            for (x = 0; x < options.tileX; x += 1) {
 
-                for (y = 0; y < options.tileY; y = y + 1) {
+                for (y = 0; y < options.tileY; y += 1) {
 
                     context.drawImage(
                         this.image,
@@ -1663,7 +1668,7 @@
     Facade.Group.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = this._setMetrics(),
+            metrics = this._setMetrics(options),
             key;
 
         context.save();
@@ -1759,10 +1764,11 @@
      * @api private
      */
 
-    Facade.Group.prototype._setMetrics = function () {
+    Facade.Group.prototype._setMetrics = function (updated) {
 
         var metrics = this.getAllMetrics(),
-            options = this.getAllOptions(),
+            options = this.setOptions(updated, true),
+            anchor,
             bounds = { top: null, right: null, bottom: null, left: null },
             key,
             obj_metrics;
@@ -1803,8 +1809,13 @@
 
         metrics.x = options.x + bounds.left;
         metrics.y = options.y + bounds.top;
-        metrics.width = bounds.right - bounds.left;
-        metrics.height = bounds.bottom - bounds.top;
+        metrics.width = (bounds.right - bounds.left) * options.scale;
+        metrics.height = (bounds.bottom - bounds.top) * options.scale;
+
+        anchor = this._getAnchorPoint(options, metrics);
+
+        metrics.x = options.x + anchor[0];
+        metrics.y = options.y + anchor[1];
 
         return metrics;
 
