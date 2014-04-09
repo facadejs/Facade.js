@@ -722,11 +722,9 @@
 
     Facade.Entity.prototype.setOption = function (key, value, test) {
 
-        var options = this.getAllOptions();
+        if (this._options.hasOwnProperty(key)) {
 
-        if (options.hasOwnProperty(key)) {
-
-            if (String(typeof options[key]) === String(typeof value)) {
+            if (String(typeof this._options[key]) === String(typeof value)) {
 
                 if (test !== true) {
 
