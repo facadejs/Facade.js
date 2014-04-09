@@ -1,7 +1,8 @@
 var group = new Facade.Group({
     x: stage.width() / 2,
     y: stage.height() / 2,
-    anchor: 'center'
+    anchor: 'center',
+    scale: 2
 });
 
 group.addToGroup(new Facade.Rect({
@@ -32,8 +33,10 @@ stage.draw(function () {
 
     this.clear();
 
-    this.addToStage(group, { rotate: ++rotate, scale: 1 });
+    this.addToStage(group, { rotate: ++rotate });
 
     updatefps();
+
+    // debugBoundingBox(group);
 
 });

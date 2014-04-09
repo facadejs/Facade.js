@@ -78,4 +78,6 @@ stage.draw(function () {
 
     updatefps();
 
+    // debugBoundingBox(clock_face);
+
 });
