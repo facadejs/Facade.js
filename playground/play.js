@@ -6,7 +6,7 @@
         code = document.querySelector('.code'),
         stage = document.querySelector('.stage'),
         iframe = document.querySelector('.stage iframe'),
-        editor = ace.edit(code),
+        editor = ace.edit('ace-editor'),
         template = Handlebars.compile(document.querySelector('#template-file-list').innerHTML),
         live_script = null,
         change_timeout = null;
