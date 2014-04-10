@@ -69,7 +69,7 @@ stage.draw(function () {
     // Second Hand
     this.addToStage(tick, {
         y2: -160,
-        lineWidth: 5,
+        lineWidth: 3,
         strokeStyle: '#f00',
         rotate: current_second * 6
     });
