@@ -33,8 +33,6 @@ stage.draw(function () {
     this.addToStage(circle, { opacity: 25 });
     this.addToStage(circle, { end: (progress / 100) * 360 });
 
-    updatefps();
-
     // debugBoundingBox(circle);
 
 });

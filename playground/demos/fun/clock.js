@@ -76,8 +76,6 @@ stage.draw(function () {
 
     this.addToStage(clock_hand_anchor);
 
-    updatefps();
-
     // debugBoundingBox(clock_face);
 
 });

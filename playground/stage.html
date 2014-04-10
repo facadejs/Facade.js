@@ -54,17 +54,18 @@ canvas {
 
 var stage = new Facade(document.querySelector('canvas')),
     fps = document.querySelector('.fps'),
+    fps_interval = null,
     debug = new Facade.Rect({
         fillStyle: 'rgba(10, 141, 251, 0.25)',
         strokeStyle: 'rgba(10, 141, 251, 0.5)',
         lineWidth: 1
     });
 
-function updatefps () {
+fps_interval = setInterval(function () {
 
     fps.innerHTML = Math.round(stage.fps);
 
-}
+}, 500);
 
 function debugBoundingBox (obj, options) {
 

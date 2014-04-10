@@ -35,8 +35,6 @@ stage.draw(function () {
 
     this.addToStage(group, { rotate: ++rotate });
 
-    updatefps();
-
     // debugBoundingBox(group);
 
 });

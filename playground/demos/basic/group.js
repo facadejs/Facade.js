@@ -32,8 +32,6 @@ stage.draw(function () {
 
     this.addToStage(group);
 
-    updatefps();
-
     // debugBoundingBox(group);
 
 });

@@ -20,8 +20,6 @@ stage.draw(function () {
 
     this.addToStage(polygon);
 
-    updatefps();
-
     // debugBoundingBox(polygon);
 
 });

@@ -15,8 +15,6 @@ stage.draw(function () {
 
     this.addToStage(rect);
 
-    updatefps();
-
     // debugBoundingBox(rect);
 
 });

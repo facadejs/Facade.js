@@ -21,8 +21,6 @@ stage.draw(function () {
 
     this.addToStage(rect, { scale: scale });
 
-    updatefps();
-
     // debugBoundingBox(rect, { scale: scale });
 
 });
