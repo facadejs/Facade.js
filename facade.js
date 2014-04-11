@@ -1,5 +1,5 @@
 /*!
- * Facade.js v0.3.0beta
+ * Facade.js v0.3.0-beta
  * https://github.com/neogeek/facade.js
  *
  * Copyright (c) 2014 Scott Doxey
@@ -20,18 +20,18 @@
      * requestAnimationFrame Support
      */
 
-    (['webkit', 'moz']).forEach(function (key) {
+    ['webkit', 'moz'].forEach(function (key) {
         _requestAnimationFrame = _requestAnimationFrame || window.requestAnimationFrame || window[key + 'RequestAnimationFrame'] || null;
         _cancelAnimationFrame = _cancelAnimationFrame || window.cancelAnimationFrame || window[key + 'CancelAnimationFrame'] || null;
     });
 
     /**
-     * Checks an object to see if it is an array. Returns a boolean result.
+     * Checks an object to see if it's an array. Returns a boolean result.
      *
      *     console.log(isArray([1, 2, 3, 4, 5])); // true
      *     console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false
      *
-     * @param {Object} obj The object to be checked.
+     * @param {Object} obj The object to be tested.
      * @return {Boolean} Result of the test.
      * @api private
      */
@@ -43,11 +43,11 @@
     }
 
     /**
-     * Checks an object to see if it is a function. Returns a boolean result.
+     * Checks an object to see if it's a function. Returns a boolean result.
      *
      *     console.log(isFunction(this._draw)); // true
      *
-     * @param {Object} obj The object to be checked.
+     * @param {Object} obj The object to be tested.
      * @return {Boolean} Result of the test.
      * @api private
      */
@@ -59,13 +59,13 @@
     }
 
     /**
-     * Extends the values of one object (a) with the values from another object (b). Note: only values of the same type can be overritten.
+     * Extends the values of one object (a) with the values of another object (b). Note: Only values of the same type can be overritten.
      *
      *     console.log(extendObject({ test: 'not tested'}, { test: 'tested' })); // { test: 'tested' }
      *
-     * @param {Object} a The main object.
-     * @param {Object} b The secondary object which will be used to update the main object.
-     * @return {Boolean} Final modified object.
+     * @param {Object} a The first object.
+     * @param {Object} b The second object which will be used to update the first object.
+     * @return {Boolean} Final updated object.
      * @api private
      */
 
@@ -146,7 +146,7 @@
 
         } catch (e) {
 
-            throw new Error('Canvas passed to Facade.js was not a valid canvas element.');
+            throw new Error('Object passed to Facade.js was not a valid canvas element.');
 
         }
 
@@ -161,11 +161,11 @@
     }
 
     /**
-     * Draws a Facade.js object to the stage.
+     * Draws a Facade.js entity to the stage.
      *
      *     stage.addToStage(circle);
      *
-     * @param {Object} obj Facade.js entity object.
+     * @param {Object} obj Facade.js entity.
      * @return {Object} Facade.js object.
      * @api public
      */
@@ -174,7 +174,7 @@
 
         if (!(obj instanceof Facade.Entity)) {
 
-            throw new Error('Parameter passed to Facade.addToStage is not a valid Facade.js entity object');
+            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
         }
 
@@ -292,11 +292,11 @@
     };
 
     /**
-     * Applys key and value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.
+     * Applys key-value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.
      *
      *     stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});
      *
-     * @param {Object?} options Context property or method names with corresponding values.
+     * @param {Object} options Object containing context property and/or method names with corresponding values.
      * @param {Function?} callback Function to be called when context options have been rendered to the canvas.
      * @return {void}
      * @api public
@@ -333,6 +333,34 @@
         }
 
         this.context.restore();
+
+    };
+
+    /**
+     * Resizes the canvas tag to the original width and height multiplied by the device pixel ratio.
+     *
+     *     stage.resizeForHDPI()
+     *
+     * @return {Object} Facade.js object.
+     * @api public
+     */
+
+    Facade.prototype.resizeForHDPI = function () {
+
+        if (window.devicePixelRatio > 1) {
+
+            this.canvas.setAttribute('style', 'width: ' + this.width() + 'px; height: ' + this.height() + 'px;');
+
+            this.canvas.setAttribute('width', this.width() * window.devicePixelRatio);
+            this.canvas.setAttribute('height', this.height() * window.devicePixelRatio);
+
+            this.context.translate(this.width() / 2, this.height() / 2);
+            this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
+            this.context.translate(-this.width() / 2, -this.height() / 2);
+
+        }
+
+        return this;
 
     };
 
@@ -400,35 +428,7 @@
     };
 
     /**
-     * Resizes the canvas tag to the original width and height multiplied by the device pixel ratio.
-     *
-     *     stage.resizeForHDPI()
-     *
-     * @return {Object} Facade.js object.
-     * @api public
-     */
-
-    Facade.prototype.resizeForHDPI = function () {
-
-        if (window.devicePixelRatio > 1) {
-
-            this.canvas.setAttribute('style', 'width: ' + this.width() + 'px; height: ' + this.height() + 'px;');
-
-            this.canvas.setAttribute('width', this.width() * window.devicePixelRatio);
-            this.canvas.setAttribute('height', this.height() * window.devicePixelRatio);
-
-            this.context.translate(this.width() / 2, this.height() / 2);
-            this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
-            this.context.translate(-this.width() / 2, -this.height() / 2);
-
-        }
-
-        return this;
-
-    };
-
-    /**
-     * Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code> and <code>Facade.fps</code>.
+     * Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code>, <code>Facade.fps</code> and  <code>Facade.ftime</code>.
      *
      *     this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
      *

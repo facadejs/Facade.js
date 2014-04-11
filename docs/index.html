@@ -113,6 +113,10 @@
 
                 
 
+                <li class="scope-public"><a href="#facade.prototype.resizeforhdpi">Facade.resizeForHDPI()</a></li>
+
+                
+
                 <li class="scope-public"><a href="#facade.prototype.start">Facade.start()</a></li>
 
                 
@@ -122,10 +126,6 @@
                 
 
                 <li class="scope-public"><a href="#facade.prototype.width">Facade.width()</a></li>
-
-                
-
-                <li class="scope-public"><a href="#facade.prototype.resizeforhdpi">Facade.resizeForHDPI()</a></li>
 
                 
 
@@ -305,7 +305,7 @@
 
                     <h2 id="isarray"><a href="#isarray" class="permalink">#</a>isArray() <span class="label label-default">private</span></h2>
 
-                    <p>Checks an object to see if it is an array. Returns a boolean result.</p>
+                    <p>Checks an object to see if it's an array. Returns a boolean result.</p>
 
                     
 
@@ -318,7 +318,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>The object to be checked.</p>
+                    <p>The object to be tested.</p>
 
                     
 
@@ -365,7 +365,7 @@
 
                     <h2 id="isfunction"><a href="#isfunction" class="permalink">#</a>isFunction() <span class="label label-default">private</span></h2>
 
-                    <p>Checks an object to see if it is a function. Returns a boolean result.</p>
+                    <p>Checks an object to see if it's a function. Returns a boolean result.</p>
 
                     
 
@@ -378,7 +378,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>The object to be checked.</p>
+                    <p>The object to be tested.</p>
 
                     
 
@@ -424,7 +424,7 @@
 
                     <h2 id="extendobject"><a href="#extendobject" class="permalink">#</a>extendObject() <span class="label label-default">private</span></h2>
 
-                    <p>Extends the values of one object (a) with the values from another object (b). Note: only values of the same type can be overritten.</p>
+                    <p>Extends the values of one object (a) with the values of another object (b). Note: Only values of the same type can be overritten.</p>
 
                     
 
@@ -437,7 +437,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>The main object.</p>
+                    <p>The first object.</p>
 
                     
 
@@ -446,7 +446,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>The secondary object which will be used to update the main object.</p>
+                    <p>The second object which will be used to update the first object.</p>
 
                     
 
@@ -498,7 +498,7 @@
 
                     <h3>Returns</h3>
 
-                    <p><code>Boolean</code> Final modified object.</p>
+                    <p><code>Boolean</code> Final updated object.</p>
 
                 </div>
 
@@ -638,7 +638,7 @@
 
     <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Canvas passed to Facade.js was not a valid canvas element.&#39;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Object passed to Facade.js was not a valid canvas element.&#39;</span><span class="p">);</span>
 
     <span class="p">}</span>
 
@@ -668,7 +668,7 @@
 
                     <h2 id="facade.prototype.addtostage"><a href="#facade.prototype.addtostage" class="permalink">#</a>Facade.addToStage() </h2>
 
-                    <p>Draws a Facade.js object to the stage.</p>
+                    <p>Draws a Facade.js entity to the stage.</p>
 
                     
 
@@ -681,7 +681,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>Facade.js entity object.</p>
+                    <p>Facade.js entity.</p>
 
                     
 
@@ -709,7 +709,7 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">))</span> <span class="p">{</span>
 
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Parameter passed to Facade.addToStage is not a valid Facade.js entity object&#39;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Object passed to Facade.addToStage is not a valid Facade.js entity.&#39;</span><span class="p">);</span>
 
     <span class="p">}</span>
 
@@ -1014,7 +1014,7 @@
 
                     <h2 id="facade.prototype.renderwithcontext"><a href="#facade.prototype.renderwithcontext" class="permalink">#</a>Facade.renderWithContext() </h2>
 
-                    <p>Applys key and value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.</p>
+                    <p>Applys key-value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.</p>
 
                     
 
@@ -1026,10 +1026,8 @@
                         <b>options</b>
                         <code>Object</code>
                         
-                        <span class="label label-default">Optional</span>
-                        
                     </p>
-                    <p>Context property or method names with corresponding values.</p>
+                    <p>Object containing context property and/or method names with corresponding values.</p>
 
                     
 
@@ -1105,6 +1103,63 @@
                     <h3>Returns</h3>
 
                     <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.prototype.resizeforhdpi"><a href="#facade.prototype.resizeforhdpi" class="permalink">#</a>Facade.resizeForHDPI() </h2>
+
+                    <p>Resizes the canvas tag to the original width and height multiplied by the device pixel ratio.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">resizeForHDPI</span><span class="p">()</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resizeForHDPI</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;width: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px; height: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px;&#39;</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">*</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">*</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Facade.js object.</p>
 
                 </div>
 
@@ -1276,68 +1331,11 @@
 
                 
 
-                <div class="method scope-public">
-
-                    <h2 id="facade.prototype.resizeforhdpi"><a href="#facade.prototype.resizeforhdpi" class="permalink">#</a>Facade.resizeForHDPI() </h2>
-
-                    <p>Resizes the canvas tag to the original width and height multiplied by the device pixel ratio.</p>
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    <h3>Examples</h3>
-
-                    <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">resizeForHDPI</span><span class="p">()</span>
-</pre></div>
-
-
-                    
-
-                    <div class="code">
-
-                        <h3>Code</h3>
-
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resizeForHDPI</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;width: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px; height: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px;&#39;</span><span class="p">);</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">*</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">*</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
-
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
-
-<span class="p">};</span>
-</pre></div>
-
-
-                    </div>
-
-                    <h3>Returns</h3>
-
-                    <p><code>Object</code> Facade.js object.</p>
-
-                </div>
-
-                
-
                 <div class="method scope-private">
 
                     <h2 id="facade.prototype.animate"><a href="#facade.prototype.animate" class="permalink">#</a>Facade._animate() <span class="label label-default">private</span></h2>
 
-                    <p>Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code> and <code>Facade.fps</code>.</p>
+                    <p>Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code>, <code>Facade.fps</code> and  <code>Facade.ftime</code>.</p>
 
                     
 

@@ -24,25 +24,34 @@ canvas {
 <script src="facade.js"></script>
 <script>
 
-function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x,0],lineTo:[i.x,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[i.x+i.width,0],lineTo:[i.x+i.width,t.canvas.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y+i.height],lineTo:[t.canvas.width,i.y+i.height],stroke:[],closePath:[]});t.renderWithContext({strokeStyle:"#f00",lineWidth:1,beginPath:[],moveTo:[0,i.y],lineTo:[t.canvas.width,i.y],stroke:[],closePath:[]});t.renderWithContext({fillStyle:"#f00",globalAlpha:.4,fillRect:[i.x,i.y,i.width,i.height]})}
-
 (function () {
 
     'use strict';
 
     var shapes = [],
-        rotate = 0;
+        debug = new Facade.Rect({
+            fillStyle: 'rgba(255, 0, 0, 0.25)',
+            strokeStyle: 'rgba(255, 0, 0, 0.5)',
+            lineWidth: 1
+        });
+
+    function debugBoundingBox (obj, stage, options) {
+
+        stage.addToStage(debug, obj._setMetrics(options, true));
+
+    }
 
     shapes.push({ type: Facade.Rect, options: { width: 200, height: 200 } });
     shapes.push({ type: Facade.Polygon, options: { points: [ [87.1, -0.4], [259.2, 69.8], [234.2, 167.3], [60.6, 217.3], [-0.5, 112.6] ] } });
-    shapes.push({ type: Facade.Circle, options: { radius: 100 } });
+    shapes.push({ type: Facade.Circle, options: { radius: 100, end: 200 } });
     shapes.push({ type: Facade.Line, options: { x2: 250 } });
 
     shapes.forEach(function (shape) {
 
         var stage = new Facade(null, 600, 550),
-            options = { x: stage.width() / 2, y: stage.height() / 2, lineWidth: 5, strokeStyle: '#000', fillStyle: '#00f', anchor: 'top/left', rotate: rotate },
-            obj = new shape.type($.extend({}, options, shape.options));
+            options = { x: stage.width() / 2, y: stage.height() / 2, lineWidth: 5, strokeStyle: '#000', fillStyle: '#00f', anchor: 'center', rotate: rotate },
+            obj = new shape.type($.extend({}, options, shape.options)),
+            rotate = 0;
 
         stage.draw(function () {
 
@@ -50,7 +59,7 @@ function debugMetrics(e,t){var i=e._setMetrics();t.renderWithContext({strokeStyl
 
             this.addToStage(obj, { rotate: rotate++ });
 
-            debugMetrics(obj, this);
+            debugBoundingBox(obj, stage);
 
         });
 

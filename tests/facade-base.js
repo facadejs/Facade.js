@@ -85,6 +85,16 @@ casper.test.begin('Facade draw.', function suite(test) {
 
     test.assertEquals(stage._callback, null, 'Draw callback is null.');
 
+    test.assertEquals(stage._requestAnimation, null, '_requestAnimation has not been set yet.');
+
+    try {
+
+        stage.draw(null);
+
+        test.pass('Null was recognized by Facade.draw as a valid function.');
+
+    } catch (e) { test.pass(e); }
+
     stage.draw(callback);
 
     test.assertType(stage._requestAnimation, 'number', '_requestAnimation has been set.');
@@ -126,6 +136,38 @@ casper.test.begin('Canvas height', function suite(test) {
     test.assertEquals(stage.height(1000), 1000, 'Height changed to 1000.');
 
     test.assertEquals(stage.height(), 1000, 'Height equals 1000.');
+
+    test.done();
+
+});
+
+// Facade.prototype.renderWithContext can't be tested as it makes context changes to the canvas only.
+
+casper.test.begin('Facade HDPI support.', function suite(test) {
+
+    'use strict';
+
+    var stage = new Facade('stage', 500, 300);
+
+    test.assertEquals(stage.width(), 500, 'Width equals 500.');
+    test.assertEquals(stage.height(), 300, 'Height equals 300.');
+
+    stage.resizeForHDPI();
+
+    test.assertEquals(stage.width(), 500, 'Width still equals 500.');
+    test.assertEquals(stage.height(), 300, 'Height still equals 300.');
+
+    test.assertEquals(stage.canvas.style.length, 0, 'Styles have not been set.');
+
+    window.devicePixelRatio = 2;
+
+    stage.resizeForHDPI();
+
+    test.assertEquals(stage.width(), 1000, 'Width (@2x) equals 1000.');
+    test.assertEquals(stage.height(), 600, 'Height (@2x) equals 600.');
+
+    test.assertEquals(stage.canvas.style.width, '500px', 'Style width set to original width (500).');
+    test.assertEquals(stage.canvas.style.height, '300px', 'Style height set to original height (300).');
 
     test.done();
 
@@ -201,7 +243,7 @@ casper.test.begin('Facade _animate.', function suite(test) {
     test.assertEquals(stage.fps, null, 'FPS was not set as there is not callback to animate with.');
     test.assertEquals(stage.ftime, null, 'Frame time was not set as there is not callback to animate with.');
 
-    stage.draw(function () { return undefined; });
+    stage._callback = function () { return undefined; }; // Should be set by running Facade.draw, used for testing only.
 
     stage._animate(Date.now());
 
