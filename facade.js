@@ -1366,7 +1366,7 @@
      *     console.log(image.load(document.querySelector('img')));
      *     console.log(image.load('images/sprite.png'));
      *
-     * @param {Object|String} source A reference to an image tag or an image URL
+     * @param {Object|String} source A reference to an image tag or an image URL.
      * @return {void}
      * @api public
      */
@@ -1431,7 +1431,7 @@
     };
 
     /**
-     * Resets an image sprite animation.
+     * Resets an image sprite animation to the first frame.
      *
      *  image.reset();
      *
