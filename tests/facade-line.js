@@ -9,16 +9,50 @@ casper.test.begin('Line entity object created.', function suite(test) {
 
     'use strict';
 
+    var object = new Facade.Line();
+
     test.assertType(Facade.Line, 'function', 'Line entity object extists.');
     test.assertInstanceOf(Facade.Line, Facade.Entity, 'Line is an instance of Facade.Entity.');
     test.assertInstanceOf(Facade.Line, Facade.Polygon, 'Line is an instance of Facade.Polygon.');
     test.assertEquals(Facade.Line.constructor, Facade.Polygon, 'Line\'s constructor is Facade.Polygon.');
+    test.assertInstanceOf(object, Facade.Line, 'Object is an instance of Facade.Line.');
+
+    test.assertEquals(object.getAllOptions(), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        shadowBlur: 0,
+        shadowColor: '#000',
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        opacity: 100,
+        points: [],
+        fillStyle: '#000',
+        strokeStyle: '',
+        lineWidth: 1,
+        lineCap: 'default',
+        lineJoin: 'miter',
+        closePath: true,
+        x1: 0,
+        y1: 0,
+        x2: 0,
+        y2: 0,
+        rotate: 0,
+        scale: 1
+    }, 'Default options have been set correctly.');
+
+    test.assertEquals(object.getAllMetrics(), {
+        x: null,
+        y: null,
+        width: null,
+        height: null
+    }, 'Default metrics have been set correctly.');
 
     test.done();
 
 });
 
-casper.test.begin('Setting/getting line entity options.', function suite(test) {
+casper.test.begin('Setting/getting line entity default options.', function suite(test) {
 
     'use strict';
 
@@ -71,10 +105,6 @@ casper.test.begin('Setting/getting line entity options.', function suite(test) {
         rotate: 0,
         scale: 1
     }, 'Object custom options have been set correctly.');
-
-    test.assertEquals(object._configOptions(object.getAllOptions()).points, [
-        [ 100, 100 ], [ 200, 200 ]
-    ], 'Object config options have been set correctly.');
 
     test.done();
 

@@ -749,7 +749,7 @@
     };
 
     /**
-     * Sets a group of option key-value pairs to an object.
+     * Sets a group of options as key-value pairs to an object.
      *
      *     console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
      *
@@ -1029,7 +1029,7 @@
      *     console.log(polygon._setMetrics(options));
      *
      * @param {Object} updated Additional options as key-value pairs.
-     * @return {Object} Object with metric key-value pairs.
+     * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
 
@@ -1501,7 +1501,7 @@
      *
      *     console.log(image._setMetrics());
      *
-     * @return {Object} Object with metric key-value pairs.
+     * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
 
@@ -1712,7 +1712,7 @@
     };
 
     /**
-     * Add a Facade.js entity to a group.
+     * Adds a Facade.js entity to a group.
      *
      *     group.addToGroup(circle);
      *
@@ -1736,7 +1736,7 @@
     };
 
     /**
-     * Remove a Facade.js entity to a group.
+     * Removes a Facade.js entity from a group.
      *
      *     group.removeFromGroup(circle);
      *
@@ -1764,7 +1764,7 @@
      *
      *     console.log(group._setMetrics());
      *
-     * @return {Object} Object with metric key-value pairs.
+     * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
 
@@ -1772,9 +1772,9 @@
 
         var metrics = this.getAllMetrics(),
             options = this.setOptions(updated, true),
-            anchor,
             bounds = { top: null, right: null, bottom: null, left: null },
             key,
+            anchor,
             obj_metrics;
 
         for (key in this._objects) {

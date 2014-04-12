@@ -9,16 +9,49 @@ casper.test.begin('Circle entity object created.', function suite(test) {
 
     'use strict';
 
+    var object = new Facade.Circle();
+
     test.assertType(Facade.Circle, 'function', 'Circle entity object extists.');
     test.assertInstanceOf(Facade.Circle, Facade.Entity, 'Circle is an instance of Facade.Entity.');
     test.assertInstanceOf(Facade.Circle, Facade.Polygon, 'Circle is an instance of Facade.Polygon.');
     test.assertEquals(Facade.Circle.constructor, Facade.Polygon, 'Circle\'s constructor is Facade.Polygon.');
+    test.assertInstanceOf(object, Facade.Circle, 'Object is an instance of Facade.Circle.');
+
+    test.assertEquals(object.getAllOptions(), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        shadowBlur: 0,
+        shadowColor: '#000',
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        opacity: 100,
+        points: [],
+        fillStyle: '#000',
+        strokeStyle: '',
+        lineWidth: 0,
+        lineCap: 'default',
+        lineJoin: 'miter',
+        closePath: true,
+        radius: 0,
+        begin: 0,
+        end: 360,
+        rotate: 0,
+        scale: 1
+    }, 'Default options have been set correctly.');
+
+    test.assertEquals(object.getAllMetrics(), {
+        x: null,
+        y: null,
+        width: null,
+        height: null
+    }, 'Default metrics have been set correctly.');
 
     test.done();
 
 });
 
-casper.test.begin('Setting/getting circle entity options.', function suite(test) {
+casper.test.begin('Setting/getting circle entity default options.', function suite(test) {
 
     'use strict';
 
@@ -70,13 +103,6 @@ casper.test.begin('Setting/getting circle entity options.', function suite(test)
         scale: 1
     }, 'Object custom options have been set correctly.');
 
-    test.assertEquals(object._configOptions(object.getAllOptions()).points, [
-        [ 0, 0, 20, 0, 360 * Math.PI / 180 ]
-    ], 'Object config options (points) have been set correctly.');
-
-    test.assertEquals(object._configOptions(object.getAllOptions()).rotate, 0,
-        'Object config options (rotate) have been set correctly.');
-
     test.done();
 
 });
@@ -85,7 +111,7 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
 
     'use strict';
 
-    var object = new Facade.Circle({ x: 10, y: 10, radius: 20, opacity: 50 });
+    var object = new Facade.Circle({ x: 10, y: 10, radius: 20, opacity: 50, rotate: 45 });
 
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,

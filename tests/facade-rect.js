@@ -9,16 +9,48 @@ casper.test.begin('Rect entity object created.', function suite(test) {
 
     'use strict';
 
+    var object = new Facade.Rect();
+
     test.assertType(Facade.Rect, 'function', 'Rect entity object extists.');
     test.assertInstanceOf(Facade.Rect, Facade.Entity, 'Rect is an instance of Facade.Entity.');
     test.assertInstanceOf(Facade.Rect, Facade.Polygon, 'Rect is an instance of Facade.Polygon.');
     test.assertEquals(Facade.Rect.constructor, Facade.Polygon, 'Rect\'s constructor is Facade.Polygon.');
+    test.assertInstanceOf(object, Facade.Rect, 'Object is an instance of Facade.Rect.');
+
+    test.assertEquals(object.getAllOptions(), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        shadowBlur: 0,
+        shadowColor: '#000',
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        opacity: 100,
+        points: [],
+        fillStyle: '#000',
+        strokeStyle: '',
+        lineWidth: 0,
+        lineCap: 'default',
+        lineJoin: 'miter',
+        closePath: true,
+        width: 0,
+        height: 0,
+        rotate: 0,
+        scale: 1
+    }, 'Default options have been set correctly.');
+
+    test.assertEquals(object.getAllMetrics(), {
+        x: null,
+        y: null,
+        width: null,
+        height: null
+    }, 'Default metrics have been set correctly.');
 
     test.done();
 
 });
 
-casper.test.begin('Setting/getting rect entity options.', function suite(test) {
+casper.test.begin('Setting/getting rect entity default options.', function suite(test) {
 
     'use strict';
 

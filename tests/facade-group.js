@@ -9,9 +9,27 @@ casper.test.begin('Group entity object created.', function suite(test) {
 
     'use strict';
 
+    var object = new Facade.Group();
+
     test.assertType(Facade.Group, 'function', 'Group entity object extists.');
     test.assertInstanceOf(Facade.Group, Facade.Entity, 'Group is an instance of Facade.Entity.');
     test.assertEquals(Facade.Group.constructor, Facade.Entity, 'Group\'s constructor is Facade.Entity.');
+    test.assertInstanceOf(object, Facade.Group, 'Object is an instance of Facade.Group.');
+
+    test.assertEquals(object.getAllOptions(), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        rotate: 0,
+        scale: 1
+    }, 'Default options have been set correctly.');
+
+    test.assertEquals(object.getAllMetrics(), {
+        x: null,
+        y: null,
+        width: null,
+        height: null
+    }, 'Default metrics have been set correctly.');
 
     test.done();
 
@@ -41,6 +59,8 @@ casper.test.begin('Setting/getting group options.', function suite(test) {
     test.done();
 
 });
+
+// Facade.Group.prototype._draw can't be tested as it makes context changes to the canvas only.
 
 casper.test.begin('Running _configOptions on group options.', function suite(test) {
 
@@ -76,7 +96,7 @@ casper.test.begin('Add Facade.js entity to Group.', function suite(test) {
 
 });
 
-casper.test.begin('Remove Facade.js entity to Group.', function suite(test) {
+casper.test.begin('Remove Facade.js entity from Group.', function suite(test) {
     'use strict';
 
     var group = new Facade.Group(),
