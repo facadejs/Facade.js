@@ -2430,7 +2430,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>Additional option key-value pairs.</p>
+                    <p>Additional options as key-value pairs.</p>
 
                     
 
@@ -2521,6 +2521,15 @@
 
                     
 
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Additional options as key-value pairs.</p>
+
+                    
+
                     
 
                     
@@ -2532,6 +2541,7 @@
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
+<span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </pre></div>
 
 
@@ -2679,6 +2689,21 @@
 
                     
 
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Additional options as key-value pairs.</p>
+
+                    
+
+                    
+
                     
 
                     
@@ -2688,6 +2713,7 @@
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2716,11 +2742,11 @@
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">point</span><span class="p">))</span> <span class="p">{</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Rect</span>
 
                 <span class="nx">point</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">};</span>
 
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Circle</span>
 
                 <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
                 <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">point</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>

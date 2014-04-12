@@ -376,7 +376,6 @@ casper.test.begin('Getting entity metrics with Entity.getMetric', function suite
 
 });
 
-
 casper.test.begin('Getting all entity metrics with Entity.getAllMetrics', function suite(test) {
 
     'use strict';
@@ -402,3 +401,5 @@ casper.test.begin('Getting all entity metrics with Entity.getAllMetrics', functi
     test.done();
 
 });
+
+// Facade.Entity.prototype.draw can't be tested as it makes context changes to the canvas only.

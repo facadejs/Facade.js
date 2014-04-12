@@ -9,19 +9,12 @@ casper.test.begin('Polygon entity object created.', function suite(test) {
 
     'use strict';
 
+    var object = new Facade.Polygon();
+
     test.assertType(Facade.Polygon, 'function', 'Polygon entity object extists.');
     test.assertInstanceOf(Facade.Polygon, Facade.Entity, 'Polygon is an instance of Facade.Entity.');
     test.assertEquals(Facade.Polygon.constructor, Facade.Entity, 'Polygon\'s constructor is Facade.Entity.');
-
-    test.done();
-
-});
-
-casper.test.begin('Setting/getting polygon entity options.', function suite(test) {
-
-    'use strict';
-
-    var object = new Facade.Polygon();
+    test.assertInstanceOf(object, Facade.Polygon, 'Object is an instance of Facade.Polygon.');
 
     test.assertEquals(object.getAllOptions(), {
         x: 0,
@@ -41,11 +34,71 @@ casper.test.begin('Setting/getting polygon entity options.', function suite(test
         closePath: true,
         rotate: 0,
         scale: 1
-    }, 'Object options have been set correctly.');
+    }, 'Default options have been set correctly.');
+
+    test.assertEquals(object.getAllMetrics(), {
+        x: null,
+        y: null,
+        width: null,
+        height: null
+    }, 'Default metrics have been set correctly.');
 
     test.done();
 
 });
+
+casper.test.begin('Setting/getting polygon entity default options.', function suite(test) {
+
+    'use strict';
+
+    var object = new Facade.Polygon();
+
+    test.assertEquals(object._defaultOptions(), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        shadowBlur: 0,
+        shadowColor: '#000',
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        opacity: 100,
+        points: [],
+        fillStyle: '#000',
+        strokeStyle: '',
+        lineWidth: 0,
+        lineCap: 'default',
+        lineJoin: 'miter',
+        closePath: true,
+        rotate: 0,
+        scale: 1
+    }, 'Default options have been set correctly.');
+
+    test.assertEquals(object._defaultOptions({ test: true }), {
+        x: 0,
+        y: 0,
+        anchor: 'top/left',
+        shadowBlur: 0,
+        shadowColor: '#000',
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        opacity: 100,
+        points: [],
+        fillStyle: '#000',
+        strokeStyle: '',
+        lineWidth: 0,
+        lineCap: 'default',
+        lineJoin: 'miter',
+        closePath: true,
+        rotate: 0,
+        scale: 1,
+        test: true
+    }, 'Custom default options have been set correctly.');
+
+    test.done();
+
+});
+
+// Facade.Polygon.prototype.draw can't be tested as it makes context changes to the canvas only.
 
 casper.test.begin('Running _configOptions on polygon options.', function suite(test) {
 

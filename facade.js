@@ -896,7 +896,7 @@
      *
      *     console.log(Facade.Polygon.prototype._defaultOptions());
      *
-     * @param {Object} updated Additional option key-value pairs.
+     * @param {Object} updated Additional options as key-value pairs.
      * @return {Object} Default set of options.
      * @api private
      */
@@ -939,8 +939,10 @@
      * Renders a polygon entity to a canvas.
      *
      *     entity.draw(stage);
+     *     entity.draw(stage, options);
      *
      * @param {Object} facade Facade.js object.
+     * @param {Object} updated Additional options as key-value pairs.
      * @return {void}
      * @api private
      */
@@ -1024,7 +1026,9 @@
      * Set metrics based on the polygon's current options.
      *
      *     console.log(polygon._setMetrics());
+     *     console.log(polygon._setMetrics(options));
      *
+     * @param {Object} updated Additional options as key-value pairs.
      * @return {Object} Object with metric key-value pairs.
      * @api private
      */
@@ -1048,11 +1052,11 @@
 
             if (options.points.hasOwnProperty(point)) {
 
-                if (options.points[point].length === 2) {
+                if (options.points[point].length === 2) { // Rect
 
                     point = { x: options.points[point][0], y: options.points[point][1] };
 
-                } else if (options.points[point].length === 5) {
+                } else if (options.points[point].length === 5) { // Circle
 
                     metrics.width = options.points[point][2] * 2;
                     metrics.height = options.points[point][2] * 2;
