@@ -470,7 +470,7 @@
     };
 
     /**
-     * The constructor for all Facade.js shapes, images and text objects.
+     * The constructor for all Facade.js shape, image and text objects.
      *
      * @return {Object} New Facade.Entity object.
      * @api private
@@ -482,8 +482,9 @@
      * Returns a default set of options common to all Facade.js entities.
      *
      *     console.log(Facade.Entity.prototype._defaultOptions());
+     *     console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));
      *
-     * @param {Object} updated Additional options key/value pairs.
+     * @param {Object} updated Additional options as key-value pairs.
      * @return {Object} Default set of options.
      * @api private
      */
@@ -519,8 +520,9 @@
      * Returns a default set of metrics common to all Facade.js entities.
      *
      *     console.log(Facade.Entity.prototype._defaultMetrics());
+     *     console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
      *
-     * @param {Object} updated Additional metric key/value pairs.
+     * @param {Object} updated Additional metrics as key-value pairs.
      * @return {Object} Default set of metrics.
      * @api private
      */
@@ -659,7 +661,7 @@
     };
 
     /**
-     * Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getOption('value'));
      *
@@ -681,7 +683,7 @@
     };
 
     /**
-     * Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllOptions());
      *
@@ -715,7 +717,7 @@
      *
      * @param {String} key The option to update.
      * @param {Object|Function|String|Integer} value The new value of the specified option.
-     * @param {Boolean} test Flag to determine if options are to be saved or not.
+     * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object|Function|String|Integer} Returns value of the updated option.
      * @api public
      */
@@ -734,7 +736,7 @@
 
             } else {
 
-                throw new Error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + typeof this._options[key]);
+                throw new Error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + String(typeof this._options[key]) + '.');
 
             }
 
@@ -747,12 +749,12 @@
     };
 
     /**
-     * Sets a group of option key/value pairs to an object.
+     * Sets a group of option key-value pairs to an object.
      *
      *     console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
      *
      * @param {Object} updated The options to update. Does not need to be entire set of options.
-     * @param {Boolean} test Flag to determine if options are to be saved or not.
+     * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object} Updated options.
      * @api public
      */
@@ -777,7 +779,7 @@
     };
 
     /**
-     * Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temperary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getMetric('width'));
      *
@@ -799,7 +801,7 @@
     };
 
     /**
-     * Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temperary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllMetrics());
      *
@@ -894,7 +896,7 @@
      *
      *     console.log(Facade.Polygon.prototype._defaultOptions());
      *
-     * @param {Object} updated Additional option key/value pairs.
+     * @param {Object} updated Additional option key-value pairs.
      * @return {Object} Default set of options.
      * @api private
      */
@@ -1023,7 +1025,7 @@
      *
      *     console.log(polygon._setMetrics());
      *
-     * @return {Object} Object with metric key/value pairs.
+     * @return {Object} Object with metric key-value pairs.
      * @api private
      */
 
@@ -1495,7 +1497,7 @@
      *
      *     console.log(image._setMetrics());
      *
-     * @return {Object} Object with metric key/value pairs.
+     * @return {Object} Object with metric key-value pairs.
      * @api private
      */
 
@@ -1758,7 +1760,7 @@
      *
      *     console.log(group._setMetrics());
      *
-     * @return {Object} Object with metric key/value pairs.
+     * @return {Object} Object with metric key-value pairs.
      * @api private
      */
 

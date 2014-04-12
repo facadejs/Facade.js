@@ -18,106 +18,30 @@ casper.test.begin('Entity object created.', function suite(test) {
 
 });
 
-casper.test.begin('Setting/getting entity options.', function suite(test) {
+casper.test.begin('Setting/getting entity default options.', function suite(test) {
 
     'use strict';
 
     var object = new Facade.Entity();
 
-    test.assertEquals(object._options, undefined, 'Object options have not been set.');
+    test.assertEquals(object._options, undefined, 'Default options have not been set.');
 
-    object._options = object._defaultOptions();
-
-    test.assertEquals(object._options, {
+    test.assertEquals(object._defaultOptions(), {
         x: 0,
         y: 0,
         anchor: 'top/left',
         rotate: 0,
         scale: 1
-    }, 'Object options have been set correctly.');
+    }, 'Default options have been set correctly.');
 
-    test.assertEquals(object.getOption('x'), 0, 'Getting object option (single key).');
-
-    test.assertEquals(object.getOption('z'), undefined, 'Getting an object option that doesn\'t exist (single key).');
-
-    test.assertEquals(object.getAllOptions(), {
+    test.assertEquals(object._defaultOptions({ test: true }), {
         x: 0,
         y: 0,
         anchor: 'top/left',
         rotate: 0,
-        scale: 1
-    }, 'Getting object options (mulitple keys).');
-
-    test.assertEquals(object.setOption('x', 100), 100, 'Setting and getting an object option (single key, integer).');
-    test.assertEquals(object.setOption('anchor', 'top/right'), 'top/right', 'Setting and getting an object option (single key, string).');
-
-    test.assertEquals(object.setOption('z', 9000), undefined, 'Setting an object option that doesn\'t exist (single key).');
-
-    try {
-
-        object.setOption('x', '100');
-
-        test.fail('Testing the validity of an invalid option value.');
-
-    } catch (e) { test.pass(e); }
-
-    object.setOption('x', 200);
-
-    test.assertEquals(object.getOption('x'), 200, 'Saving option values to an entity (integer).');
-
-    object.setOption('anchor', 'top/left');
-
-    test.assertEquals(object.getOption('x'), 200, 'Saving option values to an entity (string).');
-
-    object.setOption('x', 400, true);
-
-    test.assertEquals(object.getOption('x'), 200, 'Not saving option values to an entity.');
-
-    test.assertEquals(object.setOptions({ x: 500, y: 500 }), {
-        x: 500,
-        y: 500,
-        anchor: 'top/left',
-        rotate: 0,
-        scale: 1
-    }, 'Setting and getting an object option (multiple keys).');
-
-    object.setOptions({ x: 0, y: 0 });
-
-    test.assertEquals(object.getAllOptions(), {
-        x: 0,
-        y: 0,
-        anchor: 'top/left',
-        rotate: 0,
-        scale: 1
-    }, 'Saving multiple options to an entity.');
-
-    object.setOptions({ x: 100, y: 100 }, true);
-
-    test.assertEquals(object.getAllOptions(), {
-        x: 0,
-        y: 0,
-        anchor: 'top/left',
-        rotate: 0,
-        scale: 1
-    }, 'Not saving multiple options to an entity.');
-
-    try {
-
-        test.assertEquals(object.setOptions({ x: '9000' }), {
-            x: 500,
-            y: 500,
-            anchor: 'top/left',
-            rotate: 0,
-            scale: 1
-        }, 'Testing the validity of an invalid option value (multiple keys).');
-
-        test.fail();
-
-    } catch (e) { test.pass(e); }
-
-    object._options = object._defaultOptions({ z: null });
-
-    test.assertEquals(object.getOption('z'), null, 'Getting a custom object option that was added through _defaultOptions.');
+        scale: 1,
+        test: true
+    }, 'Custom default options have been set correctly.');
 
     test.done();
 
@@ -129,33 +53,351 @@ casper.test.begin('Setting/getting entity metrics.', function suite(test) {
 
     var object = new Facade.Entity();
 
-    test.assertEquals(object._metrics, undefined, 'Object metrics have not been set.');
+    test.assertEquals(object._metrics, undefined, 'Default metrics have not been set.');
 
-    object._metrics = object._defaultMetrics();
-
-    test.assertEquals(object._metrics, {
+    test.assertEquals(object._defaultMetrics(), {
         x: null,
         y: null,
         width: null,
         height: null
-    }, 'Object metrics have been set correctly.');
+    }, 'Default metrics have been set correctly.');
 
-    test.assertEquals(object.getMetric('x'), null, 'Getting object metric (single key).');
+    test.assertEquals(object._defaultMetrics({ scale: null }), {
+        x: null,
+        y: null,
+        width: null,
+        height: null,
+        scale: null
+    }, 'Custom default metrics have been set correctly.');
 
-    test.assertEquals(object.getMetric('z'), undefined, 'Getting an object metric that doesn\'t exist (single key).');
+    test.done();
 
-    object._metrics = object._defaultMetrics({ z: null });
+});
 
-    test.assertEquals(object.getMetric('z'), null, 'Getting a custom object metric that was added through _defaultMetrics.');
+casper.test.begin('Getting anchor position with Entity._getAnchorPoint (no border)', function suite(test) {
 
-    object._metrics = { x: 100, y: 100, width: 200, height: 200 };
+    'use strict';
 
-    test.assertEquals(object.getAllMetrics(), {
-        x: 100,
-        y: 100,
-        width: 200,
-        height: 200
-    }, 'Getting all object metrics.');
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'top/left' }),
+        rect._setMetrics()
+    ), [ 0, 0 ], 'Anchor for top/left set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'top/center' }),
+        rect._setMetrics()
+    ), [ -50, 0 ], 'Anchor for top/center set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'top/right' }),
+        rect._setMetrics()
+    ), [ -100, 0 ], 'Anchor for top/right set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'center/left' }),
+        rect._setMetrics()
+    ), [ 0, -50 ], 'Anchor for center/left set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'center' }),
+        rect._setMetrics()
+    ), [ -50, -50 ], 'Anchor for center set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'center/right' }),
+        rect._setMetrics()
+    ), [ -100, -50 ], 'Anchor for center/right set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'bottom/left' }),
+        rect._setMetrics()
+    ), [ 0, -100 ], 'Anchor for bottom/left set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'bottom/center' }),
+        rect._setMetrics()
+    ), [ -50, -100 ], 'Anchor for bottom/center set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'bottom/right' }),
+        rect._setMetrics()
+    ), [ -100, -100 ], 'Anchor for bottom/right set correctly.');
+
+    test.done();
+
+});
+
+casper.test.begin('Getting anchor position with Entity._getAnchorPoint (10px border)', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100, lineWidth: 10 });
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'top/left' }),
+        rect._setMetrics()
+    ), [ 5, 5 ], 'Anchor for top/left set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'top/center' }),
+        rect._setMetrics()
+    ), [ -50, 5 ], 'Anchor for top/center set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'top/right' }),
+        rect._setMetrics()
+    ), [ -105, 5 ], 'Anchor for top/right set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'center/left' }),
+        rect._setMetrics()
+    ), [ 5, -50 ], 'Anchor for center/left set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'center' }),
+        rect._setMetrics()
+    ), [ -50, -50 ], 'Anchor for center set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'center/right' }),
+        rect._setMetrics()
+    ), [ -105, -50 ], 'Anchor for center/right set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'bottom/left' }),
+        rect._setMetrics()
+    ), [ 5, -105 ], 'Anchor for bottom/left set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'bottom/center' }),
+        rect._setMetrics()
+    ), [ -50, -105 ], 'Anchor for bottom/center set correctly.');
+
+    test.assertEquals(rect._getAnchorPoint(
+        rect.setOptions({ anchor: 'bottom/right' }),
+        rect._setMetrics()
+    ), [ -105, -105 ], 'Anchor for bottom/right set correctly.');
+
+    test.done();
+
+});
+
+casper.test.begin('Getting stroke offset with Entity._getStrokeWidthOffset', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect._getStrokeWidthOffset(
+        rect.setOptions()
+    ), 0, 'No stroke offset was returned as lineWidth was not specified.');
+
+    test.assertEquals(rect._getStrokeWidthOffset(
+        rect.setOptions({ lineWidth: 10 })
+    ), 5, 'Stroke offset calculated correctly.');
+
+    test.done();
+
+});
+
+// Facade.Entity.prototype._applyTransforms can't be tested as it makes context changes to the canvas only.
+
+casper.test.begin('Getting entity options with Entity.getOption', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect.getOption('width'), 100, 'Option was set correctly.');
+
+    rect.setOption('width', 200);
+
+    test.assertEquals(rect.getOption('width'), 200, 'Option was set correctly.');
+
+    test.done();
+
+});
+
+casper.test.begin('Getting all entity options with Entity.getAllOptions', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect.getAllOptions(),
+        {
+            x: 0,
+            y: 0,
+            anchor: 'top/left',
+            shadowBlur: 0,
+            shadowColor: '#000',
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'default',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 100,
+            height: 100,
+            rotate: 0,
+            scale: 1
+        }, 'Options were set correctly.');
+
+    rect.setOption('width', 200);
+
+    test.assertEquals(rect.getAllOptions(),
+        {
+            x: 0,
+            y: 0,
+            anchor: 'top/left',
+            shadowBlur: 0,
+            shadowColor: '#000',
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'default',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 200,
+            height: 100,
+            rotate: 0,
+            scale: 1
+        }, 'Options were set correctly.');
+
+    test.done();
+
+});
+
+casper.test.begin('Setting an entity option with Entity.setOption', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect.setOption('width', 200), 200, 'Option was set correctly.');
+
+    try {
+
+        test.assertEquals(rect.setOption('width', '400'), '400', 'Testing the validity of an invalid option value.');
+
+        test.fail();
+
+    } catch (e) { test.pass(e); }
+
+    test.done();
+
+});
+
+casper.test.begin('Setting entity options with Entity.setOptions', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect.setOptions({ width: 200, height: 200 }),
+        {
+            x: 0,
+            y: 0,
+            anchor: 'top/left',
+            shadowBlur: 0,
+            shadowColor: '#000',
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'default',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 200,
+            height: 200,
+            rotate: 0,
+            scale: 1
+        }, 'Options were set correctly.');
+
+    try {
+
+        test.assertEquals(rect.setOption({ width: '400', height: '400' }),
+            {
+                x: 0,
+                y: 0,
+                anchor: 'top/left',
+                shadowBlur: 0,
+                shadowColor: '#000',
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                opacity: 100,
+                points: [],
+                fillStyle: '#000',
+                strokeStyle: '',
+                lineWidth: 0,
+                lineCap: 'default',
+                lineJoin: 'miter',
+                closePath: true,
+                width: '400',
+                height: '400',
+                rotate: 0,
+                scale: 1
+            }, 'Testing the validity of invalid option values.');
+
+        test.fail();
+
+    } catch (e) { test.pass(e); }
+
+    test.done();
+
+});
+
+casper.test.begin('Getting entity metrics with Entity.getMetric', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect.getMetric('width'), null, 'Metrics have not yet been set.');
+
+    rect._metrics = rect._setMetrics();
+
+    test.assertEquals(rect.getMetric('width'), 100, 'Metric was set correctly.');
+
+    test.done();
+
+});
+
+
+casper.test.begin('Getting all entity metrics with Entity.getAllMetrics', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ width: 100, height: 100 });
+
+    test.assertEquals(rect.getAllMetrics(), {
+        x: null,
+        y: null,
+        width: null,
+        height: null
+    }, 'Metrics have not yet been set.');
+
+    rect._metrics = rect._setMetrics();
+
+    test.assertEquals(rect.getAllMetrics(), {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100
+    }, 'Metrics were set correctly.');
 
     test.done();
 

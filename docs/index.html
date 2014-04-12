@@ -1420,7 +1420,7 @@
 
                     <h2 id="facade.entity"><a href="#facade.entity" class="permalink">#</a>Facade.Entity() <span class="label label-default">private</span></h2>
 
-                    <p>The constructor for all Facade.js shapes, images and text objects.</p>
+                    <p>The constructor for all Facade.js shape, image and text objects.</p>
 
                     
 
@@ -1465,7 +1465,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>Additional options key/value pairs.</p>
+                    <p>Additional options as key-value pairs.</p>
 
                     
 
@@ -1480,6 +1480,7 @@
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}));</span>
 </pre></div>
 
 
@@ -1545,7 +1546,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>Additional metric key/value pairs.</p>
+                    <p>Additional metrics as key-value pairs.</p>
 
                     
 
@@ -1560,6 +1561,7 @@
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">({</span> <span class="nx">scale</span><span class="o">:</span> <span class="kc">null</span> <span class="p">}));</span>
 </pre></div>
 
 
@@ -1871,7 +1873,7 @@
 
                     <h2 id="facade.entity.prototype.getoption"><a href="#facade.entity.prototype.getoption" class="permalink">#</a>Facade.Entity.getOption() </h2>
 
-                    <p>Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -1936,7 +1938,7 @@
 
                     <h2 id="facade.entity.prototype.getalloptions"><a href="#facade.entity.prototype.getalloptions" class="permalink">#</a>Facade.Entity.getAllOptions() </h2>
 
-                    <p>Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2024,7 +2026,7 @@
                         <code>Boolean</code>
                         
                     </p>
-                    <p>Flag to determine if options are to be saved or not.</p>
+                    <p>Flag to determine if options are to be persisted in the entity or just returned.</p>
 
                     
 
@@ -2062,7 +2064,7 @@
 
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
-            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;The value for &#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39; (&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;) was a &#39;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; not a &#39;</span> <span class="o">+</span> <span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;The value for &#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39; (&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;) was a &#39;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; not a &#39;</span> <span class="o">+</span> <span class="nb">String</span><span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">);</span>
 
         <span class="p">}</span>
 
@@ -2090,7 +2092,7 @@
 
                     <h2 id="facade.entity.prototype.setoptions"><a href="#facade.entity.prototype.setoptions" class="permalink">#</a>Facade.Entity.setOptions() </h2>
 
-                    <p>Sets a group of option key/value pairs to an object.</p>
+                    <p>Sets a group of option key-value pairs to an object.</p>
 
                     
 
@@ -2112,7 +2114,7 @@
                         <code>Boolean</code>
                         
                     </p>
-                    <p>Flag to determine if options are to be saved or not.</p>
+                    <p>Flag to determine if options are to be persisted in the entity or just returned.</p>
 
                     
 
@@ -2171,7 +2173,7 @@
 
                     <h2 id="facade.entity.prototype.getmetric"><a href="#facade.entity.prototype.getmetric" class="permalink">#</a>Facade.Entity.getMetric() </h2>
 
-                    <p>Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temperary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2236,7 +2238,7 @@
 
                     <h2 id="facade.entity.prototype.getallmetrics"><a href="#facade.entity.prototype.getallmetrics" class="permalink">#</a>Facade.Entity.getAllMetrics() </h2>
 
-                    <p>Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temperary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2428,7 +2430,7 @@
                         <code>Object</code>
                         
                     </p>
-                    <p>Additional option key/value pairs.</p>
+                    <p>Additional option key-value pairs.</p>
 
                     
 
@@ -2793,7 +2795,7 @@
 
                     <h3>Returns</h3>
 
-                    <p><code>Object</code> Object with metric key/value pairs.</p>
+                    <p><code>Object</code> Object with metric key-value pairs.</p>
 
                 </div>
 
@@ -3672,7 +3674,7 @@
 
                     <h3>Returns</h3>
 
-                    <p><code>Object</code> Object with metric key/value pairs.</p>
+                    <p><code>Object</code> Object with metric key-value pairs.</p>
 
                 </div>
 
@@ -4228,7 +4230,7 @@
 
                     <h3>Returns</h3>
 
-                    <p><code>Object</code> Object with metric key/value pairs.</p>
+                    <p><code>Object</code> Object with metric key-value pairs.</p>
 
                 </div>
 
