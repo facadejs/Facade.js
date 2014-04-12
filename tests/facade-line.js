@@ -21,6 +21,8 @@ casper.test.begin('Line entity object created.', function suite(test) {
         x: 0,
         y: 0,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -36,9 +38,7 @@ casper.test.begin('Line entity object created.', function suite(test) {
         x1: 0,
         y1: 0,
         x2: 0,
-        y2: 0,
-        rotate: 0,
-        scale: 1
+        y2: 0
     }, 'Default options have been set correctly.');
 
     test.assertEquals(object.getAllMetrics(), {
@@ -62,6 +62,8 @@ casper.test.begin('Setting/getting line entity default options.', function suite
         x: 0,
         y: 0,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -77,15 +79,15 @@ casper.test.begin('Setting/getting line entity default options.', function suite
         x1: 0,
         y1: 0,
         x2: 0,
-        y2: 0,
-        rotate: 0,
-        scale: 1
+        y2: 0
     }, 'Object default options have been set correctly.');
 
     test.assertEquals(object.setOptions({ x1: 100, y1: 100, x2: 200, y2: 200 }), {
         x: 0,
         y: 0,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -101,9 +103,7 @@ casper.test.begin('Setting/getting line entity default options.', function suite
         x1: 100,
         y1: 100,
         x2: 200,
-        y2: 200,
-        rotate: 0,
-        scale: 1
+        y2: 200
     }, 'Object custom options have been set correctly.');
 
     test.done();
@@ -120,6 +120,8 @@ casper.test.begin('Running _configOptions on line options.', function suite(test
         x: 10,
         y: 10,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -137,9 +139,7 @@ casper.test.begin('Running _configOptions on line options.', function suite(test
         x1: 100,
         y1: 100,
         x2: 200,
-        y2: 200,
-        rotate: 0,
-        scale: 1
+        y2: 200
     }, 'Custom config options have been set correctly.');
 
     test.done();

@@ -21,6 +21,8 @@ casper.test.begin('Circle entity object created.', function suite(test) {
         x: 0,
         y: 0,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -35,9 +37,7 @@ casper.test.begin('Circle entity object created.', function suite(test) {
         closePath: true,
         radius: 0,
         begin: 0,
-        end: 360,
-        rotate: 0,
-        scale: 1
+        end: 360
     }, 'Default options have been set correctly.');
 
     test.assertEquals(object.getAllMetrics(), {
@@ -61,6 +61,8 @@ casper.test.begin('Setting/getting circle entity default options.', function sui
         x: 0,
         y: 0,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -75,15 +77,15 @@ casper.test.begin('Setting/getting circle entity default options.', function sui
         closePath: true,
         radius: 0,
         begin: 0,
-        end: 360,
-        rotate: 0,
-        scale: 1
+        end: 360
     }, 'Object default options have been set correctly.');
 
     test.assertEquals(object.setOptions({ radius: 20 }), {
         x: 0,
         y: 0,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -98,9 +100,7 @@ casper.test.begin('Setting/getting circle entity default options.', function sui
         closePath: true,
         radius: 20,
         begin: 0,
-        end: 360,
-        rotate: 0,
-        scale: 1
+        end: 360
     }, 'Object custom options have been set correctly.');
 
     test.done();
@@ -117,6 +117,8 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
         x: 10,
         y: 10,
         anchor: 'top/left',
+        rotate: 0,
+        scale: 1,
         shadowBlur: 0,
         shadowColor: '#000',
         shadowOffsetX: 0,
@@ -133,9 +135,7 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
         globalAlpha: 0.5,
         radius: 20,
         begin: 0,
-        end: 360,
-        rotate: 0,
-        scale: 1
+        end: 360
     }, 'Custom config options have been set correctly.');
 
     test.done();
