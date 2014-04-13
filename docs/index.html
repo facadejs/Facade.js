@@ -213,6 +213,14 @@
 
                 
 
+                <li class="scope-private"><a href="#facade.circle.prototype.getanchorpoint">Facade.Circle._getAnchorPoint()</a></li>
+
+                
+
+                <li class="scope-private"><a href="#facade.circle.prototype.setmetrics">Facade.Circle._setMetrics()</a></li>
+
+                
+
                 <li class="scope-public"><a href="#facade.line">Facade.Line()</a></li>
 
                 
@@ -2685,7 +2693,7 @@
 
                     <h2 id="facade.polygon.prototype.setmetrics"><a href="#facade.polygon.prototype.setmetrics" class="permalink">#</a>Facade.Polygon._setMetrics() <span class="label label-default">private</span></h2>
 
-                    <p>Set metrics based on the polygon's current options.</p>
+                    <p>Set metrics based on the polygon's options.</p>
 
                     
 
@@ -2915,12 +2923,10 @@
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span> <span class="p">];</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
 
     <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">begin</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">end</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span> <span class="p">]</span> <span class="p">];</span>
-
-    <span class="nx">options</span><span class="p">.</span><span class="nx">rotate</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
 
@@ -2933,6 +2939,145 @@
                     <h3>Returns</h3>
 
                     <p><code>Object</code> Converted options.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.circle.prototype.getanchorpoint"><a href="#facade.circle.prototype.getanchorpoint" class="permalink">#</a>Facade.Circle._getAnchorPoint() <span class="label label-default">private</span></h2>
+
+                    <p>Returns an array of the x and y anchor positions based on given options and metrics.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.Circle options.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.Circle metrics.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">circle</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getAnchorPoint</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_getAnchorPoint</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
+
+    <span class="nx">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+    <span class="nx">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nx">pos</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Array</code> Array with the x and y anchor positions.</p>
+
+                </div>
+
+                
+
+                <div class="method scope-private">
+
+                    <h2 id="facade.circle.prototype.setmetrics"><a href="#facade.circle.prototype.setmetrics" class="permalink">#</a>Facade.Circle._setMetrics() <span class="label label-default">private</span></h2>
+
+                    <p>Set metrics based on the circle's options.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Additional options as key-value pairs.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">circle</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">circle</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">));</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">),</span>
+        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">updated</span><span class="p">);</span>
+
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Object</code> Object with metrics as key-value pairs.</p>
 
                 </div>
 
@@ -3648,7 +3793,7 @@
 
                     <h2 id="facade.image.prototype.setmetrics"><a href="#facade.image.prototype.setmetrics" class="permalink">#</a>Facade.Image._setMetrics() <span class="label label-default">private</span></h2>
 
-                    <p>Set metrics based on the image's current options.</p>
+                    <p>Set metrics based on the image's options.</p>
 
                     
 
@@ -4171,7 +4316,7 @@
 
                     <h2 id="facade.group.prototype.setmetrics"><a href="#facade.group.prototype.setmetrics" class="permalink">#</a>Facade.Group._setMetrics() <span class="label label-default">private</span></h2>
 
-                    <p>Set metrics based on the groups's entities.</p>
+                    <p>Set metrics based on the groups's entities and options.</p>
 
                     
 

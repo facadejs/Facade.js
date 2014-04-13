@@ -1023,7 +1023,7 @@
     };
 
     /**
-     * Set metrics based on the polygon's current options.
+     * Set metrics based on the polygon's options.
      *
      *     console.log(polygon._setMetrics());
      *     console.log(polygon._setMetrics(options));
@@ -1166,14 +1166,57 @@
 
     Facade.Circle.prototype._configOptions = function (options) {
 
-        options.translate = [ options.x + options.radius, options.y + options.radius ];
+        options.translate = [ options.x, options.y ];
         options.globalAlpha = options.opacity / 100;
 
         options.points = [ [ 0, 0, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];
 
-        options.rotate = 0;
-
         return options;
+
+    };
+
+    /**
+     * Returns an array of the x and y anchor positions based on given options and metrics.
+     *
+     *     console.log(circle._getAnchorPoint(options, metrics));
+     *
+     * @param {Object} options Facade.Circle options.
+     * @param {Object} metrics Facade.Circle metrics.
+     * @return {Array} Array with the x and y anchor positions.
+     * @api private
+     */
+
+    Facade.Circle.prototype._getAnchorPoint = function (options, metrics) {
+
+        var pos = Facade.Polygon.prototype._getAnchorPoint.call(this, options, metrics);
+
+        pos[0] = pos[0] + options.radius;
+        pos[1] = pos[1] + options.radius;
+
+        return pos;
+
+    };
+
+    /**
+     * Set metrics based on the circle's options.
+     *
+     *     console.log(circle._setMetrics());
+     *     console.log(circle._setMetrics(options));
+     *
+     * @param {Object} updated Additional options as key-value pairs.
+     * @return {Object} Object with metrics as key-value pairs.
+     * @api private
+     */
+
+    Facade.Circle.prototype._setMetrics = function (updated) {
+
+        var options = this.getAllOptions(updated),
+            metrics = Facade.Polygon.prototype._setMetrics.call(this, updated);
+
+        metrics.x = metrics.x - options.radius;
+        metrics.y = metrics.y - options.radius;
+
+        return metrics;
 
     };
 
@@ -1497,7 +1540,7 @@
     };
 
     /**
-     * Set metrics based on the image's current options.
+     * Set metrics based on the image's options.
      *
      *     console.log(image._setMetrics());
      *
@@ -1760,7 +1803,7 @@
     };
 
     /**
-     * Set metrics based on the groups's entities.
+     * Set metrics based on the groups's entities and options.
      *
      *     console.log(group._setMetrics());
      *

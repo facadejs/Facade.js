@@ -111,7 +111,7 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
 
     'use strict';
 
-    var object = new Facade.Circle({ x: 10, y: 10, radius: 20, opacity: 50, rotate: 45 });
+    var object = new Facade.Circle({ x: 10, y: 10, radius: 20, opacity: 50 });
 
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,
@@ -131,7 +131,7 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
         lineCap: 'default',
         lineJoin: 'miter',
         closePath: true,
-        translate: [ 10 + 20, 10 + 20 ],
+        translate: [ 10, 10 ],
         globalAlpha: 0.5,
         radius: 20,
         begin: 0,
@@ -177,66 +177,65 @@ casper.test.begin('Setting/getting circle anchor.', function suite(test) {
     object.setOption('anchor', 'top/left');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        5,
-        5
+        55,
+        55
     ], 'Circle anchor top/left has been set correctly.');
 
     object.setOption('anchor', 'top/center');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        -50,
-        5
+        0,
+        55
     ], 'Circle anchor top/center has been set correctly.');
 
     object.setOption('anchor', 'top/right');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        -105,
-        5
+        -55,
+        55
     ], 'Circle anchor top/right has been set correctly.');
 
 
     object.setOption('anchor', 'center/left');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        5,
-        -50
+        55,
+        0
     ], 'Circle anchor center/left has been set correctly.');
 
     object.setOption('anchor', 'center');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        -50,
-        -50
+        0,
+        0
     ], 'Circle anchor center has been set correctly.');
 
     object.setOption('anchor', 'center/right');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        -105,
-        -50
+        -55,
+        0
     ], 'Circle anchor center/right has been set correctly.');
-
 
     object.setOption('anchor', 'bottom/left');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        5,
-        -105
+        55,
+        -55
     ], 'Circle anchor bottom/left has been set correctly.');
 
     object.setOption('anchor', 'bottom/center');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        -50,
-        -105
+        0,
+        -55
     ], 'Circle anchor bottom/center has been set correctly.');
 
     object.setOption('anchor', 'bottom/right');
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
-        -105,
-        -105
+        -55,
+        -55
     ], 'Circle anchor bottom/right has been set correctly.');
 
     test.done();
