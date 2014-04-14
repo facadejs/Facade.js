@@ -1733,7 +1733,7 @@
             currentWord = null,
             currentLine = '',
             currentLineWidth = 0,
-            maxLineWidth = 0;
+            maxLineWidth = options.width;
 
         if (isFunction(this._configOptions)) {
 
@@ -1748,11 +1748,11 @@
         while (words.length) {
 
             currentWord = words.shift();
-            currentLineWidth = _context.measureText(currentLine + currentWord).width;
+            currentLineWidth = _context.measureText(currentLine + currentWord.replace(/\s$/, '')).width;
 
             if ((options.width > 0 && currentLineWidth > options.width) || currentWord.match(/\n/)) {
 
-                lines.push([currentLine, 0, lines.length * (options.fontSize * options.lineHeight)]);
+                lines.push([currentLine.replace(/\s$/, ''), 0, lines.length * (options.fontSize * options.lineHeight)]);
 
                 currentLine = currentWord.replace(/\n/, '');
 
@@ -1770,7 +1770,7 @@
 
         }
 
-        lines.push([currentLine, 0, lines.length * (options.fontSize * options.lineHeight)]);
+        lines.push([currentLine.replace(/\s$/, ''), 0, lines.length * (options.fontSize * options.lineHeight)]);
 
         lines.forEach(function (line) {
 
