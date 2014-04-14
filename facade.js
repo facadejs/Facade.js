@@ -12,7 +12,7 @@
 
     var _requestAnimationFrame,
         _cancelAnimationFrame,
-        // _context = document.createElement('canvas').getContext('2d'),
+        _context = document.createElement('canvas').getContext('2d'),
         _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
         _TO_RADIANS = Math.PI / 180;
 
@@ -832,6 +832,7 @@
      * Renders an entity to a canvas.
      *
      *     entity.draw(stage);
+     *     entity.draw(stage, options);
      *
      * @param {Object} facade Facade.js object.
      * @return {void}
@@ -938,8 +939,8 @@
     /**
      * Renders a polygon entity to a canvas.
      *
-     *     entity.draw(stage);
-     *     entity.draw(stage, options);
+     *     polygon.draw(stage);
+     *     polygon.draw(stage, options);
      *
      * @param {Object} facade Facade.js object.
      * @param {Object} updated Additional options as key-value pairs.
@@ -1371,7 +1372,7 @@
 
         if (!(this instanceof Facade.Image)) {
 
-            return new Facade.Image(options);
+            return new Facade.Image(img, options);
 
         }
 
@@ -1390,9 +1391,9 @@
         this.animating = false;
         this.currentFrame = 0;
 
-        this.load(img);
-
         this.setOptions(options);
+
+        this.load(img);
 
     };
 
@@ -1575,7 +1576,8 @@
     /**
      * Renders an image entity to a canvas.
      *
-     *     entity.draw(stage);
+     *     image.draw(stage);
+     *     image.draw(stage, options);
      *
      * @param {Object} facade Facade.js object.
      * @return {void}
@@ -1672,6 +1674,218 @@
     };
 
     /**
+     * Create a text object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     * @return {Object} New Facade.Text object.
+     * @api public
+     */
+
+    Facade.Text = function (value, options) {
+
+        if (!(this instanceof Facade.Text)) {
+
+            return new Facade.Text(value, options);
+
+        }
+
+        this._options = this._defaultOptions({
+            value: '',
+            width: 0,
+            fontFamily: 'Arial',
+            fontSize: 16,
+            lineHeight: 1,
+            textAlignment: 'left',
+            textBaseline: 'top',
+            fillStyle: '#000',
+            strokeStyle: '#000',
+            lineWidth: 0
+        });
+        this._metrics = this._defaultMetrics();
+
+        this.setOptions(options);
+
+        this.lines = this.setText(value);
+
+    };
+
+    /*!
+     * Extend from Facade.Entity
+     */
+
+    Facade.Text.prototype = Object.create(Facade.Entity.prototype);
+    Facade.Text.constructor = Facade.Entity;
+
+    /**
+     * Sets the text entities value.
+     *
+     *     console.log(text.setText('Lorem ipsum dolor sit amet'));
+     *
+     * @param {String} value The new value of the text entity.
+     * @return {Array} An array of lines and the position to render using <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#fillText()">fillText()</a> and <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#strokeText()">strokeText()</a>.
+     * @api public
+     */
+
+    Facade.Text.prototype.setText = function (value) {
+
+        var options = this.setOptions({ value: value }),
+            words = options.value.match(/\n|[\S]+ ?/g),
+            lines = [],
+            currentWord = null,
+            currentLine = '',
+            currentLineWidth = 0,
+            maxLineWidth = 0;
+
+        if (isFunction(this._configOptions)) {
+
+            options = this._configOptions(options);
+
+        }
+
+        _context.save();
+
+        _context.font = options.font;
+
+        while (words.length) {
+
+            currentWord = words.shift();
+            currentLineWidth = _context.measureText(currentLine + currentWord).width;
+
+            if ((options.width > 0 && currentLineWidth > options.width) || currentWord.match(/\n/)) {
+
+                lines.push([currentLine, 0, lines.length * (options.fontSize * options.lineHeight)]);
+
+                currentLine = currentWord.replace(/\n/, '');
+
+            } else {
+
+                currentLine = currentLine + currentWord;
+
+                if (currentLineWidth > maxLineWidth) {
+
+                    maxLineWidth = currentLineWidth;
+
+                }
+
+            }
+
+        }
+
+        lines.push([currentLine, 0, lines.length * (options.fontSize * options.lineHeight)]);
+
+        lines.forEach(function (line) {
+
+            currentLineWidth = _context.measureText(line[0]).width;
+
+            if (options.textAlignment === 'center') {
+
+                line[1] = (maxLineWidth - currentLineWidth) / 2;
+
+            } else if (options.textAlignment === 'right') {
+
+                line[1] = maxLineWidth - currentLineWidth;
+
+            }
+
+        });
+
+        if (!options.width) {
+
+            this.setOption('width', maxLineWidth);
+
+        }
+
+        _context.restore();
+
+        return lines;
+
+    };
+
+    /**
+     * Renders a text entity to a canvas.
+     *
+     *     text.draw(stage);
+     *     text.draw(stage, options);
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api private
+     */
+
+    Facade.Text.prototype._draw = function (facade, options) {
+
+        var context = facade.context,
+            metrics = this._setMetrics(options);
+
+        this._applyTransforms(context, options, metrics);
+
+        this.lines.forEach(function (word) {
+
+            context.fillText.apply(context, word);
+
+            if (options.lineWidth) {
+
+                context.strokeText.apply(context, word);
+
+            }
+
+        });
+
+    };
+
+    /**
+     * Custom configuration for options specific to a text entity.
+     *
+     *     console.log(text._configOptions(options));
+     *
+     * @param {Object} options Complete set of text specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
+
+    Facade.Text.prototype._configOptions = function (options) {
+
+        options.translate = [ options.x, options.y ];
+        options.globalAlpha = options.opacity / 100;
+        options.font = parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
+
+        return options;
+
+    };
+
+    /**
+     * Set metrics based on the text's options.
+     *
+     *     console.log(text._setMetrics());
+     *
+     * @return {Object} Object with metrics as key-value pairs.
+     * @api private
+     */
+
+    Facade.Text.prototype._setMetrics = function (updated) {
+
+        var metrics = this.getAllMetrics(),
+            options = this.setOptions(updated, true),
+            anchor;
+
+        if (isFunction(this._configOptions)) {
+
+            options = this._configOptions(options);
+
+        }
+
+        metrics.width = options.width * options.scale;
+        metrics.height = this.lines.length * (options.fontSize * options.lineHeight) * options.scale;
+
+        anchor = this._getAnchorPoint(options, metrics);
+
+        metrics.x = options.x + anchor[0];
+        metrics.y = options.y + anchor[1];
+
+        return metrics;
+
+    };
+
+    /**
      * Create a group object. Inherits all methods from <b>Facade.Entity</b>.
      *
      * @return {Object} New Facade.Group object.
@@ -1718,8 +1932,6 @@
             metrics = this._setMetrics(options),
             key;
 
-        context.save();
-
         this._applyTransforms(context, options, metrics);
 
         for (key in this._objects) {
@@ -1731,8 +1943,6 @@
             }
 
         }
-
-        context.restore();
 
     };
 
