@@ -1689,7 +1689,7 @@
         }
 
         this._options = this._defaultOptions({
-            value: '',
+            opacity: 100,
             width: 0,
             fontFamily: 'Arial',
             fontSize: 16,
@@ -1727,13 +1727,19 @@
 
     Facade.Text.prototype.setText = function (value) {
 
-        var options = this.setOptions({ value: value }),
-            words = options.value.match(/\n|[\S]+ ?/g),
+        var options = this.getAllOptions(),
+            words = [],
             lines = [],
             currentWord = null,
             currentLine = '',
             currentLineWidth = 0,
             maxLineWidth = options.width;
+
+        if (value) {
+
+            words = value.match(/\n|[\S]+ ?/g);
+
+        }
 
         if (isFunction(this._configOptions)) {
 
