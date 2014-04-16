@@ -1140,7 +1140,7 @@
 
                     <h2 id="facade.prototype.resizeforhdpi"><a href="#facade.prototype.resizeforhdpi" class="permalink">#</a>Facade.resizeForHDPI() </h2>
 
-                    <p>Resizes the canvas tag to the original width and height multiplied by the device pixel ratio.</p>
+                    <p>Resizes the canvas width and height to be multiplied by the device pixel ratio to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating any Facade entities as scaling is applied to the canvas context.</p>
 
                     
 
@@ -1164,7 +1164,7 @@
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resizeForHDPI</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="s1">&#39;data-resized-for-hdpi&#39;</span><span class="p">))</span> <span class="p">{</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;width: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px; height: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px;&#39;</span><span class="p">);</span>
 
@@ -1174,6 +1174,8 @@
         <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;data-resized-for-hdpi&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
     <span class="p">}</span>
 
@@ -4140,28 +4142,24 @@
 
     <span class="nx">_context</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">font</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">words</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">words</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">while</span> <span class="p">(</span><span class="nx">words</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">currentWord</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+        <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="nx">_context</span><span class="p">.</span><span class="nx">measureText</span><span class="p">(</span><span class="nx">currentLine</span> <span class="o">+</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)).</span><span class="nx">width</span><span class="p">;</span>
 
-            <span class="nx">currentWord</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
-            <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="nx">_context</span><span class="p">.</span><span class="nx">measureText</span><span class="p">(</span><span class="nx">currentLine</span> <span class="o">+</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)).</span><span class="nx">width</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">currentLineWidth</span> <span class="o">&gt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">||</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">))</span> <span class="p">{</span>
 
-            <span class="k">if</span> <span class="p">((</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">currentLineWidth</span> <span class="o">&gt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">||</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">lines</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">currentLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineHeight</span><span class="p">)]);</span>
 
-                <span class="nx">lines</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">currentLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineHeight</span><span class="p">)]);</span>
+            <span class="nx">currentLine</span> <span class="o">=</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
 
-                <span class="nx">currentLine</span> <span class="o">=</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">currentLine</span> <span class="o">=</span> <span class="nx">currentLine</span> <span class="o">+</span> <span class="nx">currentWord</span><span class="p">;</span>
 
-                <span class="nx">currentLine</span> <span class="o">=</span> <span class="nx">currentLine</span> <span class="o">+</span> <span class="nx">currentWord</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">currentLineWidth</span> <span class="o">&gt;</span> <span class="nx">maxLineWidth</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">currentLineWidth</span> <span class="o">&gt;</span> <span class="nx">maxLineWidth</span><span class="p">)</span> <span class="p">{</span>
-
-                    <span class="nx">maxLineWidth</span> <span class="o">=</span> <span class="nx">currentLineWidth</span><span class="p">;</span>
-
-                <span class="p">}</span>
+                <span class="nx">maxLineWidth</span> <span class="o">=</span> <span class="nx">currentLineWidth</span><span class="p">;</span>
 
             <span class="p">}</span>
 

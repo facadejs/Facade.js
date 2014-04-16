@@ -337,7 +337,7 @@
     };
 
     /**
-     * Resizes the canvas tag to the original width and height multiplied by the device pixel ratio.
+     * Resizes the canvas width and height to be multiplied by the device pixel ratio to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating any Facade entities as scaling is applied to the canvas context.
      *
      *     stage.resizeForHDPI()
      *
@@ -347,7 +347,7 @@
 
     Facade.prototype.resizeForHDPI = function () {
 
-        if (window.devicePixelRatio > 1) {
+        if (window.devicePixelRatio > 1 && !this.canvas.hasAttribute('data-resized-for-hdpi')) {
 
             this.canvas.setAttribute('style', 'width: ' + this.width() + 'px; height: ' + this.height() + 'px;');
 
@@ -357,6 +357,8 @@
             this.context.translate(this.width() / 2, this.height() / 2);
             this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
             this.context.translate(-this.width() / 2, -this.height() / 2);
+
+            this.canvas.setAttribute('data-resized-for-hdpi', true);
 
         }
 
