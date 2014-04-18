@@ -652,7 +652,7 @@
 
         }
 
-        if (options.scale) {
+        if (options.scale !== 1) {
 
             context.translate(-anchor[0], -anchor[1]);
             context.scale(options.scale, options.scale);
