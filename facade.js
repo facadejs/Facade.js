@@ -1694,6 +1694,7 @@
             opacity: 100,
             width: 0,
             fontFamily: 'Arial',
+            fontStyle: 'normal',
             fontSize: 16,
             lineHeight: 1,
             textAlignment: 'left',
@@ -1854,7 +1855,7 @@
 
         options.translate = [ options.x, options.y ];
         options.globalAlpha = options.opacity / 100;
-        options.font = parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
+        options.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
 
         return options;
 

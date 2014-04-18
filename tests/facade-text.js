@@ -25,6 +25,7 @@ casper.test.begin('Text entity object created.', function suite(test) {
         opacity: 100,
         width: 0,
         fontFamily: 'Arial',
+        fontStyle: 'normal',
         fontSize: 16,
         lineHeight: 1,
         textAlignment: 'left',
@@ -60,6 +61,7 @@ casper.test.begin('Setting/getting text entity default options.', function suite
         opacity: 100,
         width: 0,
         fontFamily: 'Arial',
+        fontStyle: 'normal',
         fontSize: 16,
         lineHeight: 1,
         textAlignment: 'left',
@@ -69,7 +71,7 @@ casper.test.begin('Setting/getting text entity default options.', function suite
         lineWidth: 0
     }, 'Object default options have been set correctly.');
 
-    test.assertEquals(object.setOptions({ fontFamily: 'Helvetica', fontSize: 40 }), {
+    test.assertEquals(object.setOptions({ fontFamily: 'Helvetica', fontStyle: 'bold', fontSize: 40 }), {
         x: 0,
         y: 0,
         anchor: 'top/left',
@@ -78,6 +80,7 @@ casper.test.begin('Setting/getting text entity default options.', function suite
         opacity: 100,
         width: 0,
         fontFamily: 'Helvetica',
+        fontStyle: 'bold',
         fontSize: 40,
         lineHeight: 1,
         textAlignment: 'left',
@@ -106,6 +109,7 @@ casper.test.begin('Running _configOptions on text options.', function suite(test
         opacity: 50,
         width: 0,
         fontFamily: 'Helvetica',
+        fontStyle: 'normal',
         fontSize: 40,
         lineHeight: 1,
         textAlignment: 'left',
@@ -115,7 +119,7 @@ casper.test.begin('Running _configOptions on text options.', function suite(test
         lineWidth: 0,
         translate: [ 10, 10 ],
         globalAlpha: 0.5,
-        font: '40px Helvetica'
+        font: 'normal 40px Helvetica'
     }, 'Custom config options have been set correctly.');
 
     test.done();
