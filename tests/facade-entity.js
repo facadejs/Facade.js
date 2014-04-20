@@ -366,10 +366,6 @@ casper.test.begin('Getting entity metrics with Entity.getMetric', function suite
 
     var rect = new Facade.Rect({ width: 100, height: 100 });
 
-    test.assertEquals(rect.getMetric('width'), null, 'Metrics have not yet been set.');
-
-    rect._metrics = rect._setMetrics();
-
     test.assertEquals(rect.getMetric('width'), 100, 'Metric was set correctly.');
 
     test.done();
@@ -381,15 +377,6 @@ casper.test.begin('Getting all entity metrics with Entity.getAllMetrics', functi
     'use strict';
 
     var rect = new Facade.Rect({ width: 100, height: 100 });
-
-    test.assertEquals(rect.getAllMetrics(), {
-        x: null,
-        y: null,
-        width: null,
-        height: null
-    }, 'Metrics have not yet been set.');
-
-    rect._metrics = rect._setMetrics();
 
     test.assertEquals(rect.getAllMetrics(), {
         x: 0,

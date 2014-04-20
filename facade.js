@@ -766,11 +766,21 @@
         var options = this.getAllOptions(),
             key;
 
-        for (key in updated) {
+        if (updated) {
 
-            if (updated.hasOwnProperty(key) && options.hasOwnProperty(key)) {
+            for (key in updated) {
 
-                options[key] = this.setOption(key, updated[key], test);
+                if (updated.hasOwnProperty(key) && options.hasOwnProperty(key)) {
+
+                    options[key] = this.setOption(key, updated[key], test);
+
+                }
+
+            }
+
+            if (!test) {
+
+                this._metrics = this._setMetrics(updated);
 
             }
 
@@ -953,7 +963,7 @@
     Facade.Polygon.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = this._setMetrics(options),
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
             point;
 
         this._applyTransforms(context, options, metrics);
@@ -1593,7 +1603,7 @@
     Facade.Image.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = this._setMetrics(options, true),
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
             offsetX = 0,
             offsetY = 0,
             x,
@@ -1827,7 +1837,7 @@
     Facade.Text.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = this._setMetrics(options);
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics();
 
         this._applyTransforms(context, options, metrics);
 
@@ -1946,7 +1956,7 @@
     Facade.Group.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = this._setMetrics(options),
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
             key;
 
         this._applyTransforms(context, options, metrics);
