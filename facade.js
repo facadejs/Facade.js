@@ -1038,7 +1038,7 @@
 
     Facade.Polygon.prototype._setMetrics = function (updated) {
 
-        var metrics = this.getAllMetrics(),
+        var metrics = this._defaultMetrics(),
             options = this.setOptions(updated, true),
             bounds = { top: null, right: null, bottom: null, left: null },
             point,
@@ -1213,8 +1213,8 @@
 
     Facade.Circle.prototype._setMetrics = function (updated) {
 
-        var options = this.getAllOptions(updated),
-            metrics = Facade.Polygon.prototype._setMetrics.call(this, updated);
+        var metrics = Facade.Polygon.prototype._setMetrics.call(this, updated),
+            options = this.getAllOptions(updated);
 
         metrics.x = metrics.x - options.radius;
         metrics.y = metrics.y - options.radius;
@@ -1557,7 +1557,7 @@
 
     Facade.Image.prototype._setMetrics = function (updated) {
 
-        var metrics = this.getAllMetrics(),
+        var metrics = this._defaultMetrics(),
             options = this.setOptions(updated, true),
             anchor;
 
@@ -1876,7 +1876,7 @@
 
     Facade.Text.prototype._setMetrics = function (updated) {
 
-        var metrics = this.getAllMetrics(),
+        var metrics = this._defaultMetrics(),
             options = this.setOptions(updated, true),
             anchor;
 
@@ -2040,7 +2040,7 @@
 
     Facade.Group.prototype._setMetrics = function (updated) {
 
-        var metrics = this.getAllMetrics(),
+        var metrics = this._defaultMetrics(),
             options = this.setOptions(updated, true),
             bounds = { top: null, right: null, bottom: null, left: null },
             key,
