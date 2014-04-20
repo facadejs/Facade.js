@@ -730,7 +730,7 @@
 
             if (String(typeof this._options[key]) === String(typeof value)) {
 
-                if (test !== true) {
+                if (!test) {
 
                     this._options[key] = value;
 
@@ -1526,15 +1526,19 @@
 
         options.translate = [ options.x, options.y ];
 
-        if (!options.width) {
+        if (this.image && this.image.complete) {
 
-            options.width = this.image.width;
+            if (!options.width) {
 
-        }
+                options.width = this.image.width;
 
-        if (!options.height) {
+            }
 
-            options.height = this.image.height;
+            if (!options.height) {
+
+                options.height = this.image.height;
+
+            }
 
         }
 
@@ -1882,8 +1886,12 @@
 
         }
 
-        metrics.width = options.width * options.scale;
-        metrics.height = this.lines.length * (options.fontSize * options.lineHeight) * options.scale;
+        if (this.lines) {
+
+            metrics.width = options.width * options.scale;
+            metrics.height = this.lines.length * (options.fontSize * options.lineHeight) * options.scale;
+
+        }
 
         anchor = this._getAnchorPoint(options, metrics);
 
