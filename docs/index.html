@@ -165,7 +165,7 @@
 
                 
 
-                <li class="scope-public"><a href="#facade.entity.prototype.setoption">Facade.Entity.setOption()</a></li>
+                <li class="scope-private"><a href="#facade.entity.prototype.setoption">Facade.Entity._setOption()</a></li>
 
                 
 
@@ -2021,9 +2021,9 @@
 
                 
 
-                <div class="method scope-public">
+                <div class="method scope-private">
 
-                    <h2 id="facade.entity.prototype.setoption"><a href="#facade.entity.prototype.setoption" class="permalink">#</a>Facade.Entity.setOption() </h2>
+                    <h2 id="facade.entity.prototype.setoption"><a href="#facade.entity.prototype.setoption" class="permalink">#</a>Facade.Entity._setOption() <span class="label label-default">private</span></h2>
 
                     <p>Sets an option for a given object.</p>
 
@@ -2070,7 +2070,7 @@
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">_setOptions</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2080,7 +2080,7 @@
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setOption</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setOption</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
 
@@ -2179,7 +2179,7 @@
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
 
-                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOption</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span> <span class="nx">test</span><span class="p">);</span>
+                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span> <span class="nx">test</span><span class="p">);</span>
 
             <span class="p">}</span>
 
@@ -2187,7 +2187,7 @@
 
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
 
         <span class="p">}</span>
 
@@ -2852,6 +2852,12 @@
 
     <span class="p">}</span>
 
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
     <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
 
 <span class="p">};</span>
@@ -3099,6 +3105,12 @@
 
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">}</span>
 
     <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
 
@@ -3872,6 +3884,12 @@
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
     <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
 
 <span class="p">};</span>
@@ -4072,9 +4090,11 @@
     <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
+    <span class="k">this</span><span class="p">.</span><span class="nx">lines</span> <span class="o">=</span> <span class="p">[];</span>
+
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">lines</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 
 <span class="p">};</span>
 </pre></div>
@@ -4135,11 +4155,12 @@
 
     <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">words</span> <span class="o">=</span> <span class="p">[],</span>
-        <span class="nx">lines</span> <span class="o">=</span> <span class="p">[],</span>
         <span class="nx">currentWord</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
         <span class="nx">currentLine</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
         <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">maxLineWidth</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">lines</span> <span class="o">=</span> <span class="p">[];</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
 
@@ -4164,7 +4185,7 @@
 
         <span class="k">if</span> <span class="p">((</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">currentLineWidth</span> <span class="o">&gt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="o">||</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">))</span> <span class="p">{</span>
 
-            <span class="nx">lines</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">currentLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineHeight</span><span class="p">)]);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">lines</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">currentLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">lines</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineHeight</span><span class="p">)]);</span>
 
             <span class="nx">currentLine</span> <span class="o">=</span> <span class="nx">currentWord</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
 
@@ -4182,9 +4203,9 @@
 
     <span class="p">}</span>
 
-    <span class="nx">lines</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">currentLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineHeight</span><span class="p">)]);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lines</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">currentLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">lines</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineHeight</span><span class="p">)]);</span>
 
-    <span class="nx">lines</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lines</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="nx">_context</span><span class="p">.</span><span class="nx">measureText</span><span class="p">(</span><span class="nx">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">width</span><span class="p">;</span>
 
@@ -4202,13 +4223,15 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">this</span><span class="p">.</span><span class="nx">setOption</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="nx">maxLineWidth</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="nx">maxLineWidth</span><span class="p">);</span>
 
     <span class="p">}</span>
 
     <span class="nx">_context</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
 
-    <span class="k">return</span> <span class="nx">lines</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">lines</span><span class="p">;</span>
 
 <span class="p">};</span>
 </pre></div>
@@ -4411,6 +4434,12 @@
 
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">}</span>
 
     <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
 
@@ -4658,6 +4687,8 @@
 
             <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
 
+            <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
+
         <span class="p">}</span>
 
     <span class="p">}</span>
@@ -4725,6 +4756,8 @@
 
             <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
 
+            <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
+
         <span class="p">}</span>
 
     <span class="p">}</span>
@@ -4782,7 +4815,7 @@
 
         <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="p">{</span>
 
-            <span class="nx">obj_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">_setMetrics</span><span class="p">();</span>
+            <span class="nx">obj_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">getAllMetrics</span><span class="p">();</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">obj_metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">||</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
 
@@ -4821,6 +4854,12 @@
 
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">anchor</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">;</span>
+
+    <span class="p">}</span>
 
     <span class="k">return</span> <span class="nx">metrics</span><span class="p">;</span>
 

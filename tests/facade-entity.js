@@ -82,47 +82,47 @@ casper.test.begin('Getting anchor position with Entity._getAnchorPoint (no borde
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'top/left' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ 0, 0 ], 'Anchor for top/left set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'top/center' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -50, 0 ], 'Anchor for top/center set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'top/right' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -100, 0 ], 'Anchor for top/right set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'center/left' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ 0, -50 ], 'Anchor for center/left set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'center' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -50, -50 ], 'Anchor for center set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'center/right' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -100, -50 ], 'Anchor for center/right set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'bottom/left' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ 0, -100 ], 'Anchor for bottom/left set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'bottom/center' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -50, -100 ], 'Anchor for bottom/center set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'bottom/right' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -100, -100 ], 'Anchor for bottom/right set correctly.');
 
     test.done();
@@ -137,47 +137,47 @@ casper.test.begin('Getting anchor position with Entity._getAnchorPoint (10px bor
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'top/left' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ 5, 5 ], 'Anchor for top/left set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'top/center' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -50, 5 ], 'Anchor for top/center set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'top/right' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -105, 5 ], 'Anchor for top/right set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'center/left' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ 5, -50 ], 'Anchor for center/left set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'center' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -50, -50 ], 'Anchor for center set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'center/right' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -105, -50 ], 'Anchor for center/right set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'bottom/left' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ 5, -105 ], 'Anchor for bottom/left set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'bottom/center' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -50, -105 ], 'Anchor for bottom/center set correctly.');
 
     test.assertEquals(rect._getAnchorPoint(
         rect.setOptions({ anchor: 'bottom/right' }),
-        rect._setMetrics()
+        rect.getAllMetrics()
     ), [ -105, -105 ], 'Anchor for bottom/right set correctly.');
 
     test.done();
@@ -212,7 +212,7 @@ casper.test.begin('Getting entity options with Entity.getOption', function suite
 
     test.assertEquals(rect.getOption('width'), 100, 'Option was set correctly.');
 
-    rect.setOption('width', 200);
+    rect.setOptions({ width: 200 });
 
     test.assertEquals(rect.getOption('width'), 200, 'Option was set correctly.');
 
@@ -249,7 +249,7 @@ casper.test.begin('Getting all entity options with Entity.getAllOptions', functi
             scale: 1
         }, 'Options were set correctly.');
 
-    rect.setOption('width', 200);
+    rect.setOptions({ width: 200 });
 
     test.assertEquals(rect.getAllOptions(),
         {
@@ -284,11 +284,11 @@ casper.test.begin('Setting an entity option with Entity.setOption', function sui
 
     var rect = new Facade.Rect({ width: 100, height: 100 });
 
-    test.assertEquals(rect.setOption('width', 200), 200, 'Option was set correctly.');
+    test.assertEquals(rect.setOptions({ width: 200 }).width, 200, 'Option was set correctly.');
 
     try {
 
-        test.assertEquals(rect.setOption('width', '400'), '400', 'Testing the validity of an invalid option value.');
+        test.assertEquals(rect.setOptions({ width: '400' }).width, '400', 'Testing the validity of an invalid option value.');
 
         test.fail();
 
@@ -329,7 +329,7 @@ casper.test.begin('Setting entity options with Entity.setOptions', function suit
 
     try {
 
-        test.assertEquals(rect.setOption({ width: '400', height: '400' }),
+        test.assertEquals(rect.setOptions({ width: '400', height: '400' }),
             {
                 x: 0,
                 y: 0,

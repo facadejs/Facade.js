@@ -138,7 +138,7 @@ casper.test.begin('Setting metrics for a polygon.', function suite(test) {
 
     var object = new Facade.Polygon({ x: 10, y: 10, points: [ [0, 0], [200, 0], [100, 200], [0, 150] ], lineWidth: 0 });
 
-    test.assertEquals(object._setMetrics(), {
+    test.assertEquals(object.getAllMetrics(), {
         x: 10,
         y: 10,
         width: 200,
@@ -147,7 +147,7 @@ casper.test.begin('Setting metrics for a polygon.', function suite(test) {
 
     object.setOptions({ lineWidth: 10 });
 
-    test.assertEquals(object._setMetrics(), {
+    test.assertEquals(object.getAllMetrics(), {
         x: 10,
         y: 10,
         width: 210,
@@ -164,67 +164,67 @@ casper.test.begin('Setting/getting polygon anchor.', function suite(test) {
 
     var object = new Facade.Polygon({ x: 0, y: 0, points: [ [0, 0], [100, 0], [100, 100], [0, 100] ], lineWidth: 10 });
 
-    object.setOption('anchor', 'top/left');
+    object.setOptions({ anchor: 'top/left' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         5,
         5
     ], 'Polygon anchor top/left has been set correctly.');
 
-    object.setOption('anchor', 'top/center');
+    object.setOptions({ anchor: 'top/center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -50,
         5
     ], 'Polygon anchor top/center has been set correctly.');
 
-    object.setOption('anchor', 'top/right');
+    object.setOptions({ anchor: 'top/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -105,
         5
     ], 'Polygon anchor top/right has been set correctly.');
 
 
-    object.setOption('anchor', 'center/left');
+    object.setOptions({ anchor: 'center/left' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         5,
         -50
     ], 'Polygon anchor center/left has been set correctly.');
 
-    object.setOption('anchor', 'center');
+    object.setOptions({ anchor: 'center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -50,
         -50
     ], 'Polygon anchor center has been set correctly.');
 
-    object.setOption('anchor', 'center/right');
+    object.setOptions({ anchor: 'center/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -105,
         -50
     ], 'Polygon anchor center/right has been set correctly.');
 
 
-    object.setOption('anchor', 'bottom/left');
+    object.setOptions({ anchor: 'bottom/left' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         5,
         -105
     ], 'Polygon anchor bottom/left has been set correctly.');
 
-    object.setOption('anchor', 'bottom/center');
+    object.setOptions({ anchor: 'bottom/center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -50,
         -105
     ], 'Polygon anchor bottom/center has been set correctly.');
 
-    object.setOption('anchor', 'bottom/right');
+    object.setOptions({ anchor: 'bottom/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -105,
         -105
     ], 'Polygon anchor bottom/right has been set correctly.');

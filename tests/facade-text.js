@@ -36,10 +36,10 @@ casper.test.begin('Text entity object created.', function suite(test) {
     }, 'Default options have been set correctly.');
 
     test.assertEquals(object.getAllMetrics(), {
-        x: null,
-        y: null,
-        width: null,
-        height: null
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 16
     }, 'Default metrics have been set correctly.');
 
     test.done();
@@ -132,7 +132,7 @@ casper.test.begin('Setting metrics for a text.', function suite(test) {
 
     var object = new Facade.Text('Hello world!\nThis is a text message.', { x: 10, y: 10, fontFamily: 'Helvetica', fontSize: 40, opacity: 50 });
 
-    test.assertEquals(object._setMetrics(), {
+    test.assertEquals(object.getAllMetrics(), {
         x: 10,
         y: 10,
         width: 406,
@@ -149,65 +149,65 @@ casper.test.begin('Setting/getting text anchor.', function suite(test) {
 
     var object = new Facade.Text('Hello world!\nThis is a text message.', { x: 10, y: 10, fontFamily: 'Helvetica', fontSize: 40, opacity: 50 });
 
-    object.setOption('anchor', 'top/left');
+    object.setOptions({ anchor: 'top/left' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         0,
         0
     ], 'Text anchor top/left has been set correctly.');
 
-    object.setOption('anchor', 'top/center');
+    object.setOptions({ anchor: 'top/center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -203,
         0
     ], 'Text anchor top/center has been set correctly.');
 
-    object.setOption('anchor', 'top/right');
+    object.setOptions({ anchor: 'top/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -406,
         0
     ], 'Text anchor top/right has been set correctly.');
 
-    object.setOption('anchor', 'center/left');
+    object.setOptions({ anchor: 'center/left' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         0,
         -40
     ], 'Text anchor center/left has been set correctly.');
 
-    object.setOption('anchor', 'center');
+    object.setOptions({ anchor: 'center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -203,
         -40
     ], 'Text anchor center has been set correctly.');
 
-    object.setOption('anchor', 'center/right');
+    object.setOptions({ anchor: 'center/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -406,
         -40
     ], 'Text anchor center/right has been set correctly.');
 
-    object.setOption('anchor', 'bottom/left');
+    object.setOptions({ anchor: 'bottom/left' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         0,
         -80
     ], 'Text anchor bottom/left has been set correctly.');
 
-    object.setOption('anchor', 'bottom/center');
+    object.setOptions({ anchor: 'bottom/center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -203,
         -80
     ], 'Text anchor bottom/center has been set correctly.');
 
-    object.setOption('anchor', 'bottom/right');
+    object.setOptions({ anchor: 'bottom/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -406,
         -80
     ], 'Text anchor bottom/right has been set correctly.');

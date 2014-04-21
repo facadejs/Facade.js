@@ -125,7 +125,7 @@ casper.test.begin('Setting metrics for a group.', function suite(test) {
     group.addToGroup(polygon1);
     group.addToGroup(polygon2);
 
-    test.assertEquals(group._setMetrics(), {
+    test.assertEquals(group.getAllMetrics(), {
         x: 0,
         y: 0,
         width: 200,
@@ -146,67 +146,65 @@ casper.test.begin('Setting/getting group anchor.', function suite(test) {
 
     object.addToGroup(new Facade.Rect({ x: 100, y: 100, width: 100, height: 100, lineWidth: 10 }));
 
-    object.setOption('anchor', 'top/left');
+    object.setOptions({ anchor: 'top/left' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         0,
         0
     ], 'Group anchor top/left has been set correctly.');
 
-    object.setOption('anchor', 'top/center');
+    object.setOptions({ anchor: 'top/center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -105,
         0
     ], 'Group anchor top/center has been set correctly.');
 
-    object.setOption('anchor', 'top/right');
+    object.setOptions({ anchor: 'top/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -210,
         0
     ], 'Group anchor top/right has been set correctly.');
 
+    object.setOptions({ anchor: 'center/left' });
 
-    object.setOption('anchor', 'center/left');
-
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         0,
         -105
     ], 'Group anchor center/left has been set correctly.');
 
-    object.setOption('anchor', 'center');
+    object.setOptions({ anchor: 'center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -105,
         -105
     ], 'Group anchor center has been set correctly.');
 
-    object.setOption('anchor', 'center/right');
+    object.setOptions({ anchor: 'center/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -210,
         -105
     ], 'Group anchor center/right has been set correctly.');
 
+    object.setOptions({ anchor: 'bottom/left' });
 
-    object.setOption('anchor', 'bottom/left');
-
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         0,
         -210
     ], 'Group anchor bottom/left has been set correctly.');
 
-    object.setOption('anchor', 'bottom/center');
+    object.setOptions({ anchor: 'bottom/center' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -105,
         -210
     ], 'Group anchor bottom/center has been set correctly.');
 
-    object.setOption('anchor', 'bottom/right');
+    object.setOptions({ anchor: 'bottom/right' });
 
-    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object._setMetrics()), [
+    test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
         -210,
         -210
     ], 'Group anchor bottom/right has been set correctly.');

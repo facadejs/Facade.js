@@ -715,16 +715,16 @@
     /**
      * Sets an option for a given object.
      *
-     *     console.log(text.setOptions('value', 'Hello world!'));
+     *     console.log(text._setOptions('value', 'Hello world!'));
      *
      * @param {String} key The option to update.
      * @param {Object|Function|String|Integer} value The new value of the specified option.
      * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object|Function|String|Integer} Returns value of the updated option.
-     * @api public
+     * @api private
      */
 
-    Facade.Entity.prototype.setOption = function (key, value, test) {
+    Facade.Entity.prototype._setOption = function (key, value, test) {
 
         if (this._options.hasOwnProperty(key)) {
 
@@ -772,7 +772,7 @@
 
                 if (updated.hasOwnProperty(key) && options.hasOwnProperty(key)) {
 
-                    options[key] = this.setOption(key, updated[key], test);
+                    options[key] = this._setOption(key, updated[key], test);
 
                 }
 
@@ -780,7 +780,7 @@
 
             if (!test) {
 
-                this._metrics = this._setMetrics(updated);
+                this._setMetrics();
 
             }
 
@@ -1134,6 +1134,12 @@
 
         }
 
+        if (!updated) {
+
+            this._metrics = metrics;
+
+        }
+
         return metrics;
 
     };
@@ -1228,6 +1234,12 @@
 
         metrics.x = metrics.x - options.radius;
         metrics.y = metrics.y - options.radius;
+
+        if (!updated) {
+
+            this._metrics = metrics;
+
+        }
 
         return metrics;
 
@@ -1585,6 +1597,12 @@
         metrics.x = options.x + anchor[0];
         metrics.y = options.y + anchor[1];
 
+        if (!updated) {
+
+            this._metrics = metrics;
+
+        }
+
         return metrics;
 
     };
@@ -1719,9 +1737,11 @@
         });
         this._metrics = this._defaultMetrics();
 
+        this.lines = [];
+
         this.setOptions(options);
 
-        this.lines = this.setText(value);
+        this.setText(value);
 
     };
 
@@ -1746,11 +1766,12 @@
 
         var options = this.getAllOptions(),
             words = [],
-            lines = [],
             currentWord = null,
             currentLine = '',
             currentLineWidth = 0,
             maxLineWidth = options.width;
+
+        this.lines = [];
 
         if (value) {
 
@@ -1775,7 +1796,7 @@
 
             if ((options.width > 0 && currentLineWidth > options.width) || currentWord.match(/\n/)) {
 
-                lines.push([currentLine.replace(/\s$/, ''), 0, lines.length * (options.fontSize * options.lineHeight)]);
+                this.lines.push([currentLine.replace(/\s$/, ''), 0, this.lines.length * (options.fontSize * options.lineHeight)]);
 
                 currentLine = currentWord.replace(/\n/, '');
 
@@ -1793,9 +1814,9 @@
 
         }
 
-        lines.push([currentLine.replace(/\s$/, ''), 0, lines.length * (options.fontSize * options.lineHeight)]);
+        this.lines.push([currentLine.replace(/\s$/, ''), 0, this.lines.length * (options.fontSize * options.lineHeight)]);
 
-        lines.forEach(function (line) {
+        this.lines.forEach(function (line) {
 
             currentLineWidth = _context.measureText(line[0]).width;
 
@@ -1813,13 +1834,15 @@
 
         if (!options.width) {
 
-            this.setOption('width', maxLineWidth);
+            this._setOption('width', maxLineWidth);
 
         }
 
         _context.restore();
 
-        return lines;
+        this._setMetrics();
+
+        return this.lines;
 
     };
 
@@ -1907,6 +1930,12 @@
 
         metrics.x = options.x + anchor[0];
         metrics.y = options.y + anchor[1];
+
+        if (!updated) {
+
+            this._metrics = metrics;
+
+        }
 
         return metrics;
 
@@ -2009,6 +2038,8 @@
 
                 this._objects.push(obj);
 
+                this._setMetrics();
+
             }
 
         }
@@ -2032,6 +2063,8 @@
             if (this._objects.indexOf(obj) !== -1) {
 
                 this._objects.splice(this._objects.indexOf(obj), 1);
+
+                this._setMetrics();
 
             }
 
@@ -2061,7 +2094,7 @@
 
             if (this._objects.hasOwnProperty(key)) {
 
-                obj_metrics = this._objects[key]._setMetrics();
+                obj_metrics = this._objects[key].getAllMetrics();
 
                 if (obj_metrics.x < bounds.left || bounds.left === null) {
 
@@ -2100,6 +2133,12 @@
 
         metrics.x = options.x + anchor[0];
         metrics.y = options.y + anchor[1];
+
+        if (!updated) {
+
+            this._metrics = metrics;
+
+        }
 
         return metrics;
 

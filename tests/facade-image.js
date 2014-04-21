@@ -128,7 +128,7 @@ setTimeout(function () { // Wait for test image (35 byte spacer.gif)
 
         var object = new Facade.Image(image);
 
-        test.assertEquals(object._setMetrics(), {
+        test.assertEquals(object.getAllMetrics(), {
             x: 0,
             y: 0,
             width: 1,
