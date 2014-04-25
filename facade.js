@@ -65,7 +65,7 @@
      *
      * @param {Object} a The first object.
      * @param {Object} b The second object which will be used to update the first object.
-     * @return {Boolean} Final updated object.
+     * @return {Object} Final updated object.
      * @api private
      */
 
@@ -451,8 +451,6 @@
 
             }
 
-            this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
-
             this.ftime = time;
 
             this.context.save();
@@ -460,6 +458,8 @@
             this._callback();
 
             this.context.restore();
+
+            this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
 
         } else {
 
