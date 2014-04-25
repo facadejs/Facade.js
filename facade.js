@@ -77,7 +77,7 @@
 
             if (b.hasOwnProperty(key) && a.hasOwnProperty(key)) {
 
-                if (String(typeof b[key]) === String(typeof a[key])) {
+                if (typeof b[key] === typeof a[key]) {
 
                     a[key] = b[key];
 
@@ -117,7 +117,7 @@
 
         }
 
-        if (canvas && String(typeof canvas) === 'object' && canvas.nodeType === 1) {
+        if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
 
             this.canvas = canvas;
 
@@ -125,7 +125,7 @@
 
             this.canvas = document.createElement('canvas');
 
-            if (String(typeof canvas) === 'string') {
+            if (typeof canvas === 'string') {
 
                 this.canvas.setAttribute('id', canvas);
 
@@ -219,7 +219,7 @@
 
     Facade.prototype.draw = function (callback) {
 
-        if (String(typeof callback) === 'function') {
+        if (typeof callback === 'function') {
 
             this._callback = callback;
 
@@ -254,7 +254,7 @@
 
         }
 
-        if (String(typeof quality) === 'number') {
+        if (typeof quality === 'number') {
 
             quality = quality / 100;
 
@@ -441,7 +441,7 @@
 
     Facade.prototype._animate = function (time) {
 
-        if (String(typeof this._callback) === 'function') {
+        if (typeof this._callback === 'function') {
 
             if (this.ftime) {
 
@@ -728,7 +728,7 @@
 
         if (this._options.hasOwnProperty(key)) {
 
-            if (String(typeof this._options[key]) === String(typeof value)) {
+            if (typeof this._options[key] === typeof value) {
 
                 if (!test) {
 
@@ -1441,7 +1441,7 @@
 
     Facade.Image.prototype.load = function (source) {
 
-        if (String(typeof source) === 'object' && source.nodeType === 1) {
+        if (typeof source === 'object' && source.nodeType === 1) {
 
             this.image = source;
 
@@ -1663,7 +1663,7 @@
 
                     this.ftime = facade.ftime;
 
-                    if (String(typeof options.callback) === 'function') {
+                    if (typeof options.callback === 'function') {
 
                         options.callback.call(this, options.frames[this.currentFrame]);
 
@@ -1693,7 +1693,7 @@
 
                     }
 
-                    if (String(typeof options.callback) === 'function') {
+                    if (typeof options.callback === 'function') {
 
                         options.callback.call(this, options.frames[this.currentFrame]);
 
@@ -2148,7 +2148,7 @@
      * AMD Support
      */
 
-    if (String(typeof window.define) === 'function' && window.define.hasOwnProperty('amd')) {
+    if (typeof window.define === 'function' && window.define.hasOwnProperty('amd')) {
 
         window.define([], function () { return Facade; });
 
