@@ -75,7 +75,7 @@
 
         for (key in b) {
 
-            if (b.hasOwnProperty(key) && a.hasOwnProperty(key)) {
+            if (typeof b[key] !== 'undefined' && typeof a[key] !== 'undefined') {
 
                 if (typeof b[key] === typeof a[key]) {
 
@@ -310,7 +310,7 @@
 
         for (key in options) {
 
-            if (options.hasOwnProperty(key)) {
+            if (typeof options[key] !== 'undefined') {
 
                 if (isArray(options[key]) && isFunction(this.context[key])) {
 
@@ -506,7 +506,7 @@
 
         for (key in updated) {
 
-            if (updated.hasOwnProperty(key)) {
+            if (typeof updated[key] !== 'undefined') {
 
                 options[key] = updated[key];
 
@@ -536,7 +536,7 @@
 
         for (key in updated) {
 
-            if (updated.hasOwnProperty(key)) {
+            if (typeof updated[key] !== 'undefined') {
 
                 metrics[key] = updated[key];
 
@@ -611,7 +611,7 @@
 
         var strokeWidthOffset = 0;
 
-        if (options.hasOwnProperty('lineWidth')) {
+        if (typeof options.lineWidth !== 'undefined') {
 
             strokeWidthOffset = options.lineWidth / 2;
 
@@ -674,7 +674,7 @@
 
     Facade.Entity.prototype.getOption = function (key) {
 
-        if (this._options.hasOwnProperty(key)) {
+        if (typeof this._options[key] !== 'undefined') {
 
             return this._options[key];
 
@@ -700,7 +700,7 @@
 
         for (key in this._options) {
 
-            if (this._options.hasOwnProperty(key)) {
+            if (typeof this._options[key] !== 'undefined') {
 
                 options[key] = this._options[key];
 
@@ -726,7 +726,7 @@
 
     Facade.Entity.prototype._setOption = function (key, value, test) {
 
-        if (this._options.hasOwnProperty(key)) {
+        if (typeof this._options[key] !== 'undefined') {
 
             if (typeof this._options[key] === typeof value) {
 
@@ -770,7 +770,7 @@
 
             for (key in updated) {
 
-                if (updated.hasOwnProperty(key) && options.hasOwnProperty(key)) {
+                if (typeof updated[key] !== 'undefined' && typeof options[key] !== 'undefined') {
 
                     options[key] = this._setOption(key, updated[key], test);
 
@@ -802,7 +802,7 @@
 
     Facade.Entity.prototype.getMetric = function (key) {
 
-        if (this._metrics.hasOwnProperty(key)) {
+        if (typeof this._metrics[key] !== 'undefined') {
 
             return this._metrics[key];
 
@@ -828,7 +828,7 @@
 
         for (key in this._metrics) {
 
-            if (this._metrics.hasOwnProperty(key)) {
+            if (typeof this._metrics[key] !== 'undefined') {
 
                 metrics[key] = this._metrics[key];
 
@@ -936,7 +936,7 @@
 
         for (key in updated) {
 
-            if (updated.hasOwnProperty(key)) {
+            if (typeof updated[key] !== 'undefined') {
 
                 options[key] = updated[key];
 
@@ -974,7 +974,7 @@
 
             for (point in options.points) {
 
-                if (options.points.hasOwnProperty(point)) {
+                if (typeof options.points[point] !== 'undefined') {
 
                     if (options.points[point].length === 6) {
 
@@ -1063,7 +1063,7 @@
 
         for (point in options.points) {
 
-            if (options.points.hasOwnProperty(point)) {
+            if (typeof options.points[point] !== 'undefined') {
 
                 if (options.points[point].length === 2) { // Rect
 
@@ -1992,7 +1992,7 @@
 
         for (key in this._objects) {
 
-            if (this._objects.hasOwnProperty(key)) {
+            if (typeof this._objects[key] !== 'undefined') {
 
                 facade.addToStage(this._objects[key]);
 
@@ -2092,7 +2092,7 @@
 
         for (key in this._objects) {
 
-            if (this._objects.hasOwnProperty(key)) {
+            if (typeof this._objects[key] !== 'undefined') {
 
                 obj_metrics = this._objects[key].getAllMetrics();
 
@@ -2148,7 +2148,7 @@
      * AMD Support
      */
 
-    if (typeof window.define === 'function' && window.define.hasOwnProperty('amd')) {
+    if (typeof window.define === 'function' && typeof window.define.amd !== 'undefined') {
 
         window.define([], function () { return Facade; });
 
