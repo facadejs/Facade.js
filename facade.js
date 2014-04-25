@@ -964,7 +964,8 @@
 
         var context = facade.context,
             metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
-            point;
+            i,
+            length;
 
         this._applyTransforms(context, options, metrics);
 
@@ -972,23 +973,19 @@
 
             context.beginPath();
 
-            for (point in options.points) {
+            for (i = 0, length = options.points.length; i < length; i = i + 1) {
 
-                if (typeof options.points[point] !== 'undefined') {
+                if (options.points[i].length === 6) {
 
-                    if (options.points[point].length === 6) {
+                    context.bezierCurveTo.apply(context, options.points[i]);
 
-                        context.bezierCurveTo.apply(context, options.points[point]);
+                } else if (options.points[i].length === 5) {
 
-                    } else if (options.points[point].length === 5) {
+                    context.arc.apply(context, options.points[i]);
 
-                        context.arc.apply(context, options.points[point]);
+                } else {
 
-                    } else {
-
-                        context.lineTo.apply(context, options.points[point]);
-
-                    }
+                    context.lineTo.apply(context, options.points[i]);
 
                 }
 
@@ -1000,7 +997,7 @@
 
             } else {
 
-                context.moveTo.apply(context, options.points[point]);
+                context.moveTo.apply(context, options.points[length - 1]);
 
             }
 
@@ -1052,6 +1049,8 @@
             options = this.setOptions(updated, true),
             bounds = { top: null, right: null, bottom: null, left: null },
             point,
+            i,
+            length,
             anchor,
             strokeWidthOffset = this._getStrokeWidthOffset(options);
 
@@ -1061,49 +1060,45 @@
 
         }
 
-        for (point in options.points) {
+        for (i = 0, length = options.points.length; i < length; i = i + 1) {
 
-            if (typeof options.points[point] !== 'undefined') {
+            if (options.points[i].length === 2) { // Rect
 
-                if (options.points[point].length === 2) { // Rect
+                point = { x: options.points[i][0], y: options.points[i][1] };
 
-                    point = { x: options.points[point][0], y: options.points[point][1] };
+            } else if (options.points[i].length === 5) { // Circle
 
-                } else if (options.points[point].length === 5) { // Circle
+                metrics.width = options.points[i][2] * 2;
+                metrics.height = options.points[i][2] * 2;
 
-                    metrics.width = options.points[point][2] * 2;
-                    metrics.height = options.points[point][2] * 2;
+                point = {
+                    x: options.points[i][0] - options.points[i][2],
+                    y: options.points[i][1] - options.points[i][2]
+                };
 
-                    point = {
-                        x: options.points[point][0] - options.points[point][2],
-                        y: options.points[point][1] - options.points[point][2]
-                    };
+            }
 
-                }
+            if (point.x < bounds.left || bounds.left === null) {
 
-                if (point.x < bounds.left || bounds.left === null) {
+                bounds.left = point.x;
 
-                    bounds.left = point.x;
+            }
 
-                }
+            if (point.y < bounds.top || bounds.top === null) {
 
-                if (point.y < bounds.top || bounds.top === null) {
+                bounds.top = point.y;
 
-                    bounds.top = point.y;
+            }
 
-                }
+            if (point.x > bounds.right || bounds.right === null) {
 
-                if (point.x > bounds.right || bounds.right === null) {
+                bounds.right = point.x;
 
-                    bounds.right = point.x;
+            }
 
-                }
+            if (point.y > bounds.bottom || bounds.bottom === null) {
 
-                if (point.y > bounds.bottom || bounds.bottom === null) {
-
-                    bounds.bottom = point.y;
-
-                }
+                bounds.bottom = point.y;
 
             }
 
@@ -1959,9 +1954,9 @@
         this._options = this._defaultOptions();
         this._metrics = this._defaultMetrics();
 
-        this.setOptions(options);
-
         this._objects = [];
+
+        this.setOptions(options);
 
     };
 
@@ -2086,39 +2081,36 @@
         var metrics = this._defaultMetrics(),
             options = this.setOptions(updated, true),
             bounds = { top: null, right: null, bottom: null, left: null },
-            key,
+            i,
+            length,
             anchor,
             obj_metrics;
 
-        for (key in this._objects) {
+        for (i = 0, length = this._objects.length; i < length; i = i + 1) {
 
-            if (typeof this._objects[key] !== 'undefined') {
+            obj_metrics = this._objects[i].getAllMetrics();
 
-                obj_metrics = this._objects[key].getAllMetrics();
+            if (obj_metrics.x < bounds.left || bounds.left === null) {
 
-                if (obj_metrics.x < bounds.left || bounds.left === null) {
+                bounds.left = obj_metrics.x;
 
-                    bounds.left = obj_metrics.x;
+            }
 
-                }
+            if (obj_metrics.y < bounds.top || bounds.top === null) {
 
-                if (obj_metrics.y < bounds.top || bounds.top === null) {
+                bounds.top = obj_metrics.y;
 
-                    bounds.top = obj_metrics.y;
+            }
 
-                }
+            if (obj_metrics.x + obj_metrics.width > bounds.right || bounds.right === null) {
 
-                if (obj_metrics.x + obj_metrics.width > bounds.right || bounds.right === null) {
+                bounds.right = obj_metrics.x + obj_metrics.width;
 
-                    bounds.right = obj_metrics.x + obj_metrics.width;
+            }
 
-                }
+            if (obj_metrics.y + obj_metrics.height > bounds.bottom || bounds.bottom === null) {
 
-                if (obj_metrics.y + obj_metrics.height > bounds.bottom || bounds.bottom === null) {
-
-                    bounds.bottom = obj_metrics.y + obj_metrics.height;
-
-                }
+                bounds.bottom = obj_metrics.y + obj_metrics.height;
 
             }
 
