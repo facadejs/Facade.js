@@ -1981,17 +1981,14 @@
 
         var context = facade.context,
             metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
-            key;
+            i,
+            length;
 
         this._applyTransforms(context, options, metrics);
 
-        for (key in this._objects) {
+        for (i = 0, length = this._objects.length; i < length; i = i + 1) {
 
-            if (typeof this._objects[key] !== 'undefined') {
-
-                facade.addToStage(this._objects[key]);
-
-            }
+            facade.addToStage(this._objects[i]);
 
         }
 
