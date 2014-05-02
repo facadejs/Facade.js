@@ -1416,13 +1416,13 @@
 
         <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">time</span><span class="p">;</span>
 
+        <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="nx">_requestAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_animate</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
         <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">_callback</span><span class="p">();</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="nx">_requestAnimationFrame</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_animate</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 

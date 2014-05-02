@@ -453,13 +453,13 @@
 
             this.ftime = time;
 
+            this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
+
             this.context.save();
 
             this._callback();
 
             this.context.restore();
-
-            this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
 
         } else {
 
