@@ -27,13 +27,13 @@ group.addToGroup(new Facade.Rect({
     anchor: 'top/left'
 }));
 
-var rotate = 0;
-
 stage.draw(function () {
 
     this.clear();
 
-    this.addToStage(group, { rotate: ++rotate });
+    group.setOptions({ rotate: '+=1' });
+
+    this.addToStage(group);
 
     // debugBoundingBox(group);
 

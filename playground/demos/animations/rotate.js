@@ -9,13 +9,13 @@ var rect = new Facade.Rect({
     anchor: 'center'
 });
 
-var rotate = 0;
-
 stage.draw(function () {
 
     this.clear();
 
-    this.addToStage(rect, { rotate: ++rotate });
+    rect.setOptions({ rotate: '+=1' });
+
+    this.addToStage(rect);
 
     // debugBoundingBox(rect);
 
