@@ -86,7 +86,7 @@ $ npm test
 
 ##Demos
 
-<http://playground.facadejs.com/>
+<http://play.facadejs.com/>
 
 ##CDN
 
