@@ -60,39 +60,6 @@
     }
 
     /**
-     * Extends the values of one object (a) with the values of another object (b). Note: Only values of the same type can be overritten.
-     *
-     *     console.log(extendObject({ test: 'not tested'}, { test: 'tested' })); // { test: 'tested' }
-     *
-     * @param {Object} a The first object.
-     * @param {Object} b The second object which will be used to update the first object.
-     * @return {Object} Final updated object.
-     * @api private
-     */
-
-    function extendObject(a, b) {
-
-        var key;
-
-        for (key in b) {
-
-            if (b[key] !== undefined && a[key] !== undefined) {
-
-                if (String(typeof b[key]) === String(typeof a[key])) {
-
-                    a[key] = b[key];
-
-                }
-
-            }
-
-        }
-
-        return a;
-
-    }
-
-    /**
      * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
      *
      *     var stage = new Facade(document.querySelector('canvas'));
@@ -874,13 +841,7 @@
 
     Facade.Entity.prototype.draw = function (facade, updated) {
 
-        var options = this.getAllOptions();
-
-        if (updated) {
-
-            options = extendObject(options, updated);
-
-        }
+        var options = this.setOptions(updated, true);
 
         if (isFunction(this._configOptions)) {
 
