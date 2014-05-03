@@ -30,7 +30,7 @@ casper.test.begin('Facade object creation', function suite(test) {
 
 });
 
-casper.test.begin('Add to stage', function suite(test) {
+casper.test.begin('Add entity to stage', function suite(test) {
 
     'use strict';
 
@@ -50,6 +50,26 @@ casper.test.begin('Add to stage', function suite(test) {
         stage.addToStage(object);
 
         test.pass('Entity was recognized by Facade.addToStage.');
+
+    } catch (e) { test.fail(e); }
+
+    test.done();
+
+});
+
+casper.test.begin('Add multiple entities to stage', function suite(test) {
+
+    'use strict';
+
+    var stage = new Facade('stage', 500, 500),
+        object1 = new Facade.Polygon(),
+        object2 = new Facade.Polygon();
+
+    try {
+
+        stage.addToStage([object1, object2]);
+
+        test.pass('Entities list was recognized by Facade.addToStage as an array and rendered.');
 
     } catch (e) { test.fail(e); }
 

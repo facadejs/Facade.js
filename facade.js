@@ -162,21 +162,38 @@
     }
 
     /**
-     * Draws a Facade.js entity to the stage.
+     * Draws a Facade.js entity (or mulitple entities) to the stage.
      *
      *     stage.addToStage(circle);
      *
-     * @param {Object} obj Facade.js entity.
-     * @param {Object} options Temporary options for rendering a Facade.js entity.
+     * @param {Object} obj Facade.js entity or an array of entities.
+     * @param {Object} options Temporary options for rendering a Facade.js entity (or mulitple entities).
      * @return {Object} Facade.js object.
      * @api public
      */
 
     Facade.prototype.addToStage = function (obj, options) {
 
+        var i,
+            length;
+
         if (!(obj instanceof Facade.Entity)) {
 
-            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+            if (isArray(obj)) {
+
+                for (i = 0, length = obj.length; i < length; i = i + 1) {
+
+                    this.addToStage(obj[i], options);
+
+                }
+
+                return this;
+
+            } else {
+
+                throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+
+            }
 
         }
 
