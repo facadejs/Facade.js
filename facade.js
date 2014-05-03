@@ -177,27 +177,23 @@
         var i,
             length;
 
-        if (!(obj instanceof Facade.Entity)) {
+        if (obj instanceof Facade.Entity) {
 
-            if (isArray(obj)) {
+            obj.draw(this, options);
 
-                for (i = 0, length = obj.length; i < length; i = i + 1) {
+        } else if (isArray(obj)) {
 
-                    this.addToStage(obj[i], options);
+            for (i = 0, length = obj.length; i < length; i = i + 1) {
 
-                }
-
-                return this;
-
-            } else {
-
-                throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+                this.addToStage(obj[i], options);
 
             }
 
-        }
+        } else {
 
-        obj.draw(this, options);
+            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+
+        }
 
         return this;
 
