@@ -14,7 +14,8 @@
         _cancelAnimationFrame,
         _context = document.createElement('canvas').getContext('2d'),
         _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
-        _TO_RADIANS = Math.PI / 180;
+        _TO_RADIANS = Math.PI / 180,
+        _OPERATOR_TEST = new RegExp('^[-+]=');
 
     /*!
      * requestAnimationFrame Support
@@ -727,6 +728,12 @@
     Facade.Entity.prototype._setOption = function (key, value, test) {
 
         if (typeof this._options[key] !== 'undefined') {
+
+            if (typeof this._options[key] === 'number' && typeof value === 'string' && value.match(_OPERATOR_TEST)) {
+
+                value = this._options[key] + parseFloat(value.replace('=', ''));
+
+            }
 
             if (typeof this._options[key] === typeof value) {
 

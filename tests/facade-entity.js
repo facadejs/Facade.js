@@ -360,6 +360,62 @@ casper.test.begin('Setting entity options with Entity.setOptions', function suit
 
 });
 
+casper.test.begin('Setting entity options with Entity.setOptions and interger operators', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ x: 100, y: 100, width: 100, height: 100 });
+
+    test.assertEquals(rect.setOptions({ x: '+=5', y: '+=5' }),
+        {
+            x: 105,
+            y: 105,
+            anchor: 'top/left',
+            shadowBlur: 0,
+            shadowColor: '#000',
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'default',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 100,
+            height: 100,
+            rotate: 0,
+            scale: 1
+        }, 'Options were set correctly.');
+
+    test.assertEquals(rect.setOptions({ x: '-=5', y: '-=5' }),
+        {
+            x: 100,
+            y: 100,
+            anchor: 'top/left',
+            shadowBlur: 0,
+            shadowColor: '#000',
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'default',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 100,
+            height: 100,
+            rotate: 0,
+            scale: 1
+        }, 'Options were set correctly.');
+
+    test.done();
+
+});
+
 casper.test.begin('Getting entity metrics with Entity.getMetric', function suite(test) {
 
     'use strict';
