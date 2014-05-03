@@ -76,9 +76,9 @@
 
         for (key in b) {
 
-            if (typeof b[key] !== 'undefined' && typeof a[key] !== 'undefined') {
+            if (b[key] !== undefined && a[key] !== undefined) {
 
-                if (typeof b[key] === typeof a[key]) {
+                if (String(typeof b[key]) === String(typeof a[key])) {
 
                     a[key] = b[key];
 
@@ -325,7 +325,7 @@
 
         for (key in options) {
 
-            if (typeof options[key] !== 'undefined') {
+            if (options[key] !== undefined) {
 
                 if (isArray(options[key]) && isFunction(this.context[key])) {
 
@@ -521,7 +521,7 @@
 
         for (key in updated) {
 
-            if (typeof updated[key] !== 'undefined') {
+            if (updated[key] !== undefined) {
 
                 options[key] = updated[key];
 
@@ -551,7 +551,7 @@
 
         for (key in updated) {
 
-            if (typeof updated[key] !== 'undefined') {
+            if (updated[key] !== undefined) {
 
                 metrics[key] = updated[key];
 
@@ -626,7 +626,7 @@
 
         var strokeWidthOffset = 0;
 
-        if (typeof options.lineWidth !== 'undefined') {
+        if (options.lineWidth !== undefined) {
 
             strokeWidthOffset = options.lineWidth / 2;
 
@@ -689,7 +689,7 @@
 
     Facade.Entity.prototype.getOption = function (key) {
 
-        if (typeof this._options[key] !== 'undefined') {
+        if (this._options[key] !== undefined) {
 
             return this._options[key];
 
@@ -715,7 +715,7 @@
 
         for (key in this._options) {
 
-            if (typeof this._options[key] !== 'undefined') {
+            if (this._options[key] !== undefined) {
 
                 options[key] = this._options[key];
 
@@ -741,7 +741,7 @@
 
     Facade.Entity.prototype._setOption = function (key, value, test) {
 
-        if (typeof this._options[key] !== 'undefined') {
+        if (this._options[key] !== undefined) {
 
             if (typeof this._options[key] === 'number' && typeof value === 'string' && value.match(_OPERATOR_TEST)) {
 
@@ -749,7 +749,7 @@
 
             }
 
-            if (typeof this._options[key] === typeof value) {
+            if (String(typeof this._options[key]) === String(typeof value)) {
 
                 if (!test) {
 
@@ -791,7 +791,7 @@
 
             for (key in updated) {
 
-                if (typeof updated[key] !== 'undefined' && typeof options[key] !== 'undefined') {
+                if (updated[key] !== undefined && options[key] !== undefined) {
 
                     options[key] = this._setOption(key, updated[key], test);
 
@@ -823,7 +823,7 @@
 
     Facade.Entity.prototype.getMetric = function (key) {
 
-        if (typeof this._metrics[key] !== 'undefined') {
+        if (this._metrics[key] !== undefined) {
 
             return this._metrics[key];
 
@@ -849,7 +849,7 @@
 
         for (key in this._metrics) {
 
-            if (typeof this._metrics[key] !== 'undefined') {
+            if (this._metrics[key] !== undefined) {
 
                 metrics[key] = this._metrics[key];
 
@@ -957,7 +957,7 @@
 
         for (key in updated) {
 
-            if (typeof updated[key] !== 'undefined') {
+            if (updated[key] !== undefined) {
 
                 options[key] = updated[key];
 
@@ -2158,7 +2158,7 @@
      * AMD Support
      */
 
-    if (typeof window.define === 'function' && typeof window.define.amd !== 'undefined') {
+    if (typeof window.define === 'function' && window.define.amd !== undefined) {
 
         window.define([], function () { return Facade; });
 
