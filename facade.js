@@ -167,6 +167,7 @@
      *     stage.addToStage(circle);
      *
      * @param {Object} obj Facade.js entity.
+     * @param {Object} options Temporary options for rendering a Facade.js entity.
      * @return {Object} Facade.js object.
      * @api public
      */
