@@ -88,6 +88,38 @@ footer {
     background: #38B27F;
 }
 
+.heart {
+    display: inline-block;
+    font-size: 1.1em;
+    color: #f00;
+    -webkit-animation: pulse 1s infinite;
+    animation: pulse 1s infinite;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    20% {
+        -webkit-transform: scale(1.05);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 @media screen and (min-width: 600px) {
 
     body {
