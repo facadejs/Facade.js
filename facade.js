@@ -2031,6 +2031,11 @@
     /**
      * Create a group object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     * @options {Integer?} x X coordinate to position a group. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position a group. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the group. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the group. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a group. <i>Default:</i> 1
      * @param {Object?} options Options to create the group with.
      * @return {Object} New Facade.Group object.
      * @api public
