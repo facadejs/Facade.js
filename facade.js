@@ -129,12 +129,12 @@
     }
 
     /**
-     * Draws a Facade.js entity (or mulitple entities) to the stage.
+     * Draws a Facade.js entity (or multiple entities) to the stage.
      *
      *     stage.addToStage(circle);
      *
      * @param {Object} obj Facade.js entity or an array of entities.
-     * @param {Object} options Temporary options for rendering a Facade.js entity (or mulitple entities).
+     * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
      * @return {Object} Facade.js object.
      * @api public
      */
@@ -184,7 +184,7 @@
     };
 
     /**
-     * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or avalible polyfill.
+     * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or available polyfill.
      *
      *     stage.draw(function () {
      *
@@ -274,7 +274,7 @@
     };
 
     /**
-     * Applys key-value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.
+     * Applies key-value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.
      *
      *     stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});
      *
@@ -604,7 +604,7 @@
     };
 
     /**
-     * Applys transforms (translate, rotate and scale) to an entity.
+     * Applies transforms (translate, rotate and scale) to an entity.
      *
      *     console.log(rect._applyTransforms(context, options, metrics));
      *
@@ -645,7 +645,7 @@
     };
 
     /**
-     * Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getOption('value'));
      *
@@ -667,7 +667,7 @@
     };
 
     /**
-     * Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllOptions());
      *
@@ -779,7 +779,7 @@
     };
 
     /**
-     * Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temperary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getMetric('width'));
      *
@@ -801,7 +801,7 @@
     };
 
     /**
-     * Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temperary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllMetrics());
      *
@@ -2115,7 +2115,7 @@
      *
      *     group.addToGroup(circle);
      *
-     * @param {Object} obj Facade.js entitiy.
+     * @param {Object} obj Facade.js entity.
      * @return {void}
      * @api private
      */
@@ -2141,7 +2141,7 @@
      *
      *     group.removeFromGroup(circle);
      *
-     * @param {Object} obj Facade.js entitiy.
+     * @param {Object} obj Facade.js entity.
      * @return {void}
      * @api private
      */
