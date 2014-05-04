@@ -860,6 +860,7 @@
     /**
      * Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     * @param {Object?} options Options to create the polygon with.
      * @return {Object} New Facade.Polygon object.
      * @api public
      */
@@ -1124,6 +1125,7 @@
     /**
      * Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     * @param {Object?} options Options to create the circle with.
      * @return {Object} New Facade.Circle object.
      * @api public
      */
@@ -1225,6 +1227,7 @@
     /**
      * Create a line object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     * @param {Object?} options Options to create the line with.
      * @return {Object} New Facade.Line object.
      * @api public
      */
@@ -1315,6 +1318,7 @@
     /**
      * Create a rectangle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     * @param {Object?} options Options to create the rectangle with.
      * @return {Object} New Facade.Rect object.
      * @api public
      */
@@ -1365,6 +1369,8 @@
     /**
      * Create an image object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     * @param {Object|String} source Local image file or reference to an HTML image element.
+     * @param {Object?} options Options to create the image with.
      * @return {Object} New Facade.Image object.
      * @api public
      */
@@ -1687,6 +1693,8 @@
     /**
      * Create a text object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     * @param {Object?} value Value of the text object.
+     * @param {Object?} options Options to create the text entity with.
      * @return {Object} New Facade.Text object.
      * @api public
      */
@@ -1921,6 +1929,7 @@
     /**
      * Create a group object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     * @param {Object?} options Options to create the group with.
      * @return {Object} New Facade.Group object.
      * @api public
      */
