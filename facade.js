@@ -1779,6 +1779,22 @@
     /**
      * Create a text object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     * @options {Integer?} x X coordinate to position a text object. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position a text object. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the text object. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a text object. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {Integer?} width Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0
+     * @options {String?} fontFamily Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
+     * @options {String?} fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
+     * @options {Integer?} fontSize Font size in pixels. <i>Default:</i> 30
+     * @options {String?} lineHeight Line height of the text. <i>Default:</i> 1
+     * @options {String?} textAlign Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
+     * @options {String?} textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
+     * @options {String?} fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
      * @param {Object?} value Value of the text object.
      * @param {Object?} options Options to create the text entity with.
      * @return {Object} New Facade.Text object.
