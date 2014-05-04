@@ -1141,6 +1141,25 @@
     /**
      * Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     * @options {Integer?} x X coordinate to position the circle. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position the circle. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the circle. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a circle. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @options {String?} fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @options {Integer?} radius Radius of the circle. <i>Default:</i> 0
+     * @options {Integer?} start Degree at which the circle begins. <i>Default:</i> 0
+     * @options {Integer?} end Degree at which the circle ends. <i>Default:</i> 360
      * @param {Object?} options Options to create the circle with.
      * @return {Object} New Facade.Circle object.
      * @api public
@@ -1243,6 +1262,26 @@
     /**
      * Create a line object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     * @options {Integer?} x X coordinate to position the line. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position the line. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the line. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a line. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a line's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @options {Integer?} x1 X coordinate where line begins. <i>Default:</i> 0
+     * @options {Integer?} y1 Y coordinate where line begins. <i>Default:</i> 0
+     * @options {Integer?} x2 X coordinate where line ends. <i>Default:</i> 0
+     * @options {Integer?} y2 Y coordinate where line ends. <i>Default:</i> 0
      * @param {Object?} options Options to create the line with.
      * @return {Object} New Facade.Line object.
      * @api public
@@ -1334,6 +1373,24 @@
     /**
      * Create a rectangle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     * @options {Integer?} x X coordinate to position the rectangle. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position the rectangle. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the rectangle. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a rectangle. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @options {String?} fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @options {String?} lineCap The style of rectangle cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @options {String?} lineJoin The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @options {Integer?} width Width of the rectangle. <i>Default:</i> 0
+     * @options {Integer?} height Height of the rectangle. <i>Default:</i> 0
      * @param {Object?} options Options to create the rectangle with.
      * @return {Object} New Facade.Rect object.
      * @api public
