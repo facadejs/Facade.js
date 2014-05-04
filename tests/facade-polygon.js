@@ -31,7 +31,7 @@ casper.test.begin('Polygon entity object created.', function suite(test) {
         fillStyle: '#000',
         strokeStyle: '',
         lineWidth: 0,
-        lineCap: 'default',
+        lineCap: 'butt',
         lineJoin: 'miter',
         closePath: true
     }, 'Default options have been set correctly.');
@@ -68,7 +68,7 @@ casper.test.begin('Setting/getting polygon entity default options.', function su
         fillStyle: '#000',
         strokeStyle: '',
         lineWidth: 0,
-        lineCap: 'default',
+        lineCap: 'butt',
         lineJoin: 'miter',
         closePath: true
     }, 'Default options have been set correctly.');
@@ -88,7 +88,7 @@ casper.test.begin('Setting/getting polygon entity default options.', function su
         fillStyle: '#000',
         strokeStyle: '',
         lineWidth: 0,
-        lineCap: 'default',
+        lineCap: 'butt',
         lineJoin: 'miter',
         closePath: true,
         test: true
@@ -121,7 +121,7 @@ casper.test.begin('Running _configOptions on polygon options.', function suite(t
         fillStyle: '#000',
         strokeStyle: '',
         lineWidth: 0,
-        lineCap: 'default',
+        lineCap: 'butt',
         lineJoin: 'miter',
         closePath: true,
         translate: [ 10, 10 ],

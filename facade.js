@@ -912,7 +912,7 @@
             fillStyle: '#000',
             strokeStyle: '',
             lineWidth: 0,
-            lineCap: 'default',
+            lineCap: 'butt',
             lineJoin: 'miter',
             closePath: true
         });
