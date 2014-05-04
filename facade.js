@@ -1442,6 +1442,19 @@
     /**
      * Create an image object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     * @options {Integer?} x X coordinate to position an image. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position an image. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the image. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of an image. <i>Default:</i> 1
+     * @options {Integer?} width Width of the image. <i>Default:</i> 0
+     * @options {Integer?} height Height of the image. <i>Default:</i> 0
+     * @options {Integer?} tileX Number of times to tile the image horizontally. <i>Default:</i> 1
+     * @options {Integer?} tileY Number of times to tile the image vertically. <i>Default:</i> 1
+     * @options {Array?} frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> []
+     * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
+     * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
+     * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
      * @param {Object|String} source Local image file or reference to an HTML image element.
      * @param {Object?} options Options to create the image with.
      * @return {Object} New Facade.Image object.
