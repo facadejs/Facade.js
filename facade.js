@@ -966,7 +966,7 @@
 
                     context.arc.apply(context, options.points[i]);
 
-                } else {
+                } else if (options.points[i].length === 2) {
 
                     context.lineTo.apply(context, options.points[i]);
 
