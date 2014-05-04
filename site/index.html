@@ -5,6 +5,7 @@
 <meta name="viewport" content="initial-scale=1">
 <title>Facade.js &mdash; Drawing shapes, images and text in HTML5 canvas made easy.</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/github.min.css">
 </head>
 
 <body>
@@ -31,24 +32,24 @@
 
     <p>First include the Facade.js script (15kb minified, 3kb gzipped):</p>
 
-    <pre>&lt;script src="facade.min.js"&gt;&lt;/script&gt;</pre>
+    <pre><code>&lt;script src="facade.min.js"&gt;&lt;/script&gt;</code></pre>
 
     <p>Then create a new Facade.js object using an existing canvas element or a unique ID.</p>
 
-    <pre>var stage = new Facade(document.querySelector('canvas'));</pre>
+    <pre><code>var stage = new Facade(document.querySelector('canvas'));</code></pre>
 
-    <pre>var stage = new Facade('stage', 400, 300);</pre>
+    <pre><code>var stage = new Facade('stage', 400, 300);</code></pre>
 
     <p>Then you can start creating and adding objects like rectangle, lines, circle, text and images.</p>
 
-    <pre>var stage = new Facade(document.querySelector('canvas')),
+    <pre><code>var stage = new Facade(document.querySelector('canvas')),
     rect = new Facade.Rect({ width: 100, height: 100, fillStyle: 'red' });
 
-stage.addToStage(rect);</pre>
+stage.addToStage(rect);</code></pre>
 
     <p>To make an animation place all draw logic within an callback function using Facade.draw.</p>
 
-    <pre>var stage = new Facade(document.querySelector('canvas')),
+    <pre><code>var stage = new Facade(document.querySelector('canvas')),
     rect = new Facade.Rect({ width: 100, height: 100, fillStyle: 'red' });
 
 stage.draw(function () {
@@ -59,7 +60,7 @@ stage.draw(function () {
 
     this.addToStage(rect);
 
-});</pre>
+});</code></pre>
 
 </div>
 
@@ -75,7 +76,7 @@ stage.draw(function () {
 
     <p>Play with this code live at <a href="http://play.facadejs.com/#basic/rect.js">http://play.facadejs.com/#basic/rect.js</a>.</p>
 
-    <pre class="demo">(function () {
+    <pre class="demo"><code>(function () {
 
     var stage = new Facade(document.querySelector('#rect_demo')),
         rect = new Facade.Rect({
@@ -97,7 +98,7 @@ stage.draw(function () {
 
     });
 
-}());</pre>
+}());</code></pre>
 
     <canvas id="rect_demo" width="900" height="400"></canvas>
 
@@ -105,7 +106,7 @@ stage.draw(function () {
 
     <p>Play with this code live at <a href="http://play.facadejs.com/#basic/line.js">http://play.facadejs.com/#basic/line.js</a>.</p>
 
-    <pre class="demo">(function () {
+    <pre class="demo"><code>(function () {
 
     var stage = new Facade(document.querySelector('#line_demo')),
         line = new Facade.Line({
@@ -125,7 +126,7 @@ stage.draw(function () {
 
     });
 
-}());</pre>
+}());</code></pre>
 
     <canvas id="line_demo" width="900" height="400"></canvas>
 
@@ -133,7 +134,7 @@ stage.draw(function () {
 
     <p>Play with this code live at <a href="http://play.facadejs.com/#basic/circle.js">http://play.facadejs.com/#basic/circle.js</a>.</p>
 
-    <pre class="demo">(function () {
+    <pre class="demo"><code>(function () {
 
     var stage = new Facade(document.querySelector('#circle_demo')),
         circle = new Facade.Circle({
@@ -154,7 +155,7 @@ stage.draw(function () {
 
     });
 
-}());</pre>
+}());</code></pre>
 
     <canvas id="circle_demo" width="900" height="400"></canvas>
 
@@ -162,7 +163,7 @@ stage.draw(function () {
 
     <p>Play with this code live at <a href="http://play.facadejs.com/#basic/text.js">http://play.facadejs.com/#basic/text.js</a>.</p>
 
-    <pre class="demo">(function () {
+    <pre class="demo"><code>(function () {
 
     var stage = new Facade(document.querySelector('#text_demo')),
         text = new Facade.Text('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', {
@@ -182,7 +183,7 @@ stage.draw(function () {
 
     });
 
-}());</pre>
+}());</code></pre>
 
     <canvas id="text_demo" width="900" height="400"></canvas>
 
@@ -190,7 +191,7 @@ stage.draw(function () {
 
     <p>Play with this code live at <a href="http://play.facadejs.com/#basic/image.js">http://play.facadejs.com/#basic/image.js</a>.</p>
 
-    <pre class="demo">(function () {
+    <pre class="demo"><code>(function () {
 
     var stage = new Facade(document.querySelector('#image_demo')),
         image = new Facade.Image('images/scott-pilgrim.png', {
@@ -211,7 +212,7 @@ stage.draw(function () {
 
     });
 
-}());</pre>
+}());</code></pre>
 
     <canvas id="image_demo" width="900" height="400"></canvas>
 
@@ -254,15 +255,20 @@ stage.draw(function () {
 
 </footer>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/languages/javascript.min.js"></script>
+
 <script src="facade.min.js"></script>
 <script>
 
 (function () {
 
+    hljs.initHighlightingOnLoad();
+
     Array.prototype.slice.call(document.querySelectorAll('.demo')).forEach(function (demo) {
 
         var script = document.createElement('script');
-        script.innerHTML = demo.innerHTML;
+        script.innerHTML = demo.firstChild.innerHTML;
 
         demo.parentNode.insertBefore(script, demo.nextSibling);
 

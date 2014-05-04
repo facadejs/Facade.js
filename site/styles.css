@@ -31,11 +31,9 @@ p a {
     hyphens: auto;
 }
 
-pre {
+pre code {
     margin: 1em 0;
-    padding: .4em .8em;
-    font-family: Courier, monospace;
-    font-size: .7em;
+    font-size: .9em;
     line-height: 1.3em;
     color: #333;
     border: 1px solid #ddd;
@@ -52,7 +50,7 @@ canvas {
 }
 
 header {
-    padding: 0 1.5em;
+    padding: 1em 1.5em;
     color: #fff;
     text-align: center;
     background-color: #371F59;
@@ -75,7 +73,7 @@ footer {
 
 .wrapper {
     margin: 0 auto;
-    padding: 1em;
+    padding: 2em 1em;
     max-width: 900px;
 }
 
