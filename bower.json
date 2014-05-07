@@ -4,8 +4,6 @@
     "version": "0.3.0-beta",
     "main": "facade.min.js",
     "ignore": [
-        "playground/",
-        "site/",
         "tests/",
         ".gitignore",
         ".travis.yml",

@@ -59,51 +59,6 @@ module.exports = function (grunt) {
 
                 command: 'gzip -9 < facade.min.js > facade.min.js.gzip'
 
-            },
-
-            site: {
-
-                command: 'cp facade.min.js site/;'
-
-            },
-
-            demos: {
-
-                command: 'cp facade.min.js playground/; cd playground; python build.py > demos.js;'
-
-            }
-
-        },
-
-        manifest: {
-
-            generate: {
-
-                options: {
-                    basePath: 'playground/',
-                    cache: [
-                        'index.html',
-                        'stage.html',
-                        'styles.css',
-                        'demos.js',
-                        'play.js',
-                        'images/scott-pilgrim.png',
-                        'facade.min.js',
-                        'http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js',
-                        'http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js',
-                        'http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/worker-javascript.js',
-                        'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js',
-                        'http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js',
-                    ],
-                    network: ['*']
-                },
-
-                src: [
-                    'playground/*'
-                ],
-
-                dest: 'playground/manifest.appcache'
-
             }
 
         },
@@ -113,19 +68,13 @@ module.exports = function (grunt) {
             default: {
                 files: ['facade.js', 'tests/**/*.js'],
                 tasks: ['jslint', 'uglify', 'shell:docs', 'shell:gzip', 'casperjs']
-            },
-
-            demos: {
-                files: ['playground/demos/**/*.js'],
-                tasks: ['shell:demos', 'manifest']
             }
 
         }
 
     });
 
-    grunt.registerTask('default', [ 'jslint', 'uglify', 'shell', 'manifest' ]);
-    grunt.registerTask('demos', [ 'shell:demos', 'manifest' ]);
+    grunt.registerTask('default', [ 'jslint', 'uglify', 'shell' ]);
     grunt.registerTask('test', [ 'casperjs' ]);
 
 };
