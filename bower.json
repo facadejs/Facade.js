@@ -24,7 +24,7 @@
     "homepage": "http://facadejs.com/",
     "repository": {
         "type": "git",
-        "url": "git://github.com/neogeek/Facade.js.git"
+        "url": "git://github.com/facadejs/Facade.js.git"
     },
     "private": true
 }

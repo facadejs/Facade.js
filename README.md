@@ -1,4 +1,4 @@
-[![](https://api.travis-ci.org/neogeek/Facade.js.svg)](https://travis-ci.org/neogeek/Facade.js)
+[![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js)
 
 #Facade.js 0.3.0-beta
 

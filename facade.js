@@ -1,6 +1,6 @@
 /*!
  * Facade.js v0.3.0-beta
- * https://github.com/neogeek/facade.js
+ * https://github.com/facadejs/facade.js
  *
  * Copyright (c) 2014 Scott Doxey
  * Dual-licensed under both MIT and BSD licenses.
