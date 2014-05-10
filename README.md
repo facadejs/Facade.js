@@ -4,6 +4,10 @@
 
 > Drawing shapes, images and text in HTML5 canvas made easy.
 
+##Demos
+
+Editable demos are available at <http://play.facadejs.com/>.
+
 ##Documentation
 
 The documentation for version 0.3.0-beta can be found at <http://docs.facadejs.com/0.3.0-beta/>.
@@ -84,14 +88,10 @@ Tests are built in [casperjs](http://casperjs.org/) and validates the values use
 $ npm test
 ```
 
-##Demos
-
-<http://play.facadejs.com/>
-
 ##CDN
 
 <http://cdn.facadejs.com/0.3.0-beta/facade.min.js>
 
 ##Browser Support
 
-Currently Facade.js works in Chrome 10+, Safari 6+, Firefox 4+ and Internet Explorer 10. Support can be added for Opera, Internet Explorer 9 and older versions of both Safari and Firefox with a [polyfill](https://gist.github.com/paulirish/1579671) for [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/DOM/window.requestAnimationFrame).
+Facade.js works in Chrome 10+, Safari 6+, Firefox 4+, Opera 15+, and Internet Explorer 10+. By way of an additional [polyfill](https://gist.github.com/paulirish/1579671) for [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/DOM/window.requestAnimationFrame) support can be added for Internet Explorer 9 and older versions of Safari, Firefox, and Opera.
