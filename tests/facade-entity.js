@@ -286,9 +286,11 @@ casper.test.begin('Setting an entity option with Entity.setOption', function sui
 
     test.assertEquals(rect.setOptions({ width: 200 }).width, 200, 'Option was set correctly.');
 
+    test.assertEquals(rect.setOptions({ width: '200px' }).width, 200, 'String with destination type of number was converted correctly.');
+
     try {
 
-        test.assertEquals(rect.setOptions({ width: '400' }).width, '400', 'Testing the validity of an invalid option value.');
+        test.assertEquals(rect.setOptions({ points: { x: 0, y: 0 } }).width, { x: 0, y: 0 }, 'Testing the validity of an invalid option value.');
 
         test.fail();
 

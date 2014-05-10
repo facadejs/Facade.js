@@ -708,9 +708,17 @@
 
         if (this._options[key] !== undefined) {
 
-            if (typeof this._options[key] === 'number' && typeof value === 'string' && value.match(_OPERATOR_TEST)) {
+            if (typeof this._options[key] === 'number' && typeof value === 'string') {
 
-                value = this._options[key] + parseFloat(value.replace('=', ''));
+                if (value.match(_OPERATOR_TEST)) {
+
+                    value = this._options[key] + parseFloat(value.replace('=', ''));
+
+                } else {
+
+                    value = parseFloat(value);
+
+                }
 
             }
 
