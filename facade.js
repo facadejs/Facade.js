@@ -1158,6 +1158,7 @@
      * @options {Integer?} radius Radius of the circle. <i>Default:</i> 0
      * @options {Integer?} start Degree at which the circle begins. <i>Default:</i> 0
      * @options {Integer?} end Degree at which the circle ends. <i>Default:</i> 360
+     * @options {Boolean?} counterclockwise Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
      * @param {Object?} options Options to create the circle with.
      * @return {Object} New Facade.Circle object.
      * @api public
@@ -1171,7 +1172,7 @@
 
         }
 
-        this._options = this._defaultOptions({ radius: 0, begin: 0, end: 360 });
+        this._options = this._defaultOptions({ radius: 0, begin: 0, end: 360, counterclockwise: false });
         this._metrics = this._defaultMetrics();
 
         this.setOptions(options);
@@ -1200,7 +1201,15 @@
         options.translate = [ options.x, options.y ];
         options.globalAlpha = options.opacity / 100;
 
-        options.points = [ [ 0, 0, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];
+        if (options.counterclockwise) {
+
+            options.points = [ [ 0, 0, options.radius, options.end * _TO_RADIANS, options.begin * _TO_RADIANS ] ];
+
+        } else {
+
+            options.points = [ [ 0, 0, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];
+
+        }
 
         return options;
 

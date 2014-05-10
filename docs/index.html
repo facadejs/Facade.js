@@ -3248,6 +3248,17 @@
 
                     
 
+                    <p>
+                        <b>counterclockwise</b>
+                        <code>Boolean</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false</p>
+
+                    
+
                     
 
                     
@@ -3266,7 +3277,7 @@
 
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">radius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">begin</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span> <span class="mi">360</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">radius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">begin</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span> <span class="mi">360</span><span class="p">,</span> <span class="nx">counterclockwise</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
@@ -3331,7 +3342,15 @@
     <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
 
-    <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">begin</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">end</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span> <span class="p">]</span> <span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">counterclockwise</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">end</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">begin</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span> <span class="p">]</span> <span class="p">];</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">begin</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">end</span> <span class="o">*</span> <span class="nx">_TO_RADIANS</span> <span class="p">]</span> <span class="p">];</span>
+
+    <span class="p">}</span>
 
     <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
 

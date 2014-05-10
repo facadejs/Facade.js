@@ -37,7 +37,8 @@ casper.test.begin('Circle entity object created.', function suite(test) {
         closePath: true,
         radius: 0,
         begin: 0,
-        end: 360
+        end: 360,
+        counterclockwise: false
     }, 'Default options have been set correctly.');
 
     test.assertEquals(object.getAllMetrics(), {
@@ -77,7 +78,8 @@ casper.test.begin('Setting/getting circle entity default options.', function sui
         closePath: true,
         radius: 0,
         begin: 0,
-        end: 360
+        end: 360,
+        counterclockwise: false
     }, 'Object default options have been set correctly.');
 
     test.assertEquals(object.setOptions({ radius: 20 }), {
@@ -100,7 +102,8 @@ casper.test.begin('Setting/getting circle entity default options.', function sui
         closePath: true,
         radius: 20,
         begin: 0,
-        end: 360
+        end: 360,
+        counterclockwise: false
     }, 'Object custom options have been set correctly.');
 
     test.done();
@@ -135,7 +138,8 @@ casper.test.begin('Running _configOptions on circle options.', function suite(te
         globalAlpha: 0.5,
         radius: 20,
         begin: 0,
-        end: 360
+        end: 360,
+        counterclockwise: false
     }, 'Custom config options have been set correctly.');
 
     test.done();
