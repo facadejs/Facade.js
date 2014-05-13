@@ -85,6 +85,17 @@
 
         }
 
+        this.dt = null;
+        this.fps = null;
+        this.ftime = null;
+
+        this._callback = null;
+
+        this._requestAnimation = null;
+
+        this._width = null;
+        this._height = null;
+
         if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
 
             this.canvas = canvas;
@@ -106,6 +117,11 @@
             this.width(width);
             this.height(height);
 
+        } else {
+
+            this._width = parseInt(this.canvas.getAttribute('width'), 10);
+            this._height = parseInt(this.canvas.getAttribute('height'), 10);
+
         }
 
         try {
@@ -117,14 +133,6 @@
             throw new Error('Object passed to Facade.js was not a valid canvas element.');
 
         }
-
-        this.dt = null;
-        this.fps = null;
-        this.ftime = null;
-
-        this._callback = null;
-
-        this._requestAnimation = null;
 
     }
 
@@ -265,11 +273,21 @@
 
         if (height) {
 
-            this.canvas.setAttribute('height', parseInt(height, 10));
+            this._height = parseInt(height, 10);
+
+            if (this.canvas.hasAttribute('data-resized-for-hdpi')) {
+
+                this.resizeForHDPI();
+
+            } else {
+
+                this.canvas.setAttribute('height', this._height);
+
+            }
 
         }
 
-        return this.canvas.height;
+        return this._height;
 
     };
 
@@ -319,24 +337,36 @@
     };
 
     /**
-     * Resizes the canvas width and height to be multiplied by the device pixel ratio to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating any Facade entities as scaling is applied to the canvas context.
+     * Resizes the canvas width and height to be multiplied by the pixel ratio of the device to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating/adding any Facade entities as scaling is applied to the canvas context.
      *
      *     stage.resizeForHDPI();
+     *     stage.resizeForHDPI(2);
      *
+     * @param {Integer?} ratio Ratio to scale the canvas.
      * @return {Object} Facade.js object.
      * @api public
      */
 
-    Facade.prototype.resizeForHDPI = function () {
+    Facade.prototype.resizeForHDPI = function (ratio) {
 
-        if (window.devicePixelRatio > 1 && !this.canvas.hasAttribute('data-resized-for-hdpi')) {
+        if (ratio === undefined) {
+
+            ratio = window.devicePixelRatio;
+
+        } else {
+
+            ratio = parseFloat(ratio);
+
+        }
+
+        if (ratio > 1) {
 
             this.canvas.setAttribute('style', 'width: ' + this.width() + 'px; height: ' + this.height() + 'px;');
 
-            this.canvas.setAttribute('width', this.width() * window.devicePixelRatio);
-            this.canvas.setAttribute('height', this.height() * window.devicePixelRatio);
+            this.canvas.setAttribute('width', this.width() * ratio);
+            this.canvas.setAttribute('height', this.height() * ratio);
 
-            this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
+            this.context.scale(ratio, ratio);
 
             this.canvas.setAttribute('data-resized-for-hdpi', true);
 
@@ -401,11 +431,21 @@
 
         if (width) {
 
-            this.canvas.setAttribute('width', parseInt(width, 10));
+            this._width = parseInt(width, 10);
+
+            if (this.canvas.hasAttribute('data-resized-for-hdpi')) {
+
+                this.resizeForHDPI();
+
+            } else {
+
+                this.canvas.setAttribute('width', this._width);
+
+            }
 
         }
 
-        return this.canvas.width;
+        return this._width;
 
     };
 

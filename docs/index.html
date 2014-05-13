@@ -549,6 +549,17 @@
 
     <span class="p">}</span>
 
+    <span class="k">this</span><span class="p">.</span><span class="nx">dt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">fps</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_callback</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_width</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_height</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
     <span class="k">if</span> <span class="p">(</span><span class="nx">canvas</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">canvas</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">;</span>
@@ -570,6 +581,11 @@
         <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
 
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_width</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_height</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">);</span>
+
     <span class="p">}</span>
 
     <span class="k">try</span> <span class="p">{</span>
@@ -581,14 +597,6 @@
         <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Object passed to Facade.js was not a valid canvas element.&#39;</span><span class="p">);</span>
 
     <span class="p">}</span>
-
-    <span class="k">this</span><span class="p">.</span><span class="nx">dt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">fps</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-
-    <span class="k">this</span><span class="p">.</span><span class="nx">_callback</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-
-    <span class="k">this</span><span class="p">.</span><span class="nx">_requestAnimation</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -952,11 +960,21 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_height</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="s1">&#39;data-resized-for-hdpi&#39;</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">resizeForHDPI</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_height</span><span class="p">);</span>
+
+        <span class="p">}</span>
 
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_height</span><span class="p">;</span>
 
 <span class="p">};</span>
 </pre></div>
@@ -1074,7 +1092,24 @@
 
                     <h2 id="facade.prototype.resizeforhdpi"><a href="#facade.prototype.resizeforhdpi" class="permalink">#</a>Facade.resizeForHDPI() </h2>
 
-                    <p>Resizes the canvas width and height to be multiplied by the device pixel ratio to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating any Facade entities as scaling is applied to the canvas context.</p>
+                    <p>Resizes the canvas width and height to be multiplied by the pixel ratio of the device to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating/adding any Facade entities as scaling is applied to the canvas context.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>ratio</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Ratio to scale the canvas.</p>
+
+                    
 
                     
 
@@ -1087,6 +1122,7 @@
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">resizeForHDPI</span><span class="p">();</span>
+<span class="nx">stage</span><span class="p">.</span><span class="nx">resizeForHDPI</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 </pre></div>
 
 
@@ -1096,16 +1132,26 @@
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resizeForHDPI</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resizeForHDPI</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ratio</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="s1">&#39;data-resized-for-hdpi&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">ratio</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">ratio</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="nx">ratio</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">ratio</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">ratio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;width: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px; height: &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;px;&#39;</span><span class="p">);</span>
 
-        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">*</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">*</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">()</span> <span class="o">*</span> <span class="nx">ratio</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">()</span> <span class="o">*</span> <span class="nx">ratio</span><span class="p">);</span>
 
-        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">ratio</span><span class="p">,</span> <span class="nx">ratio</span><span class="p">);</span>
 
         <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;data-resized-for-hdpi&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
@@ -1273,11 +1319,21 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_width</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="s1">&#39;data-resized-for-hdpi&#39;</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">resizeForHDPI</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_width</span><span class="p">);</span>
+
+        <span class="p">}</span>
 
     <span class="p">}</span>
 
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_width</span><span class="p">;</span>
 
 <span class="p">};</span>
 </pre></div>

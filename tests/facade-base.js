@@ -183,8 +183,11 @@ casper.test.begin('Facade HDPI support.', function suite(test) {
 
     stage.resizeForHDPI();
 
-    test.assertEquals(stage.width(), 1000, 'Width (@2x) equals 1000.');
-    test.assertEquals(stage.height(), 600, 'Height (@2x) equals 600.');
+    test.assertEquals(stage.width(), 500, 'Wdth (@2x) equals 500.');
+    test.assertEquals(stage.height(), 300, 'Height (@2x) equals 300.');
+
+    test.assertEquals(stage.canvas.getAttribute('width'), '1000', 'Actual width (@2x) equals 1000.');
+    test.assertEquals(stage.canvas.getAttribute('height'), '600', 'Actual height (@2x) equals 600.');
 
     test.assertEquals(stage.canvas.style.width, '500px', 'Style width set to original width (500).');
     test.assertEquals(stage.canvas.style.height, '300px', 'Style height set to original height (300).');
