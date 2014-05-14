@@ -2292,7 +2292,11 @@
 
     if (typeof window.define === 'function' && window.define.amd !== undefined) {
 
-        window.define([], function () { return Facade; });
+        window.define([], Facade);
+
+    } else if (typeof module === 'object' && module.exports !== undefined) {
+
+        module.exports = Facade;
 
     } else {
 

@@ -1,7 +1,9 @@
-/*global require, casper, Facade*/
+/*global require, casper*/
 
 require('../polyfills/requestAnimationFrame-polyfill');
-require('../facade');
+
+var Facade = require('../facade');
+
 
 casper.test.info('Facade.Line');
 

@@ -1,7 +1,9 @@
-/*global require, casper, Facade, setTimeout*/
+/*global require, casper, setTimeout*/
 
 require('../polyfills/requestAnimationFrame-polyfill');
-require('../facade');
+
+var Facade = require('../facade');
+
 
 var image = document.createElement('img');
 image.setAttribute('src', 'data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=');
