@@ -16,6 +16,7 @@ module.exports = function (grunt) {
                     nomen: true,
                     globals: {
                         'document': true,
+                        'define': true,
                         'module': true,
                         'require': true,
                         'window': true

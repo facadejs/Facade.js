@@ -2290,9 +2290,9 @@
      * AMD Support
      */
 
-    if (typeof window.define === 'function' && window.define.amd !== undefined) {
+    if (typeof define === 'function' && define.amd !== undefined) {
 
-        window.define([], Facade);
+        define([], Facade);
 
     } else if (typeof module === 'object' && module.exports !== undefined) {
 
