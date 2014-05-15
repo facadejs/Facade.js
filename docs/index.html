@@ -4502,6 +4502,28 @@
                     
 
                     <p>
+                        <b>offsetX</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Starting X coordinate within the image. <i>Default:</i> 0</p>
+
+                    
+
+                    <p>
+                        <b>offsetY</b>
+                        <code>Integer</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Starting Y coordinate within the image. <i>Default:</i> 0</p>
+
+                    
+
+                    <p>
                         <b>frames</b>
                         <code>Array</code>
                         
@@ -4568,6 +4590,8 @@
         <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">tileX</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="nx">tileY</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">frames</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
         <span class="nx">speed</span><span class="o">:</span> <span class="mi">120</span><span class="p">,</span>
         <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -5052,8 +5076,8 @@
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
         <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
-        <span class="nx">offsetX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">offsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">currentOffsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">x</span><span class="p">,</span>
         <span class="nx">y</span><span class="p">;</span>
 
@@ -5063,7 +5087,7 @@
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="nx">offsetX</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
 
         <span class="p">}</span>
 
@@ -5073,8 +5097,8 @@
 
                 <span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span>
                     <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span>
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">offsetX</span><span class="p">,</span>
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">offsetY</span><span class="p">,</span>
+                    <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">currentOffsetX</span><span class="p">)</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">,</span>
+                    <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">currentOffsetY</span><span class="p">)</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">,</span>
                     <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
                     <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
                     <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">x</span><span class="p">,</span>

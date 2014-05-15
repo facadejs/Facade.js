@@ -1506,6 +1506,8 @@
      * @options {Integer?} height Height of the image. <i>Default:</i> 0
      * @options {Integer?} tileX Number of times to tile the image horizontally. <i>Default:</i> 1
      * @options {Integer?} tileY Number of times to tile the image vertically. <i>Default:</i> 1
+     * @options {Integer?} offsetX Starting X coordinate within the image. <i>Default:</i> 0
+     * @options {Integer?} offsetY Starting Y coordinate within the image. <i>Default:</i> 0
      * @options {Array?} frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> []
      * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
      * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
@@ -1529,6 +1531,8 @@
             height: 0,
             tileX: 1,
             tileY: 1,
+            offsetX: 0,
+            offsetY: 0,
             frames: [0],
             speed: 120,
             loop: true,
@@ -1746,8 +1750,8 @@
 
         var context = facade.context,
             metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
-            offsetX = 0,
-            offsetY = 0,
+            currentOffsetX = 0,
+            currentOffsetY = 0,
             x,
             y;
 
@@ -1757,7 +1761,7 @@
 
             if (options.frames.length) {
 
-                offsetX = options.frames[this.currentFrame] || 0;
+                currentOffsetX = options.frames[this.currentFrame] || 0;
 
             }
 
@@ -1767,8 +1771,8 @@
 
                     context.drawImage(
                         this.image,
-                        options.width * offsetX,
-                        options.height * offsetY,
+                        (options.width * currentOffsetX) + options.offsetX,
+                        (options.height * currentOffsetY) + options.offsetY,
                         options.width,
                         options.height,
                         options.width * x,
