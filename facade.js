@@ -1586,7 +1586,7 @@
 
         } else {
 
-            this.image.addEventListener('load', this._setMetrics.bind(this));
+            this.image.addEventListener('load', this._setMetrics.bind(this, null));
 
         }
 
