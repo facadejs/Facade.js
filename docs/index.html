@@ -5428,6 +5428,8 @@
     <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
+    <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
     <span class="k">this</span><span class="p">.</span><span class="nx">lines</span> <span class="o">=</span> <span class="p">[];</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
@@ -5495,8 +5497,9 @@
         <span class="nx">words</span> <span class="o">=</span> <span class="p">[],</span>
         <span class="nx">currentWord</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
         <span class="nx">currentLine</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-        <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">maxLineWidth</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+        <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">lines</span> <span class="o">=</span> <span class="p">[];</span>
 
@@ -5531,9 +5534,9 @@
 
             <span class="nx">currentLine</span> <span class="o">=</span> <span class="nx">currentLine</span> <span class="o">+</span> <span class="nx">currentWord</span><span class="p">;</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">currentLineWidth</span> <span class="o">&gt;</span> <span class="nx">maxLineWidth</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">currentLineWidth</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="nx">maxLineWidth</span> <span class="o">=</span> <span class="nx">currentLineWidth</span><span class="p">;</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span> <span class="o">=</span> <span class="nx">currentLineWidth</span><span class="p">;</span>
 
             <span class="p">}</span>
 
@@ -5549,21 +5552,15 @@
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">textAlignment</span> <span class="o">===</span> <span class="s1">&#39;center&#39;</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="nx">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nx">maxLineWidth</span> <span class="o">-</span> <span class="nx">currentLineWidth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="nx">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span> <span class="o">-</span> <span class="nx">currentLineWidth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
 
         <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">textAlignment</span> <span class="o">===</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="nx">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">maxLineWidth</span> <span class="o">-</span> <span class="nx">currentLineWidth</span><span class="p">;</span>
+            <span class="nx">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span> <span class="o">-</span> <span class="nx">currentLineWidth</span><span class="p">;</span>
 
         <span class="p">}</span>
 
     <span class="p">});</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="nx">maxLineWidth</span><span class="p">);</span>
-
-    <span class="p">}</span>
 
     <span class="nx">_context</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
 
@@ -5706,6 +5703,12 @@
     <span class="nx">options</span><span class="p">.</span><span class="nx">translate</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="p">];</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">globalAlpha</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">fontStyle</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px &#39;</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">fontFamily</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span><span class="p">;</span>
+
+    <span class="p">}</span>
 
     <span class="k">return</span> <span class="nx">options</span><span class="p">;</span>
 

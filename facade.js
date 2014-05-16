@@ -1883,6 +1883,8 @@
         });
         this._metrics = this._defaultMetrics();
 
+        this._maxLineWidth = 0;
+
         this.lines = [];
 
         this.setOptions(options);
@@ -1914,8 +1916,9 @@
             words = [],
             currentWord = null,
             currentLine = '',
-            currentLineWidth = 0,
-            maxLineWidth = options.width;
+            currentLineWidth = 0;
+
+        this._maxLineWidth = options.width;
 
         this.lines = [];
 
@@ -1950,9 +1953,9 @@
 
                 currentLine = currentLine + currentWord;
 
-                if (currentLineWidth > maxLineWidth) {
+                if (currentLineWidth > this._maxLineWidth) {
 
-                    maxLineWidth = currentLineWidth;
+                    this._maxLineWidth = currentLineWidth;
 
                 }
 
@@ -1968,21 +1971,15 @@
 
             if (options.textAlignment === 'center') {
 
-                line[1] = (maxLineWidth - currentLineWidth) / 2;
+                line[1] = (this._maxLineWidth - currentLineWidth) / 2;
 
             } else if (options.textAlignment === 'right') {
 
-                line[1] = maxLineWidth - currentLineWidth;
+                line[1] = this._maxLineWidth - currentLineWidth;
 
             }
 
         });
-
-        if (!options.width) {
-
-            this._setOption('width', maxLineWidth);
-
-        }
 
         _context.restore();
 
@@ -2039,6 +2036,12 @@
         options.translate = [ options.x, options.y ];
         options.globalAlpha = options.opacity / 100;
         options.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
+
+        if (options.width === 0) {
+
+            options.width = this._maxLineWidth;
+
+        }
 
         return options;
 
