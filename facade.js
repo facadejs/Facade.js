@@ -1916,7 +1916,9 @@
             words = [],
             currentWord = null,
             currentLine = '',
-            currentLineWidth = 0;
+            currentLineWidth = 0,
+            i,
+            length;
 
         this._maxLineWidth = options.width;
 
@@ -1965,21 +1967,21 @@
 
         this.lines.push([currentLine.replace(/\s$/, ''), 0, this.lines.length * (options.fontSize * options.lineHeight)]);
 
-        this.lines.forEach(function (line) {
+        for (i = 0, length = this.lines.length; i < length; i = i + 1) {
 
-            currentLineWidth = _context.measureText(line[0]).width;
+            currentLineWidth = _context.measureText(this.lines[i][0]).width;
 
             if (options.textAlignment === 'center') {
 
-                line[1] = (this._maxLineWidth - currentLineWidth) / 2;
+                this.lines[i][1] = (this._maxLineWidth - currentLineWidth) / 2;
 
             } else if (options.textAlignment === 'right') {
 
-                line[1] = this._maxLineWidth - currentLineWidth;
+                this.lines[i][1] = this._maxLineWidth - currentLineWidth;
 
             }
 
-        });
+        }
 
         _context.restore();
 
