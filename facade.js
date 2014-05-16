@@ -2005,21 +2005,23 @@
     Facade.Text.prototype._draw = function (facade, options) {
 
         var context = facade.context,
-            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics();
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
+            i,
+            length;
 
         this._applyTransforms(context, options, metrics);
 
-        this.lines.forEach(function (word) {
+        for (i = 0, length = this.lines.length; i < length; i = i + 1) {
 
-            context.fillText.apply(context, word);
+            context.fillText.apply(context, this.lines[i]);
 
             if (options.lineWidth) {
 
-                context.strokeText.apply(context, word);
+                context.strokeText.apply(context, this.lines[i]);
 
             }
 
-        });
+        }
 
     };
 
