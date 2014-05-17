@@ -1868,6 +1868,12 @@
 
         }
 
+        if (value !== undefined) {
+
+            value = String(value);
+
+        }
+
         this._options = this._defaultOptions({
             opacity: 100,
             width: 0,
