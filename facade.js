@@ -1926,7 +1926,7 @@
 
         if (value) {
 
-            words = value.match(/\n|[\S]+ ?/g);
+            words = String(value).match(/\n|[\S]+ ?/g);
 
         }
 
