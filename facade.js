@@ -906,6 +906,16 @@
     /**
      * Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     *     var polygon = new Facade.Polygon({
+     *         x: 0,
+     *         y: 0,
+     *         points: [ [100, 0], [200, 100], [100, 200], [0, 100] ],
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         fillStyle: '#1C73A8',
+     *         anchor: 'top/left'
+     *     });
+     *
      * @options {Integer?} x X coordinate to position the polygon. <i>Default:</i> 0
      * @options {Integer?} y Y coordinate to position the polygon. <i>Default:</i> 0
      * @options {String?} anchor Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
@@ -1187,6 +1197,16 @@
     /**
      * Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     *     var circle = new Facade.Circle({
+     *         x: 0,
+     *         y: 0,
+     *         radius: 100,
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         fillStyle: '#1C73A8',
+     *         anchor: 'top/left'
+     *     });
+     *
      * @options {Integer?} x X coordinate to position the circle. <i>Default:</i> 0
      * @options {Integer?} y Y coordinate to position the circle. <i>Default:</i> 0
      * @options {String?} anchor Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
@@ -1317,6 +1337,15 @@
     /**
      * Create a line object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     *     var line = new Facade.Line({
+     *         x: 0,
+     *         y: 0,
+     *         x2: 200,
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         anchor: 'top/left'
+     *     });
+     *
      * @options {Integer?} x X coordinate to position the line. <i>Default:</i> 0
      * @options {Integer?} y Y coordinate to position the line. <i>Default:</i> 0
      * @options {String?} anchor Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
@@ -1428,6 +1457,17 @@
     /**
      * Create a rectangle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
+     *     var rect = new Facade.Rect({
+     *         x: 0,
+     *         y: 0,
+     *         width: 200,
+     *         height: 200,
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         fillStyle: '#1C73A8',
+     *         anchor: 'top/left'
+     *     });
+     *
      * @options {Integer?} x X coordinate to position the rectangle. <i>Default:</i> 0
      * @options {Integer?} y Y coordinate to position the rectangle. <i>Default:</i> 0
      * @options {String?} anchor Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
@@ -1496,6 +1536,14 @@
 
     /**
      * Create an image object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     *     var image = new Facade.Image('images/sprite.png', {
+     *         x: 0,
+     *         y: 0,
+     *         width: 100,
+     *         height: 200,
+     *         anchor: 'top/left'
+     *     });
      *
      * @options {Integer?} x X coordinate to position an image. <i>Default:</i> 0
      * @options {Integer?} y Y coordinate to position an image. <i>Default:</i> 0
@@ -1838,6 +1886,15 @@
     /**
      * Create a text object. Inherits all methods from <b>Facade.Entity</b>.
      *
+     *     var text = new Facade.Text('Hello World!', {
+     *         x: 0,
+     *         y: 0,
+     *         fontFamily: 'Helvetica',
+     *         fontSize: 40,
+     *         fillStyle: '#333',
+     *         anchor: 'top/left'
+     *     });
+     *
      * @options {Integer?} x X coordinate to position a text object. <i>Default:</i> 0
      * @options {Integer?} y Y coordinate to position a text object. <i>Default:</i> 0
      * @options {String?} anchor Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
@@ -2102,6 +2159,13 @@
 
     /**
      * Create a group object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     *     var group = new Facade.Group({ x: 100, y: 100 });
+     *
+     *     group.addToGroup(polygon);
+     *     group.addToGroup(circle);
+     *     group.addToGroup(line);
+     *     group.addToGroup(rect);
      *
      * @options {Integer?} x X coordinate to position a group. <i>Default:</i> 0
      * @options {Integer?} y Y coordinate to position a group. <i>Default:</i> 0
