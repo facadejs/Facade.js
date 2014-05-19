@@ -3,7 +3,7 @@
  * https://github.com/facadejs/facade.js
  *
  * Copyright (c) 2014 Scott Doxey
- * Dual-licensed under both MIT and BSD licenses.
+ * Released under the MIT license
  */
 
 (function () {
