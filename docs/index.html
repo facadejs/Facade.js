@@ -655,7 +655,7 @@ header a:hover {
 
                     <p>
                         <b>obj</b>
-                        <code>Object</code>
+                        <code>Object|Array</code>
                         
                     </p>
                     <p>Facade.js entity or an array of entities.</p>
@@ -6217,10 +6217,10 @@ header a:hover {
 
                     <p>
                         <b>obj</b>
-                        <code>Object</code>
+                        <code>Object|Array</code>
                         
                     </p>
-                    <p>Facade.js entity.</p>
+                    <p>Facade.js entity or an array of entities.</p>
 
                     
 
@@ -6246,6 +6246,9 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addToGroup</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
 
+    <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
+
     <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
@@ -6255,6 +6258,24 @@ header a:hover {
             <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
 
         <span class="p">}</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Object passed to Facade.addToStage is not a valid Facade.js entity.&#39;</span><span class="p">);</span>
 
     <span class="p">}</span>
 

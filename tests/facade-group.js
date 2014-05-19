@@ -98,6 +98,23 @@ casper.test.begin('Add Facade.js entity to Group.', function suite(test) {
 
 });
 
+casper.test.begin('Add an array of Facade.js entities to Group.', function suite(test) {
+
+    'use strict';
+
+    var group = new Facade.Group(),
+        object1 = new Facade.Entity(),
+        object2 = new Facade.Entity();
+
+    group.addToGroup([object1, object2]);
+
+    test.assertEquals(group._objects[0], object1, 'Object #1 successfully added to group.');
+    test.assertEquals(group._objects[1], object2, 'Object #2 successfully added to group.');
+
+    test.done();
+
+});
+
 casper.test.begin('Remove Facade.js entity from Group.', function suite(test) {
     'use strict';
 

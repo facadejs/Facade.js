@@ -141,7 +141,7 @@
      *
      *     stage.addToStage(circle);
      *
-     * @param {Object} obj Facade.js entity or an array of entities.
+     * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
      * @return {Object} Facade.js object.
      * @api public
@@ -2251,12 +2251,15 @@
      *
      *     group.addToGroup(circle);
      *
-     * @param {Object} obj Facade.js entity.
+     * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @return {void}
      * @api private
      */
 
     Facade.Group.prototype.addToGroup = function (obj) {
+
+        var i,
+            length;
 
         if (obj instanceof Facade.Entity) {
 
@@ -2267,6 +2270,24 @@
                 this._setMetrics();
 
             }
+
+        } else if (isArray(obj)) {
+
+            for (i = 0, length = obj.length; i < length; i = i + 1) {
+
+                if (this._objects.indexOf(obj[i]) === -1) {
+
+                    this._objects.push(obj[i]);
+
+                }
+
+            }
+
+            this._setMetrics();
+
+        } else {
+
+            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
         }
 
