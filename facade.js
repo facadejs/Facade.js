@@ -2253,7 +2253,7 @@
      *
      * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @return {void}
-     * @api private
+     * @api public
      */
 
     Facade.Group.prototype.addToGroup = function (obj) {
@@ -2300,7 +2300,7 @@
      *
      * @param {Object} obj Facade.js entity.
      * @return {void}
-     * @api private
+     * @api public
      */
 
     Facade.Group.prototype.removeFromGroup = function (obj) {
