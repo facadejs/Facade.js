@@ -1560,6 +1560,9 @@
      * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
      * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
      * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
+     * @property {image} image Reference to the image element.
+     * @property {animating} animating Boolean state of animation.
+     * @property {currentFrame} currentFrame Current frame of animation.
      * @param {Object|String} source Local image file or reference to an HTML image element.
      * @param {Object?} options Options to create the image with.
      * @return {Object} New Facade.Image object.
@@ -1911,6 +1914,7 @@
      * @options {String?} fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {String?} strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @property {value} value Current value of the text object.
      * @param {Object?} value Value of the text object.
      * @param {Object?} options Options to create the text entity with.
      * @return {Object} New Facade.Text object.
@@ -1948,7 +1952,7 @@
 
         this._maxLineWidth = 0;
 
-        this.lines = [];
+        this._lines = [];
 
         this.setOptions(options);
 
@@ -1985,7 +1989,7 @@
 
         this._maxLineWidth = options.width;
 
-        this.lines = [];
+        this._lines = [];
 
         if (value) {
 
@@ -2010,7 +2014,7 @@
 
             if ((options.width > 0 && currentLineWidth > options.width) || currentWord.match(/\n/)) {
 
-                this.lines.push([currentLine.replace(/\s$/, ''), 0, this.lines.length * (options.fontSize * options.lineHeight)]);
+                this._lines.push([currentLine.replace(/\s$/, ''), 0, this._lines.length * (options.fontSize * options.lineHeight)]);
 
                 currentLine = currentWord.replace(/\n/, '');
 
@@ -2028,19 +2032,19 @@
 
         }
 
-        this.lines.push([currentLine.replace(/\s$/, ''), 0, this.lines.length * (options.fontSize * options.lineHeight)]);
+        this._lines.push([currentLine.replace(/\s$/, ''), 0, this._lines.length * (options.fontSize * options.lineHeight)]);
 
-        for (i = 0, length = this.lines.length; i < length; i = i + 1) {
+        for (i = 0, length = this._lines.length; i < length; i = i + 1) {
 
-            currentLineWidth = _context.measureText(this.lines[i][0]).width;
+            currentLineWidth = _context.measureText(this._lines[i][0]).width;
 
             if (options.textAlignment === 'center') {
 
-                this.lines[i][1] = (this._maxLineWidth - currentLineWidth) / 2;
+                this._lines[i][1] = (this._maxLineWidth - currentLineWidth) / 2;
 
             } else if (options.textAlignment === 'right') {
 
-                this.lines[i][1] = this._maxLineWidth - currentLineWidth;
+                this._lines[i][1] = this._maxLineWidth - currentLineWidth;
 
             }
 
@@ -2050,7 +2054,7 @@
 
         this._setMetrics();
 
-        return this.lines;
+        return this._lines;
 
     };
 
@@ -2074,13 +2078,13 @@
 
         this._applyTransforms(context, options, metrics);
 
-        for (i = 0, length = this.lines.length; i < length; i = i + 1) {
+        for (i = 0, length = this._lines.length; i < length; i = i + 1) {
 
-            context.fillText.apply(context, this.lines[i]);
+            context.fillText.apply(context, this._lines[i]);
 
             if (options.lineWidth) {
 
-                context.strokeText.apply(context, this.lines[i]);
+                context.strokeText.apply(context, this._lines[i]);
 
             }
 
@@ -2135,10 +2139,10 @@
 
         }
 
-        if (this.lines) {
+        if (this._lines) {
 
             metrics.width = options.width * options.scale;
-            metrics.height = this.lines.length * (options.fontSize * options.lineHeight) * options.scale;
+            metrics.height = this._lines.length * (options.fontSize * options.lineHeight) * options.scale;
 
         }
 
