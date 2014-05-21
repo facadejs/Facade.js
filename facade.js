@@ -1927,7 +1927,7 @@
 
         if (value !== undefined) {
 
-            value = String(value);
+            this.value = String(value);
 
         }
 
@@ -1952,7 +1952,7 @@
 
         this.setOptions(options);
 
-        this.setText(value);
+        this.setText(this.value);
 
     };
 
@@ -2290,6 +2290,22 @@
             throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
         }
+
+    };
+
+    /**
+     * Tests the existence of an entity within a group.
+     *
+     *     group.addToGroup(circle);
+     *
+     * @param {Object} obj Facade.js entity.
+     * @return {Boolean} Result of the test.
+     * @api public
+     */
+
+    Facade.Group.prototype.hasEntity = function (obj) {
+
+        return this._objects.indexOf(obj) !== -1;
 
     };
 

@@ -115,6 +115,23 @@ casper.test.begin('Add an array of Facade.js entities to Group.', function suite
 
 });
 
+casper.test.begin('Testing the existence of an entity within a Group.', function suite(test) {
+
+    'use strict';
+
+    var group = new Facade.Group(),
+        object1 = new Facade.Entity(),
+        object2 = new Facade.Entity();
+
+    group.addToGroup(object1);
+
+    test.assertEquals(group.hasEntity(object1), true, 'Object has been found within the group.');
+    test.assertEquals(group.hasEntity(object2), false, 'Object doesn\'t exist within the group.');
+
+    test.done();
+
+});
+
 casper.test.begin('Remove Facade.js entity from Group.', function suite(test) {
     'use strict';
 

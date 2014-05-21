@@ -338,6 +338,10 @@ header a:hover {
 
                 
 
+                <li class="scope-public"><a href="#facade.group.prototype.hasentity">Facade.Group.hasEntity()</a></li>
+
+                
+
                 <li class="scope-public"><a href="#facade.group.prototype.removefromgroup">Facade.Group.removeFromGroup()</a></li>
 
                 
@@ -5537,7 +5541,7 @@ header a:hover {
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="nx">value</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 
     <span class="p">}</span>
 
@@ -5562,7 +5566,7 @@ header a:hover {
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
 
 <span class="p">};</span>
 </pre></div>
@@ -6288,6 +6292,65 @@ header a:hover {
                     <h3>Returns</h3>
 
                     <p><code>void</code> </p>
+
+                </div>
+
+                
+
+                <div class="method scope-public">
+
+                    <h2 id="facade.group.prototype.hasentity"><a href="#facade.group.prototype.hasentity" class="permalink">#</a>Facade.Group.hasEntity() </h2>
+
+                    <p>Tests the existence of an entity within a group.</p>
+
+                    
+
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>obj</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Facade.js entity.</p>
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <h3>Examples</h3>
+
+                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">addToGroup</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
+</pre></div>
+
+
+                    
+
+                    <div class="code">
+
+                        <h3>Code</h3>
+
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasEntity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+
+
+                    </div>
+
+                    <h3>Returns</h3>
+
+                    <p><code>Boolean</code> Result of the test.</p>
 
                 </div>
 
