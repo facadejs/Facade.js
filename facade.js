@@ -683,7 +683,7 @@
     };
 
     /**
-     * Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getOption('value'));
      *
@@ -705,7 +705,7 @@
     };
 
     /**
-     * Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllOptions());
      *
