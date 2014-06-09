@@ -1,1816 +1,2429 @@
 /*!
- * Facade.js (facadejs.com)
- * Copyright (c) 2013 Scott Doxey
- * Dual-licensed under both MIT and BSD licenses.
+ * Facade.js v0.3.0-beta
+ * https://github.com/facadejs/facade.js
+ *
+ * Copyright (c) 2014 Scott Doxey
+ * Released under the MIT license
  */
 
 (function () {
 
-	'use strict';
+    'use strict';
 
-	var _requestAnimationFrame,
-		_cancelAnimationFrame,
-		_context = document.createElement('canvas').getContext('2d');
+    var _requestAnimationFrame,
+        _cancelAnimationFrame,
+        _context = document.createElement('canvas').getContext('2d'),
+        _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
+        _TO_RADIANS = Math.PI / 180,
+        _OPERATOR_TEST = new RegExp('^[-+]=');
 
-	/*!
-	 * requestAnimationFrame Support
-	 */
+    /*!
+     * requestAnimationFrame Support
+     */
 
-	(['webkit', 'moz']).forEach(function (key) {
-		_requestAnimationFrame = _requestAnimationFrame || window.requestAnimationFrame || window[key + 'RequestAnimationFrame'] || null;
-		_cancelAnimationFrame = _cancelAnimationFrame || window.cancelAnimationFrame || window[key + 'CancelAnimationFrame'] || null;
-	});
+    ['webkit', 'moz'].forEach(function (key) {
+        _requestAnimationFrame = _requestAnimationFrame || window.requestAnimationFrame || window[key + 'RequestAnimationFrame'] || null;
+        _cancelAnimationFrame = _cancelAnimationFrame || window.cancelAnimationFrame || window[key + 'CancelAnimationFrame'] || null;
+    });
 
-	/**
-	 * Checks an object to see if it is a JavaScript array. Returns a boolean result.
-	 *
-	 *	console.log(isArray([1, 2, 3, 4, 5])); // true
-	 *	console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false
-	 *
-	 * @param {Object} obj The object to be checked.
-	 * @return {Boolean} Result of the test.
-	 * @api private
-	 */
+    /**
+     * Checks an object to see if it's an array. Returns a boolean result.
+     *
+     *     console.log(isArray([1, 2, 3, 4, 5])); // true
+     *     console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false
+     *
+     * @param {Object} obj The object to be tested.
+     * @return {Boolean} Result of the test.
+     * @api private
+     */
 
-	function isArray(obj) {
+    function isArray(obj) {
 
-		return Object.prototype.toString.call(obj) === '[object Array]' ? true : false;
+        return Object.prototype.toString.call(obj) === '[object Array]' ? true : false;
 
-	}
+    }
 
-	/**
-	 * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
-	 *
-	 *	var stage = new Facade(document.getElementById('stage'));
-	 *	var stage = new Facade('stage', 500, 300);
-	 *
-	 * @property {Object} canvas Reference to the canvas element.
-	 * @property {Object} context Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
-	 * @property {Integer} dt Current time in milliseconds since last canvas draw.
-	 * @property {Integer} fps Current frames per second.
-	 * @property {Integer} ftime Time of last canvas draw.
-	 * @param {Object|String?} canvas Reference to an HTML canvas element or a unique name.
-	 * @param {Integer?} width Width of the canvas.
-	 * @param {Integer?} height Height of the canvas.
-	 * @return {Object} New Facade.js object.
-	 * @api public
-	 */
+    /**
+     * Checks an object to see if it's a function. Returns a boolean result.
+     *
+     *     console.log(isFunction(this._draw)); // true
+     *
+     * @param {Object} obj The object to be tested.
+     * @return {Boolean} Result of the test.
+     * @api private
+     */
 
-	function Facade(canvas, width, height) {
+    function isFunction(obj) {
 
-		if (!(this instanceof Facade)) {
+        return Object.prototype.toString.call(obj) === '[object Function]' ? true : false;
 
-			return new Facade(canvas, width, height);
+    }
 
-		}
+    /**
+     * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
+     *
+     *     var stage = new Facade(document.querySelector('canvas'));
+     *     var stage = new Facade('stage', 500, 300);
+     *
+     * @property {Object} canvas Reference to the canvas element.
+     * @property {Object} context Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
+     * @property {Integer} dt Current time in milliseconds since last canvas draw.
+     * @property {Integer} fps Current frames per second.
+     * @property {Integer} ftime Time of last canvas draw.
+     * @param {Object|String?} canvas Reference to an HTML canvas element or a unique name.
+     * @param {Integer?} width Width of the canvas.
+     * @param {Integer?} height Height of the canvas.
+     * @return {Object} New Facade.js object.
+     * @api public
+     */
 
-		if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
+    function Facade(canvas, width, height) {
 
-			this.canvas = canvas;
+        if (!(this instanceof Facade)) {
 
-		} else {
+            return new Facade(canvas, width, height);
 
-			this.canvas = document.createElement('canvas');
+        }
 
-			if (typeof canvas === 'string') {
+        this.dt = null;
+        this.fps = null;
+        this.ftime = null;
 
-				this.canvas.setAttribute('id', canvas);
+        this._callback = null;
 
-			}
+        this._requestAnimation = null;
 
-		}
+        this._width = null;
+        this._height = null;
 
-		if (width && height) {
+        if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
 
-			this.canvas.setAttribute('width', parseInt(width, 10));
-			this.canvas.setAttribute('height', parseInt(height, 10));
+            this.canvas = canvas;
 
-		}
+        } else {
 
-		try {
+            this.canvas = document.createElement('canvas');
 
-			this.context = this.canvas.getContext('2d');
+            if (typeof canvas === 'string') {
 
-		} catch (e) {
+                this.canvas.setAttribute('id', canvas);
 
-			throw new Error('Parameter passed to Facade.js is not a valid canvas element');
+            }
 
-		}
+        }
 
-		this.dt = 0;
-		this.fps = 0;
-		this.ftime = null;
+        if (width && height) {
 
-		this._callback = null;
+            this.width(width);
+            this.height(height);
 
-		this._requestAnimation = null;
+        } else {
 
-	}
+            this._width = parseInt(this.canvas.getAttribute('width'), 10);
+            this._height = parseInt(this.canvas.getAttribute('height'), 10);
 
-	/**
-	 * Draws a Facade.js object to the stage. Allows for temporary options to be use while drawing an object.
-	 *
-	 *	stage.addToStage(circle);
-	 *	stage.addToStage(circle, { scale: 2 });
-	 *
-	 * @param {Object} obj Facade.js entity object.
-	 * @param {Object?} options Temperary options.
-	 * @return {Object} Facade.js object.
-	 * @api public
-	 */
+        }
 
-	Facade.prototype.addToStage = function (obj, options) {
+        try {
 
-		var metrics;
+            this.context = this.canvas.getContext('2d');
 
-		if (!(obj instanceof Facade.Entity)) {
+        } catch (e) {
 
-			throw new Error('Parameter passed to Facade.addToStage is not a valid Facade.js entity object');
+            throw new Error('Object passed to Facade.js was not a valid canvas element.');
 
-		}
+        }
 
-		if (options) {
+    }
 
-			options = obj.setOptions(options, true);
-			metrics = obj._setMetrics(options, true);
+    /**
+     * Draws a Facade.js entity (or multiple entities) to the stage.
+     *
+     *     stage.addToStage(circle);
+     *
+     * @param {Object|Array} obj Facade.js entity or an array of entities.
+     * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
+     * @return {Object} Facade.js object.
+     * @api public
+     */
 
-		} else {
+    Facade.prototype.addToStage = function (obj, options) {
 
-			options = obj.getAllOptions();
-			metrics = obj.getAllMetrics();
+        var i,
+            length;
 
-		}
+        if (obj instanceof Facade.Entity) {
 
-		if (obj.isVisible(this, metrics)) {
+            obj.draw(this, options);
 
-			this.context.save();
+        } else if (isArray(obj)) {
 
-			obj._draw.call(obj, this, options, metrics);
+            for (i = 0, length = obj.length; i < length; i = i + 1) {
 
-			this.context.restore();
+                this.addToStage(obj[i], options);
 
-		}
+            }
 
-		return this;
+        } else {
 
-	};
+            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
-	/**
-	 * Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code> and <code>Facade.fps</code>.
-	 *
-	 *	this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
-	 *
-	 * @param {Integer} time <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp" target="_blank">DOMTimeStamp</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp" target="_blank">DOMHighResTimeStamp</a> (Google Chrome Only)
-	 * @return {Object} Facade.js object.
-	 * @api private
-	 */
+        }
 
-	Facade.prototype._animate = function (time) {
+        return this;
 
-		if (typeof this._callback === 'function') {
+    };
 
-			if (this.ftime) {
+    /**
+     * Clears the canvas.
+     *
+     *      stage.clear();
+     *
+     * @return {Object} Facade.js object.
+     * @api public
+     */
 
-				this.dt = time - this.ftime;
+    Facade.prototype.clear = function () {
 
-				this.fps = (1000 / this.dt).toFixed(2);
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-			}
+        return this;
 
-			this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
+    };
 
-			this.ftime = time;
+    /**
+     * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or available polyfill.
+     *
+     *     stage.draw(function () {
+     *
+     *         this.clear();
+     *
+     *         this.addToStage(circle, { x: 100, y: 100 });
+     *
+     *     });
+     *
+     * @param {Function} callback Function callback.
+     * @return {Object} Facade.js object.
+     * @api public
+     */
 
-			this.context.save();
+    Facade.prototype.draw = function (callback) {
 
-			this._callback.call(this);
+        if (typeof callback === 'function') {
 
-			this.context.restore();
+            this._callback = callback;
 
-		} else {
+            this.start();
 
-			this.stop();
+        } else {
 
-		}
+            throw new Error('Parameter passed to Facade.draw is not a valid function');
 
-		return this;
+        }
 
-	};
+        return this;
 
-	/**
-	 * Clears the canvas.
-	 *
-	 *	stage.clear();
-	 *
-	 * @return {Object} Facade.js object.
-	 * @api public
-	 */
+    };
 
-	Facade.prototype.clear = function () {
+    /**
+     * Exports a base64 encoded representation of the current rendered canvas.
+     *
+     *     console.log(stage.exportBase64('image/png', 100));
+     *
+     * @param {String?} type Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)
+     * @param {Integer?} quality Number between 0 and 100.
+     * @return {String} Base64 encoded string.
+     * @api public
+     */
 
-		this.context.clearRect(0, 0, this.width(), this.height());
+    Facade.prototype.exportBase64 = function (type, quality) {
 
-		return this;
+        if (!type) {
 
-	};
+            type = 'image/png';
 
-	/**
-	 * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>.
-	 *
-	 *	stage.draw(function () {
-	 *
-	 *		this.clear();
-	 *
-	 *		this.addToStage(circle, { x: 100, y: 100 });
-	 *
-	 *	});
-	 *
-	 * @param {Function} callback Function callback.
-	 * @return {Object} Facade.js object.
-	 * @api public
-	 */
+        }
 
-	Facade.prototype.draw = function (callback) {
+        if (typeof quality === 'number') {
 
-		if (typeof callback === 'function') {
+            quality = quality / 100;
 
-			this._callback = callback;
+        } else {
 
-			this.start();
+            quality = 1;
 
-		} else {
+        }
 
-			throw new Error('Parameter passed to Facade.draw is not a valid function');
+        return this.canvas.toDataURL(type, quality);
 
-		}
+    };
 
-		return this;
+    /**
+     * Gets and sets the canvas height.
+     *
+     *     console.log(stage.height()); // 300
+     *     console.log(stage.height(600)); // 600
+     *
+     * @param {Integer?} height Height in pixels.
+     * @return {Integer} Height in pixels.
+     * @api public
+     */
 
-	};
+    Facade.prototype.height = function (height) {
 
-	/**
-	 * Exports a base64 encoded representation of the current rendered canvas.
-	 *
-	 *	console.log(stage.exportBase64('image/png', 100));
-	 *
-	 * @param {String?} type Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)
-	 * @param {Integer?} quality Number between 0 and 100.
-	 * @return {String} Base64 encoded string.
-	 * @api public
-	 */
+        if (height) {
 
-	Facade.prototype.exportBase64 = function (type, quality) {
+            this._height = parseInt(height, 10);
 
-		if (!type) {
+            if (this.canvas.hasAttribute('data-resized-for-hdpi')) {
 
-			type = 'image/png';
+                this.resizeForHDPI();
 
-		}
+            } else {
 
-		if (typeof quality === 'number') {
+                this.canvas.setAttribute('height', this._height);
 
-			quality = quality / 100;
+            }
 
-		} else {
+        }
 
-			quality = 1;
+        return this._height;
 
-		}
+    };
 
-		return this.canvas.toDataURL(type, quality);
+    /**
+     * Applies key-value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.
+     *
+     *     stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});
+     *
+     * @param {Object} options Object containing context property and/or method names with corresponding values.
+     * @param {Function?} callback Function to be called when context options have been rendered to the canvas.
+     * @return {void}
+     * @api public
+     */
 
-	};
+    Facade.prototype.renderWithContext = function (options, callback) {
 
-	/**
-	 * Gets and sets the canvas height.
-	 *
-	 *	console.log(stage.height()); // 300
-	 *	console.log(stage.height(600)); // 600
-	 *
-	 * @param {Integer?} height Height in pixels.
-	 * @return {Integer} Height in pixels.
-	 * @api public
-	 */
+        var key;
 
-	Facade.prototype.height = function (height) {
+        this.context.save();
 
-		if (height) {
+        for (key in options) {
 
-			this.canvas.setAttribute('height', parseInt(height, 10));
+            if (options[key] !== undefined) {
 
-		}
+                if (isArray(options[key]) && isFunction(this.context[key])) {
 
-		return this.canvas.height;
+                    this.context[key].apply(this.context, options[key]);
 
-	};
+                } else if (_contextProperties.indexOf(key) !== -1) {
 
-	/**
-	 * Starts the callback supplied in <code>Facade.draw</code>.
-	 *
-	 *	stage.start();
-	 *
-	 * @return {Object} Facade.js object.
-	 * @api public
-	 */
+                    this.context[key] = options[key];
 
-	Facade.prototype.start = function () {
+                }
 
-		this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
+            }
 
-		return this;
+        }
 
-	};
+        if (callback) {
 
-	/**
-	 * Stops the callback supplied in <code>Facade.draw</code>.
-	 *
-	 *	stage.stop();
-	 *
-	 * @return {Object} Facade.js object.
-	 * @api public
-	 */
+            callback.call(null, this);
 
-	Facade.prototype.stop = function () {
+        }
 
-		this.dt = 0;
-		this.fps = 0;
-		this.ftime = null;
+        this.context.restore();
 
-		this._requestAnimation = _cancelAnimationFrame(this._requestAnimation);
+    };
 
-		return this;
+    /**
+     * Resizes the canvas width and height to be multiplied by the pixel ratio of the device to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating/adding any Facade entities as scaling is applied to the canvas context.
+     *
+     *     stage.resizeForHDPI();
+     *     stage.resizeForHDPI(2);
+     *
+     * @param {Integer?} ratio Ratio to scale the canvas.
+     * @return {Object} Facade.js object.
+     * @api public
+     */
 
-	};
+    Facade.prototype.resizeForHDPI = function (ratio) {
 
-	/**
-	 * Gets and sets the canvas width.
-	 *
-	 *	console.log(stage.width()); // 400
-	 *	console.log(stage.width(800)); // 800
-	 *
-	 * @param {Integer?} width Width in pixels.
-	 * @return {Integer} Width in pixels.
-	 * @api public
-	 */
+        if (ratio === undefined) {
 
-	Facade.prototype.width = function (width) {
+            ratio = window.devicePixelRatio;
 
-		if (width) {
+        } else {
 
-			this.canvas.setAttribute('width', parseInt(width, 10));
+            ratio = parseFloat(ratio);
 
-		}
+        }
 
-		return this.canvas.width;
+        if (ratio > 1) {
 
-	};
+            this.canvas.setAttribute('style', 'width: ' + this.width() + 'px; height: ' + this.height() + 'px;');
 
-	/**
-	 * The constructor for all Facade.js shapes, images and text objects.
-	 *
-	 * @api private
-	 */
+            this.canvas.setAttribute('width', this.width() * ratio);
+            this.canvas.setAttribute('height', this.height() * ratio);
 
-	Facade.Entity = function () { };
+            this.context.scale(ratio, ratio);
 
-	/**
-	 * Returns a default set of options common to all Facade.js entities.
-	 *
-	 *	console.log(Facade.Entity.prototype._defaultOptions());
-	 *
-	 * @return {Object} Default set of options.
-	 * @api private
-	 */
+            this.canvas.setAttribute('data-resized-for-hdpi', true);
 
-	Facade.Entity.prototype._defaultOptions = function () {
+        }
 
-		return {
-			x: 0,
-			y: 0,
-			shadowBlur: 0,
-			shadowColor: '#000',
-			shadowOffsetX: 0,
-			shadowOffsetY: 0,
-			anchor: 'top/left',
-			opacity: 100,
-			flip: '',
-			rotate: 0,
-			scale: 1
-		};
+        return this;
 
-	};
+    };
 
-	/**
-	 * Returns a default set of metrics common to all Facade.js entities.
-	 *
-	 *	console.log(Facade.Entity.prototype._defaultMetrics());
-	 *
-	 * @return {Object} Default set of metrics.
-	 * @api private
-	 */
+    /**
+     * Starts the callback supplied in <code>Facade.draw</code>.
+     *
+     *     stage.start();
+     *
+     * @return {Object} Facade.js object.
+     * @api public
+     */
 
-	Facade.Entity.prototype._defaultMetrics = function () {
+    Facade.prototype.start = function () {
 
-		return {
-			x: null,
-			y: null,
-			width: null,
-			height: null
-		};
+        this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
 
-	};
+        return this;
 
-	/**
-	 * Sets options for a given <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object based on passed options and metrics.
-	 *
-	 *	this._setContext(context, options, metrics);
-	 *
-	 * @param {Object} context A <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
-	 * @param {Object} options An options object based on <a href="#facade.entity.prototype.defaultoptions">Facade.Entity._defaultOptions()</a> and the extended key/value pairs through the custom options.
-	 * @param {Object} metrics A metrics object based on <a href="#facade.entity.prototype.defaultmetrics">Facade.Entity._defaultMetrics()</a> and the extended key/value pairs through the custom metrics.
-	 * @return {void}
-	 * @api private
-	 */
+    };
 
-	Facade.Entity.prototype._setContext = function (context, options, metrics) {
+    /**
+     * Stops the callback supplied in <code>Facade.draw</code>.
+     *
+     *     stage.stop();
+     *
+     * @return {Object} Facade.js object.
+     * @api public
+     */
 
-		var rotate = this._getRotatePoint(options, metrics),
-			flip_horizontal = options.flip.match(/horizontal/),
-			flip_vertical = options.flip.match(/vertical/);
+    Facade.prototype.stop = function () {
 
-		context.translate(metrics.x, metrics.y);
+        this.dt = null;
+        this.fps = null;
+        this.ftime = null;
 
-		if (options.rotate) {
+        _cancelAnimationFrame(this._requestAnimation);
 
-			context.translate(rotate[0], rotate[1]);
-			context.rotate(options.rotate * Math.PI / 180);
-			context.translate(-rotate[0], -rotate[1]);
+        this._requestAnimation = null;
 
-		}
+        return this;
 
-		if (flip_horizontal) {
-			context.translate(metrics.width, 0);
-		}
+    };
 
-		if (flip_vertical) {
-			context.translate(0, metrics.height);
-		}
+    /**
+     * Gets and sets the canvas width.
+     *
+     *     console.log(stage.width()); // 400
+     *     console.log(stage.width(800)); // 800
+     *
+     * @param {Integer?} width Width in pixels.
+     * @return {Integer} Width in pixels.
+     * @api public
+     */
 
-		context.scale(options.scale, options.scale);
+    Facade.prototype.width = function (width) {
 
-		if (flip_horizontal) {
-			context.scale(-1, 1);
-		}
+        if (width) {
 
-		if (flip_vertical) {
-			context.scale(1, -1);
-		}
+            this._width = parseInt(width, 10);
 
-		context.globalAlpha = options.opacity / 100;
+            if (this.canvas.hasAttribute('data-resized-for-hdpi')) {
 
-		if (options.fillStyle) {
-			context.fillStyle = options.fillStyle;
-		}
+                this.resizeForHDPI();
 
-		if (options.lineCap) {
-			context.lineCap = options.lineCap;
-		}
+            } else {
 
-		if (options.lineWidth) {
-			context.lineWidth = options.lineWidth;
-			context.strokeStyle = options.strokeStyle;
-		}
+                this.canvas.setAttribute('width', this._width);
 
-		if (options.shadowBlur) {
-			context.shadowBlur = options.shadowBlur;
-			context.shadowColor = options.shadowColor;
-			context.shadowOffsetX = options.shadowOffsetX;
-			context.shadowOffsetY = options.shadowOffsetY;
-		}
+            }
 
-		if (options.fontStyle) {
-			context.font = options.fontStyle + ' ' + options.fontSize + 'px ' + options.fontFamily;
-			context.textBaseline = options.textBaseline;
-		}
+        }
 
-	};
+        return this._width;
 
-	/**
-	 * Retrives the value of a given option. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
-	 *
-	 *	console.log(text.getOption('value'));
-	 *
-	 * @param {String} key The name of the option.
-	 * @return {Object|Function|String|Integer} Value of the option requested.
-	 * @api public
-	 */
+    };
 
-	Facade.Entity.prototype.getOption = function (key) {
+    /**
+     * Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code>, <code>Facade.fps</code> and  <code>Facade.ftime</code>.
+     *
+     *     this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
+     *
+     * @param {Integer} time <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp" target="_blank">DOMTimeStamp</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp" target="_blank">DOMHighResTimeStamp</a> (Google Chrome Only)
+     * @return {Object} Facade.js object.
+     * @api private
+     */
 
-		if (this._options.hasOwnProperty(key)) {
+    Facade.prototype._animate = function (time) {
 
-			return this._options[key];
+        if (typeof this._callback === 'function') {
 
-		}
+            if (this.ftime) {
 
-		return undefined;
+                this.dt = time - this.ftime;
 
-	};
+                this.fps = (1000 / this.dt).toFixed(2);
 
-	/**
-	 * Retrives the value of all options. Only retrieves options set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
-	 *
-	 *	console.log(text.getAllOptions());
-	 *
-	 * @return {Object} Object containing all options.
-	 * @api public
-	 */
+            }
 
-	Facade.Entity.prototype.getAllOptions = function () {
+            this.ftime = time;
 
-		var options = {},
-			key;
+            this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
 
-		for (key in this._options) {
+            this.context.save();
 
-			if (this._options.hasOwnProperty(key)) {
+            this._callback();
 
-				options[key] = this._options[key];
+            this.context.restore();
 
-			}
+        } else {
 
-		}
+            this.stop();
 
-		return options;
+        }
 
-	};
+        return this;
 
-	/**
-	 * Sets all options for a given object.
-	 *
-	 *	console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
-	 *
-	 * @param {Object} updated The options to update. Does not need to be entire set of options.
-	 * @param {Boolean} test Flag to determine if options are to be saved or not.
-	 * @return {Object} Updated options.
-	 * @api public
-	 */
+    };
 
-	Facade.Entity.prototype.setOptions = function (updated, test) {
+    /**
+     * The constructor for all Facade.js shape, image and text objects.
+     *
+     * @return {Object} New Facade.Entity object.
+     * @api private
+     */
 
-		var options = {},
-			key;
+    Facade.Entity = function () { return undefined; };
 
-		for (key in this._options) {
+    /**
+     * Returns a default set of options common to all Facade.js entities.
+     *
+     *     console.log(Facade.Entity.prototype._defaultOptions());
+     *     console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));
+     *
+     * @param {Object} updated Additional options as key-value pairs.
+     * @return {Object} Default set of options.
+     * @api private
+     */
 
-			if (this._options.hasOwnProperty(key)) {
+    Facade.Entity.prototype._defaultOptions = function (updated) {
 
-				if (updated && updated.hasOwnProperty(key)) {
+        var options,
+            key;
 
-					if (typeof this._options[key] === typeof updated[key]) {
+        options = {
+            x: 0,
+            y: 0,
+            anchor: 'top/left',
+            rotate: 0,
+            scale: 1
+        };
 
-						options[key] = updated[key];
+        for (key in updated) {
 
-						if (test !== true) {
+            if (updated[key] !== undefined) {
 
-							this._options[key] = updated[key];
+                options[key] = updated[key];
 
-						}
+            }
 
-					} else {
+        }
 
-						throw new Error('The value for ' + key + ' was a ' + typeof updated[key] + ' not a ' + typeof this._options[key]);
+        return options;
 
-					}
+    };
 
-				} else {
+    /**
+     * Returns a default set of metrics common to all Facade.js entities.
+     *
+     *     console.log(Facade.Entity.prototype._defaultMetrics());
+     *     console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
+     *
+     * @param {Object} updated Additional metrics as key-value pairs.
+     * @return {Object} Default set of metrics.
+     * @api private
+     */
 
-					options[key] = this._options[key];
+    Facade.Entity.prototype._defaultMetrics = function (updated) {
 
-				}
+        var metrics = { x: null, y: null, width: null, height: null },
+            key;
 
-			}
+        for (key in updated) {
 
-		}
+            if (updated[key] !== undefined) {
 
-		if (test !== true) {
+                metrics[key] = updated[key];
 
-			this._setMetrics(options, test);
+            }
 
-		}
+        }
 
-		return options;
+        return metrics;
 
-	};
+    };
 
-	/**
-	 * Retrives the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
-	 *
-	 *	console.log(text.getMetric('width'));
-	 *
-	 * @param {String} key The name of the metric.
-	 * @return {Integer} Value of the metric requested.
-	 * @api public
-	 */
+    /**
+     * Returns an array of the x and y anchor positions based on given options and metrics.
+     *
+     *     console.log(rect._getAnchorPoint(options, metrics));
+     *
+     * @param {Object} options Facade.Entity options.
+     * @param {Object} metrics Facade.Entity metrics.
+     * @return {Array} Array with the x and y anchor positions.
+     * @api private
+     */
 
-	Facade.Entity.prototype.getMetric = function (key) {
+    Facade.Entity.prototype._getAnchorPoint = function (options, metrics) {
 
-		if (this._metrics.hasOwnProperty(key)) {
+        var pos = [0, 0],
+            strokeWidthOffset;
 
-			return this._metrics[key];
+        if (options.anchor.match(/center$/)) {
 
-		}
+            pos[0] = -metrics.width / 2;
 
-		return undefined;
+        } else if (options.anchor.match(/right$/)) {
 
-	};
+            pos[0] = -metrics.width;
 
-	/**
-	 * Retrives the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temperary options set through <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
-	 *
-	 *	console.log(text.getAllMetrics());
-	 *
-	 * @return {Object} Object containing all metrics.
-	 * @api public
-	 */
+        }
 
-	Facade.Entity.prototype.getAllMetrics = function () {
+        if (options.anchor.match(/^center/)) {
 
-		var metrics = {},
-			key;
+            pos[1] = -metrics.height / 2;
 
-		for (key in this._metrics) {
+        } else if (options.anchor.match(/^bottom/)) {
 
-			if (this._metrics.hasOwnProperty(key)) {
+            pos[1] = -metrics.height;
 
-				metrics[key] = this._metrics[key];
+        }
 
-			}
+        if (this instanceof Facade.Polygon) {
 
-		}
+            strokeWidthOffset = this._getStrokeWidthOffset(options);
 
-		return metrics;
+            pos[0] = pos[0] + strokeWidthOffset;
+            pos[1] = pos[1] + strokeWidthOffset;
 
-	};
+        }
 
-	/**
-	 * Method used to test if an object is visible on a given canvas. Optional metrics parameter used to test an object with different metrics.
-	 *
-	 *	console.log(box.isVisible(stage.canvas));
-	 *	console.log(box.isVisible(stage.canvas, { x: 200, y: 200, width: 100, height: 100 }));
-	 *
-	 * @param {Object} canvas Facade.js object or canvas element.
-	 * @param {Object?} metrics Optional test metrics.
-	 * @return {Boolean} Result of the test.
-	 * @api public
-	 */
+        return pos;
 
-	Facade.Entity.prototype.isVisible = function (canvas, metrics) {
+    };
 
-		if (canvas instanceof Facade) {
+    /**
+     * Returns an integer for the stroke width offset. Used to calculate metrics.
+     *
+     *     console.log(rect._getStrokeWidthOffset(options));
+     *
+     * @param {Object} options Facade.Entity options.
+     * @return {Integer} Integer representing the stroke width offset.
+     * @api private
+     */
 
-			canvas = canvas.canvas;
+    Facade.Entity.prototype._getStrokeWidthOffset = function (options) {
 
-		}
+        var strokeWidthOffset = 0;
 
-		if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
+        if (options.lineWidth !== undefined) {
 
-			if (typeof metrics === 'undefined') {
+            strokeWidthOffset = options.lineWidth / 2;
 
-				metrics = this._metrics;
+        }
 
-			}
+        return strokeWidthOffset;
 
-			if (metrics.x < canvas.width && metrics.x + metrics.width > 0 && metrics.y < canvas.height && metrics.y + metrics.height > 0) {
+    };
 
-				return true;
+    /**
+     * Applies transforms (translate, rotate and scale) to an entity.
+     *
+     *     console.log(rect._applyTransforms(context, options, metrics));
+     *
+     * @param {Object} context Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
+     * @param {Object} options Facade.Entity options.
+     * @param {Object} metrics Facade.Entity metrics.
+     * @return {void}
+     * @api private
+     */
 
-			}
+    Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
 
-		} else {
+        var anchor = this._getAnchorPoint(options, {
+            x: metrics.x,
+            y: metrics.y,
+            width: metrics.width / options.scale,
+            height: metrics.height / options.scale
+        });
 
-			throw new Error('Parameter passed to Facade.Entity.isVisible is not a valid canvas element');
+        context.translate.apply(context, anchor);
 
-		}
+        if (options.rotate) {
 
-		return false;
+            context.translate(-anchor[0], -anchor[1]);
+            context.rotate(options.rotate * _TO_RADIANS);
+            context.translate(anchor[0], anchor[1]);
 
-	};
+        }
 
-	/**
-	 * Gets the anchor point to draw an object at.
-	 *
-	 *	var anchor = this._getAnchorPoint(options, metrics);
-	 *
-	 * @param {Object} options Facade.js object options.
-	 * @param {Object} metrics Facade.js object metrics.
-	 * @return {Object} Array with x and y coordinates.
-	 * @api private
-	 */
+        if (options.scale !== 1) {
 
-	Facade.Entity.prototype._getAnchorPoint = function (options, metrics) {
+            context.translate(-anchor[0], -anchor[1]);
+            context.scale(options.scale, options.scale);
+            context.translate(anchor[0], anchor[1]);
 
-		var x = options.x,
-			y = options.y;
+        }
 
-		if (options.anchor.match(/^center/)) {
+    };
 
-			y = options.y - (metrics.height / 2);
+    /**
+     * Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     *
+     *     console.log(text.getOption('value'));
+     *
+     * @param {String} key The name of the option.
+     * @return {Object|Function|String|Integer} Value of the option requested.
+     * @api public
+     */
 
-		} else if (options.anchor.match(/^bottom/)) {
+    Facade.Entity.prototype.getOption = function (key) {
 
-			y = options.y - metrics.height;
+        if (this._options[key] !== undefined) {
 
-		}
+            return this._options[key];
 
-		if (options.anchor.match(/center$/)) {
+        }
 
-			x = options.x - (metrics.width / 2);
+        return undefined;
 
-		} else if (options.anchor.match(/right$/)) {
+    };
 
-			x = options.x - metrics.width;
+    /**
+     * Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     *
+     *     console.log(text.getAllOptions());
+     *
+     * @return {Object} Object containing all options.
+     * @api public
+     */
 
-		}
+    Facade.Entity.prototype.getAllOptions = function () {
 
-		return [ x, y ];
+        var options = {},
+            key;
 
-	};
+        for (key in this._options) {
 
-	/**
-	 * Gets the anchor point to rotate an object at.
-	 *
-	 *	var rotate = this._getRotatePoint(options, metrics);
-	 *
-	 * @param {Object} options Facade.js object options.
-	 * @param {Object} metrics Facade.js object metrics.
-	 * @return {Object} Array with x and y coordinates.
-	 * @api private
-	 */
+            if (this._options[key] !== undefined) {
 
-	Facade.Entity.prototype._getRotatePoint = function (options, metrics) {
+                options[key] = this._options[key];
 
-		var x = 0,
-			y = 0;
+            }
 
-		if (options.anchor.match(/^center/)) {
+        }
 
-			y = metrics.height / 2;
+        return options;
 
-		} else if (options.anchor.match(/^bottom/)) {
+    };
 
-			y = metrics.height;
+    /**
+     * Sets an option for a given object.
+     *
+     *     console.log(text._setOptions('value', 'Hello world!'));
+     *
+     * @param {String} key The option to update.
+     * @param {Object|Function|String|Integer} value The new value of the specified option.
+     * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
+     * @return {Object|Function|String|Integer} Returns value of the updated option.
+     * @api private
+     */
 
-		}
+    Facade.Entity.prototype._setOption = function (key, value, test) {
 
-		if (options.anchor.match(/center$/)) {
+        if (this._options[key] !== undefined) {
 
-			x = metrics.width / 2;
+            if (typeof this._options[key] === 'number' && typeof value === 'string') {
 
-		} else if (options.anchor.match(/right$/)) {
+                if (value.match(_OPERATOR_TEST)) {
 
-			x = metrics.width;
+                    value = this._options[key] + parseFloat(value.replace('=', ''));
 
-		}
+                } else {
 
-		return [ x, y ];
+                    value = parseFloat(value);
 
-	};
+                }
 
-	/**
-	 * Create a circle object. Inherits all methods from <b>Facade.Entity</b>.
-	 *
-	 *	var circle = new Facade.Circle({ x: 250, y: 250, radius: 50, anchor: 'center' });
-	 *
-	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
-	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
-	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
-	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
-	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
-	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
-	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
-	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
-	 * @options {Integer?} radius Radius of the circle. <i>Default:</i> 10
-	 * @options {Integer?} start Degree at which the circle begins. <i>Default:</i> 0
-	 * @options {Integer?} end Degree at which the circle ends. <i>Default:</i> 360
-	 * @options {Boolean?} counterclockwise Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
-	 * @options {String?} fillStyle Fill color for the object. <i>Default:</i> "#000"
-	 * @options {String?} strokeStyle Color of an object's stroke. <i>Default:</i> "#000"
-	 * @options {String?} strokePosition Position to draw the stroke. <i>Default:</i> "default"
-	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-	 * @options {String?} lineCap The style of line cap (end of line). <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-	 * @param {Object?} options Options to create the circle with.
-	 * @return {Object} Reference to the new Facade.js circle object.
-	 * @api public
-	 */
+            }
 
-	Facade.Circle = function (options) {
+            if (String(typeof this._options[key]) === String(typeof value)) {
 
-		if (!(this instanceof Facade.Circle)) {
+                if (!test) {
 
-			return new Facade.Circle(options);
+                    this._options[key] = value;
 
-		}
+                }
 
-		this._options = this._defaultOptions();
-		this._metrics = this._defaultMetrics();
+            } else {
 
-		this._options.radius = 10;
-		this._options.start = 0;
-		this._options.end = 360;
-		this._options.counterclockwise = false;
-		this._options.fillStyle = '#000';
-		this._options.strokeStyle = '#000';
-		this._options.strokePosition = 'default';
-		this._options.lineWidth = 0;
-		this._options.lineCap = 'butt';
+                throw new Error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + String(typeof this._options[key]) + '.');
 
-		this.setOptions(options);
+            }
 
-	};
+            return value;
 
-	/*!
-	 * Extend from Facade.Entity
-	 */
+        }
 
-	Facade.Circle.prototype = Object.create(Facade.Entity.prototype);
+        return undefined;
 
-	/**
-	 * Renders the circle on the specified Facade.js canvas with the custom options and metrics.
-	 *
-	 *	circle._draw(stage, circle.getAllOptions(), circle.getAllMetrics());
-	 *
-	 * @param {Object} facade Facade.js object.
-	 * @param {Object} options The options to render the circle with.
-	 * @param {Object} metrics The metrics to render the circle with.
-	 * @return {void}
-	 * @api private
-	 */
+    };
 
-	Facade.Circle.prototype._draw = function (facade, options, metrics) {
+    /**
+     * Sets a group of options as key-value pairs to an object.
+     *
+     *     console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
+     *
+     * @param {Object} updated The options to update. Does not need to be entire set of options.
+     * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
+     * @return {Object} Updated options.
+     * @api public
+     */
 
-		var context = facade.context,
-			strokeOffset = 0;
+    Facade.Entity.prototype.setOptions = function (updated, test) {
 
-		this._setContext(context, options, metrics);
+        var options = this.getAllOptions(),
+            key;
 
-		context.beginPath();
+        if (updated) {
 
-		context.arc(
-			0,
-			0,
-			options.radius,
-			options.start * Math.PI / 180,
-			options.end * Math.PI / 180,
-			options.counterclockwise
-		);
+            for (key in updated) {
 
-		if (options.fillStyle) {
+                if (updated[key] !== undefined && options[key] !== undefined) {
 
-			context.fill();
+                    options[key] = this._setOption(key, updated[key], test);
 
-		}
+                }
 
-		if (options.strokePosition.match(/(in|out)set/)) {
+            }
 
-			if (options.strokePosition === 'inset') {
+            if (!test) {
 
-				strokeOffset = -(options.lineWidth / 2);
+                this._setMetrics();
 
-			} else if (options.strokePosition === 'outset') {
+            }
 
-				strokeOffset = (options.lineWidth / 2);
+        }
 
-			}
+        return options;
 
-			context.closePath();
-			context.beginPath();
+    };
 
-			context.arc(
-				0,
-				0,
-				options.radius + strokeOffset,
-				options.start * Math.PI / 180,
-				options.end * Math.PI / 180,
-				options.counterclockwise
-			);
+    /**
+     * Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     *
+     *     console.log(text.getMetric('width'));
+     *
+     * @param {String} key The name of the metric.
+     * @return {Integer} Value of the metric requested.
+     * @api public
+     */
 
-		}
+    Facade.Entity.prototype.getMetric = function (key) {
 
-		if (options.lineWidth) {
+        if (this._metrics[key] !== undefined) {
 
-			context.stroke();
+            return this._metrics[key];
 
-		}
+        }
 
-		context.closePath();
+        return undefined;
 
-	};
+    };
 
-	/**
-	 * Sets the metrics of the circle based on supplied options.
-	 *
-	 *	console.log(circle._setMetrics(circle.getAllOptions()));
-	 *
-	 * @param {Object} options Options to set the metrics with.
-	 * @param {Boolean?} test Flag to determine if metrics are saved or not.
-	 * @return {Object} Updated metrics.
-	 * @api private
-	 */
+    /**
+     * Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     *
+     *     console.log(text.getAllMetrics());
+     *
+     * @return {Object} Object containing all metrics.
+     * @api public
+     */
 
-	Facade.Circle.prototype._setMetrics = function (options, test) {
+    Facade.Entity.prototype.getAllMetrics = function () {
 
-		var metrics = this.getAllMetrics(),
-			anchor,
-			strokeWidth = 0;
+        var metrics = {},
+            key;
 
-		if (options.strokePosition === 'default') {
+        for (key in this._metrics) {
 
-			strokeWidth = options.lineWidth / 2;
+            if (this._metrics[key] !== undefined) {
 
-		} else if (options.strokePosition === 'outset') {
+                metrics[key] = this._metrics[key];
 
-			strokeWidth = options.lineWidth;
+            }
 
-		}
+        }
 
-		metrics.width = ((options.radius + strokeWidth) * 2) * options.scale;
-		metrics.height = ((options.radius + strokeWidth) * 2) * options.scale;
+        return metrics;
 
-		anchor = this._getAnchorPoint(options, metrics);
+    };
 
-		metrics.x = anchor[0] + ((options.radius + strokeWidth) * options.scale);
-		metrics.y = anchor[1] + ((options.radius + strokeWidth) * options.scale);
+    /**
+     * Renders an entity to a canvas.
+     *
+     *     entity.draw(stage);
+     *     entity.draw(stage, options);
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api public
+     */
 
-		if (test !== true) {
+    Facade.Entity.prototype.draw = function (facade, updated) {
 
-			this._metrics = metrics;
+        var options = this.setOptions(updated, true);
 
-		}
+        if (isFunction(this._configOptions)) {
 
-		return metrics;
+            options = this._configOptions(options);
 
-	};
+        }
 
-	/**
-	 * Create an image object. Inherits all methods from <b>Facade.Entity</b>.
-	 *
-	 *	var image = new Facade.Image('images/player.png', { width: 50, height: 90, anchor: 'bottom/center' });
-	 *
-	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
-	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
-	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
-	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
-	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
-	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
-	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
-	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
-	 * @options {Integer?} width Width of the object. <i>Default:</i> 0
-	 * @options {Integer?} height Height of the object. <i>Default:</i> 0
-	 * @options {Integer?} offsetX X coordinate within the image where rendering begins. <i>Default:</i> 0
-	 * @options {Integer?} offsetY Y coordinate within the image where rendering begins. <i>Default:</i> 0
-	 * @options {Integer?} tileX Number of times to tile the image horizontally. <i>Default:</i> 1
-	 * @options {Integer?} tileY Number of times to tile the image vertically. <i>Default:</i> 1
-	 * @options {Array?} frames Array of frames for sprite animation. <i>Default:</i> []
-	 * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
-	 * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
-	 * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
-	 * @property {Object} image Reference to the image element.
-	 * @property {Integer} currentFrame Current frame of sprite animation.
-	 * @property {Boolean} isAnimating Boolean state of sprite animation.
-	 * @param {Object|String} source Local image file or reference to an HTML image tag.
-	 * @param {Object?} options Options to create the image with.
-	 * @return {Object} Reference to the new Facade.js image object.
-	 * @api public
-	 */
+        if (isFunction(this._draw)) {
 
-	Facade.Image = function (source, options) {
+            facade.renderWithContext(options, this._draw.bind(this, facade, options));
 
-		if (typeof source === 'undefined') {
+        }
 
-			throw new Error('Required parameter "source" missing from Facade.Image call');
+    };
 
-		}
+    /**
+     * Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     *     var polygon = new Facade.Polygon({
+     *         x: 0,
+     *         y: 0,
+     *         points: [ [100, 0], [200, 100], [100, 200], [0, 100] ],
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         fillStyle: '#1C73A8',
+     *         anchor: 'top/left'
+     *     });
+     *
+     * @options {Integer?} x X coordinate to position the polygon. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position the polygon. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the polygon. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a polygon. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @param {Object?} options Options to create the polygon with.
+     * @return {Object} New Facade.Polygon object.
+     * @api public
+     */
 
-		if (!(this instanceof Facade.Image)) {
+    Facade.Polygon = function (options) {
 
-			return new Facade.Image(source, options);
+        if (!(this instanceof Facade.Polygon)) {
 
-		}
+            return new Facade.Polygon(options);
 
-		this._options = this._defaultOptions();
-		this._metrics = this._defaultMetrics();
+        }
 
-		this._options.width = 0;
-		this._options.height = 0;
-		this._options.offsetX = 0;
-		this._options.offsetY = 0;
-		this._options.tileX = 1;
-		this._options.tileY = 1;
-		this._options.frames = [];
-		this._options.speed = 120;
-		this._options.loop = true;
-		this._options.callback = function (frame) { };
+        this._options = this._defaultOptions();
+        this._metrics = this._defaultMetrics();
 
-		this.image = this.load(source);
+        this.setOptions(options);
 
-		this.currentFrame = 0;
+    };
 
-		this.isAnimating = false;
+    /*!
+     * Extend from Facade.Entity
+     */
 
-		this.setOptions(options);
+    Facade.Polygon.prototype = Object.create(Facade.Entity.prototype);
+    Facade.Polygon.constructor = Facade.Entity;
 
-	};
+    /**
+     * Returns a default set of options common to all Facade.js polygon entities.
+     *
+     *     console.log(Facade.Polygon.prototype._defaultOptions());
+     *
+     * @param {Object} updated Additional options as key-value pairs.
+     * @return {Object} Default set of options.
+     * @api private
+     */
 
-	/*!
-	 * Extend from Facade.Entity
-	 */
+    Facade.Polygon.prototype._defaultOptions = function (updated) {
 
-	Facade.Image.prototype = Object.create(Facade.Entity.prototype);
+        var options,
+            key;
 
-	/**
-	 * Starts an image sprite animation.
-	 *
-	 *	image.play();
-	 *
-	 * @return {Object} Facade.js image object.
-	 * @api public
-	 */
+        options = Facade.Entity.prototype._defaultOptions({
+            opacity: 100,
+            shadowBlur: 0,
+            shadowColor: '#000',
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            closePath: true
+        });
 
-	Facade.Image.prototype.play = function () {
+        for (key in updated) {
 
-		this.isAnimating = true;
+            if (updated[key] !== undefined) {
 
-		return this;
+                options[key] = updated[key];
 
-	};
+            }
 
-	/**
-	 * Pauses an image sprite animation.
-	 *
-	 *	image.pause();
-	 *
-	 * @return {Object} Facade.js image object.
-	 * @api public
-	 */
+        }
 
-	Facade.Image.prototype.pause = function () {
+        return options;
 
-		this.isAnimating = false;
+    };
 
-		return this;
+    /**
+     * Renders a polygon entity to a canvas.
+     *
+     *     polygon.draw(stage);
+     *     polygon.draw(stage, options);
+     *
+     * @param {Object} facade Facade.js object.
+     * @param {Object} updated Additional options as key-value pairs.
+     * @return {void}
+     * @api private
+     */
 
-	};
+    Facade.Polygon.prototype._draw = function (facade, options) {
 
-	/**
-	 * Resets an image sprite animation.
-	 *
-	 *	image.reset();
-	 *
-	 * @return {Object} Facade.js image object.
-	 * @api public
-	 */
+        var context = facade.context,
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
+            i,
+            length;
 
-	Facade.Image.prototype.reset = function () {
+        this._applyTransforms(context, options, metrics);
 
-		this.currentFrame = 0;
+        if (options.points.length) {
 
-		return this;
+            context.beginPath();
 
-	};
+            for (i = 0, length = options.points.length; i < length; i = i + 1) {
 
-	/**
-	 * Stops and resets an image sprite animation.
-	 *
-	 *	image.stop();
-	 *
-	 * @return {Object} Facade.js image object.
-	 * @api public
-	 */
+                if (options.points[i].length === 6) {
 
-	Facade.Image.prototype.stop = function () {
+                    context.bezierCurveTo.apply(context, options.points[i]);
 
-		this.currentFrame = 0;
+                } else if (options.points[i].length === 5) {
 
-		this.isAnimating = false;
+                    context.arc.apply(context, options.points[i]);
 
-		return this;
+                } else if (options.points[i].length === 2) {
 
-	};
+                    context.lineTo.apply(context, options.points[i]);
 
-	/**
-	 * Loads an image into a Facade.js image object.
-	 *
-	 *	image.load('image/tiles.png');
-	 *	image.load(document.getElementById('avatar'));
-	 *
-	 * @param {Object|String} source Local image file or reference to an HTML image element.
-	 * @return {Object} Reference to the HTML image element.
-	 * @api public
-	 */
+                }
 
-	Facade.Image.prototype.load = function (source) {
+            }
 
-		var image;
+            if (options.closePath) {
 
-		if (typeof source === 'object' && source.nodeType === 1) {
+                context.closePath();
 
-			image = source;
+            } else {
 
-			if (image.complete) {
+                context.moveTo.apply(context, options.points[length - 1]);
 
-				this._setMetrics.call(this, this._options);
+            }
 
-			} else {
+            if (options.fillStyle) {
+                context.fill();
+            }
 
-				image.addEventListener('load', this._setMetrics.bind(this, this._options));
+            if (options.lineWidth > 0) {
+                context.stroke();
+            }
 
-			}
+        }
 
-		} else {
+    };
 
-			image = document.createElement('img');
-			image.setAttribute('src', source);
-			image.addEventListener('load', this._setMetrics.bind(this, this._options));
+    /**
+     * Custom configuration for options specific to a polygon entity.
+     *
+     *     console.log(polygon._configOptions(options));
+     *
+     * @param {Object} options Complete set of polygon specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
 
-		}
+    Facade.Polygon.prototype._configOptions = function (options) {
 
-		return image;
+        options.translate = [ options.x, options.y ];
+        options.globalAlpha = options.opacity / 100;
 
-	};
+        return options;
 
-	/**
-	 * Renders the image on the specified Facade.js canvas with the custom options and metrics.
-	 *
-	 *	image._draw(stage, image.getAllOptions(), image.getAllMetrics());
-	 *
-	 * @param {Object} facade Facade.js object.
-	 * @param {Object} options The options to render the image with.
-	 * @param {Object} metrics The metrics to render the image with.
-	 * @return {void}
-	 * @api private
-	 */
+    };
 
-	Facade.Image.prototype._draw = function (facade, options, metrics) {
+    /**
+     * Set metrics based on the polygon's options.
+     *
+     *     console.log(polygon._setMetrics());
+     *     console.log(polygon._setMetrics(options));
+     *
+     * @param {Object} updated Additional options as key-value pairs.
+     * @return {Object} Object with metrics as key-value pairs.
+     * @api private
+     */
 
-		var context = facade.context,
-			currentOffsetX = 0,
-			x = 0,
-			y = 0;
+    Facade.Polygon.prototype._setMetrics = function (updated) {
 
-		if (this.image.complete) {
+        var metrics = this._defaultMetrics(),
+            options = this.setOptions(updated, true),
+            bounds = { top: null, right: null, bottom: null, left: null },
+            point,
+            i,
+            length,
+            anchor,
+            strokeWidthOffset = this._getStrokeWidthOffset(options);
 
-			this._setContext(context, options, metrics);
+        if (isFunction(this._configOptions)) {
 
-			if (options.frames.length) {
+            options = this._configOptions(options);
 
-				currentOffsetX = options.frames[this.currentFrame] || 0;
+        }
 
-			}
+        for (i = 0, length = options.points.length; i < length; i = i + 1) {
 
-			for (x = 0; x < options.tileX; x += 1) {
+            if (options.points[i].length === 2) { // Rect
 
-				for (y = 0; y < options.tileY; y += 1) {
+                point = { x: options.points[i][0], y: options.points[i][1] };
 
-					context.drawImage(
-						this.image,
-						(options.width * currentOffsetX) + options.offsetX,
-						options.offsetY,
-						options.width,
-						options.height,
-						options.width * x,
-						options.height * y,
-						options.width,
-						options.height
-					);
+            } else if (options.points[i].length === 5) { // Circle
 
-				}
+                metrics.width = options.points[i][2] * 2;
+                metrics.height = options.points[i][2] * 2;
 
-			}
+                point = {
+                    x: options.points[i][0] - options.points[i][2],
+                    y: options.points[i][1] - options.points[i][2]
+                };
 
-			if (this.isAnimating && options.frames.length) {
+            }
 
-				if (!this.ftime) {
+            if (point.x < bounds.left || bounds.left === null) {
 
-					this.ftime = facade.ftime;
+                bounds.left = point.x;
 
-					if (typeof options.callback === 'function') {
+            }
 
-						options.callback.call(this, options.frames[this.currentFrame]);
+            if (point.y < bounds.top || bounds.top === null) {
 
-					}
+                bounds.top = point.y;
 
-				}
+            }
 
-				if (facade.ftime - this.ftime >= options.speed) {
+            if (point.x > bounds.right || bounds.right === null) {
 
-					this.ftime = facade.ftime;
+                bounds.right = point.x;
 
-					this.currentFrame += 1;
+            }
 
-					if (this.currentFrame >= options.frames.length) {
+            if (point.y > bounds.bottom || bounds.bottom === null) {
 
-						if (options.loop) {
+                bounds.bottom = point.y;
 
-							this.currentFrame = 0;
+            }
 
-						} else {
+        }
 
-							this.currentFrame = options.frames.length - 1;
+        metrics.x = options.x + bounds.left;
+        metrics.y = options.y + bounds.top;
 
-							this.isAnimating = false;
+        if (metrics.width === null && metrics.height === null) {
 
-						}
+            metrics.width = bounds.right - bounds.left;
+            metrics.height = bounds.bottom - bounds.top;
 
-					}
+        }
 
-					if (typeof options.callback === 'function') {
+        metrics.width = (metrics.width + strokeWidthOffset * 2) * options.scale;
+        metrics.height = (metrics.height + strokeWidthOffset * 2) * options.scale;
 
-						options.callback.call(this, options.frames[this.currentFrame]);
+        anchor = this._getAnchorPoint(options, metrics);
 
-					}
+        metrics.x = metrics.x + anchor[0] - strokeWidthOffset;
+        metrics.y = metrics.y + anchor[1] - strokeWidthOffset;
 
-				}
+        if (this instanceof Facade.Circle) {
 
-			}
+            metrics.x = metrics.x + options.radius;
+            metrics.y = metrics.y + options.radius;
 
-		}
+        }
 
-	};
+        if (!updated) {
 
-	/**
-	 * Sets the metrics of the image based on supplied options.
-	 *
-	 *	console.log(image._setMetrics(image.getAllOptions()));
-	 *
-	 * @param {Object} options Options to set the metrics with.
-	 * @param {Boolean} test Flag to determine if metrics are saved or not.
-	 * @return {Object} Updated metrics.
-	 * @api private
-	 */
+            this._metrics = metrics;
 
-	Facade.Image.prototype._setMetrics = function (options, test) {
+        }
 
-		var metrics = this.getAllMetrics(),
-			anchor;
+        return metrics;
 
-		if (this.image.complete) {
+    };
 
-			options.width = options.width || this.image.width;
-			options.height = options.height || this.image.height;
+    /**
+     * Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.
+     *
+     *     var circle = new Facade.Circle({
+     *         x: 0,
+     *         y: 0,
+     *         radius: 100,
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         fillStyle: '#1C73A8',
+     *         anchor: 'top/left'
+     *     });
+     *
+     * @options {Integer?} x X coordinate to position the circle. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position the circle. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the circle. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a circle. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @options {String?} fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @options {Integer?} radius Radius of the circle. <i>Default:</i> 0
+     * @options {Integer?} start Degree at which the circle begins. <i>Default:</i> 0
+     * @options {Integer?} end Degree at which the circle ends. <i>Default:</i> 360
+     * @options {Boolean?} counterclockwise Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
+     * @param {Object?} options Options to create the circle with.
+     * @return {Object} New Facade.Circle object.
+     * @api public
+     */
 
-			metrics.width = (options.width * options.tileX) * options.scale;
-			metrics.height = (options.height * options.tileY) * options.scale;
+    Facade.Circle = function (options) {
 
-			anchor = this._getAnchorPoint(options, metrics);
+        if (!(this instanceof Facade.Circle)) {
 
-			metrics.x = anchor[0];
-			metrics.y = anchor[1];
+            return new Facade.Circle(options);
 
-			if (test !== true) {
+        }
 
-				this._metrics = metrics;
+        this._options = this._defaultOptions({ radius: 0, begin: 0, end: 360, counterclockwise: false });
+        this._metrics = this._defaultMetrics();
 
-			}
+        this.setOptions(options);
 
-			return metrics;
+    };
 
-		}
+    /*!
+     * Extend from Facade.Polygon
+     */
 
-	};
+    Facade.Circle.prototype = Object.create(Facade.Polygon.prototype);
+    Facade.Circle.constructor = Facade.Polygon;
 
-	/**
-	 * Create a line object. Inherits all methods from <b>Facade.Entity</b>.
-	 *
-	 *	var line = new Facade.Line({ x: 250, y: 250, startX: 250, startY: 0, endX: 250, endY: 250, lineWidth: 1, anchor: 'center' });
-	 *
-	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
-	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
-	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
-	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
-	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
-	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
-	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
-	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
-	 * @options {Integer?} startX X coordinate where line starts. <i>Default:</i> 0
-	 * @options {Integer?} startY Y coordinate where line starts. <i>Default:</i> 0
-	 * @options {Integer?} endX X coordinate where line ends. <i>Default:</i> 0
-	 * @options {Integer?} endY Y coordinate where line ends. <i>Default:</i> 0
-	 * @options {String?} strokeStyle Color of an object's stroke. <i>Default:</i> "#000"
-	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-	 * @options {String?} lineCap The style of line cap (end of line). <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-	 * @param {Object} options Options to create the line with.
-	 * @return {Object} Reference to the new Facade.js line object.
-	 * @api public
-	 */
+    /**
+     * Custom configuration for options specific to a circle entity.
+     *
+     *     console.log(circle._configOptions(options));
+     *
+     * @param {Object} options Complete set of circle specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
 
-	Facade.Line = function (options) {
+    Facade.Circle.prototype._configOptions = function (options) {
 
-		if (!(this instanceof Facade.Line)) {
+        options.translate = [ options.x, options.y ];
+        options.globalAlpha = options.opacity / 100;
 
-			return new Facade.Line(options);
+        if (options.counterclockwise) {
 
-		}
+            options.points = [ [ 0, 0, options.radius, options.end * _TO_RADIANS, options.begin * _TO_RADIANS ] ];
 
-		this._options = this._defaultOptions();
-		this._metrics = this._defaultMetrics();
+        } else {
 
-		this._options.startX = 0;
-		this._options.startY = 0;
-		this._options.endX = 0;
-		this._options.endY = 0;
-		this._options.strokeStyle = '#000';
-		this._options.lineWidth = 0;
-		this._options.lineCap = 'butt';
+            options.points = [ [ 0, 0, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];
 
-		this.setOptions(options);
+        }
 
-	};
+        return options;
 
-	/*!
-	 * Extend from Facade.Entity
-	 */
+    };
 
-	Facade.Line.prototype = Object.create(Facade.Entity.prototype);
+    /**
+     * Returns an array of the x and y anchor positions based on given options and metrics.
+     *
+     *     console.log(circle._getAnchorPoint(options, metrics));
+     *
+     * @param {Object} options Facade.Circle options.
+     * @param {Object} metrics Facade.Circle metrics.
+     * @return {Array} Array with the x and y anchor positions.
+     * @api private
+     */
 
-	/**
-	 * Renders the line on the specified Facade.js canvas with the custom options and metrics.
-	 *
-	 *	line._draw(stage, line.getAllOptions(), line.getAllMetrics());
-	 *
-	 * @param {Object} facade Facade.js object.
-	 * @param {Object} options The options to render the line with.
-	 * @param {Object} metrics The metrics to render the line with.
-	 * @return {void}
-	 * @api private
-	 */
+    Facade.Circle.prototype._getAnchorPoint = function (options, metrics) {
 
-	Facade.Line.prototype._draw = function (facade, options, metrics) {
+        var pos = Facade.Polygon.prototype._getAnchorPoint.call(this, options, metrics);
 
-		var context = facade.context;
+        pos[0] = pos[0] + options.radius;
+        pos[1] = pos[1] + options.radius;
 
-		this._setContext(context, options, metrics);
+        return pos;
 
-		context.beginPath();
+    };
 
-		context.moveTo(0, 0);
-		context.lineTo(
-			options.endX - options.startX,
-			options.endY - options.startY
-		);
+    /**
+     * Set metrics based on the circle's options.
+     *
+     *     console.log(circle._setMetrics());
+     *     console.log(circle._setMetrics(options));
+     *
+     * @param {Object} updated Additional options as key-value pairs.
+     * @return {Object} Object with metrics as key-value pairs.
+     * @api private
+     */
 
-		context.stroke();
+    Facade.Circle.prototype._setMetrics = function (updated) {
 
-		context.closePath();
+        var metrics = Facade.Polygon.prototype._setMetrics.call(this, updated),
+            options = this.getAllOptions(updated);
 
-	};
+        metrics.x = metrics.x - options.radius;
+        metrics.y = metrics.y - options.radius;
 
-	/**
-	 * Sets the metrics of the line based on supplied options.
-	 *
-	 *	console.log(line._setMetrics(line.getAllOptions()));
-	 *
-	 * @param {Object} options Options to set the metrics with.
-	 * @param {Boolean?} test Flag to determine if metrics are saved or not.
-	 * @return {Object} Updated metrics.
-	 * @api private
-	 */
+        if (!updated) {
 
-	Facade.Line.prototype._setMetrics = function (options, test) {
+            this._metrics = metrics;
 
-		var metrics = this.getAllMetrics(),
-			anchor;
+        }
 
-		metrics.width = Math.abs(options.endX - options.startX) * options.scale;
-		metrics.height = Math.abs(options.endY - options.startY) * options.scale;
+        return metrics;
 
-		anchor = this._getAnchorPoint(options, metrics);
+    };
 
-		metrics.x = anchor[0];
-		metrics.y = anchor[1];
+    /**
+     * Create a line object. Inherits all methods from <b>Facade.Polygon</b>.
+     *
+     *     var line = new Facade.Line({
+     *         x: 0,
+     *         y: 0,
+     *         x2: 200,
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         anchor: 'top/left'
+     *     });
+     *
+     * @options {Integer?} x X coordinate to position the line. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position the line. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the line. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a line. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a line's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @options {Integer?} x1 X coordinate where line begins. <i>Default:</i> 0
+     * @options {Integer?} y1 Y coordinate where line begins. <i>Default:</i> 0
+     * @options {Integer?} x2 X coordinate where line ends. <i>Default:</i> 0
+     * @options {Integer?} y2 Y coordinate where line ends. <i>Default:</i> 0
+     * @param {Object?} options Options to create the line with.
+     * @return {Object} New Facade.Line object.
+     * @api public
+     */
 
-		if (test !== true) {
+    Facade.Line = function (options) {
 
-			this._metrics = metrics;
+        if (!(this instanceof Facade.Line)) {
 
-		}
+            return new Facade.Line(options);
 
-		return metrics;
+        }
 
-	};
+        this._options = this._defaultOptions({ x1: 0, y1: 0, x2: 0, y2: 0, lineWidth: 1 });
+        this._metrics = this._defaultMetrics();
 
-	/**
-	 * Create a rectangle object. Inherits all methods from <b>Facade.Entity</b>.
-	 *
-	 *	var rect = new Facade.Rect({ width: 100, height: 100, fillStyle: '#f00' });
-	 *
-	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
-	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
-	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
-	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
-	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
-	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
-	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
-	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
-	 * @options {Integer?} width Width of the object. <i>Default:</i> 100
-	 * @options {Integer?} height Height of the object. <i>Default:</i> 100
-	 * @options {String?} fillStyle Fill color for the object. <i>Default:</i> "#000"
-	 * @options {String?} strokeStyle Color of an object's stroke. <i>Default:</i> "#000"
-	 * @options {String?} strokePosition Position to draw the stroke. <i>Default:</i> "default"
-	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-	 * @options {Integer?} borderRadius Radius of the rectangle's corners. <i>Default:</i> 0
-	 * @param {Object} options Options to create the rectangle with.
-	 * @return {Object} Reference to the new Facade.js rectangle object.
-	 * @api public
-	 */
+        this.setOptions(options);
 
-	Facade.Rect = function (options) {
+    };
 
-		if (!(this instanceof Facade.Rect)) {
+    /*!
+     * Extend from Facade.Polygon
+     */
 
-			return new Facade.Rect(options);
+    Facade.Line.prototype = Object.create(Facade.Polygon.prototype);
+    Facade.Line.constructor = Facade.Polygon;
 
-		}
+    /**
+     * Custom configuration for options specific to a line entity.
+     *
+     *     console.log(line._configOptions(options));
+     *
+     * @param {Object} options Complete set of line specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
 
-		this._options = this._defaultOptions();
-		this._metrics = this._defaultMetrics();
+    Facade.Line.prototype._configOptions = function (options) {
 
-		this._options.width = 100;
-		this._options.height = 100;
-		this._options.fillStyle = '#000';
-		this._options.strokeStyle = '#000';
-		this._options.strokePosition = 'default';
-		this._options.lineWidth = 0;
-		this._options.borderRadius = 0;
+        options.translate = [ options.x, options.y ];
+        options.globalAlpha = options.opacity / 100;
+        options.closePath = false;
 
-		this.setOptions(options);
+        options.points = [ [ options.x1, options.y1 ], [ options.x2, options.y2 ] ];
 
-	};
+        return options;
 
-	/*!
-	 * Extend from Facade.Entity
-	 */
+    };
 
-	Facade.Rect.prototype = Object.create(Facade.Entity.prototype);
+    /**
+     * Returns an array of the x and y anchor positions based on given options and metrics.
+     *
+     *     console.log(line._getAnchorPoint(options, metrics));
+     *
+     * @param {Object} options Facade.Line options.
+     * @param {Object} metrics Facade.Line metrics.
+     * @return {Array} Array with the x and y anchor positions.
+     * @api private
+     */
 
-	/**
-	 * Renders the rectangle on the specified Facade.js canvas with the custom options and metrics.
-	 *
-	 *	rect._draw(stage, rect.getAllOptions(), rect.getAllMetrics());
-	 *
-	 * @param {Object} facade Facade.js object.
-	 * @param {Object} options The options to render the rectangle with.
-	 * @param {Object} metrics The metrics to render the rectangle with.
-	 * @return {void}
-	 * @api private
-	 */
+    Facade.Line.prototype._getAnchorPoint = function (options, metrics) {
 
-	Facade.Rect.prototype._draw = function (facade, options, metrics) {
+        var pos = [0, 0];
 
-		var context = facade.context,
-			borderRadius;
+        if (options.anchor.match(/center$/)) {
 
-		this._setContext(context, options, metrics);
+            pos[0] = -(metrics.width / 2 - options.lineWidth / 2);
 
-		context.beginPath();
+        } else if (options.anchor.match(/right$/)) {
 
-		if (options.borderRadius) {
+            pos[0] = -(metrics.width - options.lineWidth);
 
-			borderRadius = Math.min(
-				options.borderRadius,
-				options.height / 2,
-				options.width / 2
-			);
+        }
 
-			context.moveTo(borderRadius, 0);
+        if (options.anchor.match(/^center/)) {
 
-			context.arc(
-				options.width - borderRadius,
-				borderRadius,
-				borderRadius,
-				Math.PI * 1.5,
-				0
-			);
+            pos[1] = -(metrics.height / 2 - options.lineWidth / 2);
 
-			context.arc(
-				options.width - borderRadius,
-				options.height - borderRadius,
-				borderRadius,
-				0,
-				Math.PI * 0.5
-			);
+        } else if (options.anchor.match(/^bottom/)) {
 
-			context.arc(
-				borderRadius,
-				options.height - borderRadius,
-				borderRadius,
-				Math.PI * 0.5,
-				Math.PI
-			);
+            pos[1] = -(metrics.height - options.lineWidth);
 
-			context.arc(
-				borderRadius,
-				borderRadius,
-				borderRadius,
-				Math.PI,
-				Math.PI * 1.5
-			);
+        }
 
-			if (options.fillStyle) {
+        return pos;
 
-				context.fill();
+    };
 
-			}
+    /**
+     * Create a rectangle object. Inherits all methods from <b>Facade.Polygon</b>.
+     *
+     *     var rect = new Facade.Rect({
+     *         x: 0,
+     *         y: 0,
+     *         width: 200,
+     *         height: 200,
+     *         lineWidth: 10,
+     *         strokeStyle: '#333E4B',
+     *         fillStyle: '#1C73A8',
+     *         anchor: 'top/left'
+     *     });
+     *
+     * @options {Integer?} x X coordinate to position the rectangle. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position the rectangle. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the rectangle. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a rectangle. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
+     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
+     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @options {String?} fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @options {String?} lineCap The style of rectangle cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @options {String?} lineJoin The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @options {Integer?} width Width of the rectangle. <i>Default:</i> 0
+     * @options {Integer?} height Height of the rectangle. <i>Default:</i> 0
+     * @param {Object?} options Options to create the rectangle with.
+     * @return {Object} New Facade.Rect object.
+     * @api public
+     */
 
-			if (options.lineWidth) {
+    Facade.Rect = function (options) {
 
-				context.stroke();
+        if (!(this instanceof Facade.Rect)) {
 
-			}
+            return new Facade.Rect(options);
 
-		} else {
+        }
 
-			if (options.fillStyle) {
+        this._options = this._defaultOptions({ width: 0, height: 0 });
+        this._metrics = this._defaultMetrics();
 
-				context.fillRect(0, 0, options.width, options.height);
+        this.setOptions(options);
 
-			}
+    };
 
-			if (options.lineWidth) {
+    /*!
+     * Extend from Facade.Polygon
+     */
 
-				if (options.strokePosition === 'inset') {
+    Facade.Rect.prototype = Object.create(Facade.Polygon.prototype);
+    Facade.Rect.constructor = Facade.Polygon;
 
-					context.strokeRect(options.lineWidth / 2, options.lineWidth / 2, options.width - options.lineWidth, options.height - options.lineWidth);
+    /**
+     * Custom configuration for options specific to a rectangle entity.
+     *
+     *     console.log(rect._configOptions(options));
+     *
+     * @param {Object} options Complete set of rectangle specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
 
-				} else if (options.strokePosition === 'outset') {
+    Facade.Rect.prototype._configOptions = function (options) {
 
-					context.strokeRect(-options.lineWidth / 2, -options.lineWidth / 2, options.width + options.lineWidth, options.height + options.lineWidth);
+        options.translate = [ options.x, options.y ];
+        options.globalAlpha = options.opacity / 100;
 
-				} else {
+        options.points = [ [ 0, 0 ], [ options.width, 0 ], [ options.width, options.height ], [ 0, options.height ] ];
 
-					context.strokeRect(0, 0, options.width, options.height);
+        return options;
 
-				}
+    };
 
-			}
+    /**
+     * Create an image object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     *     var image = new Facade.Image('images/sprite.png', {
+     *         x: 0,
+     *         y: 0,
+     *         width: 100,
+     *         height: 200,
+     *         anchor: 'top/left'
+     *     });
+     *
+     * @options {Integer?} x X coordinate to position an image. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position an image. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the image. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of an image. <i>Default:</i> 1
+     * @options {Integer?} width Width of the image. <i>Default:</i> 0
+     * @options {Integer?} height Height of the image. <i>Default:</i> 0
+     * @options {Integer?} tileX Number of times to tile the image horizontally. <i>Default:</i> 1
+     * @options {Integer?} tileY Number of times to tile the image vertically. <i>Default:</i> 1
+     * @options {Integer?} offsetX Starting X coordinate within the image. <i>Default:</i> 0
+     * @options {Integer?} offsetY Starting Y coordinate within the image. <i>Default:</i> 0
+     * @options {Array?} frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> []
+     * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
+     * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
+     * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
+     * @property {image} image Reference to the image element.
+     * @property {animating} animating Boolean state of animation.
+     * @property {currentFrame} currentFrame Current frame of animation.
+     * @param {Object|String} source Local image file or reference to an HTML image element.
+     * @param {Object?} options Options to create the image with.
+     * @return {Object} New Facade.Image object.
+     * @api public
+     */
 
-		}
+    Facade.Image = function (img, options) {
 
-		context.closePath();
+        if (!(this instanceof Facade.Image)) {
 
-	};
+            return new Facade.Image(img, options);
 
-	/**
-	 * Sets the metrics of the rectangle based on supplied options.
-	 *
-	 *	console.log(rect._setMetrics(rect.getAllOptions()));
-	 *
-	 * @param {Object} options Options to set the metrics with.
-	 * @param {Boolean} test Flag to determine if metrics are saved or not.
-	 * @return {Object} Updated metrics.
-	 * @api private
-	 */
+        }
 
-	Facade.Rect.prototype._setMetrics = function (options, test) {
+        this._options = this._defaultOptions({
+            width: 0,
+            height: 0,
+            tileX: 1,
+            tileY: 1,
+            offsetX: 0,
+            offsetY: 0,
+            frames: [0],
+            speed: 120,
+            loop: true,
+            callback: function () { return undefined; }
+        });
+        this._metrics = this._defaultMetrics();
 
-		var metrics = this.getAllMetrics(),
-			anchor,
-			strokeWidth = 0;
+        this.animating = false;
+        this.currentFrame = 0;
 
-		if (options.strokePosition === 'default') {
+        this.setOptions(options);
 
-			strokeWidth = options.lineWidth / 2;
+        this.load(img);
 
-		} else if (options.strokePosition === 'outset') {
+    };
 
-			strokeWidth = options.lineWidth;
+    /*!
+     * Extend from Facade.Entity
+     */
 
-		}
+    Facade.Image.prototype = Object.create(Facade.Entity.prototype);
+    Facade.Image.constructor = Facade.Entity;
 
-		metrics.width = (options.width + (strokeWidth * 2)) * options.scale;
-		metrics.height = (options.height + (strokeWidth * 2)) * options.scale;
+    /**
+     * Loads either a reference to an image tag or an image URL into a Facade.Image entity.
+     *
+     *     console.log(image.load(document.querySelector('img')));
+     *     console.log(image.load('images/sprite.png'));
+     *
+     * @param {Object|String} source A reference to an image tag or an image URL.
+     * @return {void}
+     * @api public
+     */
 
-		anchor = this._getAnchorPoint(options, metrics);
+    Facade.Image.prototype.load = function (source) {
 
-		metrics.x = anchor[0] + (strokeWidth * options.scale);
-		metrics.y = anchor[1] + (strokeWidth * options.scale);
+        if (typeof source === 'object' && source.nodeType === 1) {
 
-		if (test !== true) {
+            this.image = source;
 
-			this._metrics = metrics;
+        } else {
 
-		}
+            this.image = document.createElement('img');
+            this.image.setAttribute('src', source);
 
-		return metrics;
+        }
 
-	};
+        if (this.image.complete) {
 
-	/**
-	 * Create a text object. Inherits all methods from <b>Facade.Entity</b>.
-	 *
-	 *	var text = new Facade.Text({ value: 'Hello World!', x: 250, y: 250, anchor: 'center' });
-	 *
-	 * @options {Integer?} x X coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} y Y coordinate to begin drawing an object. <i>Default:</i> 0
-	 * @options {Integer?} shadowBlur Blur level for drop shadow. <i>Default:</i> 0
-	 * @options {String?} shadowColor Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
-	 * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-	 * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
-	 * @options {String?} anchor Position to anchor the object. <i>Default:</i> "top/left"<br><ul><li>center</li><li>center/right</li><li>bottom/right</li><li>bottom/center</li><li>bottom/left</li><li>center/left</li><li>top/left</li><li>top/center</li><li>top/right</li></ul>
-	 * @options {Integer?} opacity Opacity of the object. Integer between 0 and 100. <i>Default:</i> 100
-	 * @options {String?} flip Direction to flip the object. Can be either one or both of the following options. Delimited by a <code>/</code>. <i>Default:</i> ""<br><ul><li>horizontal</li><li>vertical</li></ul>
-	 * @options {Integer?} rotate Degrees to rotate the object. <i>Default:</i> 0
-	 * @options {Integer?} scale Scaling of the object. A float starting at 1. <i>Default:</i> 1
-	 * @options {Integer?} width Width of the object.
-	 * @options {String?} value Value of the text object.
-	 * @options {String?} fontFamily Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
-	 * @options {Integer?} fontSize Font size in pixels. <i>Default:</i> 30
-	 * @options {String?} fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
-	 * @options {String?} lineHeight Line height of the text drawn on multiple lines. New lines are delimited with <code>\n</code>. <i>Default:</i> Inherits from <code>fontSize</code>
-	 * @options {String?} textAlign Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
-	 * @options {String?} textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
-	 * @options {String?} fillStyle Fill color for the object. Can be a text representation of a color, a HEX value or RBG(A). <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
-	 * @options {String?} strokeStyle Color of an object's stroke. Can be a text representation of a color, a HEX value or RBG(A).  <i>Default:</i> "#000"<br><ul><li>red</li><li>#F00</li><li>rgb(255, 0, 0);</li><li>rgba(255, 0, 0, 1);</li></ul>
-	 * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-	 * @param {Object} options Options to create the text with.
-	 * @return {Object} Reference to the new Facade.js text object.
-	 * @api public
-	 */
+            this._setMetrics();
 
-	Facade.Text = function (options) {
+        } else {
 
-		if (!(this instanceof Facade.Text)) {
+            this.image.addEventListener('load', this._setMetrics.bind(this, null));
 
-			return new Facade.Text(options);
+        }
 
-		}
+    };
 
-		this._options = this._defaultOptions();
-		this._metrics = this._defaultMetrics();
+    /**
+     * Starts an image sprite animation.
+     *
+     *  image.play();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
 
-		this._options.width = 0;
-		this._options.value = '';
-		this._options.fontFamily = 'Arial';
-		this._options.fontSize = 30;
-		this._options.fontStyle = 'normal';
-		this._options.lineHeight = 0;
-		this._options.textAlign = 'left';
-		this._options.textBaseline = 'top';
-		this._options.fillStyle = '#000';
-		this._options.strokeStyle = '#000';
-		this._options.lineWidth = 0;
+    Facade.Image.prototype.play = function () {
 
-		this.setOptions(options);
+        this.animating = true;
 
-	};
+        return this;
 
-	/*!
-	 * Extend from Facade.Entity
-	 */
+    };
 
-	Facade.Text.prototype = Object.create(Facade.Entity.prototype);
+    /**
+     * Pauses an image sprite animation.
+     *
+     *  image.pause();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
 
-	/**
-	 * Renders the text on the specified Facade.js canvas with the custom options and metrics.
-	 *
-	 *	text._draw(stage, text.getAllOptions(), text.getAllMetrics());
-	 *
-	 * @param {Object} facade Facade.js object.
-	 * @param {Object} options The options to render the text with.
-	 * @param {Object} metrics The metrics to render the text with.
-	 * @return {void}
-	 * @api private
-	 */
+    Facade.Image.prototype.pause = function () {
 
-	Facade.Text.prototype._draw = function (facade, options, metrics) {
+        this.animating = false;
 
-		var context = facade.context,
-			offsetX = 0,
-			line,
-			length;
+        return this;
 
-		this._setContext(context, options, metrics);
+    };
 
-		if (!isArray(options.value)) {
+    /**
+     * Resets an image sprite animation to the first frame.
+     *
+     *  image.reset();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
 
-			options.value = options.value.split(/[ ]*\n[ ]*/);
+    Facade.Image.prototype.reset = function () {
 
-		}
+        this.currentFrame = 0;
 
-		if (!options.lineHeight) {
+        return this;
 
-			options.lineHeight = options.fontSize;
+    };
 
-		}
+    /**
+     * Stops and resets an image sprite animation.
+     *
+     *  image.stop();
+     *
+     * @return {Object} Facade.js image object.
+     * @api public
+     */
 
-		for (line = 0, length = options.value.length; line < length; line += 1) {
+    Facade.Image.prototype.stop = function () {
 
-			if (options.textAlign === 'center') {
+        this.currentFrame = 0;
 
-				offsetX = (options.width - context.measureText(options.value[line]).width) / 2;
+        this.animating = false;
 
-			} else if (options.textAlign === 'right') {
+        return this;
 
-				offsetX = options.width - context.measureText(options.value[line]).width;
+    };
 
-			}
+    /**
+     * Custom configuration for options specific to a image entity.
+     *
+     *     console.log(image._configOptions(options));
+     *
+     * @param {Object} options Complete set of image specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
 
-			if (options.fillStyle) {
+    Facade.Image.prototype._configOptions = function (options) {
 
-				context.fillText(options.value[line], offsetX, line * options.lineHeight);
+        options.translate = [ options.x, options.y ];
 
-			}
+        if (this.image && this.image.complete) {
 
-			if (options.lineWidth) {
+            if (!options.width) {
 
-				context.strokeText(options.value[line], offsetX, line * options.lineHeight);
+                options.width = this.image.width;
 
-			}
+            }
 
-		}
+            if (!options.height) {
 
-	};
+                options.height = this.image.height;
 
-	/**
-	 * Sets the metrics of the text based on supplied options.
-	 *
-	 *	console.log(text._setMetrics(text.getAllOptions()));
-	 *
-	 * @param {Object} options Options to set the metrics with.
-	 * @param {Boolean?} test Flag to determine if metrics are saved or not.
-	 * @return {Object} Updated metrics.
-	 * @api private
-	 */
+            }
 
-	Facade.Text.prototype._setMetrics = function (options, test) {
+        }
 
-		var metrics = this.getAllMetrics(),
-			anchor,
-			line,
-			length;
+        return options;
 
-		_context.font = options.fontStyle + ' ' + options.fontSize + 'px ' + options.fontFamily;
+    };
 
-		if (!isArray(options.value)) {
+    /**
+     * Set metrics based on the image's options.
+     *
+     *     console.log(image._setMetrics());
+     *
+     * @return {Object} Object with metrics as key-value pairs.
+     * @api private
+     */
 
-			options.value = options.value.split(/[ ]*\n[ ]*/);
+    Facade.Image.prototype._setMetrics = function (updated) {
 
-		}
+        var metrics = this._defaultMetrics(),
+            options = this.setOptions(updated, true),
+            anchor;
 
-		if (!options.lineHeight) {
+        if (isFunction(this._configOptions)) {
 
-			options.lineHeight = options.fontSize;
+            options = this._configOptions(options);
 
-		}
+        }
 
-		for (line = 0, length = options.value.length; line < length; line += 1) {
+        metrics.width = options.width * options.tileX * options.scale;
+        metrics.height = options.height * options.tileY * options.scale;
 
-			options.width = Math.max(options.width, _context.measureText(options.value[line]).width);
+        anchor = this._getAnchorPoint(options, metrics);
 
-		}
+        metrics.x = options.x + anchor[0];
+        metrics.y = options.y + anchor[1];
 
-		metrics.width = options.width * options.scale;
-		metrics.height = (length * options.lineHeight) * options.scale;
+        if (!updated) {
 
-		anchor = this._getAnchorPoint(options, metrics);
+            this._metrics = metrics;
 
-		metrics.x = anchor[0];
-		metrics.y = anchor[1];
+        }
 
-		if (test !== true) {
+        return metrics;
 
-			this._metrics = metrics;
+    };
 
-		}
+    /**
+     * Renders an image entity to a canvas.
+     *
+     *     image.draw(stage);
+     *     image.draw(stage, options);
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api private
+     */
 
-		return metrics;
+    Facade.Image.prototype._draw = function (facade, options) {
 
-	};
+        var context = facade.context,
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
+            currentOffsetX = 0,
+            currentOffsetY = 0,
+            x,
+            y;
 
-	/*!
-	 * AMD Support
-	 */
+        if (this.image.complete) {
 
-	if (typeof window.define === 'function' && window.define.hasOwnProperty('amd')) {
+            this._applyTransforms(context, options, metrics);
 
-		window.define([], function () { return Facade; });
+            if (options.frames.length) {
 
-	} else {
+                currentOffsetX = options.frames[this.currentFrame] || 0;
 
-		window.Facade = Facade;
+            }
 
-	}
+            for (x = 0; x < options.tileX; x += 1) {
+
+                for (y = 0; y < options.tileY; y += 1) {
+
+                    context.drawImage(
+                        this.image,
+                        (options.width * currentOffsetX) + options.offsetX,
+                        (options.height * currentOffsetY) + options.offsetY,
+                        options.width,
+                        options.height,
+                        options.width * x,
+                        options.height * y,
+                        options.width,
+                        options.height
+                    );
+
+                }
+
+            }
+
+            if (this.animating) {
+
+                if (!this.ftime) {
+
+                    this.ftime = facade.ftime;
+
+                    if (typeof options.callback === 'function') {
+
+                        options.callback.call(this, options.frames[this.currentFrame]);
+
+                    }
+
+                }
+
+                if (facade.ftime - this.ftime >= options.speed) {
+
+                    this.ftime = facade.ftime;
+
+                    this.currentFrame += 1;
+
+                    if (this.currentFrame >= options.frames.length) {
+
+                        if (options.loop) {
+
+                            this.currentFrame = 0;
+
+                        } else {
+
+                            this.currentFrame = options.frames.length - 1;
+
+                            this.isAnimating = false;
+
+                        }
+
+                    }
+
+                    if (typeof options.callback === 'function') {
+
+                        options.callback.call(this, options.frames[this.currentFrame]);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    };
+
+    /**
+     * Create a text object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     *     var text = new Facade.Text('Hello World!', {
+     *         x: 0,
+     *         y: 0,
+     *         fontFamily: 'Helvetica',
+     *         fontSize: 40,
+     *         fillStyle: '#333',
+     *         anchor: 'top/left'
+     *     });
+     *
+     * @options {Integer?} x X coordinate to position a text object. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position a text object. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the text object. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a text object. <i>Default:</i> 1
+     * @options {Integer?} opacity Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100
+     * @options {Integer?} width Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0
+     * @options {String?} fontFamily Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
+     * @options {String?} fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
+     * @options {Integer?} fontSize Font size in pixels. <i>Default:</i> 30
+     * @options {String?} lineHeight Line height of the text. <i>Default:</i> 1
+     * @options {String?} textAlign Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
+     * @options {String?} textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
+     * @options {String?} fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
+     * @property {value} value Current value of the text object.
+     * @param {Object?} value Value of the text object.
+     * @param {Object?} options Options to create the text entity with.
+     * @return {Object} New Facade.Text object.
+     * @api public
+     */
+
+    Facade.Text = function (value, options) {
+
+        if (!(this instanceof Facade.Text)) {
+
+            return new Facade.Text(value, options);
+
+        }
+
+        if (value !== undefined) {
+
+            this.value = String(value);
+
+        }
+
+        this._options = this._defaultOptions({
+            opacity: 100,
+            width: 0,
+            fontFamily: 'Arial',
+            fontStyle: 'normal',
+            fontSize: 16,
+            lineHeight: 1,
+            textAlignment: 'left',
+            textBaseline: 'top',
+            fillStyle: '#000',
+            strokeStyle: '#000',
+            lineWidth: 0
+        });
+        this._metrics = this._defaultMetrics();
+
+        this._maxLineWidth = 0;
+
+        this._lines = [];
+
+        this.setOptions(options);
+
+        this.setText(this.value);
+
+    };
+
+    /*!
+     * Extend from Facade.Entity
+     */
+
+    Facade.Text.prototype = Object.create(Facade.Entity.prototype);
+    Facade.Text.constructor = Facade.Entity;
+
+    /**
+     * Sets the text entities value.
+     *
+     *     console.log(text.setText('Lorem ipsum dolor sit amet'));
+     *
+     * @param {String} value The new value of the text entity.
+     * @return {Array} An array of lines and the position to render using <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#fillText()">fillText()</a> and <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#strokeText()">strokeText()</a>.
+     * @api public
+     */
+
+    Facade.Text.prototype.setText = function (value) {
+
+        var options = this.getAllOptions(),
+            words = [],
+            currentWord = null,
+            currentLine = '',
+            currentLineWidth = 0,
+            i,
+            length;
+
+        this._maxLineWidth = options.width;
+
+        this._lines = [];
+
+        if (value) {
+
+            words = String(value).match(/\n|[\S]+ ?/g);
+
+        }
+
+        if (isFunction(this._configOptions)) {
+
+            options = this._configOptions(options);
+
+        }
+
+        _context.save();
+
+        _context.font = options.font;
+
+        while (words.length) {
+
+            currentWord = words.shift();
+            currentLineWidth = _context.measureText(currentLine + currentWord.replace(/\s$/, '')).width;
+
+            if ((options.width > 0 && currentLineWidth > options.width) || currentWord.match(/\n/)) {
+
+                this._lines.push([currentLine.replace(/\s$/, ''), 0, this._lines.length * (options.fontSize * options.lineHeight)]);
+
+                currentLine = currentWord.replace(/\n/, '');
+
+            } else {
+
+                currentLine = currentLine + currentWord;
+
+                if (currentLineWidth > this._maxLineWidth) {
+
+                    this._maxLineWidth = currentLineWidth;
+
+                }
+
+            }
+
+        }
+
+        this._lines.push([currentLine.replace(/\s$/, ''), 0, this._lines.length * (options.fontSize * options.lineHeight)]);
+
+        for (i = 0, length = this._lines.length; i < length; i = i + 1) {
+
+            currentLineWidth = _context.measureText(this._lines[i][0]).width;
+
+            if (options.textAlignment === 'center') {
+
+                this._lines[i][1] = (this._maxLineWidth - currentLineWidth) / 2;
+
+            } else if (options.textAlignment === 'right') {
+
+                this._lines[i][1] = this._maxLineWidth - currentLineWidth;
+
+            }
+
+        }
+
+        _context.restore();
+
+        this._setMetrics();
+
+        return this._lines;
+
+    };
+
+    /**
+     * Renders a text entity to a canvas.
+     *
+     *     text.draw(stage);
+     *     text.draw(stage, options);
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api private
+     */
+
+    Facade.Text.prototype._draw = function (facade, options) {
+
+        var context = facade.context,
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
+            i,
+            length;
+
+        this._applyTransforms(context, options, metrics);
+
+        for (i = 0, length = this._lines.length; i < length; i = i + 1) {
+
+            context.fillText.apply(context, this._lines[i]);
+
+            if (options.lineWidth) {
+
+                context.strokeText.apply(context, this._lines[i]);
+
+            }
+
+        }
+
+    };
+
+    /**
+     * Custom configuration for options specific to a text entity.
+     *
+     *     console.log(text._configOptions(options));
+     *
+     * @param {Object} options Complete set of text specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
+
+    Facade.Text.prototype._configOptions = function (options) {
+
+        options.translate = [ options.x, options.y ];
+        options.globalAlpha = options.opacity / 100;
+        options.font = options.fontStyle + ' ' + parseInt(options.fontSize, 10) + 'px ' + options.fontFamily;
+
+        if (options.width === 0) {
+
+            options.width = this._maxLineWidth;
+
+        }
+
+        return options;
+
+    };
+
+    /**
+     * Set metrics based on the text's options.
+     *
+     *     console.log(text._setMetrics());
+     *
+     * @return {Object} Object with metrics as key-value pairs.
+     * @api private
+     */
+
+    Facade.Text.prototype._setMetrics = function (updated) {
+
+        var metrics = this._defaultMetrics(),
+            options = this.setOptions(updated, true),
+            anchor;
+
+        if (isFunction(this._configOptions)) {
+
+            options = this._configOptions(options);
+
+        }
+
+        if (this._lines) {
+
+            metrics.width = options.width * options.scale;
+            metrics.height = this._lines.length * (options.fontSize * options.lineHeight) * options.scale;
+
+        }
+
+        anchor = this._getAnchorPoint(options, metrics);
+
+        metrics.x = options.x + anchor[0];
+        metrics.y = options.y + anchor[1];
+
+        if (!updated) {
+
+            this._metrics = metrics;
+
+        }
+
+        return metrics;
+
+    };
+
+    /**
+     * Create a group object. Inherits all methods from <b>Facade.Entity</b>.
+     *
+     *     var group = new Facade.Group({ x: 100, y: 100 });
+     *
+     *     group.addToGroup(polygon);
+     *     group.addToGroup(circle);
+     *     group.addToGroup(line);
+     *     group.addToGroup(rect);
+     *
+     * @options {Integer?} x X coordinate to position a group. <i>Default:</i> 0
+     * @options {Integer?} y Y coordinate to position a group. <i>Default:</i> 0
+     * @options {String?} anchor Position to anchor the group. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @options {Integer?} rotate Degrees to rotate the group. <i>Default:</i> 0
+     * @options {Integer?} scale A float representing the scale of a group. <i>Default:</i> 1
+     * @param {Object?} options Options to create the group with.
+     * @return {Object} New Facade.Group object.
+     * @api public
+     */
+
+    Facade.Group = function (options) {
+
+        if (!(this instanceof Facade.Group)) {
+
+            return new Facade.Group(options);
+
+        }
+
+        this._options = this._defaultOptions();
+        this._metrics = this._defaultMetrics();
+
+        this._objects = [];
+
+        this.setOptions(options);
+
+    };
+
+    /*!
+     * Extend from Facade.Entity
+     */
+
+    Facade.Group.prototype = Object.create(Facade.Entity.prototype);
+    Facade.Group.constructor = Facade.Entity;
+
+    /**
+     * Renders a group of entities to a canvas.
+     *
+     *     group._draw(stage);
+     *
+     * @param {Object} facade Facade.js object.
+     * @return {void}
+     * @api private
+     */
+
+    Facade.Group.prototype._draw = function (facade, options) {
+
+        var context = facade.context,
+            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
+            i,
+            length;
+
+        this._applyTransforms(context, options, metrics);
+
+        for (i = 0, length = this._objects.length; i < length; i = i + 1) {
+
+            facade.addToStage(this._objects[i]);
+
+        }
+
+    };
+
+    /**
+     * Custom configuration for options specific to a group entity.
+     *
+     *     console.log(group._configOptions(options));
+     *
+     * @param {Object} options Complete set of group specific options.
+     * @return {Object} Converted options.
+     * @api private
+     */
+
+    Facade.Group.prototype._configOptions = function (options) {
+
+        options.translate = [ options.x, options.y ];
+
+        return options;
+
+    };
+
+    /**
+     * Adds a Facade.js entity to a group.
+     *
+     *     group.addToGroup(circle);
+     *
+     * @param {Object|Array} obj Facade.js entity or an array of entities.
+     * @return {void}
+     * @api public
+     */
+
+    Facade.Group.prototype.addToGroup = function (obj) {
+
+        var i,
+            length;
+
+        if (obj instanceof Facade.Entity) {
+
+            if (this._objects.indexOf(obj) === -1) {
+
+                this._objects.push(obj);
+
+                this._setMetrics();
+
+            }
+
+        } else if (isArray(obj)) {
+
+            for (i = 0, length = obj.length; i < length; i = i + 1) {
+
+                if (this._objects.indexOf(obj[i]) === -1) {
+
+                    this._objects.push(obj[i]);
+
+                }
+
+            }
+
+            this._setMetrics();
+
+        } else {
+
+            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+
+        }
+
+    };
+
+    /**
+     * Tests the existence of an entity within a group.
+     *
+     *     group.addToGroup(circle);
+     *
+     * @param {Object} obj Facade.js entity.
+     * @return {Boolean} Result of the test.
+     * @api public
+     */
+
+    Facade.Group.prototype.hasEntity = function (obj) {
+
+        return this._objects.indexOf(obj) !== -1;
+
+    };
+
+    /**
+     * Removes a Facade.js entity from a group.
+     *
+     *     group.removeFromGroup(circle);
+     *
+     * @param {Object} obj Facade.js entity.
+     * @return {void}
+     * @api public
+     */
+
+    Facade.Group.prototype.removeFromGroup = function (obj) {
+
+        if (obj instanceof Facade.Entity) {
+
+            if (this._objects.indexOf(obj) !== -1) {
+
+                this._objects.splice(this._objects.indexOf(obj), 1);
+
+                this._setMetrics();
+
+            }
+
+        }
+
+    };
+
+    /**
+     * Set metrics based on the groups's entities and options.
+     *
+     *     console.log(group._setMetrics());
+     *
+     * @return {Object} Object with metrics as key-value pairs.
+     * @api private
+     */
+
+    Facade.Group.prototype._setMetrics = function (updated) {
+
+        var metrics = this._defaultMetrics(),
+            options = this.setOptions(updated, true),
+            bounds = { top: null, right: null, bottom: null, left: null },
+            i,
+            length,
+            anchor,
+            obj_metrics;
+
+        for (i = 0, length = this._objects.length; i < length; i = i + 1) {
+
+            obj_metrics = this._objects[i].getAllMetrics();
+
+            if (obj_metrics.x < bounds.left || bounds.left === null) {
+
+                bounds.left = obj_metrics.x;
+
+            }
+
+            if (obj_metrics.y < bounds.top || bounds.top === null) {
+
+                bounds.top = obj_metrics.y;
+
+            }
+
+            if (obj_metrics.x + obj_metrics.width > bounds.right || bounds.right === null) {
+
+                bounds.right = obj_metrics.x + obj_metrics.width;
+
+            }
+
+            if (obj_metrics.y + obj_metrics.height > bounds.bottom || bounds.bottom === null) {
+
+                bounds.bottom = obj_metrics.y + obj_metrics.height;
+
+            }
+
+        }
+
+        metrics.x = options.x + bounds.left;
+        metrics.y = options.y + bounds.top;
+        metrics.width = (bounds.right - bounds.left) * options.scale;
+        metrics.height = (bounds.bottom - bounds.top) * options.scale;
+
+        anchor = this._getAnchorPoint(options, metrics);
+
+        metrics.x = options.x + anchor[0];
+        metrics.y = options.y + anchor[1];
+
+        if (!updated) {
+
+            this._metrics = metrics;
+
+        }
+
+        return metrics;
+
+    };
+
+    /*!
+     * AMD Support
+     */
+
+    if (typeof define === 'function' && define.amd !== undefined) {
+
+        define([], Facade);
+
+    } else if (typeof module === 'object' && module.exports !== undefined) {
+
+        module.exports = Facade;
+
+    } else {
+
+        window.Facade = Facade;
+
+    }
 
 }());
