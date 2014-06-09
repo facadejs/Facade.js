@@ -56,6 +56,14 @@ stage.draw(function () {
 });
 ```
 
+##Install
+
+Facade.js can be installed using [bower](http://bower.io):
+
+```bash
+$ bower install Facade.js
+```
+
 ##Build
 
 To build Facade.js first install dependencies.
