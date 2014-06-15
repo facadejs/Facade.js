@@ -61,7 +61,13 @@ stage.draw(function () {
 Facade.js can be installed using [bower](http://bower.io):
 
 ```bash
-$ bower install Facade.js
+$ bower install facade.js
+```
+
+or with [npm](https://www.npmjs.org):
+
+```bash
+$ npm install facade.js
 ```
 
 ##Build
