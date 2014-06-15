@@ -12,19 +12,25 @@
 
     var _requestAnimationFrame,
         _cancelAnimationFrame,
-        _context = document.createElement('canvas').getContext('2d'),
+        _context,
         _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
         _TO_RADIANS = Math.PI / 180,
         _OPERATOR_TEST = new RegExp('^[-+]=');
 
-    /*!
-     * requestAnimationFrame Support
-     */
+    if (String(typeof window) !== 'undefined') {
 
-    ['webkit', 'moz'].forEach(function (key) {
-        _requestAnimationFrame = _requestAnimationFrame || window.requestAnimationFrame || window[key + 'RequestAnimationFrame'] || null;
-        _cancelAnimationFrame = _cancelAnimationFrame || window.cancelAnimationFrame || window[key + 'CancelAnimationFrame'] || null;
-    });
+        _context = document.createElement('canvas').getContext('2d');
+
+        /*!
+         * requestAnimationFrame Support
+         */
+
+        ['webkit', 'moz'].forEach(function (key) {
+            _requestAnimationFrame = _requestAnimationFrame || window.requestAnimationFrame || window[key + 'RequestAnimationFrame'] || null;
+            _cancelAnimationFrame = _cancelAnimationFrame || window.cancelAnimationFrame || window[key + 'CancelAnimationFrame'] || null;
+        });
+
+    }
 
     /**
      * Checks an object to see if it's an array. Returns a boolean result.
@@ -2414,7 +2420,7 @@
 
     if (typeof define === 'function' && define.amd !== undefined) {
 
-        define([], Facade);
+        define([], function () { return Facade; });
 
     } else if (typeof module === 'object' && module.exports !== undefined) {
 
