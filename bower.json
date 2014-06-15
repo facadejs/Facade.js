@@ -1,5 +1,5 @@
 {
-    "name": "Facade.js",
+    "name": "facade.js",
     "description": "Drawing shapes, images and text in HTML5 canvas made easy.",
     "version": "0.3.0-beta",
     "main": "facade.js",
