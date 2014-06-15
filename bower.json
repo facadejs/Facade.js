@@ -1,7 +1,7 @@
 {
     "name": "facade.js",
     "description": "Drawing shapes, images and text in HTML5 canvas made easy.",
-    "version": "0.3.0-beta",
+    "version": "0.3.0-beta.2",
     "main": "facade.js",
     "license": "MIT",
     "ignore": [
