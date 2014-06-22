@@ -164,7 +164,7 @@
 
         } else if (isArray(obj)) {
 
-            for (i = 0, length = obj.length; i < length; i = i + 1) {
+            for (i = 0, length = obj.length; i < length; i += 1) {
 
                 this.addToStage(obj[i], options);
 
@@ -1034,7 +1034,7 @@
 
             context.beginPath();
 
-            for (i = 0, length = options.points.length; i < length; i = i + 1) {
+            for (i = 0, length = options.points.length; i < length; i += 1) {
 
                 if (options.points[i].length === 6) {
 
@@ -1121,7 +1121,7 @@
 
         }
 
-        for (i = 0, length = options.points.length; i < length; i = i + 1) {
+        for (i = 0, length = options.points.length; i < length; i += 1) {
 
             if (options.points[i].length === 2) { // Rect
 
@@ -2040,7 +2040,7 @@
 
         this._lines.push([currentLine.replace(/\s$/, ''), 0, this._lines.length * (options.fontSize * options.lineHeight)]);
 
-        for (i = 0, length = this._lines.length; i < length; i = i + 1) {
+        for (i = 0, length = this._lines.length; i < length; i += 1) {
 
             currentLineWidth = _context.measureText(this._lines[i][0]).width;
 
@@ -2084,7 +2084,7 @@
 
         this._applyTransforms(context, options, metrics);
 
-        for (i = 0, length = this._lines.length; i < length; i = i + 1) {
+        for (i = 0, length = this._lines.length; i < length; i += 1) {
 
             context.fillText.apply(context, this._lines[i]);
 
@@ -2230,7 +2230,7 @@
 
         this._applyTransforms(context, options, metrics);
 
-        for (i = 0, length = this._objects.length; i < length; i = i + 1) {
+        for (i = 0, length = this._objects.length; i < length; i += 1) {
 
             facade.addToStage(this._objects[i]);
 
@@ -2283,7 +2283,7 @@
 
         } else if (isArray(obj)) {
 
-            for (i = 0, length = obj.length; i < length; i = i + 1) {
+            for (i = 0, length = obj.length; i < length; i += 1) {
 
                 if (this._objects.indexOf(obj[i]) === -1) {
 
@@ -2364,7 +2364,7 @@
             anchor,
             obj_metrics;
 
-        for (i = 0, length = this._objects.length; i < length; i = i + 1) {
+        for (i = 0, length = this._objects.length; i < length; i += 1) {
 
             obj_metrics = this._objects[i].getAllMetrics();
 
