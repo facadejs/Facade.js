@@ -310,23 +310,21 @@
 
     Facade.prototype.renderWithContext = function (options, callback) {
 
-        var key;
+        var keys = Object.keys(options),
+            i,
+            length;
 
         this.context.save();
 
-        for (key in options) {
+        for (i = 0, length = keys.length; i < length; i += 1) {
 
-            if (options[key] !== undefined) {
+            if (isArray(options[keys[i]]) && isFunction(this.context[keys[i]])) {
 
-                if (isArray(options[key]) && isFunction(this.context[key])) {
+                this.context[keys[i]].apply(this.context, options[keys[i]]);
 
-                    this.context[key].apply(this.context, options[key]);
+            } else if (_contextProperties.indexOf(keys[i]) !== -1) {
 
-                } else if (_contextProperties.indexOf(key) !== -1) {
-
-                    this.context[key] = options[key];
-
-                }
+                this.context[keys[i]] = options[keys[i]];
 
             }
 
@@ -504,7 +502,20 @@
      * @api private
      */
 
-    Facade.Entity = function () { return undefined; };
+    Facade.Entity = function () {
+
+        if (!(this instanceof Facade.Entity)) {
+
+            return new Facade.Entity();
+
+        }
+
+        this._options = this._defaultOptions();
+        this._metrics = this._defaultMetrics();
+
+        this.setOptions();
+
+    };
 
     /**
      * Returns a default set of options common to all Facade.js entities.
@@ -520,7 +531,9 @@
     Facade.Entity.prototype._defaultOptions = function (updated) {
 
         var options,
-            key;
+            keys,
+            i,
+            length;
 
         options = {
             x: 0,
@@ -530,11 +543,13 @@
             scale: 1
         };
 
-        for (key in updated) {
+        if (typeof updated === 'object') {
 
-            if (updated[key] !== undefined) {
+            keys = Object.keys(updated);
 
-                options[key] = updated[key];
+            for (i = 0, length = keys.length; i < length; i += 1) {
+
+                options[keys[i]] = updated[keys[i]];
 
             }
 
@@ -558,13 +573,17 @@
     Facade.Entity.prototype._defaultMetrics = function (updated) {
 
         var metrics = { x: null, y: null, width: null, height: null },
-            key;
+            keys,
+            i,
+            length;
 
-        for (key in updated) {
+        if (typeof updated === 'object') {
 
-            if (updated[key] !== undefined) {
+            keys = Object.keys(updated);
 
-                metrics[key] = updated[key];
+            for (i = 0, length = keys.length; i < length; i += 1) {
+
+                metrics[keys[i]] = updated[keys[i]];
 
             }
 
@@ -722,15 +741,13 @@
     Facade.Entity.prototype.getAllOptions = function () {
 
         var options = {},
-            key;
+            keys = Object.keys(this._options),
+            i,
+            length;
 
-        for (key in this._options) {
+        for (i = 0, length = keys.length; i < length; i += 1) {
 
-            if (this._options[key] !== undefined) {
-
-                options[key] = this._options[key];
-
-            }
+            options[keys[i]] = this._options[keys[i]];
 
         }
 
@@ -864,15 +881,13 @@
     Facade.Entity.prototype.getAllMetrics = function () {
 
         var metrics = {},
-            key;
+            keys = Object.keys(this._metrics),
+            i,
+            length;
 
-        for (key in this._metrics) {
+        for (i = 0, length = keys.length; i < length; i += 1) {
 
-            if (this._metrics[key] !== undefined) {
-
-                metrics[key] = this._metrics[key];
-
-            }
+            metrics[keys[i]] = this._metrics[keys[i]];
 
         }
 
