@@ -2425,7 +2425,8 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">();</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
 
@@ -2435,7 +2436,7 @@ header a:hover {
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">))</span> <span class="p">{</span>
 
-        <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">));</span>
+        <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
 
     <span class="p">}</span>
 
@@ -2826,11 +2827,20 @@ header a:hover {
                     
 
                     <p>
-                        <b>updated</b>
+                        <b>options</b>
                         <code>Object</code>
                         
                     </p>
-                    <p>Additional options as key-value pairs.</p>
+                    <p>Options used to render the polygon.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the polygon.</p>
 
                     
 
@@ -2855,10 +2865,9 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
 
@@ -5198,6 +5207,24 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Options used to render the image.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the image.</p>
+
+                    
+
                     
 
                     
@@ -5219,10 +5246,9 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">currentOffsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">x</span><span class="p">,</span>
@@ -5784,6 +5810,24 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Options used to render the text entity.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the text entity.</p>
+
+                    
+
                     
 
                     
@@ -5805,10 +5849,9 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Text</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Text</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
 
@@ -6144,6 +6187,24 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Options used to render the group.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the group.</p>
+
+                    
+
                     
 
                     
@@ -6164,10 +6225,9 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
 

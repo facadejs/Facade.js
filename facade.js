@@ -908,7 +908,8 @@
 
     Facade.Entity.prototype.draw = function (facade, updated) {
 
-        var options = this.setOptions(updated, true);
+        var options = this.setOptions(updated, true),
+            metrics = updated ? this._setMetrics(options, true) : this.getAllMetrics();
 
         if (isFunction(this._configOptions)) {
 
@@ -918,7 +919,7 @@
 
         if (isFunction(this._draw)) {
 
-            facade.renderWithContext(options, this._draw.bind(this, facade, options));
+            facade.renderWithContext(options, this._draw.bind(this, facade, options, metrics));
 
         }
 
@@ -1031,15 +1032,15 @@
      *     polygon.draw(stage, options);
      *
      * @param {Object} facade Facade.js object.
-     * @param {Object} updated Additional options as key-value pairs.
+     * @param {Object} options Options used to render the polygon.
+     * @param {Object} metrics Metrics used to render the polygon.
      * @return {void}
      * @api private
      */
 
-    Facade.Polygon.prototype._draw = function (facade, options) {
+    Facade.Polygon.prototype._draw = function (facade, options, metrics) {
 
         var context = facade.context,
-            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
             i,
             length;
 
@@ -1814,14 +1815,15 @@
      *     image.draw(stage, options);
      *
      * @param {Object} facade Facade.js object.
+     * @param {Object} options Options used to render the image.
+     * @param {Object} metrics Metrics used to render the image.
      * @return {void}
      * @api private
      */
 
-    Facade.Image.prototype._draw = function (facade, options) {
+    Facade.Image.prototype._draw = function (facade, options, metrics) {
 
         var context = facade.context,
-            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
             currentOffsetX = 0,
             currentOffsetY = 0,
             x,
@@ -2086,14 +2088,15 @@
      *     text.draw(stage, options);
      *
      * @param {Object} facade Facade.js object.
+     * @param {Object} options Options used to render the text entity.
+     * @param {Object} metrics Metrics used to render the text entity.
      * @return {void}
      * @api private
      */
 
-    Facade.Text.prototype._draw = function (facade, options) {
+    Facade.Text.prototype._draw = function (facade, options, metrics) {
 
         var context = facade.context,
-            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
             i,
             length;
 
@@ -2232,14 +2235,15 @@
      *     group._draw(stage);
      *
      * @param {Object} facade Facade.js object.
+     * @param {Object} options Options used to render the group.
+     * @param {Object} metrics Metrics used to render the group.
      * @return {void}
      * @api private
      */
 
-    Facade.Group.prototype._draw = function (facade, options) {
+    Facade.Group.prototype._draw = function (facade, options, metrics) {
 
         var context = facade.context,
-            metrics = options ? this._setMetrics(options, true) : this.getAllMetrics(),
             i,
             length;
 
