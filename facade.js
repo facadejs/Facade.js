@@ -53,6 +53,7 @@
      * Checks an object to see if it's a function. Returns a boolean result.
      *
      *     console.log(isFunction(this._draw)); // true
+     *     console.log(isFunction('test')); // false
      *
      * @param {Object} obj The object to be tested.
      * @return {Boolean} Result of the test.
@@ -812,8 +813,8 @@
      *
      *     console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
      *
-     * @param {Object} updated The options to update. Does not need to be entire set of options.
-     * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
+     * @param {Object?} updated The options to update. Does not need to be entire set of options.
+     * @param {Boolean?} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object} Updated options.
      * @api public
      */
@@ -848,7 +849,7 @@
     };
 
     /**
-     * Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype._setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getMetric('width'));
      *
@@ -870,7 +871,7 @@
     };
 
     /**
-     * Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype._setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllMetrics());
      *
@@ -909,13 +910,15 @@
     Facade.Entity.prototype.draw = function (facade, updated) {
 
         var options = this.setOptions(updated, true),
-            metrics = updated ? this._setMetrics(options, true) : this.getAllMetrics();
+            metrics;
 
         if (isFunction(this._configOptions)) {
 
             options = this._configOptions(options);
 
         }
+
+        metrics = updated ? this._setMetrics(options) : this.getAllMetrics();
 
         if (isFunction(this._draw)) {
 
@@ -1115,7 +1118,7 @@
      *     console.log(polygon._setMetrics());
      *     console.log(polygon._setMetrics(options));
      *
-     * @param {Object} updated Additional options as key-value pairs.
+     * @param {Object?} updated Custom options used to render the polygon.
      * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
@@ -1123,7 +1126,7 @@
     Facade.Polygon.prototype._setMetrics = function (updated) {
 
         var metrics = this._defaultMetrics(),
-            options = this.setOptions(updated, true),
+            options = updated || this.getAllOptions(),
             bounds = { top: null, right: null, bottom: null, left: null },
             point,
             i,
@@ -1333,7 +1336,7 @@
      *     console.log(circle._setMetrics());
      *     console.log(circle._setMetrics(options));
      *
-     * @param {Object} updated Additional options as key-value pairs.
+     * @param {Object?} updated Additional options as key-value pairs.
      * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
@@ -1773,7 +1776,9 @@
      * Set metrics based on the image's options.
      *
      *     console.log(image._setMetrics());
+     *     console.log(image._setMetrics(updated));
      *
+     * @param {Object?} updated Custom options used to render the image.
      * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
@@ -1781,7 +1786,7 @@
     Facade.Image.prototype._setMetrics = function (updated) {
 
         var metrics = this._defaultMetrics(),
-            options = this.setOptions(updated, true),
+            options = updated || this.getAllOptions(),
             anchor;
 
         if (isFunction(this._configOptions)) {
@@ -2146,7 +2151,9 @@
      * Set metrics based on the text's options.
      *
      *     console.log(text._setMetrics());
+     *     console.log(text._setMetrics(updated));
      *
+     * @param {Object?} updated Custom options used to render the text entity.
      * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
@@ -2154,7 +2161,7 @@
     Facade.Text.prototype._setMetrics = function (updated) {
 
         var metrics = this._defaultMetrics(),
-            options = this.setOptions(updated, true),
+            options = updated || this.getAllOptions(),
             anchor;
 
         if (isFunction(this._configOptions)) {
@@ -2304,15 +2311,9 @@
 
             for (i = 0, length = obj.length; i < length; i += 1) {
 
-                if (this._objects.indexOf(obj[i]) === -1) {
-
-                    this._objects.push(obj[i]);
-
-                }
+                this.addToGroup(obj[i]);
 
             }
-
-            this._setMetrics();
 
         } else {
 
@@ -2368,7 +2369,9 @@
      * Set metrics based on the groups's entities and options.
      *
      *     console.log(group._setMetrics());
+     *     console.log(group._setMetrics(updated));
      *
+     * @param {Object?} updated Custom options used to render the group.
      * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
@@ -2376,7 +2379,7 @@
     Facade.Group.prototype._setMetrics = function (updated) {
 
         var metrics = this._defaultMetrics(),
-            options = this.setOptions(updated, true),
+            options = updated || this.getAllOptions(),
             bounds = { top: null, right: null, bottom: null, left: null },
             i,
             length,
