@@ -33,23 +33,6 @@
     }
 
     /**
-     * Checks an object to see if it's an array. Returns a boolean result.
-     *
-     *     console.log(isArray([1, 2, 3, 4, 5])); // true
-     *     console.log(isArray({ x: 0, y: 0, width: 100, height: 100 })); // false
-     *
-     * @param {Object} obj The object to be tested.
-     * @return {Boolean} Result of the test.
-     * @api private
-     */
-
-    function isArray(obj) {
-
-        return Object.prototype.toString.call(obj) === '[object Array]' ? true : false;
-
-    }
-
-    /**
      * Checks an object to see if it's a function. Returns a boolean result.
      *
      *     console.log(isFunction(this._draw)); // true
@@ -163,7 +146,7 @@
 
             obj.draw(this, options);
 
-        } else if (isArray(obj)) {
+        } else if (Array.isArray(obj)) {
 
             for (i = 0, length = obj.length; i < length; i += 1) {
 
@@ -319,7 +302,7 @@
 
         for (i = 0, length = keys.length; i < length; i += 1) {
 
-            if (isArray(options[keys[i]]) && isFunction(this.context[keys[i]])) {
+            if (Array.isArray(options[keys[i]]) && isFunction(this.context[keys[i]])) {
 
                 this.context[keys[i]].apply(this.context, options[keys[i]]);
 
@@ -2307,7 +2290,7 @@
 
             }
 
-        } else if (isArray(obj)) {
+        } else if (Array.isArray(obj)) {
 
             for (i = 0, length = obj.length; i < length; i += 1) {
 
