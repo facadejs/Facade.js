@@ -45,7 +45,7 @@
 
     function isFunction(obj) {
 
-        return Object.prototype.toString.call(obj) === '[object Function]' ? true : false;
+        return typeof obj === 'function';
 
     }
 
