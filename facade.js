@@ -302,13 +302,13 @@
 
         for (i = 0, length = keys.length; i < length; i += 1) {
 
-            if (Array.isArray(options[keys[i]]) && isFunction(this.context[keys[i]])) {
-
-                this.context[keys[i]].apply(this.context, options[keys[i]]);
-
-            } else if (_contextProperties.indexOf(keys[i]) !== -1) {
+            if (_contextProperties.indexOf(keys[i]) !== -1) {
 
                 this.context[keys[i]] = options[keys[i]];
+
+            } else if (Array.isArray(options[keys[i]]) && isFunction(this.context[keys[i]])) {
+
+                this.context[keys[i]].apply(this.context, options[keys[i]]);
 
             }
 
@@ -934,9 +934,6 @@
      * @options {Integer?} rotate Degrees to rotate the polygon. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a polygon. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
      * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
      * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {String?} strokeStyle Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
@@ -990,10 +987,6 @@
 
         options = Facade.Entity.prototype._defaultOptions({
             opacity: 100,
-            shadowBlur: 0,
-            shadowColor: '#000',
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
             points: [],
             fillStyle: '#000',
             strokeStyle: '',
@@ -1229,9 +1222,6 @@
      * @options {Integer?} rotate Degrees to rotate the circle. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a circle. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
      * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
      * @options {String?} fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {String?} strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
@@ -1368,9 +1358,6 @@
      * @options {Integer?} rotate Degrees to rotate the line. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a line. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
      * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
      * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {String?} strokeStyle Color of a line's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
@@ -1490,9 +1477,6 @@
      * @options {Integer?} rotate Degrees to rotate the rectangle. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a rectangle. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} shadowColor Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} shadowOffsetX X offset of drop shadow. <i>Default:</i> 0
-     * @options {Integer?} shadowOffsetY Y offset of drop shadow. <i>Default:</i> 0
      * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
      * @options {String?} fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {String?} strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>

@@ -1022,13 +1022,13 @@ header a:hover {
 
     <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="o">&amp;&amp;</span> <span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]))</span> <span class="p">{</span>
-
-            <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]].</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]);</span>
-
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">_contextProperties</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_contextProperties</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="o">&amp;&amp;</span> <span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]))</span> <span class="p">{</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]].</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]);</span>
 
         <span class="p">}</span>
 
@@ -2503,39 +2503,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
                         <b>points</b>
                         <code>Array</code>
                         
@@ -2715,10 +2682,6 @@ header a:hover {
 
     <span class="nx">options</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
         <span class="nx">opacity</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">shadowColor</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-        <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">points</span><span class="o">:</span> <span class="p">[],</span>
         <span class="nx">fillStyle</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
         <span class="nx">strokeStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -3192,39 +3155,6 @@ header a:hover {
                         
                     </p>
                     <p>Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100</p>
-
-                    
-
-                    <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
 
                     
 
@@ -3723,39 +3653,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
                         <b>points</b>
                         <code>Array</code>
                         
@@ -4181,39 +4078,6 @@ header a:hover {
                         
                     </p>
                     <p>Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100</p>
-
-                    
-
-                    <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
 
                     
 
