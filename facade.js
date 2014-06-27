@@ -805,15 +805,19 @@
     Facade.Entity.prototype.setOptions = function (updated, test) {
 
         var options = this.getAllOptions(),
-            key;
+            keys,
+            i,
+            length;
 
         if (updated) {
 
-            for (key in updated) {
+            keys = Object.keys(updated);
 
-                if (updated[key] !== undefined && options[key] !== undefined) {
+            for (i = 0, length = keys.length; i < length; i += 1) {
 
-                    options[key] = this._setOption(key, updated[key], test);
+                if (updated[keys[i]] !== undefined && options[keys[i]] !== undefined) {
+
+                    options[keys[i]] = this._setOption(keys[i], updated[keys[i]], test);
 
                 }
 
@@ -980,7 +984,9 @@
     Facade.Polygon.prototype._defaultOptions = function (updated) {
 
         var options,
-            key;
+            keys,
+            i,
+            length;
 
         options = Facade.Entity.prototype._defaultOptions({
             opacity: 100,
@@ -997,11 +1003,13 @@
             closePath: true
         });
 
-        for (key in updated) {
+        if (updated) {
 
-            if (updated[key] !== undefined) {
+            keys = Object.keys(updated);
 
-                options[key] = updated[key];
+            for (i = 0, length = keys.length; i < length; i += 1) {
+
+                options[keys[i]] = updated[keys[i]];
 
             }
 

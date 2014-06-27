@@ -2164,15 +2164,19 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
-        <span class="nx">key</span><span class="p">;</span>
+        <span class="nx">keys</span><span class="p">,</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span> <span class="nx">test</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]],</span> <span class="nx">test</span><span class="p">);</span>
 
             <span class="p">}</span>
 
@@ -2705,7 +2709,9 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">options</span><span class="p">,</span>
-        <span class="nx">key</span><span class="p">;</span>
+        <span class="nx">keys</span><span class="p">,</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
     <span class="nx">options</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
         <span class="nx">opacity</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
@@ -2722,11 +2728,13 @@ header a:hover {
         <span class="nx">closePath</span><span class="o">:</span> <span class="kc">true</span>
     <span class="p">});</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
 
-            <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
         <span class="p">}</span>
 
