@@ -1066,11 +1066,15 @@
             }
 
             if (options.fillStyle) {
+
                 context.fill();
+
             }
 
             if (options.lineWidth > 0) {
+
                 context.stroke();
+
             }
 
         }
