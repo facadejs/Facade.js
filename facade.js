@@ -1814,6 +1814,7 @@
             currentHeight = options.height,
             originalWidth = this.image.width,
             originalHeight = this.image.height,
+            modulus = Math.floor(this.image.width / options.width),
             x,
             y;
 
@@ -1823,12 +1824,11 @@
 
             if (options.frames.length) {
 
-                currentOffsetX = options.frames[this.currentFrame] || 0;
+                currentOffsetX = options.frames[this.currentFrame] % modulus * options.width;
+
+                currentOffsetY = Math.floor(options.frames[this.currentFrame] / modulus) * options.height;
 
             }
-
-            currentOffsetX = (options.width * currentOffsetX) + options.offsetX;
-            currentOffsetY = options.offsetY;
 
             if (currentOffsetX + currentWidth > originalWidth) {
 
