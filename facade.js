@@ -1810,6 +1810,10 @@
         var context = facade.context,
             currentOffsetX = 0,
             currentOffsetY = 0,
+            currentWidth = options.width,
+            currentHeight = options.height,
+            originalWidth = this.image.width,
+            originalHeight = this.image.height,
             x,
             y;
 
@@ -1823,20 +1827,35 @@
 
             }
 
+            currentOffsetX = (options.width * currentOffsetX) + options.offsetX;
+            currentOffsetY = options.offsetY;
+
+            if (currentOffsetX + currentWidth > originalWidth) {
+
+                currentWidth = currentOffsetX + currentWidth - originalWidth;
+
+            }
+
+            if (currentOffsetY + currentHeight > originalHeight) {
+
+                currentHeight = currentOffsetY + currentHeight - originalHeight;
+
+            }
+
             for (x = 0; x < options.tileX; x += 1) {
 
                 for (y = 0; y < options.tileY; y += 1) {
 
                     context.drawImage(
                         this.image,
-                        (options.width * currentOffsetX) + options.offsetX,
-                        (options.height * currentOffsetY) + options.offsetY,
-                        options.width,
-                        options.height,
+                        currentOffsetX,
+                        currentOffsetY,
+                        currentWidth,
+                        currentHeight,
                         options.width * x,
                         options.height * y,
-                        options.width,
-                        options.height
+                        currentWidth,
+                        currentHeight
                     );
 
                 }
