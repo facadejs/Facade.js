@@ -2075,8 +2075,7 @@
     /**
      * Renders a text entity to a canvas.
      *
-     *     text.draw(stage);
-     *     text.draw(stage, options);
+     *     text._draw(facade, options, metrics);
      *
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the text entity.
@@ -2095,7 +2094,11 @@
 
         for (i = 0, length = this._lines.length; i < length; i += 1) {
 
-            context.fillText.apply(context, this._lines[i]);
+            if (options.fillStyle) {
+
+                context.fillText.apply(context, this._lines[i]);
+
+            }
 
             if (options.lineWidth) {
 
@@ -2225,7 +2228,7 @@
     /**
      * Renders a group of entities to a canvas.
      *
-     *     group._draw(stage);
+     *     group._draw(stage, options, metrics);
      *
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the group.
@@ -2285,7 +2288,7 @@
 
         if (obj instanceof Facade.Entity) {
 
-            if (this._objects.indexOf(obj) === -1) {
+            if (!this.hasEntity(obj)) {
 
                 this._objects.push(obj);
 
@@ -2315,7 +2318,7 @@
      *     group.addToGroup(circle);
      *
      * @param {Object} obj Facade.js entity.
-     * @return {Boolean} Result of the test.
+     * @return {Boolean} Boolean result of the test.
      * @api public
      */
 
@@ -2339,7 +2342,7 @@
 
         if (obj instanceof Facade.Entity) {
 
-            if (this._objects.indexOf(obj) !== -1) {
+            if (this.hasEntity(obj)) {
 
                 this._objects.splice(this._objects.indexOf(obj), 1);
 
@@ -2404,6 +2407,7 @@
 
         metrics.x = options.x + bounds.left;
         metrics.y = options.y + bounds.top;
+
         metrics.width = (bounds.right - bounds.left) * options.scale;
         metrics.height = (bounds.bottom - bounds.top) * options.scale;
 
