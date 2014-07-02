@@ -1962,13 +1962,13 @@
 
         this._lines = [];
 
+        this.setOptions(options);
+
         if (value !== undefined) {
 
             this.setText(value);
 
         }
-
-        this.setOptions(options);
 
     };
 
