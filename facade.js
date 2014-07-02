@@ -927,8 +927,8 @@
      * @options {Integer?} scale A float representing the scale of a polygon. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100
      * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
-     * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
      * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
      * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
@@ -1007,8 +1007,7 @@
     /**
      * Renders a polygon entity to a canvas.
      *
-     *     polygon.draw(stage);
-     *     polygon.draw(stage, options);
+     *     polygon._draw(facade, options, metrics);
      *
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the polygon.
@@ -1218,17 +1217,15 @@
      * @options {Integer?} rotate Degrees to rotate the circle. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a circle. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
-     * @options {String?} fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
      * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
      * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
      * @options {Integer?} radius Radius of the circle. <i>Default:</i> 0
      * @options {Integer?} start Degree at which the circle begins. <i>Default:</i> 0
      * @options {Integer?} end Degree at which the circle ends. <i>Default:</i> 360
-     * @options {Boolean?} counterclockwise Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
+     * @options {Boolean?} counterclockwise Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
      * @param {Object?} options Options to create the circle with.
      * @return {Object} New Facade.Circle object.
      * @api public
@@ -1242,7 +1239,12 @@
 
         }
 
-        this._options = this._defaultOptions({ radius: 0, begin: 0, end: 360, counterclockwise: false });
+        this._options = this._defaultOptions({
+            radius: 0,
+            begin: 0,
+            end: 360,
+            counterclockwise: false
+        });
         this._metrics = this._defaultMetrics();
 
         this.setOptions(options);
@@ -1313,7 +1315,7 @@
      *     console.log(circle._setMetrics());
      *     console.log(circle._setMetrics(options));
      *
-     * @param {Object?} updated Additional options as key-value pairs.
+     * @param {Object?} updated updated Custom options used to render the circle.
      * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
@@ -1321,7 +1323,7 @@
     Facade.Circle.prototype._setMetrics = function (updated) {
 
         var metrics = Facade.Polygon.prototype._setMetrics.call(this, updated),
-            options = this.getAllOptions(updated);
+            options = updated || this.getAllOptions();
 
         metrics.x = metrics.x - options.radius;
         metrics.y = metrics.y - options.radius;

@@ -2721,8 +2721,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">polygon</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
-<span class="nx">polygon</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+                    <div class="highlight"><pre><span class="nx">polygon</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 </pre></div>
 
 
@@ -3116,17 +3115,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>points</b>
-                        <code>Array</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
-
-                    
-
-                    <p>
                         <b>fillStyle</b>
                         <code>String</code>
                         
@@ -3182,17 +3170,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>closePath</b>
-                        <code>Boolean</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
-
-                    
-
-                    <p>
                         <b>radius</b>
                         <code>Integer</code>
                         
@@ -3232,7 +3209,7 @@ header a:hover {
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false</p>
+                    <p>Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false</p>
 
                     
 
@@ -3270,7 +3247,12 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">radius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">begin</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span> <span class="mi">360</span><span class="p">,</span> <span class="nx">counterclockwise</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+        <span class="nx">radius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">begin</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">end</span><span class="o">:</span> <span class="mi">360</span><span class="p">,</span>
+        <span class="nx">counterclockwise</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
@@ -3453,7 +3435,7 @@ header a:hover {
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>Additional options as key-value pairs.</p>
+                    <p>updated Custom options used to render the circle.</p>
 
                     
 
@@ -3481,7 +3463,7 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">updated</span><span class="p">),</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">();</span>
 
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
