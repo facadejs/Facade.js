@@ -3435,7 +3435,7 @@ header a:hover {
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>updated Custom options used to render the circle.</p>
+                    <p>Custom options used to render the circle.</p>
 
                     
 
@@ -3592,35 +3592,13 @@ header a:hover {
                     
 
                     <p>
-                        <b>points</b>
-                        <code>Array</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
-
-                    
-
-                    <p>
-                        <b>fillStyle</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
                         <b>strokeStyle</b>
                         <code>String</code>
                         
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>Color of a line's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                    <p>Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
                     
 
@@ -3643,28 +3621,6 @@ header a:hover {
                         
                     </p>
                     <p>The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>lineJoin</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>closePath</b>
-                        <code>Boolean</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
 
                     
 
@@ -3723,6 +3679,7 @@ header a:hover {
                     <div class="highlight"><pre><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">x2</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
     <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="nx">strokeStyle</span><span class="o">:</span> <span class="s1">&#39;#333E4B&#39;</span><span class="p">,</span>
@@ -3745,7 +3702,13 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">x1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+        <span class="nx">x1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">x2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>

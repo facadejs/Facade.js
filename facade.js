@@ -1315,7 +1315,7 @@
      *     console.log(circle._setMetrics());
      *     console.log(circle._setMetrics(options));
      *
-     * @param {Object?} updated updated Custom options used to render the circle.
+     * @param {Object?} updated Custom options used to render the circle.
      * @return {Object} Object with metrics as key-value pairs.
      * @api private
      */
@@ -1344,6 +1344,7 @@
      *     var line = new Facade.Line({
      *         x: 0,
      *         y: 0,
+     *         x1: 0,
      *         x2: 200,
      *         lineWidth: 10,
      *         strokeStyle: '#333E4B',
@@ -1356,13 +1357,9 @@
      * @options {Integer?} rotate Degrees to rotate the line. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a line. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
-     * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a line's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
      * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
      * @options {Integer?} x1 X coordinate where line begins. <i>Default:</i> 0
      * @options {Integer?} y1 Y coordinate where line begins. <i>Default:</i> 0
      * @options {Integer?} x2 X coordinate where line ends. <i>Default:</i> 0
@@ -1380,7 +1377,13 @@
 
         }
 
-        this._options = this._defaultOptions({ x1: 0, y1: 0, x2: 0, y2: 0, lineWidth: 1 });
+        this._options = this._defaultOptions({
+            x1: 0,
+            y1: 0,
+            x2: 0,
+            y2: 0,
+            lineWidth: 1
+        });
         this._metrics = this._defaultMetrics();
 
         this.setOptions(options);
