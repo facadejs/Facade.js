@@ -33,23 +33,6 @@
     }
 
     /**
-     * Checks an object to see if it's a function. Returns a boolean result.
-     *
-     *     console.log(isFunction(this._draw)); // true
-     *     console.log(isFunction('test')); // false
-     *
-     * @param {Object} obj The object to be tested.
-     * @return {Boolean} Result of the test.
-     * @api private
-     */
-
-    function isFunction(obj) {
-
-        return typeof obj === 'function';
-
-    }
-
-    /**
      * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
      *
      *     var stage = new Facade(document.querySelector('canvas'));
@@ -306,7 +289,7 @@
 
                 this.context[keys[i]] = options[keys[i]];
 
-            } else if (Array.isArray(options[keys[i]]) && isFunction(this.context[keys[i]])) {
+            } else if (Array.isArray(options[keys[i]]) && typeof this.context[keys[i]] === 'function') {
 
                 this.context[keys[i]].apply(this.context, options[keys[i]]);
 
@@ -899,7 +882,7 @@
         var options = this.setOptions(updated, true),
             metrics;
 
-        if (isFunction(this._configOptions)) {
+        if (typeof this._configOptions === 'function') {
 
             options = this._configOptions(options);
 
@@ -907,7 +890,7 @@
 
         metrics = updated ? this._setMetrics(options) : this.getAllMetrics();
 
-        if (isFunction(this._draw)) {
+        if (typeof this._draw === 'function') {
 
             facade.renderWithContext(options, this._draw.bind(this, facade, options, metrics));
 
@@ -1122,7 +1105,7 @@
             anchor,
             strokeWidthOffset = this._getStrokeWidthOffset(options);
 
-        if (isFunction(this._configOptions)) {
+        if (typeof this._configOptions === 'function') {
 
             options = this._configOptions(options);
 
@@ -1768,7 +1751,7 @@
             options = updated || this.getAllOptions(),
             anchor;
 
-        if (isFunction(this._configOptions)) {
+        if (typeof this._configOptions === 'function') {
 
             options = this._configOptions(options);
 
@@ -2023,7 +2006,7 @@
 
         }
 
-        if (isFunction(this._configOptions)) {
+        if (typeof this._configOptions === 'function') {
 
             options = this._configOptions(options);
 
@@ -2162,7 +2145,7 @@
             options = updated || this.getAllOptions(),
             anchor;
 
-        if (isFunction(this._configOptions)) {
+        if (typeof this._configOptions === 'function') {
 
             options = this._configOptions(options);
 

@@ -102,10 +102,6 @@ header a:hover {
 
                 
 
-                <li class="scope-private"><a href="#isfunction">isFunction()</a></li>
-
-                
-
                 <li class="scope-public"><a href="#facade">Facade()</a></li>
 
                 
@@ -351,66 +347,6 @@ header a:hover {
             </div>
 
             <div class="col-md-9">
-
-                
-
-                <div class="method scope-private">
-
-                    <h2 id="isfunction"><a href="#isfunction" class="permalink">#</a>isFunction() <span class="label label-default">private</span></h2>
-
-                    <p>Checks an object to see if it's a function. Returns a boolean result.</p>
-
-                    
-
-                    <h3>Parameters</h3>
-
-                    
-
-                    <p>
-                        <b>obj</b>
-                        <code>Object</code>
-                        
-                    </p>
-                    <p>The object to be tested.</p>
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    <h3>Examples</h3>
-
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">));</span> <span class="c1">// false</span>
-</pre></div>
-
-
-                    
-
-                    <div class="code">
-
-                        <h3>Code</h3>
-
-                        <div class="highlight"><pre><span class="kd">function</span> <span class="nx">isFunction</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">return</span> <span class="k">typeof</span> <span class="nx">obj</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">;</span>
-
-<span class="p">}</span>
-</pre></div>
-
-
-                    </div>
-
-                    <h3>Returns</h3>
-
-                    <p><code>Boolean</code> Result of the test.</p>
-
-                </div>
 
                 
 
@@ -1026,7 +962,7 @@ header a:hover {
 
             <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="o">&amp;&amp;</span> <span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]))</span> <span class="p">{</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]].</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]);</span>
 
@@ -2373,7 +2309,7 @@ header a:hover {
     <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span>
         <span class="nx">metrics</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -2381,7 +2317,7 @@ header a:hover {
 
     <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">();</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
 
@@ -2964,7 +2900,7 @@ header a:hover {
         <span class="nx">anchor</span><span class="p">,</span>
         <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -4991,7 +4927,7 @@ header a:hover {
         <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">anchor</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -5576,7 +5512,7 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -5862,7 +5798,7 @@ header a:hover {
         <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">anchor</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
