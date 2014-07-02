@@ -113,6 +113,7 @@
      * Draws a Facade.js entity (or multiple entities) to the stage.
      *
      *     stage.addToStage(circle);
+     *     stage.addToStage(circle, { x: 10, y: 10 });
      *
      * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
@@ -158,7 +159,7 @@
 
     Facade.prototype.clear = function () {
 
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.clearRect(0, 0, this.width(), this.height());
 
         return this;
 

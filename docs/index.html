@@ -559,6 +559,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
+<span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">10</span> <span class="p">});</span>
 </pre></div>
 
 
@@ -635,7 +636,7 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">());</span>
 
     <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 
