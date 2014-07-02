@@ -191,7 +191,7 @@
 
         } else {
 
-            throw new Error('Parameter passed to Facade.draw is not a valid function');
+            throw new Error('Parameter passed to Facade.draw is not a valid function.');
 
         }
 
@@ -467,10 +467,10 @@
      * The constructor for all Facade.js shape, image and text objects.
      *
      * @return {Object} New Facade.Entity object.
-     * @api private
+     * @api public
      */
 
-    Facade.Entity = function () {
+    Facade.Entity = function (options) {
 
         if (!(this instanceof Facade.Entity)) {
 
@@ -481,7 +481,7 @@
         this._options = this._defaultOptions();
         this._metrics = this._defaultMetrics();
 
-        this.setOptions();
+        this.setOptions(options);
 
     };
 

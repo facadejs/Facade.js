@@ -150,7 +150,7 @@ header a:hover {
 
                 
 
-                <li class="scope-private"><a href="#facade.entity">Facade.Entity()</a></li>
+                <li class="scope-public"><a href="#facade.entity">Facade.Entity()</a></li>
 
                 
 
@@ -711,7 +711,7 @@ header a:hover {
 
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Parameter passed to Facade.draw is not a valid function&#39;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Parameter passed to Facade.draw is not a valid function.&#39;</span><span class="p">);</span>
 
     <span class="p">}</span>
 
@@ -1339,9 +1339,9 @@ header a:hover {
 
                 
 
-                <div class="method scope-private">
+                <div class="method scope-public">
 
-                    <h2 id="facade.entity"><a href="#facade.entity" class="permalink">#</a>Facade.Entity() <span class="label label-default">private</span></h2>
+                    <h2 id="facade.entity"><a href="#facade.entity" class="permalink">#</a>Facade.Entity() </h2>
 
                     <p>The constructor for all Facade.js shape, image and text objects.</p>
 
@@ -1357,7 +1357,7 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">))</span> <span class="p">{</span>
 
@@ -1368,7 +1368,7 @@ header a:hover {
     <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">();</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
 <span class="p">};</span>
 </pre></div>
