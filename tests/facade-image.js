@@ -75,8 +75,8 @@ setTimeout(function () { // Wait for test image (35 byte spacer.gif)
 
         var object = new Facade.Image(image, { frames: [ 0, 1, 2, 3, 4, 5 ]});
 
-        test.assertEquals(object.animating, false, 'Intial animating status.');
-        test.assertEquals(object.currentFrame, 0, 'Intial current frame.');
+        test.assertEquals(object.animating, false, 'Initial animating status.');
+        test.assertEquals(object.currentFrame, 0, 'Initial current frame.');
 
         object.play();
 
@@ -139,14 +139,14 @@ setTimeout(function () { // Wait for test image (35 byte spacer.gif)
             y: 0,
             width: 1,
             height: 1
-        }, 'image metrics have been set correctly.');
+        }, 'Image metrics have been set correctly.');
 
-        test.assertEquals(object._setMetrics({ tileX: 100 }), {
+        test.assertEquals(object._setMetrics(object.setOptions({ tileX: 100 }, true)), {
             x: 0,
             y: 0,
             width: 100,
             height: 1
-        }, 'image metrics have been set correctly.');
+        }, 'Image metrics have been set correctly.');
 
         test.done();
 

@@ -26,9 +26,7 @@ casper.test.begin('Setting/getting entity default options.', function suite(test
 
     var object = new Facade.Entity();
 
-    test.assertEquals(object._options, undefined, 'Default options have not been set.');
-
-    test.assertEquals(object._defaultOptions(), {
+    test.assertEquals(object.getAllOptions(), {
         x: 0,
         y: 0,
         anchor: 'top/left',
@@ -36,7 +34,9 @@ casper.test.begin('Setting/getting entity default options.', function suite(test
         scale: 1
     }, 'Default options have been set correctly.');
 
-    test.assertEquals(object._defaultOptions({ test: true }), {
+    object._options = object._defaultOptions({ test: true });
+
+    test.assertEquals(object.getAllOptions(), {
         x: 0,
         y: 0,
         anchor: 'top/left',
@@ -55,16 +55,16 @@ casper.test.begin('Setting/getting entity metrics.', function suite(test) {
 
     var object = new Facade.Entity();
 
-    test.assertEquals(object._metrics, undefined, 'Default metrics have not been set.');
-
-    test.assertEquals(object._defaultMetrics(), {
+    test.assertEquals(object.getAllMetrics(), {
         x: null,
         y: null,
         width: null,
         height: null
     }, 'Default metrics have been set correctly.');
 
-    test.assertEquals(object._defaultMetrics({ scale: null }), {
+    object._metrics = object._defaultMetrics({ scale: null });
+
+    test.assertEquals(object.getAllMetrics(), {
         x: null,
         y: null,
         width: null,
@@ -233,10 +233,6 @@ casper.test.begin('Getting all entity options with Entity.getAllOptions', functi
             x: 0,
             y: 0,
             anchor: 'top/left',
-            shadowBlur: 0,
-            shadowColor: '#000',
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
             opacity: 100,
             points: [],
             fillStyle: '#000',
@@ -258,10 +254,6 @@ casper.test.begin('Getting all entity options with Entity.getAllOptions', functi
             x: 0,
             y: 0,
             anchor: 'top/left',
-            shadowBlur: 0,
-            shadowColor: '#000',
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
             opacity: 100,
             points: [],
             fillStyle: '#000',
@@ -313,10 +305,6 @@ casper.test.begin('Setting entity options with Entity.setOptions', function suit
             x: 0,
             y: 0,
             anchor: 'top/left',
-            shadowBlur: 0,
-            shadowColor: '#000',
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
             opacity: 100,
             points: [],
             fillStyle: '#000',
@@ -375,10 +363,6 @@ casper.test.begin('Setting entity options with Entity.setOptions and interger op
             x: 105,
             y: 105,
             anchor: 'top/left',
-            shadowBlur: 0,
-            shadowColor: '#000',
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
             opacity: 100,
             points: [],
             fillStyle: '#000',
@@ -398,10 +382,6 @@ casper.test.begin('Setting entity options with Entity.setOptions and interger op
             x: 100,
             y: 100,
             anchor: 'top/left',
-            shadowBlur: 0,
-            shadowColor: '#000',
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
             opacity: 100,
             points: [],
             fillStyle: '#000',

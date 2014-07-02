@@ -13,14 +13,13 @@ module.exports = function (grunt) {
             client: {
                 src: ['facade.js', 'tests/**/*.js'],
                 directives: {
-                    nomen: true,
+                    browser: true,
                     globals: {
-                        'document': true,
                         'define': true,
                         'module': true,
-                        'require': true,
-                        'window': true
-                    }
+                        'require': true
+                    },
+                    nomen: true
                 }
             }
 

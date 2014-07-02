@@ -102,14 +102,6 @@ header a:hover {
 
                 
 
-                <li class="scope-private"><a href="#isarray">isArray()</a></li>
-
-                
-
-                <li class="scope-private"><a href="#isfunction">isFunction()</a></li>
-
-                
-
                 <li class="scope-public"><a href="#facade">Facade()</a></li>
 
                 
@@ -158,7 +150,7 @@ header a:hover {
 
                 
 
-                <li class="scope-private"><a href="#facade.entity">Facade.Entity()</a></li>
+                <li class="scope-public"><a href="#facade.entity">Facade.Entity()</a></li>
 
                 
 
@@ -355,125 +347,6 @@ header a:hover {
             </div>
 
             <div class="col-md-9">
-
-                
-
-                <div class="method scope-private">
-
-                    <h2 id="isarray"><a href="#isarray" class="permalink">#</a>isArray() <span class="label label-default">private</span></h2>
-
-                    <p>Checks an object to see if it's an array. Returns a boolean result.</p>
-
-                    
-
-                    <h3>Parameters</h3>
-
-                    
-
-                    <p>
-                        <b>obj</b>
-                        <code>Object</code>
-                        
-                    </p>
-                    <p>The object to be tested.</p>
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    <h3>Examples</h3>
-
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isArray</span><span class="p">({</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}));</span> <span class="c1">// false</span>
-</pre></div>
-
-
-                    
-
-                    <div class="code">
-
-                        <h3>Code</h3>
-
-                        <div class="highlight"><pre><span class="kd">function</span> <span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;[object Array]&#39;</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span>
-
-<span class="p">}</span>
-</pre></div>
-
-
-                    </div>
-
-                    <h3>Returns</h3>
-
-                    <p><code>Boolean</code> Result of the test.</p>
-
-                </div>
-
-                
-
-                <div class="method scope-private">
-
-                    <h2 id="isfunction"><a href="#isfunction" class="permalink">#</a>isFunction() <span class="label label-default">private</span></h2>
-
-                    <p>Checks an object to see if it's a function. Returns a boolean result.</p>
-
-                    
-
-                    <h3>Parameters</h3>
-
-                    
-
-                    <p>
-                        <b>obj</b>
-                        <code>Object</code>
-                        
-                    </p>
-                    <p>The object to be tested.</p>
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    <h3>Examples</h3>
-
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">));</span> <span class="c1">// true</span>
-</pre></div>
-
-
-                    
-
-                    <div class="code">
-
-                        <h3>Code</h3>
-
-                        <div class="highlight"><pre><span class="kd">function</span> <span class="nx">isFunction</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;[object Function]&#39;</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="p">;</span>
-
-<span class="p">}</span>
-</pre></div>
-
-
-                    </div>
-
-                    <h3>Returns</h3>
-
-                    <p><code>Boolean</code> Result of the test.</p>
-
-                </div>
 
                 
 
@@ -686,6 +559,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
+<span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span> <span class="p">});</span>
 </pre></div>
 
 
@@ -704,9 +578,9 @@ header a:hover {
 
         <span class="nx">obj</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">options</span><span class="p">);</span>
 
@@ -762,7 +636,7 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">());</span>
 
     <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 
@@ -837,7 +711,7 @@ header a:hover {
 
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Parameter passed to Facade.draw is not a valid function&#39;</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Parameter passed to Facade.draw is not a valid function.&#39;</span><span class="p">);</span>
 
     <span class="p">}</span>
 
@@ -1077,23 +951,21 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">renderWithContext</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="kd">var</span> <span class="nx">key</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">options</span><span class="p">),</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_contextProperties</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">key</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
-                <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">_contextProperties</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-
-                <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-
-            <span class="p">}</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]].</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]);</span>
 
         <span class="p">}</span>
 
@@ -1467,9 +1339,9 @@ header a:hover {
 
                 
 
-                <div class="method scope-private">
+                <div class="method scope-public">
 
-                    <h2 id="facade.entity"><a href="#facade.entity" class="permalink">#</a>Facade.Entity() <span class="label label-default">private</span></h2>
+                    <h2 id="facade.entity"><a href="#facade.entity" class="permalink">#</a>Facade.Entity() </h2>
 
                     <p>The constructor for all Facade.js shape, image and text objects.</p>
 
@@ -1485,7 +1357,20 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span> <span class="p">};</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">))</span> <span class="p">{</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+
+<span class="p">};</span>
 </pre></div>
 
 
@@ -1544,7 +1429,9 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">options</span><span class="p">,</span>
-        <span class="nx">key</span><span class="p">;</span>
+        <span class="nx">keys</span><span class="p">,</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
     <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -1554,11 +1441,13 @@ header a:hover {
         <span class="nx">scale</span><span class="o">:</span> <span class="mi">1</span>
     <span class="p">};</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">updated</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
 
-            <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
         <span class="p">}</span>
 
@@ -1624,14 +1513,25 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
-        <span class="nx">key</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">metrics</span><span class="p">,</span>
+        <span class="nx">keys</span><span class="p">,</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="kc">null</span>
+    <span class="p">};</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">updated</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="nx">metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">metrics</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
         <span class="p">}</span>
 
@@ -1924,7 +1824,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getoption"><a href="#facade.entity.prototype.getoption" class="permalink">#</a>Facade.Entity.getOption() </h2>
 
-                    <p>Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -1989,7 +1889,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getalloptions"><a href="#facade.entity.prototype.getalloptions" class="permalink">#</a>Facade.Entity.getAllOptions() </h2>
 
-                    <p>Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2014,15 +1914,13 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getAllOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{},</span>
-        <span class="nx">key</span><span class="p">;</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">),</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
-
-            <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-
-        <span class="p">}</span>
+        <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
     <span class="p">}</span>
 
@@ -2046,7 +1944,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.setoption"><a href="#facade.entity.prototype.setoption" class="permalink">#</a>Facade.Entity._setOption() <span class="label label-default">private</span></h2>
 
-                    <p>Sets an option for a given object.</p>
+                    <p>Sets an option for a given entity.</p>
 
                     
 
@@ -2091,7 +1989,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">_setOptions</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2157,7 +2055,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.setoptions"><a href="#facade.entity.prototype.setoptions" class="permalink">#</a>Facade.Entity.setOptions() </h2>
 
-                    <p>Sets a group of options as key-value pairs to an object.</p>
+                    <p>Sets a group of options as key-value pairs to an entity.</p>
 
                     
 
@@ -2169,6 +2067,8 @@ header a:hover {
                         <b>updated</b>
                         <code>Object</code>
                         
+                        <span class="label label-default">Optional</span>
+                        
                     </p>
                     <p>The options to update. Does not need to be entire set of options.</p>
 
@@ -2177,6 +2077,8 @@ header a:hover {
                     <p>
                         <b>test</b>
                         <code>Boolean</code>
+                        
+                        <span class="label label-default">Optional</span>
                         
                     </p>
                     <p>Flag to determine if options are to be persisted in the entity or just returned.</p>
@@ -2193,7 +2095,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">,</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Georgia&#39;</span> <span class="p">}));</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Georgia&#39;</span><span class="p">,</span> <span class="nx">fontSize</span><span class="o">:</span> <span class="mi">20</span> <span class="p">}));</span>
 </pre></div>
 
 
@@ -2206,15 +2108,19 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
-        <span class="nx">key</span><span class="p">;</span>
+        <span class="nx">keys</span><span class="p">,</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">],</span> <span class="nx">test</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]],</span> <span class="nx">test</span><span class="p">);</span>
 
             <span class="p">}</span>
 
@@ -2248,7 +2154,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getmetric"><a href="#facade.entity.prototype.getmetric" class="permalink">#</a>Facade.Entity.getMetric() </h2>
 
-                    <p>Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2313,7 +2219,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getallmetrics"><a href="#facade.entity.prototype.getallmetrics" class="permalink">#</a>Facade.Entity.getAllMetrics() </h2>
 
-                    <p>Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype.setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2338,15 +2244,13 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getAllMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{},</span>
-        <span class="nx">key</span><span class="p">;</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">),</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
-
-            <span class="nx">metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-
-        <span class="p">}</span>
+        <span class="nx">metrics</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
     <span class="p">}</span>
 
@@ -2387,6 +2291,15 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Temporary options for rendering a Facade.js entity.</p>
+
+                    
+
                     
 
                     
@@ -2398,7 +2311,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
-<span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span> <span class="p">});</span>
 </pre></div>
 
 
@@ -2410,17 +2323,20 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nx">metrics</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">();</span>
 
-        <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="nx">facade</span><span class="p">.</span><span class="nx">renderWithContext</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_draw</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">));</span>
 
     <span class="p">}</span>
 
@@ -2536,39 +2452,6 @@ header a:hover {
                         
                     </p>
                     <p>Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100</p>
-
-                    
-
-                    <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
 
                     
 
@@ -2746,14 +2629,12 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">options</span><span class="p">,</span>
-        <span class="nx">key</span><span class="p">;</span>
+        <span class="nx">keys</span><span class="p">,</span>
+        <span class="nx">i</span><span class="p">,</span>
+        <span class="nx">length</span><span class="p">;</span>
 
     <span class="nx">options</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
         <span class="nx">opacity</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">shadowColor</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-        <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">points</span><span class="o">:</span> <span class="p">[],</span>
         <span class="nx">fillStyle</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
         <span class="nx">strokeStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -2763,11 +2644,13 @@ header a:hover {
         <span class="nx">closePath</span><span class="o">:</span> <span class="kc">true</span>
     <span class="p">});</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
 
-            <span class="nx">options</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
 
         <span class="p">}</span>
 
@@ -2811,11 +2694,20 @@ header a:hover {
                     
 
                     <p>
-                        <b>updated</b>
+                        <b>options</b>
                         <code>Object</code>
                         
                     </p>
-                    <p>Additional options as key-value pairs.</p>
+                    <p>Options used to render the polygon.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the polygon.</p>
 
                     
 
@@ -2829,8 +2721,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">polygon</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
-<span class="nx">polygon</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+                    <div class="highlight"><pre><span class="nx">polygon</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 </pre></div>
 
 
@@ -2840,10 +2731,9 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
 
@@ -2853,7 +2743,7 @@ header a:hover {
 
         <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
 
@@ -2882,11 +2772,15 @@ header a:hover {
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">)</span> <span class="p">{</span>
+
             <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span>
+
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+
             <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+
         <span class="p">}</span>
 
     <span class="p">}</span>
@@ -2983,8 +2877,10 @@ header a:hover {
                         <b>updated</b>
                         <code>Object</code>
                         
+                        <span class="label label-default">Optional</span>
+                        
                     </p>
-                    <p>Additional options as key-value pairs.</p>
+                    <p>Custom options used to render the polygon.</p>
 
                     
 
@@ -3012,7 +2908,7 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">(),</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">bounds</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">left</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
         <span class="nx">point</span><span class="p">,</span>
         <span class="nx">i</span><span class="p">,</span>
@@ -3020,13 +2916,13 @@ header a:hover {
         <span class="nx">anchor</span><span class="p">,</span>
         <span class="nx">strokeWidthOffset</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_getStrokeWidthOffset</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
     <span class="p">}</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Rect</span>
 
@@ -3219,50 +3115,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>points</b>
-                        <code>Array</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
-
-                    
-
-                    <p>
                         <b>fillStyle</b>
                         <code>String</code>
                         
@@ -3318,17 +3170,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>closePath</b>
-                        <code>Boolean</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
-
-                    
-
-                    <p>
                         <b>radius</b>
                         <code>Integer</code>
                         
@@ -3368,7 +3209,7 @@ header a:hover {
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>Determines if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false</p>
+                    <p>Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false</p>
 
                     
 
@@ -3406,7 +3247,12 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">radius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">begin</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span> <span class="mi">360</span><span class="p">,</span> <span class="nx">counterclockwise</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+        <span class="nx">radius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">begin</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">end</span><span class="o">:</span> <span class="mi">360</span><span class="p">,</span>
+        <span class="nx">counterclockwise</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
@@ -3586,8 +3432,10 @@ header a:hover {
                         <b>updated</b>
                         <code>Object</code>
                         
+                        <span class="label label-default">Optional</span>
+                        
                     </p>
-                    <p>Additional options as key-value pairs.</p>
+                    <p>Custom options used to render the circle.</p>
 
                     
 
@@ -3615,7 +3463,7 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">updated</span><span class="p">),</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">);</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">();</span>
 
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">options</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
@@ -3744,68 +3592,13 @@ header a:hover {
                     
 
                     <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>points</b>
-                        <code>Array</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
-
-                    
-
-                    <p>
-                        <b>fillStyle</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
                         <b>strokeStyle</b>
                         <code>String</code>
                         
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>Color of a line's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                    <p>Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
                     
 
@@ -3828,28 +3621,6 @@ header a:hover {
                         
                     </p>
                     <p>The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>lineJoin</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>closePath</b>
-                        <code>Boolean</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
 
                     
 
@@ -3908,6 +3679,7 @@ header a:hover {
                     <div class="highlight"><pre><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">x2</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
     <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="nx">strokeStyle</span><span class="o">:</span> <span class="s1">&#39;#333E4B&#39;</span><span class="p">,</span>
@@ -3930,7 +3702,13 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">x1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+        <span class="nx">x1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y1</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">x2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y2</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">lineWidth</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
@@ -4206,50 +3984,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>shadowColor</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetX</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>X offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>shadowOffsetY</b>
-                        <code>Integer</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Y offset of drop shadow. <i>Default:</i> 0</p>
-
-                    
-
-                    <p>
-                        <b>points</b>
-                        <code>Array</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
-
-                    
-
-                    <p>
                         <b>fillStyle</b>
                         <code>String</code>
                         
@@ -4283,17 +4017,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>lineCap</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>The style of rectangle cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
-
-                    
-
-                    <p>
                         <b>lineJoin</b>
                         <code>String</code>
                         
@@ -4301,17 +4024,6 @@ header a:hover {
                         
                     </p>
                     <p>The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>closePath</b>
-                        <code>Boolean</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
 
                     
 
@@ -4372,7 +4084,10 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
@@ -4501,7 +4216,7 @@ header a:hover {
                     
 
                     <p><b>animating</b> <code>animating</code></p>
-                    <p>Boolean state of animation.</p>
+                    <p>Boolean state of the animation.</p>
 
                     
 
@@ -4648,7 +4363,7 @@ header a:hover {
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> []</p>
+                    <p>Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]</p>
 
                     
 
@@ -5102,6 +4817,23 @@ header a:hover {
 
                     
 
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Custom options used to render the image.</p>
+
+                    
+
+                    
+
                     
 
                     
@@ -5111,6 +4843,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">updated</span><span class="p">));</span>
 </pre></div>
 
 
@@ -5123,10 +4856,10 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">(),</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">anchor</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -5183,6 +4916,24 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Options used to render the image.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the image.</p>
+
+                    
+
                     
 
                     
@@ -5193,8 +4944,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">image</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
-<span class="nx">image</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+                    <div class="highlight"><pre><span class="nx">image</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 </pre></div>
 
 
@@ -5204,12 +4954,16 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">currentOffsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">currentWidth</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+        <span class="nx">currentHeight</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+        <span class="nx">originalWidth</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+        <span class="nx">originalHeight</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+        <span class="nx">modulus</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">),</span>
         <span class="nx">x</span><span class="p">,</span>
         <span class="nx">y</span><span class="p">;</span>
 
@@ -5219,7 +4973,21 @@ header a:hover {
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">%</span> <span class="nx">modulus</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+
+            <span class="nx">currentOffsetY</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">/</span> <span class="nx">modulus</span><span class="p">)</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">currentOffsetX</span> <span class="o">+</span> <span class="nx">currentWidth</span> <span class="o">&gt;</span> <span class="nx">originalWidth</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">currentWidth</span> <span class="o">=</span> <span class="nx">currentOffsetX</span> <span class="o">+</span> <span class="nx">currentWidth</span> <span class="o">-</span> <span class="nx">originalWidth</span><span class="p">;</span>
+
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">currentOffsetY</span> <span class="o">+</span> <span class="nx">currentHeight</span> <span class="o">&gt;</span> <span class="nx">originalHeight</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">currentHeight</span> <span class="o">=</span> <span class="nx">currentOffsetY</span> <span class="o">+</span> <span class="nx">currentHeight</span> <span class="o">-</span> <span class="nx">originalHeight</span><span class="p">;</span>
 
         <span class="p">}</span>
 
@@ -5229,14 +4997,14 @@ header a:hover {
 
                 <span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span>
                     <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span>
-                    <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">currentOffsetX</span><span class="p">)</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">,</span>
-                    <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">currentOffsetY</span><span class="p">)</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">,</span>
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+                    <span class="nx">currentOffsetX</span><span class="p">,</span>
+                    <span class="nx">currentOffsetY</span><span class="p">,</span>
+                    <span class="nx">currentWidth</span><span class="p">,</span>
+                    <span class="nx">currentHeight</span><span class="p">,</span>
                     <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">x</span><span class="p">,</span>
                     <span class="nx">options</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">y</span><span class="p">,</span>
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">height</span>
+                    <span class="nx">currentWidth</span><span class="p">,</span>
+                    <span class="nx">currentHeight</span>
                 <span class="p">);</span>
 
             <span class="p">}</span>
@@ -5245,23 +5013,15 @@ header a:hover {
 
         <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">animating</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">||</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
-
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]);</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
 
                 <span class="p">}</span>
 
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
-
                 <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span><span class="p">;</span>
-
-                <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
@@ -5484,7 +5244,7 @@ header a:hover {
                     
 
                     <p>
-                        <b>textAlign</b>
+                        <b>textAlignment</b>
                         <code>String</code>
                         
                         <span class="label label-default">Optional</span>
@@ -5571,12 +5331,6 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-
-    <span class="p">}</span>
-
     <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
         <span class="nx">opacity</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
         <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -5596,9 +5350,13 @@ header a:hover {
 
     <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span> <span class="o">=</span> <span class="p">[];</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
 <span class="p">};</span>
 </pre></div>
@@ -5665,6 +5423,8 @@ header a:hover {
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
 
+    <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+
     <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span> <span class="o">=</span> <span class="p">[];</span>
@@ -5675,7 +5435,7 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -5712,7 +5472,7 @@ header a:hover {
 
     <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">currentLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s$/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">lineHeight</span><span class="p">)]);</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="nx">_context</span><span class="p">.</span><span class="nx">measureText</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]).</span><span class="nx">width</span><span class="p">;</span>
 
@@ -5769,6 +5529,24 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Options used to render the text entity.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the text entity.</p>
+
+                    
+
                     
 
                     
@@ -5779,8 +5557,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">text</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
-<span class="nx">text</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+                    <div class="highlight"><pre><span class="nx">text</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 </pre></div>
 
 
@@ -5790,18 +5567,21 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Text</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Text</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">_applyTransforms</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="nx">context</span><span class="p">.</span><span class="nx">fillText</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nx">context</span><span class="p">.</span><span class="nx">fillText</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+
+        <span class="p">}</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">)</span> <span class="p">{</span>
 
@@ -5902,6 +5682,23 @@ header a:hover {
 
                     
 
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Custom options used to render the text entity.</p>
+
+                    
+
+                    
+
                     
 
                     
@@ -5911,6 +5708,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">updated</span><span class="p">));</span>
 </pre></div>
 
 
@@ -5923,10 +5721,10 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Text</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">(),</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">anchor</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">isFunction</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_configOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
@@ -6129,6 +5927,24 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>options</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Options used to render the group.</p>
+
+                    
+
+                    <p>
+                        <b>metrics</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Metrics used to render the group.</p>
+
+                    
+
                     
 
                     
@@ -6139,7 +5955,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
+                    <div class="highlight"><pre><span class="nx">group</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 </pre></div>
 
 
@@ -6149,16 +5965,15 @@ header a:hover {
 
                         <h3>Code</h3>
 
-                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+                        <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">?</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllMetrics</span><span class="p">(),</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">_applyTransforms</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">facade</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
 
@@ -6287,7 +6102,7 @@ header a:hover {
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">hasEntity</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
 
@@ -6295,19 +6110,13 @@ header a:hover {
 
         <span class="p">}</span>
 
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-
-                <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-
-            <span class="p">}</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">addToGroup</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
 
         <span class="p">}</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">();</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
@@ -6382,7 +6191,7 @@ header a:hover {
 
                     <h3>Returns</h3>
 
-                    <p><code>Boolean</code> Result of the test.</p>
+                    <p><code>Boolean</code> Boolean result of the test.</p>
 
                 </div>
 
@@ -6433,7 +6242,7 @@ header a:hover {
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasEntity</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
 
             <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
 
@@ -6465,6 +6274,23 @@ header a:hover {
 
                     
 
+                    <h3>Parameters</h3>
+
+                    
+
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                        <span class="label label-default">Optional</span>
+                        
+                    </p>
+                    <p>Custom options used to render the group.</p>
+
+                    
+
+                    
+
                     
 
                     
@@ -6474,6 +6300,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">_setMetrics</span><span class="p">(</span><span class="nx">updated</span><span class="p">));</span>
 </pre></div>
 
 
@@ -6486,14 +6313,14 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Group</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">(),</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">updated</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">updated</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAllOptions</span><span class="p">(),</span>
         <span class="nx">bounds</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">left</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">,</span>
         <span class="nx">anchor</span><span class="p">,</span>
         <span class="nx">obj_metrics</span><span class="p">;</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="nx">obj_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_objects</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAllMetrics</span><span class="p">();</span>
 
@@ -6525,6 +6352,7 @@ header a:hover {
 
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span> <span class="o">-</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">scale</span><span class="p">;</span>
     <span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">-</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span><span class="p">)</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">scale</span><span class="p">;</span>
 
