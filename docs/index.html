@@ -3984,17 +3984,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>points</b>
-                        <code>Array</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
-
-                    
-
-                    <p>
                         <b>fillStyle</b>
                         <code>String</code>
                         
@@ -4028,17 +4017,6 @@ header a:hover {
                     
 
                     <p>
-                        <b>lineCap</b>
-                        <code>String</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>The style of rectangle cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
-
-                    
-
-                    <p>
                         <b>lineJoin</b>
                         <code>String</code>
                         
@@ -4046,17 +4024,6 @@ header a:hover {
                         
                     </p>
                     <p>The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
-
-                    
-
-                    <p>
-                        <b>closePath</b>
-                        <code>Boolean</code>
-                        
-                        <span class="label label-default">Optional</span>
-                        
-                    </p>
-                    <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
 
                     
 
@@ -4117,7 +4084,10 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">});</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_metrics</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultMetrics</span><span class="p">();</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
@@ -4246,7 +4216,7 @@ header a:hover {
                     
 
                     <p><b>animating</b> <code>animating</code></p>
-                    <p>Boolean state of animation.</p>
+                    <p>Boolean state of the animation.</p>
 
                     
 
@@ -4393,7 +4363,7 @@ header a:hover {
                         <span class="label label-default">Optional</span>
                         
                     </p>
-                    <p>Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> []</p>
+                    <p>Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]</p>
 
                     
 
@@ -4974,8 +4944,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">image</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
-<span class="nx">image</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+                    <div class="highlight"><pre><span class="nx">image</span><span class="p">.</span><span class="nx">_draw</span><span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">);</span>
 </pre></div>
 
 
@@ -5044,23 +5013,15 @@ header a:hover {
 
         <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">animating</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">||</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">ftime</span><span class="p">)</span> <span class="p">{</span>
 
-                <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
-
-                    <span class="nx">options</span><span class="p">.</span><span class="nx">callback</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]);</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
 
                 <span class="p">}</span>
 
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
-
                 <span class="k">this</span><span class="p">.</span><span class="nx">ftime</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">ftime</span><span class="p">;</span>
-
-                <span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span> <span class="o">&gt;=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
@@ -5283,7 +5244,7 @@ header a:hover {
                     
 
                     <p>
-                        <b>textAlign</b>
+                        <b>textAlignment</b>
                         <code>String</code>
                         
                         <span class="label label-default">Optional</span>
@@ -5370,12 +5331,6 @@ header a:hover {
 
     <span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-
-    <span class="p">}</span>
-
     <span class="k">this</span><span class="p">.</span><span class="nx">_options</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_defaultOptions</span><span class="p">({</span>
         <span class="nx">opacity</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
         <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -5395,9 +5350,13 @@ header a:hover {
 
     <span class="k">this</span><span class="p">.</span><span class="nx">_lines</span> <span class="o">=</span> <span class="p">[];</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
 <span class="p">};</span>
 </pre></div>
@@ -5463,6 +5422,8 @@ header a:hover {
         <span class="nx">currentLineWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">_maxLineWidth</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 

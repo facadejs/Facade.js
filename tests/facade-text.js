@@ -38,10 +38,10 @@ casper.test.begin('Text entity object created.', function suite(test) {
     }, 'Default options have been set correctly.');
 
     test.assertEquals(object.getAllMetrics(), {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 16
+        x: null,
+        y: null,
+        width: null,
+        height: null
     }, 'Default metrics have been set correctly.');
 
     test.done();
@@ -100,7 +100,7 @@ casper.test.begin('Running _configOptions on text options.', function suite(test
 
     'use strict';
 
-    var object = new Facade.Text(undefined, { x: 10, y: 10, fontFamily: 'Helvetica', fontSize: 40, opacity: 50 });
+    var object = new Facade.Text('Hello world!\nThis is a text message.', { x: 10, y: 10, fontFamily: 'Helvetica', fontSize: 40, opacity: 50 });
 
     test.assertEquals(object._configOptions(object.getAllOptions()), {
         x: 10,
@@ -109,7 +109,7 @@ casper.test.begin('Running _configOptions on text options.', function suite(test
         rotate: 0,
         scale: 1,
         opacity: 50,
-        width: 0,
+        width: 162,
         fontFamily: 'Helvetica',
         fontStyle: 'normal',
         fontSize: 40,
@@ -128,7 +128,7 @@ casper.test.begin('Running _configOptions on text options.', function suite(test
 
 });
 
-casper.test.begin('Setting metrics for a text.', function suite(test) {
+casper.test.begin('Setting metrics for a text entity.', function suite(test) {
 
     'use strict';
 
@@ -137,7 +137,7 @@ casper.test.begin('Setting metrics for a text.', function suite(test) {
     test.assertEquals(object.getAllMetrics(), {
         x: 10,
         y: 10,
-        width: 406,
+        width: 162,
         height: 80
     }, 'Rect metrics have been set correctly.');
 
@@ -161,14 +161,14 @@ casper.test.begin('Setting/getting text anchor.', function suite(test) {
     object.setOptions({ anchor: 'top/center' });
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
-        -203,
+        -81,
         0
     ], 'Text anchor top/center has been set correctly.');
 
     object.setOptions({ anchor: 'top/right' });
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
-        -406,
+        -162,
         0
     ], 'Text anchor top/right has been set correctly.');
 
@@ -182,14 +182,14 @@ casper.test.begin('Setting/getting text anchor.', function suite(test) {
     object.setOptions({ anchor: 'center' });
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
-        -203,
+        -81,
         -40
     ], 'Text anchor center has been set correctly.');
 
     object.setOptions({ anchor: 'center/right' });
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
-        -406,
+        -162,
         -40
     ], 'Text anchor center/right has been set correctly.');
 
@@ -203,14 +203,14 @@ casper.test.begin('Setting/getting text anchor.', function suite(test) {
     object.setOptions({ anchor: 'bottom/center' });
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
-        -203,
+        -81,
         -80
     ], 'Text anchor bottom/center has been set correctly.');
 
     object.setOptions({ anchor: 'bottom/right' });
 
     test.assertEquals(object._getAnchorPoint(object.getAllOptions(), object.getAllMetrics()), [
-        -406,
+        -162,
         -80
     ], 'Text anchor bottom/right has been set correctly.');
 

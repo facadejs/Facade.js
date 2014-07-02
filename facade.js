@@ -1357,7 +1357,7 @@
      * @options {Integer?} rotate Degrees to rotate the line. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a line. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} strokeStyle Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
      * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
      * @options {Integer?} x1 X coordinate where line begins. <i>Default:</i> 0
@@ -1478,13 +1478,10 @@
      * @options {Integer?} rotate Degrees to rotate the rectangle. <i>Default:</i> 0
      * @options {Integer?} scale A float representing the scale of a rectangle. <i>Default:</i> 1
      * @options {Integer?} opacity Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
-     * @options {String?} fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-     * @options {String?} lineCap The style of rectangle cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
      * @options {String?} lineJoin The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
      * @options {Integer?} width Width of the rectangle. <i>Default:</i> 0
      * @options {Integer?} height Height of the rectangle. <i>Default:</i> 0
      * @param {Object?} options Options to create the rectangle with.
@@ -1500,7 +1497,10 @@
 
         }
 
-        this._options = this._defaultOptions({ width: 0, height: 0 });
+        this._options = this._defaultOptions({
+            width: 0,
+            height: 0
+        });
         this._metrics = this._defaultMetrics();
 
         this.setOptions(options);
@@ -1557,12 +1557,12 @@
      * @options {Integer?} tileY Number of times to tile the image vertically. <i>Default:</i> 1
      * @options {Integer?} offsetX Starting X coordinate within the image. <i>Default:</i> 0
      * @options {Integer?} offsetY Starting Y coordinate within the image. <i>Default:</i> 0
-     * @options {Array?} frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> []
+     * @options {Array?} frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]
      * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
      * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
      * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
      * @property {image} image Reference to the image element.
-     * @property {animating} animating Boolean state of animation.
+     * @property {animating} animating Boolean state of the animation.
      * @property {currentFrame} currentFrame Current frame of animation.
      * @param {Object|String} source Local image file or reference to an HTML image element.
      * @param {Object?} options Options to create the image with.
@@ -1792,8 +1792,7 @@
     /**
      * Renders an image entity to a canvas.
      *
-     *     image.draw(stage);
-     *     image.draw(stage, options);
+     *     image._draw(facade, options, metrics);
      *
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the image.
@@ -1861,23 +1860,15 @@
 
             if (this.animating) {
 
-                if (!this.ftime) {
+                if (!this.ftime || facade.ftime - this.ftime >= options.speed) {
 
-                    this.ftime = facade.ftime;
+                    if (this.ftime) {
 
-                    if (typeof options.callback === 'function') {
-
-                        options.callback.call(this, options.frames[this.currentFrame]);
+                        this.currentFrame += 1;
 
                     }
 
-                }
-
-                if (facade.ftime - this.ftime >= options.speed) {
-
                     this.ftime = facade.ftime;
-
-                    this.currentFrame += 1;
 
                     if (this.currentFrame >= options.frames.length) {
 
@@ -1932,10 +1923,10 @@
      * @options {String?} fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
      * @options {Integer?} fontSize Font size in pixels. <i>Default:</i> 30
      * @options {String?} lineHeight Line height of the text. <i>Default:</i> 1
-     * @options {String?} textAlign Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
+     * @options {String?} textAlignment Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
      * @options {String?} textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
-     * @options {String?} fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a).  <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @options {String?} strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
      * @property {value} value Current value of the text object.
      * @param {Object?} value Value of the text object.
@@ -1949,12 +1940,6 @@
         if (!(this instanceof Facade.Text)) {
 
             return new Facade.Text(value, options);
-
-        }
-
-        if (value !== undefined) {
-
-            this.value = String(value);
 
         }
 
@@ -1977,9 +1962,13 @@
 
         this._lines = [];
 
-        this.setOptions(options);
+        if (value !== undefined) {
 
-        this.setText(this.value);
+            this.setText(value);
+
+        }
+
+        this.setOptions(options);
 
     };
 
@@ -2009,6 +1998,8 @@
             currentLineWidth = 0,
             i,
             length;
+
+        this.value = value;
 
         this._maxLineWidth = options.width;
 
