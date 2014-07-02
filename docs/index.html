@@ -559,7 +559,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
-<span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">10</span> <span class="p">});</span>
+<span class="nx">stage</span><span class="p">.</span><span class="nx">addToStage</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span> <span class="p">});</span>
 </pre></div>
 
 
@@ -1513,10 +1513,17 @@ header a:hover {
 
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Entity</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_defaultMetrics</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updated</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="kd">var</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="kc">null</span> <span class="p">},</span>
+    <span class="kd">var</span> <span class="nx">metrics</span><span class="p">,</span>
         <span class="nx">keys</span><span class="p">,</span>
         <span class="nx">i</span><span class="p">,</span>
         <span class="nx">length</span><span class="p">;</span>
+
+    <span class="nx">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="kc">null</span>
+    <span class="p">};</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">updated</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
 
@@ -1817,7 +1824,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getoption"><a href="#facade.entity.prototype.getoption" class="permalink">#</a>Facade.Entity.getOption() </h2>
 
-                    <p>Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -1882,7 +1889,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getalloptions"><a href="#facade.entity.prototype.getalloptions" class="permalink">#</a>Facade.Entity.getAllOptions() </h2>
 
-                    <p>Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -1937,7 +1944,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.setoption"><a href="#facade.entity.prototype.setoption" class="permalink">#</a>Facade.Entity._setOption() <span class="label label-default">private</span></h2>
 
-                    <p>Sets an option for a given object.</p>
+                    <p>Sets an option for a given entity.</p>
 
                     
 
@@ -1982,7 +1989,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">_setOptions</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">));</span>
 </pre></div>
 
 
@@ -2048,7 +2055,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.setoptions"><a href="#facade.entity.prototype.setoptions" class="permalink">#</a>Facade.Entity.setOptions() </h2>
 
-                    <p>Sets a group of options as key-value pairs to an object.</p>
+                    <p>Sets a group of options as key-value pairs to an entity.</p>
 
                     
 
@@ -2088,7 +2095,7 @@ header a:hover {
 
                     <h3>Examples</h3>
 
-                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;Hello world!&#39;</span><span class="p">,</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Georgia&#39;</span> <span class="p">}));</span>
+                    <div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Georgia&#39;</span><span class="p">,</span> <span class="nx">fontSize</span><span class="o">:</span> <span class="mi">20</span> <span class="p">}));</span>
 </pre></div>
 
 
@@ -2111,7 +2118,7 @@ header a:hover {
 
         <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
 
                 <span class="nx">options</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_setOption</span><span class="p">(</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">updated</span><span class="p">[</span><span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">]],</span> <span class="nx">test</span><span class="p">);</span>
 
@@ -2147,7 +2154,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getmetric"><a href="#facade.entity.prototype.getmetric" class="permalink">#</a>Facade.Entity.getMetric() </h2>
 
-                    <p>Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype._setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2212,7 +2219,7 @@ header a:hover {
 
                     <h2 id="facade.entity.prototype.getallmetrics"><a href="#facade.entity.prototype.getallmetrics" class="permalink">#</a>Facade.Entity.getAllMetrics() </h2>
 
-                    <p>Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype._setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
+                    <p>Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
                     
 
@@ -2284,6 +2291,15 @@ header a:hover {
 
                     
 
+                    <p>
+                        <b>updated</b>
+                        <code>Object</code>
+                        
+                    </p>
+                    <p>Temporary options for rendering a Facade.js entity.</p>
+
+                    
+
                     
 
                     
@@ -2295,7 +2311,7 @@ header a:hover {
                     <h3>Examples</h3>
 
                     <div class="highlight"><pre><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">);</span>
-<span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">stage</span><span class="p">,</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span> <span class="p">});</span>
 </pre></div>
 
 

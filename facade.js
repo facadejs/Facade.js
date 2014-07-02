@@ -113,7 +113,7 @@
      * Draws a Facade.js entity (or multiple entities) to the stage.
      *
      *     stage.addToStage(circle);
-     *     stage.addToStage(circle, { x: 10, y: 10 });
+     *     stage.addToStage(circle, { x: 100, y: 100 });
      *
      * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
@@ -540,10 +540,17 @@
 
     Facade.Entity.prototype._defaultMetrics = function (updated) {
 
-        var metrics = { x: null, y: null, width: null, height: null },
+        var metrics,
             keys,
             i,
             length;
+
+        metrics = {
+            x: null,
+            y: null,
+            width: null,
+            height: null
+        };
 
         if (typeof updated === 'object') {
 
@@ -676,7 +683,7 @@
     };
 
     /**
-     * Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getOption('value'));
      *
@@ -698,7 +705,7 @@
     };
 
     /**
-     * Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllOptions());
      *
@@ -724,9 +731,9 @@
     };
 
     /**
-     * Sets an option for a given object.
+     * Sets an option for a given entity.
      *
-     *     console.log(text._setOptions('value', 'Hello world!'));
+     *     console.log(text._setOption('value', 'Hello world!'));
      *
      * @param {String} key The option to update.
      * @param {Object|Function|String|Integer} value The new value of the specified option.
@@ -776,9 +783,9 @@
     };
 
     /**
-     * Sets a group of options as key-value pairs to an object.
+     * Sets a group of options as key-value pairs to an entity.
      *
-     *     console.log(text.setOptions({ value: 'Hello world!', fontFamily: 'Georgia' }));
+     *     console.log(text.setOptions({ fontFamily: 'Georgia', fontSize: 20 }));
      *
      * @param {Object?} updated The options to update. Does not need to be entire set of options.
      * @param {Boolean?} test Flag to determine if options are to be persisted in the entity or just returned.
@@ -799,7 +806,7 @@
 
             for (i = 0, length = keys.length; i < length; i += 1) {
 
-                if (updated[keys[i]] !== undefined && options[keys[i]] !== undefined) {
+                if (options[keys[i]] !== undefined) {
 
                     options[keys[i]] = this._setOption(keys[i], updated[keys[i]], test);
 
@@ -820,7 +827,7 @@
     };
 
     /**
-     * Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype._setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getMetric('width'));
      *
@@ -842,7 +849,7 @@
     };
 
     /**
-     * Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity object or <a href="#facade.entity.prototype._setmetrics"><code>setMetrics</code></a> not through temporary metrics set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
+     * Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.
      *
      *     console.log(text.getAllMetrics());
      *
@@ -871,9 +878,10 @@
      * Renders an entity to a canvas.
      *
      *     entity.draw(stage);
-     *     entity.draw(stage, options);
+     *     entity.draw(stage, { x: 100, y: 100 });
      *
      * @param {Object} facade Facade.js object.
+     * @param {Object} updated Temporary options for rendering a Facade.js entity.
      * @return {void}
      * @api public
      */
