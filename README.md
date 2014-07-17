@@ -1,4 +1,4 @@
-[![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js)
+[![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js) [![](https://david-dm.org/facadejs/Facade.js/dev-status.svg)](https://david-dm.org/facadejs/Facade.js/#info=devDependencies)
 
 #Facade.js 0.3.0-beta
 
