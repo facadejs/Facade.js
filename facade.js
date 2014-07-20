@@ -1804,8 +1804,8 @@
     Facade.Image.prototype._draw = function (facade, options, metrics) {
 
         var context = facade.context,
-            currentOffsetX = 0,
-            currentOffsetY = 0,
+            currentOffsetX = options.offsetX,
+            currentOffsetY = options.offsetY,
             currentWidth = options.width,
             currentHeight = options.height,
             originalWidth = this.image.width,
@@ -1820,9 +1820,16 @@
 
             if (options.frames.length) {
 
-                currentOffsetX = options.frames[this.currentFrame] % modulus * options.width;
+                currentOffsetX += options.frames[this.currentFrame] % modulus * options.width;
 
-                currentOffsetY = Math.floor(options.frames[this.currentFrame] / modulus) * options.height;
+                currentOffsetY += Math.floor(options.frames[this.currentFrame] / modulus) * options.height;
+
+                if (currentOffsetX + options.width > originalWidth) {
+
+                    currentOffsetX = 0;
+                    currentOffsetY += options.height;
+
+                }
 
             }
 
