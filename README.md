@@ -1,4 +1,4 @@
-[![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js)
+[![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js) [![](https://david-dm.org/facadejs/Facade.js/dev-status.svg)](https://david-dm.org/facadejs/Facade.js/#info=devDependencies)
 
 #Facade.js 0.3.0-beta
 
@@ -89,7 +89,6 @@ More specifically if you would like to run each grunt command separately they ar
 ```bash
 $ grunt jslint # Runs jslint tests
 $ grunt uglify # Uglifys facade.js and stores the result in facade.min.js
-$ grunt demos # Compiles all demos into a single JavaScript file and rebuilds the cache manifest file
 $ grunt shell:docs # Rebuild documentation
 $ grunt shell:gzip # Gzip facade.min.js and stores the result in facade.min.js.gzip
 ```
@@ -98,7 +97,7 @@ $ grunt shell:gzip # Gzip facade.min.js and stores the result in facade.min.js.g
 
 Tests are built in [casperjs](http://casperjs.org/) and validates the values used to render entities on the canvas.
 
-```
+```bash
 $ npm test
 ```
 

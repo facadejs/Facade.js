@@ -4957,13 +4957,12 @@ header a:hover {
                         <div class="highlight"><pre><span class="nx">Facade</span><span class="p">.</span><span class="nx">Image</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_draw</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">facade</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">metrics</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">facade</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
-        <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">currentOffsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">,</span>
+        <span class="nx">currentOffsetY</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">,</span>
         <span class="nx">currentWidth</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
         <span class="nx">currentHeight</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
         <span class="nx">originalWidth</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
         <span class="nx">originalHeight</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
-        <span class="nx">modulus</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">),</span>
         <span class="nx">x</span><span class="p">,</span>
         <span class="nx">y</span><span class="p">;</span>
 
@@ -4973,9 +4972,15 @@ header a:hover {
 
         <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
 
-            <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">%</span> <span class="nx">modulus</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+            <span class="nx">currentOffsetX</span> <span class="o">+=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 
-            <span class="nx">currentOffsetY</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">frames</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentFrame</span><span class="p">]</span> <span class="o">/</span> <span class="nx">modulus</span><span class="p">)</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">currentOffsetX</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">width</span> <span class="o">&gt;</span> <span class="nx">originalWidth</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="nx">currentOffsetY</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">currentOffsetX</span> <span class="o">/</span> <span class="nx">originalWidth</span><span class="p">)</span> <span class="o">*</span> <span class="nx">options</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+                <span class="nx">currentOffsetX</span> <span class="o">=</span> <span class="nx">currentOffsetX</span> <span class="o">%</span> <span class="nx">originalWidth</span><span class="p">;</span>
+
+            <span class="p">}</span>
 
         <span class="p">}</span>
 
