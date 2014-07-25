@@ -1,5 +1,10 @@
 #Changelog
 
+##0.3.0-beta.5 (July 24, 2014)
+
+- Fix for offsetX/offsetY regression bug.
+- Improved image offset support with regards to sprite wrapping.
+
 ##0.3.0-beta.4 (July 2, 2014)
 
 - Fixed bug introduced in 0.3.0-beta.3 with text wrapping in Facade.Text.
