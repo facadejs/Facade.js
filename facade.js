@@ -1561,9 +1561,9 @@
      * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
      * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
      * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
-     * @property {image} image Reference to the image element.
-     * @property {animating} animating Boolean state of the animation.
-     * @property {currentFrame} currentFrame Current frame of animation.
+     * @property {Object} image Reference to the image element.
+     * @property {Boolean} animating Boolean state of the animation.
+     * @property {Integer} currentFrame Current frame of animation.
      * @param {Object|String} source Local image file or reference to an HTML image element.
      * @param {Object?} options Options to create the image with.
      * @return {Object} New Facade.Image object.
@@ -1933,7 +1933,7 @@
      * @options {String?} fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {String?} strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
      * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-     * @property {value} value Current value of the text object.
+     * @property {String} value Current value of the text object.
      * @param {Object?} value Value of the text object.
      * @param {Object?} options Options to create the text entity with.
      * @return {Object} New Facade.Text object.
