@@ -47,7 +47,7 @@
      * @param {Integer?} width Width of the canvas.
      * @param {Integer?} height Height of the canvas.
      * @return {Object} New Facade.js object.
-     * @api public
+     * @public
      */
 
     function Facade(canvas, width, height) {
@@ -118,7 +118,7 @@
      * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.addToStage = function (obj, options) {
@@ -154,7 +154,7 @@
      *      stage.clear();
      *
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.clear = function () {
@@ -178,7 +178,7 @@
      *
      * @param {Function} callback Function callback.
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.draw = function (callback) {
@@ -207,7 +207,7 @@
      * @param {String?} type Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)
      * @param {Integer?} quality Number between 0 and 100.
      * @return {String} Base64 encoded string.
-     * @api public
+     * @public
      */
 
     Facade.prototype.exportBase64 = function (type, quality) {
@@ -240,7 +240,7 @@
      *
      * @param {Integer?} height Height in pixels.
      * @return {Integer} Height in pixels.
-     * @api public
+     * @public
      */
 
     Facade.prototype.height = function (height) {
@@ -273,7 +273,7 @@
      * @param {Object} options Object containing context property and/or method names with corresponding values.
      * @param {Function?} callback Function to be called when context options have been rendered to the canvas.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.prototype.renderWithContext = function (options, callback) {
@@ -316,7 +316,7 @@
      *
      * @param {Integer?} ratio Ratio to scale the canvas.
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.resizeForHDPI = function (ratio) {
@@ -354,7 +354,7 @@
      *     stage.start();
      *
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.start = function () {
@@ -371,7 +371,7 @@
      *     stage.stop();
      *
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.stop = function () {
@@ -396,7 +396,7 @@
      *
      * @param {Integer?} width Width in pixels.
      * @return {Integer} Width in pixels.
-     * @api public
+     * @public
      */
 
     Facade.prototype.width = function (width) {
@@ -428,7 +428,7 @@
      *
      * @param {Integer} time <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp" target="_blank">DOMTimeStamp</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp" target="_blank">DOMHighResTimeStamp</a> (Google Chrome Only)
      * @return {Object} Facade.js object.
-     * @api private
+     * @private
      */
 
     Facade.prototype._animate = function (time) {
@@ -467,7 +467,7 @@
      * The constructor for all Facade.js shape, image and text objects.
      *
      * @return {Object} New Facade.Entity object.
-     * @api public
+     * @public
      */
 
     Facade.Entity = function (options) {
@@ -493,7 +493,7 @@
      *
      * @param {Object} updated Additional options as key-value pairs.
      * @return {Object} Default set of options.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._defaultOptions = function (updated) {
@@ -535,7 +535,7 @@
      *
      * @param {Object} updated Additional metrics as key-value pairs.
      * @return {Object} Default set of metrics.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._defaultMetrics = function (updated) {
@@ -576,7 +576,7 @@
      * @param {Object} options Facade.Entity options.
      * @param {Object} metrics Facade.Entity metrics.
      * @return {Array} Array with the x and y anchor positions.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._getAnchorPoint = function (options, metrics) {
@@ -624,7 +624,7 @@
      *
      * @param {Object} options Facade.Entity options.
      * @return {Integer} Integer representing the stroke width offset.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._getStrokeWidthOffset = function (options) {
@@ -650,7 +650,7 @@
      * @param {Object} options Facade.Entity options.
      * @param {Object} metrics Facade.Entity metrics.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
@@ -689,7 +689,7 @@
      *
      * @param {String} key The name of the option.
      * @return {Object|Function|String|Integer} Value of the option requested.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getOption = function (key) {
@@ -710,7 +710,7 @@
      *     console.log(text.getAllOptions());
      *
      * @return {Object} Object containing all options.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getAllOptions = function () {
@@ -739,7 +739,7 @@
      * @param {Object|Function|String|Integer} value The new value of the specified option.
      * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object|Function|String|Integer} Returns value of the updated option.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._setOption = function (key, value, test) {
@@ -790,7 +790,7 @@
      * @param {Object?} updated The options to update. Does not need to be entire set of options.
      * @param {Boolean?} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object} Updated options.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.setOptions = function (updated, test) {
@@ -833,7 +833,7 @@
      *
      * @param {String} key The name of the metric.
      * @return {Integer} Value of the metric requested.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getMetric = function (key) {
@@ -854,7 +854,7 @@
      *     console.log(text.getAllMetrics());
      *
      * @return {Object} Object containing all metrics.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getAllMetrics = function () {
@@ -883,7 +883,7 @@
      * @param {Object} facade Facade.js object.
      * @param {Object} updated Temporary options for rendering a Facade.js entity.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.draw = function (facade, updated) {
@@ -935,7 +935,7 @@
      * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
      * @param {Object?} options Options to create the polygon with.
      * @return {Object} New Facade.Polygon object.
-     * @api public
+     * @public
      */
 
     Facade.Polygon = function (options) {
@@ -967,7 +967,7 @@
      *
      * @param {Object} updated Additional options as key-value pairs.
      * @return {Object} Default set of options.
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._defaultOptions = function (updated) {
@@ -1013,7 +1013,7 @@
      * @param {Object} options Options used to render the polygon.
      * @param {Object} metrics Metrics used to render the polygon.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._draw = function (facade, options, metrics) {
@@ -1079,7 +1079,7 @@
      *
      * @param {Object} options Complete set of polygon specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._configOptions = function (options) {
@@ -1099,7 +1099,7 @@
      *
      * @param {Object?} updated Custom options used to render the polygon.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._setMetrics = function (updated) {
@@ -1228,7 +1228,7 @@
      * @options {Boolean?} counterclockwise Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
      * @param {Object?} options Options to create the circle with.
      * @return {Object} New Facade.Circle object.
-     * @api public
+     * @public
      */
 
     Facade.Circle = function (options) {
@@ -1265,7 +1265,7 @@
      *
      * @param {Object} options Complete set of circle specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Circle.prototype._configOptions = function (options) {
@@ -1295,7 +1295,7 @@
      * @param {Object} options Facade.Circle options.
      * @param {Object} metrics Facade.Circle metrics.
      * @return {Array} Array with the x and y anchor positions.
-     * @api private
+     * @private
      */
 
     Facade.Circle.prototype._getAnchorPoint = function (options, metrics) {
@@ -1317,7 +1317,7 @@
      *
      * @param {Object?} updated Custom options used to render the circle.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Circle.prototype._setMetrics = function (updated) {
@@ -1366,7 +1366,7 @@
      * @options {Integer?} y2 Y coordinate where line ends. <i>Default:</i> 0
      * @param {Object?} options Options to create the line with.
      * @return {Object} New Facade.Line object.
-     * @api public
+     * @public
      */
 
     Facade.Line = function (options) {
@@ -1404,7 +1404,7 @@
      *
      * @param {Object} options Complete set of line specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Line.prototype._configOptions = function (options) {
@@ -1427,7 +1427,7 @@
      * @param {Object} options Facade.Line options.
      * @param {Object} metrics Facade.Line metrics.
      * @return {Array} Array with the x and y anchor positions.
-     * @api private
+     * @private
      */
 
     Facade.Line.prototype._getAnchorPoint = function (options, metrics) {
@@ -1486,7 +1486,7 @@
      * @options {Integer?} height Height of the rectangle. <i>Default:</i> 0
      * @param {Object?} options Options to create the rectangle with.
      * @return {Object} New Facade.Rect object.
-     * @api public
+     * @public
      */
 
     Facade.Rect = function (options) {
@@ -1521,7 +1521,7 @@
      *
      * @param {Object} options Complete set of rectangle specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Rect.prototype._configOptions = function (options) {
@@ -1567,7 +1567,7 @@
      * @param {Object|String} source Local image file or reference to an HTML image element.
      * @param {Object?} options Options to create the image with.
      * @return {Object} New Facade.Image object.
-     * @api public
+     * @public
      */
 
     Facade.Image = function (img, options) {
@@ -1616,7 +1616,7 @@
      *
      * @param {Object|String} source A reference to an image tag or an image URL.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.load = function (source) {
@@ -1650,7 +1650,7 @@
      *  image.play();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.play = function () {
@@ -1667,7 +1667,7 @@
      *  image.pause();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.pause = function () {
@@ -1684,7 +1684,7 @@
      *  image.reset();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.reset = function () {
@@ -1701,7 +1701,7 @@
      *  image.stop();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.stop = function () {
@@ -1721,7 +1721,7 @@
      *
      * @param {Object} options Complete set of image specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Image.prototype._configOptions = function (options) {
@@ -1756,7 +1756,7 @@
      *
      * @param {Object?} updated Custom options used to render the image.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Image.prototype._setMetrics = function (updated) {
@@ -1798,7 +1798,7 @@
      * @param {Object} options Options used to render the image.
      * @param {Object} metrics Metrics used to render the image.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Image.prototype._draw = function (facade, options, metrics) {
@@ -1937,7 +1937,7 @@
      * @param {Object?} value Value of the text object.
      * @param {Object?} options Options to create the text entity with.
      * @return {Object} New Facade.Text object.
-     * @api public
+     * @public
      */
 
     Facade.Text = function (value, options) {
@@ -1991,7 +1991,7 @@
      *
      * @param {String} value The new value of the text entity.
      * @return {Array} An array of lines and the position to render using <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#fillText()">fillText()</a> and <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#strokeText()">strokeText()</a>.
-     * @api public
+     * @public
      */
 
     Facade.Text.prototype.setText = function (value) {
@@ -2086,7 +2086,7 @@
      * @param {Object} options Options used to render the text entity.
      * @param {Object} metrics Metrics used to render the text entity.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Text.prototype._draw = function (facade, options, metrics) {
@@ -2122,7 +2122,7 @@
      *
      * @param {Object} options Complete set of text specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Text.prototype._configOptions = function (options) {
@@ -2149,7 +2149,7 @@
      *
      * @param {Object?} updated Custom options used to render the text entity.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Text.prototype._setMetrics = function (updated) {
@@ -2203,7 +2203,7 @@
      * @options {Integer?} scale A float representing the scale of a group. <i>Default:</i> 1
      * @param {Object?} options Options to create the group with.
      * @return {Object} New Facade.Group object.
-     * @api public
+     * @public
      */
 
     Facade.Group = function (options) {
@@ -2239,7 +2239,7 @@
      * @param {Object} options Options used to render the group.
      * @param {Object} metrics Metrics used to render the group.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Group.prototype._draw = function (facade, options, metrics) {
@@ -2265,7 +2265,7 @@
      *
      * @param {Object} options Complete set of group specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Group.prototype._configOptions = function (options) {
@@ -2283,7 +2283,7 @@
      *
      * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Group.prototype.addToGroup = function (obj) {
@@ -2324,7 +2324,7 @@
      *
      * @param {Object} obj Facade.js entity.
      * @return {Boolean} Boolean result of the test.
-     * @api public
+     * @public
      */
 
     Facade.Group.prototype.hasEntity = function (obj) {
@@ -2340,7 +2340,7 @@
      *
      * @param {Object} obj Facade.js entity.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Group.prototype.removeFromGroup = function (obj) {
@@ -2367,7 +2367,7 @@
      *
      * @param {Object?} updated Custom options used to render the group.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Group.prototype._setMetrics = function (updated) {
