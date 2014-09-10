@@ -85,15 +85,31 @@
 
         }
 
-        if (width && height) {
+        if (width) {
 
             this.width(width);
-            this.height(height);
+
+        } else if (this.canvas.hasAttribute('width')) {
+
+            this._width = parseInt(this.canvas.getAttribute('width'), 10);
 
         } else {
 
-            this._width = parseInt(this.canvas.getAttribute('width'), 10);
+            this.width(this.canvas.clientWidth);
+
+        }
+
+        if (height) {
+
+            this.height(height);
+
+        } else if (this.canvas.hasAttribute('height')) {
+
             this._height = parseInt(this.canvas.getAttribute('height'), 10);
+
+        } else {
+
+            this.height(this.canvas.clientHeight);
 
         }
 

@@ -98,6 +98,30 @@ casper.test.begin('Clear canvas', function suite(test) {
 
 });
 
+casper.test.begin('Clear canvas without width and height attributes.', function suite(test) {
+
+    'use strict';
+
+    var canvas = document.createElement('canvas'),
+        stage;
+
+    document.body.appendChild(canvas);
+
+    stage = new Facade(canvas);
+
+    stage.context.fillStyle = 'rgb(255, 0, 0)';
+    stage.context.fillRect(0, 0, 500, 500);
+
+    test.assertEquals(stage.context.getImageData(0, 0, 1, 1).data[0], 255, 'Fill color is red.');
+
+    stage.clear();
+
+    test.assertEquals(stage.context.getImageData(0, 0, 1, 1).data[0], 0, 'Canvas was cleared.');
+
+    test.done();
+
+});
+
 casper.test.begin('Facade draw.', function suite(test) {
 
     'use strict';
