@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 
             docs: {
 
-                command: 'dox < facade.js > docs/facade.json; cd docs/; doxdox.py --title="Facade.js" --description="Drawing shapes, images and text in HTML5 canvas made easy." --header "header.html" > index.html; rm facade.json;'
+                command: './node_modules/doxdox/bin/doxdox facade.js --layout docs/template.hbs --output docs/index.html'
 
             },
 
