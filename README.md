@@ -49,7 +49,7 @@ stage.draw(function () {
 
     this.clear();
 
-    this.setOptions({ x: '+=1' });
+    rect.setOptions({ x: '+=1' });
 
     this.addToStage(rect);
 
