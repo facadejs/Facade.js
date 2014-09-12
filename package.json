@@ -9,11 +9,11 @@
         "grunt-casperjs": "2.0.1",
         "grunt-contrib-watch": "0.6.1",
         "grunt-contrib-uglify": "0.5.1",
+        "grunt-doxdox": "0.0.1",
         "grunt-shell": "1.1.1",
         "grunt-jslint": "1.1.12",
         "grunt-notify": "0.3.1",
         "casperjs": "1.1.0-beta3",
-        "doxdox": "0.0.10",
         "matchdep": "0.3.0"
     },
     "scripts": {

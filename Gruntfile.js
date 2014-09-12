@@ -46,13 +46,21 @@ module.exports = function (grunt) {
 
         },
 
+        doxdox: {
+
+            dev: {
+
+                input: 'facade.js',
+                output: 'docs/index.html',
+                config: {
+                    layout: 'docs/template.hbs'
+                }
+
+            }
+
+        },
+
         shell: {
-
-            docs: {
-
-                command: './node_modules/doxdox/bin/doxdox facade.js --layout docs/template.hbs --output docs/index.html'
-
-            },
 
             gzip: {
 
@@ -73,7 +81,7 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('default', [ 'jslint', 'uglify', 'shell' ]);
+    grunt.registerTask('default', [ 'jslint', 'uglify', 'doxdox', 'shell' ]);
     grunt.registerTask('test', [ 'casperjs' ]);
 
 };
