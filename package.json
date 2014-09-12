@@ -16,11 +16,8 @@
         "doxdox": "0.0.10",
         "matchdep": "0.3.0"
     },
-    "peerDependencies": {
-        "grunt-cli": "0.1.13"
-    },
     "scripts": {
-        "test": "./node_modules/grunt-cli/bin/grunt test"
+        "test": "grunt test"
     },
     "keywords": [
         "canvas",
