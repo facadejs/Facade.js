@@ -1,6 +1,6 @@
 #Changelog
 
-##0.3.0-beta.6 (Octobe 2, 2014)
+##0.3.0-beta.6 (October 2, 2014)
 
 - Fixed issue when clearing a canvas with no width/height attributes.
 - Updated documentation to work with latest version of doxdox.
