@@ -34,6 +34,8 @@
 .menu li a {
     display: block;
     padding: .25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .menu li ul {
@@ -106,7 +108,6 @@ header a:hover {
 
 </header>
 
-
 <div class="back-to-top"><a href="#">Back to Top</a></div>
 
 <div class="wrap">
@@ -155,7 +156,7 @@ header a:hover {
                                 {{#if ctx}}
 
                                     <li class="scope-{{#if isPrivate}}private{{else}}public{{/if}}">
-                                        <a href="#{{ctx.uid}}">{{formatName ctx.string}}</a>
+                                        <a href="#{{ctx.uid}}" title="{{formatName ctx.string}}">{{formatName ctx.string}}</a>
                                     </li>
 
                                 {{/if}}
