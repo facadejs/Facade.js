@@ -1,5 +1,10 @@
 #Changelog
 
+##0.3.0-beta.6 (Octobe 2, 2014)
+
+- Fixed issue when clearing a canvas with no width/height attributes.
+- Updated documentation to work with latest version of doxdox.
+
 ##0.3.0-beta.5 (July 24, 2014)
 
 - Fix for offsetX/offsetY regression bug.

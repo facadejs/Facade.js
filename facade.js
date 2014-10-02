@@ -47,7 +47,7 @@
      * @param {Integer?} width Width of the canvas.
      * @param {Integer?} height Height of the canvas.
      * @return {Object} New Facade.js object.
-     * @api public
+     * @public
      */
 
     function Facade(canvas, width, height) {
@@ -85,15 +85,31 @@
 
         }
 
-        if (width && height) {
+        if (width) {
 
             this.width(width);
-            this.height(height);
+
+        } else if (this.canvas.hasAttribute('width')) {
+
+            this._width = parseInt(this.canvas.getAttribute('width'), 10);
 
         } else {
 
-            this._width = parseInt(this.canvas.getAttribute('width'), 10);
+            this.width(this.canvas.clientWidth);
+
+        }
+
+        if (height) {
+
+            this.height(height);
+
+        } else if (this.canvas.hasAttribute('height')) {
+
             this._height = parseInt(this.canvas.getAttribute('height'), 10);
+
+        } else {
+
+            this.height(this.canvas.clientHeight);
 
         }
 
@@ -118,7 +134,7 @@
      * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.addToStage = function (obj, options) {
@@ -154,7 +170,7 @@
      *      stage.clear();
      *
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.clear = function () {
@@ -178,7 +194,7 @@
      *
      * @param {Function} callback Function callback.
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.draw = function (callback) {
@@ -207,7 +223,7 @@
      * @param {String?} type Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)
      * @param {Integer?} quality Number between 0 and 100.
      * @return {String} Base64 encoded string.
-     * @api public
+     * @public
      */
 
     Facade.prototype.exportBase64 = function (type, quality) {
@@ -240,7 +256,7 @@
      *
      * @param {Integer?} height Height in pixels.
      * @return {Integer} Height in pixels.
-     * @api public
+     * @public
      */
 
     Facade.prototype.height = function (height) {
@@ -273,7 +289,7 @@
      * @param {Object} options Object containing context property and/or method names with corresponding values.
      * @param {Function?} callback Function to be called when context options have been rendered to the canvas.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.prototype.renderWithContext = function (options, callback) {
@@ -316,7 +332,7 @@
      *
      * @param {Integer?} ratio Ratio to scale the canvas.
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.resizeForHDPI = function (ratio) {
@@ -354,7 +370,7 @@
      *     stage.start();
      *
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.start = function () {
@@ -371,7 +387,7 @@
      *     stage.stop();
      *
      * @return {Object} Facade.js object.
-     * @api public
+     * @public
      */
 
     Facade.prototype.stop = function () {
@@ -396,7 +412,7 @@
      *
      * @param {Integer?} width Width in pixels.
      * @return {Integer} Width in pixels.
-     * @api public
+     * @public
      */
 
     Facade.prototype.width = function (width) {
@@ -428,7 +444,7 @@
      *
      * @param {Integer} time <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp" target="_blank">DOMTimeStamp</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp" target="_blank">DOMHighResTimeStamp</a> (Google Chrome Only)
      * @return {Object} Facade.js object.
-     * @api private
+     * @private
      */
 
     Facade.prototype._animate = function (time) {
@@ -467,7 +483,7 @@
      * The constructor for all Facade.js shape, image and text objects.
      *
      * @return {Object} New Facade.Entity object.
-     * @api public
+     * @public
      */
 
     Facade.Entity = function (options) {
@@ -493,7 +509,7 @@
      *
      * @param {Object} updated Additional options as key-value pairs.
      * @return {Object} Default set of options.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._defaultOptions = function (updated) {
@@ -535,7 +551,7 @@
      *
      * @param {Object} updated Additional metrics as key-value pairs.
      * @return {Object} Default set of metrics.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._defaultMetrics = function (updated) {
@@ -576,7 +592,7 @@
      * @param {Object} options Facade.Entity options.
      * @param {Object} metrics Facade.Entity metrics.
      * @return {Array} Array with the x and y anchor positions.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._getAnchorPoint = function (options, metrics) {
@@ -624,7 +640,7 @@
      *
      * @param {Object} options Facade.Entity options.
      * @return {Integer} Integer representing the stroke width offset.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._getStrokeWidthOffset = function (options) {
@@ -650,7 +666,7 @@
      * @param {Object} options Facade.Entity options.
      * @param {Object} metrics Facade.Entity metrics.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
@@ -689,7 +705,7 @@
      *
      * @param {String} key The name of the option.
      * @return {Object|Function|String|Integer} Value of the option requested.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getOption = function (key) {
@@ -710,7 +726,7 @@
      *     console.log(text.getAllOptions());
      *
      * @return {Object} Object containing all options.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getAllOptions = function () {
@@ -739,7 +755,7 @@
      * @param {Object|Function|String|Integer} value The new value of the specified option.
      * @param {Boolean} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object|Function|String|Integer} Returns value of the updated option.
-     * @api private
+     * @private
      */
 
     Facade.Entity.prototype._setOption = function (key, value, test) {
@@ -790,7 +806,7 @@
      * @param {Object?} updated The options to update. Does not need to be entire set of options.
      * @param {Boolean?} test Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object} Updated options.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.setOptions = function (updated, test) {
@@ -833,7 +849,7 @@
      *
      * @param {String} key The name of the metric.
      * @return {Integer} Value of the metric requested.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getMetric = function (key) {
@@ -854,7 +870,7 @@
      *     console.log(text.getAllMetrics());
      *
      * @return {Object} Object containing all metrics.
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.getAllMetrics = function () {
@@ -883,7 +899,7 @@
      * @param {Object} facade Facade.js object.
      * @param {Object} updated Temporary options for rendering a Facade.js entity.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Entity.prototype.draw = function (facade, updated) {
@@ -920,22 +936,22 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @options {Integer?} x X coordinate to position the polygon. <i>Default:</i> 0
-     * @options {Integer?} y Y coordinate to position the polygon. <i>Default:</i> 0
-     * @options {String?} anchor Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @options {Integer?} rotate Degrees to rotate the polygon. <i>Default:</i> 0
-     * @options {Integer?} scale A float representing the scale of a polygon. <i>Default:</i> 1
-     * @options {Integer?} opacity Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {Array?} points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
-     * @options {String?} fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @options {Boolean?} closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
      * @param {Object?} options Options to create the polygon with.
+     * @param {Integer?} options.x X coordinate to position the polygon. <i>Default:</i> 0
+     * @param {Integer?} options.y Y coordinate to position the polygon. <i>Default:</i> 0
+     * @param {String?} options.anchor Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer?} options.rotate Degrees to rotate the polygon. <i>Default:</i> 0
+     * @param {Integer?} options.scale A float representing the scale of a polygon. <i>Default:</i> 1
+     * @param {Integer?} options.opacity Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {Array?} options.points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @param {String?} options.fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String?} options.strokeStyle Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
+     * @param {String?} options.lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @param {String?} options.lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @param {Boolean?} options.closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
      * @return {Object} New Facade.Polygon object.
-     * @api public
+     * @public
      */
 
     Facade.Polygon = function (options) {
@@ -967,7 +983,7 @@
      *
      * @param {Object} updated Additional options as key-value pairs.
      * @return {Object} Default set of options.
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._defaultOptions = function (updated) {
@@ -1013,7 +1029,7 @@
      * @param {Object} options Options used to render the polygon.
      * @param {Object} metrics Metrics used to render the polygon.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._draw = function (facade, options, metrics) {
@@ -1079,7 +1095,7 @@
      *
      * @param {Object} options Complete set of polygon specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._configOptions = function (options) {
@@ -1099,7 +1115,7 @@
      *
      * @param {Object?} updated Custom options used to render the polygon.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Polygon.prototype._setMetrics = function (updated) {
@@ -1211,24 +1227,24 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @options {Integer?} x X coordinate to position the circle. <i>Default:</i> 0
-     * @options {Integer?} y Y coordinate to position the circle. <i>Default:</i> 0
-     * @options {String?} anchor Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @options {Integer?} rotate Degrees to rotate the circle. <i>Default:</i> 0
-     * @options {Integer?} scale A float representing the scale of a circle. <i>Default:</i> 1
-     * @options {Integer?} opacity Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-     * @options {String?} lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @options {Integer?} radius Radius of the circle. <i>Default:</i> 0
-     * @options {Integer?} start Degree at which the circle begins. <i>Default:</i> 0
-     * @options {Integer?} end Degree at which the circle ends. <i>Default:</i> 360
-     * @options {Boolean?} counterclockwise Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
      * @param {Object?} options Options to create the circle with.
+     * @param {Integer?} options.x X coordinate to position the circle. <i>Default:</i> 0
+     * @param {Integer?} options.y Y coordinate to position the circle. <i>Default:</i> 0
+     * @param {String?} options.anchor Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer?} options.rotate Degrees to rotate the circle. <i>Default:</i> 0
+     * @param {Integer?} options.scale A float representing the scale of a circle. <i>Default:</i> 1
+     * @param {Integer?} options.opacity Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {String?} options.fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String?} options.strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
+     * @param {String?} options.lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @param {String?} options.lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @param {Integer?} options.radius Radius of the circle. <i>Default:</i> 0
+     * @param {Integer?} options.start Degree at which the circle begins. <i>Default:</i> 0
+     * @param {Integer?} options.end Degree at which the circle ends. <i>Default:</i> 360
+     * @param {Boolean?} options.counterclockwise Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
      * @return {Object} New Facade.Circle object.
-     * @api public
+     * @public
      */
 
     Facade.Circle = function (options) {
@@ -1265,7 +1281,7 @@
      *
      * @param {Object} options Complete set of circle specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Circle.prototype._configOptions = function (options) {
@@ -1295,7 +1311,7 @@
      * @param {Object} options Facade.Circle options.
      * @param {Object} metrics Facade.Circle metrics.
      * @return {Array} Array with the x and y anchor positions.
-     * @api private
+     * @private
      */
 
     Facade.Circle.prototype._getAnchorPoint = function (options, metrics) {
@@ -1317,7 +1333,7 @@
      *
      * @param {Object?} updated Custom options used to render the circle.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Circle.prototype._setMetrics = function (updated) {
@@ -1351,22 +1367,22 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @options {Integer?} x X coordinate to position the line. <i>Default:</i> 0
-     * @options {Integer?} y Y coordinate to position the line. <i>Default:</i> 0
-     * @options {String?} anchor Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @options {Integer?} rotate Degrees to rotate the line. <i>Default:</i> 0
-     * @options {Integer?} scale A float representing the scale of a line. <i>Default:</i> 1
-     * @options {Integer?} opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} strokeStyle Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-     * @options {String?} lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-     * @options {Integer?} x1 X coordinate where line begins. <i>Default:</i> 0
-     * @options {Integer?} y1 Y coordinate where line begins. <i>Default:</i> 0
-     * @options {Integer?} x2 X coordinate where line ends. <i>Default:</i> 0
-     * @options {Integer?} y2 Y coordinate where line ends. <i>Default:</i> 0
      * @param {Object?} options Options to create the line with.
+     * @param {Integer?} options.x X coordinate to position the line. <i>Default:</i> 0
+     * @param {Integer?} options.y Y coordinate to position the line. <i>Default:</i> 0
+     * @param {String?} options.anchor Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer?} options.rotate Degrees to rotate the line. <i>Default:</i> 0
+     * @param {Integer?} options.scale A float representing the scale of a line. <i>Default:</i> 1
+     * @param {Integer?} options.opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {String?} options.strokeStyle Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
+     * @param {String?} options.lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @param {Integer?} options.x1 X coordinate where line begins. <i>Default:</i> 0
+     * @param {Integer?} options.y1 Y coordinate where line begins. <i>Default:</i> 0
+     * @param {Integer?} options.x2 X coordinate where line ends. <i>Default:</i> 0
+     * @param {Integer?} options.y2 Y coordinate where line ends. <i>Default:</i> 0
      * @return {Object} New Facade.Line object.
-     * @api public
+     * @public
      */
 
     Facade.Line = function (options) {
@@ -1404,7 +1420,7 @@
      *
      * @param {Object} options Complete set of line specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Line.prototype._configOptions = function (options) {
@@ -1427,7 +1443,7 @@
      * @param {Object} options Facade.Line options.
      * @param {Object} metrics Facade.Line metrics.
      * @return {Array} Array with the x and y anchor positions.
-     * @api private
+     * @private
      */
 
     Facade.Line.prototype._getAnchorPoint = function (options, metrics) {
@@ -1472,21 +1488,21 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @options {Integer?} x X coordinate to position the rectangle. <i>Default:</i> 0
-     * @options {Integer?} y Y coordinate to position the rectangle. <i>Default:</i> 0
-     * @options {String?} anchor Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @options {Integer?} rotate Degrees to rotate the rectangle. <i>Default:</i> 0
-     * @options {Integer?} scale A float representing the scale of a rectangle. <i>Default:</i> 1
-     * @options {Integer?} opacity Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {String?} fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-     * @options {String?} lineJoin The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @options {Integer?} width Width of the rectangle. <i>Default:</i> 0
-     * @options {Integer?} height Height of the rectangle. <i>Default:</i> 0
      * @param {Object?} options Options to create the rectangle with.
+     * @param {Integer?} options.x X coordinate to position the rectangle. <i>Default:</i> 0
+     * @param {Integer?} options.y Y coordinate to position the rectangle. <i>Default:</i> 0
+     * @param {String?} options.anchor Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer?} options.rotate Degrees to rotate the rectangle. <i>Default:</i> 0
+     * @param {Integer?} options.scale A float representing the scale of a rectangle. <i>Default:</i> 1
+     * @param {Integer?} options.opacity Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {String?} options.fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String?} options.strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
+     * @param {String?} options.lineJoin The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @param {Integer?} options.width Width of the rectangle. <i>Default:</i> 0
+     * @param {Integer?} options.height Height of the rectangle. <i>Default:</i> 0
      * @return {Object} New Facade.Rect object.
-     * @api public
+     * @public
      */
 
     Facade.Rect = function (options) {
@@ -1521,7 +1537,7 @@
      *
      * @param {Object} options Complete set of rectangle specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Rect.prototype._configOptions = function (options) {
@@ -1546,28 +1562,28 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @options {Integer?} x X coordinate to position an image. <i>Default:</i> 0
-     * @options {Integer?} y Y coordinate to position an image. <i>Default:</i> 0
-     * @options {String?} anchor Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @options {Integer?} rotate Degrees to rotate the image. <i>Default:</i> 0
-     * @options {Integer?} scale A float representing the scale of an image. <i>Default:</i> 1
-     * @options {Integer?} width Width of the image. <i>Default:</i> 0
-     * @options {Integer?} height Height of the image. <i>Default:</i> 0
-     * @options {Integer?} tileX Number of times to tile the image horizontally. <i>Default:</i> 1
-     * @options {Integer?} tileY Number of times to tile the image vertically. <i>Default:</i> 1
-     * @options {Integer?} offsetX Starting X coordinate within the image. <i>Default:</i> 0
-     * @options {Integer?} offsetY Starting Y coordinate within the image. <i>Default:</i> 0
-     * @options {Array?} frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]
-     * @options {Integer?} speed Speed of sprite animation. <i>Default:</i> 120
-     * @options {Boolean?} loop Determines if the animation should loop. <i>Default:</i> true
-     * @options {Function?} callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
-     * @property {image} image Reference to the image element.
-     * @property {animating} animating Boolean state of the animation.
-     * @property {currentFrame} currentFrame Current frame of animation.
      * @param {Object|String} source Local image file or reference to an HTML image element.
      * @param {Object?} options Options to create the image with.
+     * @param {Integer?} options.x X coordinate to position an image. <i>Default:</i> 0
+     * @param {Integer?} options.y Y coordinate to position an image. <i>Default:</i> 0
+     * @param {String?} options.anchor Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer?} options.rotate Degrees to rotate the image. <i>Default:</i> 0
+     * @param {Integer?} options.scale A float representing the scale of an image. <i>Default:</i> 1
+     * @param {Integer?} options.width Width of the image. <i>Default:</i> 0
+     * @param {Integer?} options.height Height of the image. <i>Default:</i> 0
+     * @param {Integer?} options.tileX Number of times to tile the image horizontally. <i>Default:</i> 1
+     * @param {Integer?} options.tileY Number of times to tile the image vertically. <i>Default:</i> 1
+     * @param {Integer?} options.offsetX Starting X coordinate within the image. <i>Default:</i> 0
+     * @param {Integer?} options.offsetY Starting Y coordinate within the image. <i>Default:</i> 0
+     * @param {Array?} options.frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]
+     * @param {Integer?} options.speed Speed of sprite animation. <i>Default:</i> 120
+     * @param {Boolean?} options.loop Determines if the animation should loop. <i>Default:</i> true
+     * @param {Function?} options.callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
+     * @property {Object} image Reference to the image element.
+     * @property {Boolean} animating Boolean state of the animation.
+     * @property {Integer} currentFrame Current frame of animation.
      * @return {Object} New Facade.Image object.
-     * @api public
+     * @public
      */
 
     Facade.Image = function (img, options) {
@@ -1616,7 +1632,7 @@
      *
      * @param {Object|String} source A reference to an image tag or an image URL.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.load = function (source) {
@@ -1650,7 +1666,7 @@
      *  image.play();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.play = function () {
@@ -1667,7 +1683,7 @@
      *  image.pause();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.pause = function () {
@@ -1684,7 +1700,7 @@
      *  image.reset();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.reset = function () {
@@ -1701,7 +1717,7 @@
      *  image.stop();
      *
      * @return {Object} Facade.js image object.
-     * @api public
+     * @public
      */
 
     Facade.Image.prototype.stop = function () {
@@ -1721,7 +1737,7 @@
      *
      * @param {Object} options Complete set of image specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Image.prototype._configOptions = function (options) {
@@ -1756,7 +1772,7 @@
      *
      * @param {Object?} updated Custom options used to render the image.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Image.prototype._setMetrics = function (updated) {
@@ -1798,7 +1814,7 @@
      * @param {Object} options Options used to render the image.
      * @param {Object} metrics Metrics used to render the image.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Image.prototype._draw = function (facade, options, metrics) {
@@ -1917,27 +1933,27 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @options {Integer?} x X coordinate to position a text object. <i>Default:</i> 0
-     * @options {Integer?} y Y coordinate to position a text object. <i>Default:</i> 0
-     * @options {String?} anchor Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @options {Integer?} rotate Degrees to rotate the text object. <i>Default:</i> 0
-     * @options {Integer?} scale A float representing the scale of a text object. <i>Default:</i> 1
-     * @options {Integer?} opacity Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100
-     * @options {Integer?} width Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0
-     * @options {String?} fontFamily Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
-     * @options {String?} fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
-     * @options {Integer?} fontSize Font size in pixels. <i>Default:</i> 30
-     * @options {String?} lineHeight Line height of the text. <i>Default:</i> 1
-     * @options {String?} textAlignment Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
-     * @options {String?} textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
-     * @options {String?} fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {String?} strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @options {Integer?} lineWidth Width of the stroke. <i>Default:</i> 0
-     * @property {value} value Current value of the text object.
      * @param {Object?} value Value of the text object.
      * @param {Object?} options Options to create the text entity with.
+     * @param {Integer?} options.x X coordinate to position a text object. <i>Default:</i> 0
+     * @param {Integer?} options.y Y coordinate to position a text object. <i>Default:</i> 0
+     * @param {String?} options.anchor Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer?} options.rotate Degrees to rotate the text object. <i>Default:</i> 0
+     * @param {Integer?} options.scale A float representing the scale of a text object. <i>Default:</i> 1
+     * @param {Integer?} options.opacity Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {Integer?} options.width Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0
+     * @param {String?} options.fontFamily Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
+     * @param {String?} options.fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
+     * @param {Integer?} options.fontSize Font size in pixels. <i>Default:</i> 30
+     * @param {String?} options.lineHeight Line height of the text. <i>Default:</i> 1
+     * @param {String?} options.textAlignment Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
+     * @param {String?} options.textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
+     * @param {String?} options.fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String?} options.strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
+     * @property {String} value Current value of the text object.
      * @return {Object} New Facade.Text object.
-     * @api public
+     * @public
      */
 
     Facade.Text = function (value, options) {
@@ -1991,7 +2007,7 @@
      *
      * @param {String} value The new value of the text entity.
      * @return {Array} An array of lines and the position to render using <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#fillText()">fillText()</a> and <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#strokeText()">strokeText()</a>.
-     * @api public
+     * @public
      */
 
     Facade.Text.prototype.setText = function (value) {
@@ -2086,7 +2102,7 @@
      * @param {Object} options Options used to render the text entity.
      * @param {Object} metrics Metrics used to render the text entity.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Text.prototype._draw = function (facade, options, metrics) {
@@ -2122,7 +2138,7 @@
      *
      * @param {Object} options Complete set of text specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Text.prototype._configOptions = function (options) {
@@ -2149,7 +2165,7 @@
      *
      * @param {Object?} updated Custom options used to render the text entity.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Text.prototype._setMetrics = function (updated) {
@@ -2196,14 +2212,14 @@
      *     group.addToGroup(line);
      *     group.addToGroup(rect);
      *
-     * @options {Integer?} x X coordinate to position a group. <i>Default:</i> 0
-     * @options {Integer?} y Y coordinate to position a group. <i>Default:</i> 0
-     * @options {String?} anchor Position to anchor the group. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @options {Integer?} rotate Degrees to rotate the group. <i>Default:</i> 0
-     * @options {Integer?} scale A float representing the scale of a group. <i>Default:</i> 1
      * @param {Object?} options Options to create the group with.
+     * @param {Integer?} options.x X coordinate to position a group. <i>Default:</i> 0
+     * @param {Integer?} options.y Y coordinate to position a group. <i>Default:</i> 0
+     * @param {String?} options.anchor Position to anchor the group. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer?} options.rotate Degrees to rotate the group. <i>Default:</i> 0
+     * @param {Integer?} options.scale A float representing the scale of a group. <i>Default:</i> 1
      * @return {Object} New Facade.Group object.
-     * @api public
+     * @public
      */
 
     Facade.Group = function (options) {
@@ -2239,7 +2255,7 @@
      * @param {Object} options Options used to render the group.
      * @param {Object} metrics Metrics used to render the group.
      * @return {void}
-     * @api private
+     * @private
      */
 
     Facade.Group.prototype._draw = function (facade, options, metrics) {
@@ -2265,7 +2281,7 @@
      *
      * @param {Object} options Complete set of group specific options.
      * @return {Object} Converted options.
-     * @api private
+     * @private
      */
 
     Facade.Group.prototype._configOptions = function (options) {
@@ -2283,7 +2299,7 @@
      *
      * @param {Object|Array} obj Facade.js entity or an array of entities.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Group.prototype.addToGroup = function (obj) {
@@ -2324,7 +2340,7 @@
      *
      * @param {Object} obj Facade.js entity.
      * @return {Boolean} Boolean result of the test.
-     * @api public
+     * @public
      */
 
     Facade.Group.prototype.hasEntity = function (obj) {
@@ -2340,7 +2356,7 @@
      *
      * @param {Object} obj Facade.js entity.
      * @return {void}
-     * @api public
+     * @public
      */
 
     Facade.Group.prototype.removeFromGroup = function (obj) {
@@ -2367,7 +2383,7 @@
      *
      * @param {Object?} updated Custom options used to render the group.
      * @return {Object} Object with metrics as key-value pairs.
-     * @api private
+     * @private
      */
 
     Facade.Group.prototype._setMetrics = function (updated) {

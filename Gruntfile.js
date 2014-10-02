@@ -46,13 +46,21 @@ module.exports = function (grunt) {
 
         },
 
+        doxdox: {
+
+            dev: {
+
+                input: 'facade.js',
+                output: 'docs/index.html',
+                config: {
+                    layout: 'docs/template.hbs'
+                }
+
+            }
+
+        },
+
         shell: {
-
-            docs: {
-
-                command: 'dox < facade.js > docs/facade.json; cd docs/; doxdox.py --title="Facade.js" --description="Drawing shapes, images and text in HTML5 canvas made easy." --header "header.html" > index.html; rm facade.json;'
-
-            },
 
             gzip: {
 
@@ -73,7 +81,7 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('default', [ 'jslint', 'uglify', 'shell' ]);
+    grunt.registerTask('default', [ 'jslint', 'uglify', 'doxdox', 'shell' ]);
     grunt.registerTask('test', [ 'casperjs' ]);
 
 };
