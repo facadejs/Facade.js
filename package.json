@@ -6,10 +6,10 @@
     "license": "MIT",
     "devDependencies": {
         "grunt": "0.4.5",
-        "grunt-casperjs": "2.0.1",
+        "grunt-casperjs": "2.0.2",
         "grunt-contrib-watch": "0.6.1",
         "grunt-contrib-uglify": "0.6.0",
-        "grunt-doxdox": "0.0.2",
+        "grunt-doxdox": "0.0.3",
         "grunt-shell": "1.1.1",
         "grunt-jslint": "1.1.12",
         "grunt-notify": "0.3.1",
