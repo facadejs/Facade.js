@@ -78,7 +78,7 @@ pre .hljs {
 
 </style>
 <script>
-(function(e,i,t){"use strict";var c=e.location.protocol==="file:"?"http:":e.location.protocol,o=["//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css","//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css","//code.jquery.com/jquery-2.1.1.js","//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"];function s(e){var l;if(e.match(/\.js$/)){l=i.createElement("script");l.setAttribute("src",c+e)}else if(e.match(/\.css$/)){l=i.createElement("link");l.setAttribute("rel","stylesheet");l.setAttribute("href",c+e)}l.addEventListener("load",function(){if(o.length){s(o.shift())}else{if($.isReady){t()}else{$(document).ready(t)}}});i.head.appendChild(l)}s(o.shift())})(window,document,function(){"use strict";var e=window.location.hash,i=$('[id="'+e.replace(/#/,"")+'"]'),t=$(".code"),c=$(".scope-private"),o=$(".toggle-code-blocks"),s=$(".toggle-private"),l=$(".back-to-top");function n(){if(window.scrollY>100&&l.not(":visible")){l.fadeIn()}else if(window.scrollY<100&&l.is(":visible")){l.fadeOut()}}o.on("click",function(){if(o.is(":checked")){t.show()}else{t.hide()}});s.on("click",function(){if(s.is(":checked")){c.show()}else{c.hide()}});t.hide();c.hide();if(i.length&&!i.is(":visible")){s.trigger("click")}$(".examples pre code, .code pre code").each(function(){hljs.highlightBlock(this)});$(window).on("scroll",n);n()});
+(function(e,i,t){"use strict";var o=e.location.protocol==="file:"?"http:":e.location.protocol,s=["//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css","//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css","//code.jquery.com/jquery-2.1.1.js","//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"];function c(e){var l;if(e.match(/\.js$/)){l=i.createElement("script");l.setAttribute("src",o+e)}else if(e.match(/\.css$/)){l=i.createElement("link");l.setAttribute("rel","stylesheet");l.setAttribute("href",o+e)}l.addEventListener("load",function(){if(s.length){c(s.shift())}else{if($.isReady){t()}else{$(document).ready(t)}}});i.head.appendChild(l)}c(s.shift())})(window,document,function(){"use strict";var e=window.location.hash,i=$('[id="'+e.replace(/#/,"")+'"]'),t=$(".code"),o=$(".scope-private"),s=$(".toggle-code-blocks"),c=$(".toggle-private"),l=$(".back-to-top");function n(){if(window.scrollY>100&&l.not(":visible")){l.fadeIn()}else if(window.scrollY<100&&l.is(":visible")){l.fadeOut()}}s.on("click",function(){if(s.is(":checked")){t.show()}else{t.hide()}});c.on("click",function(){if(c.is(":checked")){o.show()}else{o.hide()}});t.hide();o.hide();if(i.length&&!i.is(":visible")){c.trigger("click")}$("pre code:not(.hljs)").each(function(){hljs.highlightBlock(this)});$(window).on("scroll",n);n()});
 </script>
 </head>
 
@@ -911,76 +911,76 @@ var stage = new Facade(&#39;stage&#39;, 500, 300);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>function Facade(canvas, width, height) {
+                                    <pre><code class="hljs"><span class="hljs-function">function <span class="hljs-title">Facade</span><span class="hljs-params">(canvas, width, height)</span> </span>{
 
-    if (!(this instanceof Facade)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> instanceof Facade)) {
 
-        return new Facade(canvas, width, height);
+        <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title">Facade</span><span class="hljs-params">(canvas, width, height)</span></span>;
 
     }
 
-    this.dt = null;
-    this.fps = null;
-    this.ftime = null;
+    <span class="hljs-keyword">this</span>.dt = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">this</span>.fps = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">this</span>.ftime = <span class="hljs-keyword">null</span>;
 
-    this._callback = null;
+    <span class="hljs-keyword">this</span>._callback = <span class="hljs-keyword">null</span>;
 
-    this._requestAnimation = null;
+    <span class="hljs-keyword">this</span>._requestAnimation = <span class="hljs-keyword">null</span>;
 
-    this._width = null;
-    this._height = null;
+    <span class="hljs-keyword">this</span>._width = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">this</span>._height = <span class="hljs-keyword">null</span>;
 
-    if (canvas &amp;&amp; typeof canvas === &#x27;object&#x27; &amp;&amp; canvas.nodeType === 1) {
+    <span class="hljs-keyword">if</span> (canvas &amp;&amp; <span class="hljs-keyword">typeof</span> canvas === <span class="hljs-string">'object'</span> &amp;&amp; canvas.nodeType === <span class="hljs-number">1</span>) {
 
-        this.canvas = canvas;
+        <span class="hljs-keyword">this</span>.canvas = canvas;
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        this.canvas = document.createElement(&#x27;canvas&#x27;);
+        <span class="hljs-keyword">this</span>.canvas = document.createElement(<span class="hljs-string">'canvas'</span>);
 
-        if (typeof canvas === &#x27;string&#x27;) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> canvas === <span class="hljs-string">'string'</span>) {
 
-            this.canvas.setAttribute(&#x27;id&#x27;, canvas);
+            <span class="hljs-keyword">this</span>.canvas.setAttribute(<span class="hljs-string">'id'</span>, canvas);
 
         }
 
     }
 
-    if (width) {
+    <span class="hljs-keyword">if</span> (width) {
 
-        this.width(width);
+        <span class="hljs-keyword">this</span>.width(width);
 
-    } else if (this.canvas.hasAttribute(&#x27;width&#x27;)) {
+    } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'width'</span>)</span>) </span>{
 
-        this._width = parseInt(this.canvas.getAttribute(&#x27;width&#x27;), 10);
+        <span class="hljs-keyword">this</span>._width = parseInt(<span class="hljs-keyword">this</span>.canvas.getAttribute(<span class="hljs-string">'width'</span>), <span class="hljs-number">10</span>);
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        this.width(this.canvas.clientWidth);
-
-    }
-
-    if (height) {
-
-        this.height(height);
-
-    } else if (this.canvas.hasAttribute(&#x27;height&#x27;)) {
-
-        this._height = parseInt(this.canvas.getAttribute(&#x27;height&#x27;), 10);
-
-    } else {
-
-        this.height(this.canvas.clientHeight);
+        <span class="hljs-keyword">this</span>.width(<span class="hljs-keyword">this</span>.canvas.clientWidth);
 
     }
 
-    try {
+    <span class="hljs-keyword">if</span> (height) {
 
-        this.context = this.canvas.getContext(&#x27;2d&#x27;);
+        <span class="hljs-keyword">this</span>.height(height);
 
-    } catch (e) {
+    } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'height'</span>)</span>) </span>{
 
-        throw new Error(&#x27;Object passed to Facade.js was not a valid canvas element.&#x27;);
+        <span class="hljs-keyword">this</span>._height = parseInt(<span class="hljs-keyword">this</span>.canvas.getAttribute(<span class="hljs-string">'height'</span>), <span class="hljs-number">10</span>);
+
+    } <span class="hljs-keyword">else</span> {
+
+        <span class="hljs-keyword">this</span>.height(<span class="hljs-keyword">this</span>.canvas.clientHeight);
+
+    }
+
+    <span class="hljs-keyword">try</span> {
+
+        <span class="hljs-keyword">this</span>.context = <span class="hljs-keyword">this</span>.canvas.getContext(<span class="hljs-string">'2d'</span>);
+
+    } <span class="hljs-keyword">catch</span> (e) {
+
+        <span class="hljs-function"><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title">Error</span><span class="hljs-params">(<span class="hljs-string">'Object passed to Facade.js was not a valid canvas element.'</span>)</span></span>;
 
     }
 
@@ -1095,30 +1095,30 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.addToStage = function (obj, options) {
+                                    <pre><code class="hljs">Facade.prototype.addToStage = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(obj, options)</span> </span>{
 
-    var i,
+    <span class="hljs-keyword">var</span> i,
         length;
 
-    if (obj instanceof Facade.Entity) {
+    <span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">instanceof</span> Facade.Entity) {
 
-        obj.draw(this, options);
+        obj.draw(<span class="hljs-keyword">this</span>, options);
 
-    } else if (Array.isArray(obj)) {
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(obj)) {
 
-        for (i = 0, length = obj.length; i &lt; length; i += 1) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = obj.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-            this.addToStage(obj[i], options);
+            <span class="hljs-keyword">this</span>.addToStage(obj[i], options);
 
         }
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        throw new Error(&#x27;Object passed to Facade.addToStage is not a valid Facade.js entity.&#x27;);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Object passed to Facade.addToStage is not a valid Facade.js entity.'</span>);
 
     }
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -1179,11 +1179,11 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.clear = function () {
+                                    <pre><code class="hljs">Facade.prototype.clear = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    this.context.clearRect(0, 0, this.width(), this.height());
+    <span class="hljs-keyword">this</span>.context.clearRect(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">this</span>.width(), <span class="hljs-keyword">this</span>.height());
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -1271,21 +1271,21 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.draw = function (callback) {
+                                    <pre><code class="hljs">Facade.prototype.draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
 
-    if (typeof callback === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">callback</span> === <span class="hljs-string">'function'</span>) {
 
-        this._callback = callback;
+        <span class="hljs-keyword">this</span>._callback = <span class="hljs-keyword">callback</span>;
 
-        this.start();
+        <span class="hljs-keyword">this</span>.start();
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        throw new Error(&#x27;Parameter passed to Facade.draw is not a valid function.&#x27;);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">'Parameter passed to Facade.draw is not a valid function.'</span>);
 
     }
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -1384,25 +1384,25 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.exportBase64 = function (type, quality) {
+                                    <pre><code class="hljs"><span class="hljs-type">Facade</span>.prototype.exportBase64 = function (<span class="hljs-class"><span class="hljs-keyword">type</span>, <span class="hljs-title">quality</span>) {</span>
 
-    if (!type) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-class"><span class="hljs-keyword">type</span>) {</span>
 
-        type = &#x27;image/png&#x27;;
-
-    }
-
-    if (typeof quality === &#x27;number&#x27;) {
-
-        quality = quality / 100;
-
-    } else {
-
-        quality = 1;
+        <span class="hljs-class"><span class="hljs-keyword">type</span> =</span> <span class="hljs-symbol">'image</span>/png';
 
     }
 
-    return this.canvas.toDataURL(type, quality);
+    <span class="hljs-keyword">if</span> (typeof quality === <span class="hljs-symbol">'numbe</span>r') {
+
+        quality = quality / <span class="hljs-number">100</span>;
+
+    } <span class="hljs-keyword">else</span> {
+
+        quality = <span class="hljs-number">1</span>;
+
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.canvas.toDataURL(<span class="hljs-class"><span class="hljs-keyword">type</span>, <span class="hljs-title">quality</span>);</span>
 
 };</code></pre>
 
@@ -1490,25 +1490,25 @@ console.log(stage.height(600)); // 600
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.height = function (height) {
+                                    <pre><code class="hljs">Facade.prototype.height = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(height)</span> </span>{
 
-    if (height) {
+    <span class="hljs-keyword">if</span> (height) {
 
-        this._height = parseInt(height, 10);
+        <span class="hljs-keyword">this</span>._height = <span class="hljs-built_in">parseInt</span>(height, <span class="hljs-number">10</span>);
 
-        if (this.canvas.hasAttribute(&#x27;data-resized-for-hdpi&#x27;)) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'data-resized-for-hdpi'</span>)) {
 
-            this.resizeForHDPI();
+            <span class="hljs-keyword">this</span>.resizeForHDPI();
 
-        } else {
+        } <span class="hljs-keyword">else</span> {
 
-            this.canvas.setAttribute(&#x27;height&#x27;, this._height);
+            <span class="hljs-keyword">this</span>.canvas.setAttribute(<span class="hljs-string">'height'</span>, <span class="hljs-keyword">this</span>._height);
 
         }
 
     }
 
-    return this._height;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._height;
 
 };</code></pre>
 
@@ -1606,37 +1606,37 @@ console.log(stage.height(600)); // 600
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.renderWithContext = function (options, callback) {
+                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.prototype.renderWithContext = function (<span class="hljs-literal">options</span>, <span class="hljs-keyword">callback) {</span>
 
-    var keys = Object.keys(options),
+    var <span class="hljs-literal">keys</span> = <span class="hljs-constant">Object</span>.<span class="hljs-literal">keys</span>(<span class="hljs-literal">options</span>),
         i,
         length;
 
-    this.context.save();
+    this.<span class="hljs-literal">context</span>.save();
 
-    for (i = 0, length = keys.length; i &lt; length; i += 1) {
+    for (i = <span class="hljs-number">0</span>, length = <span class="hljs-literal">keys</span>.length; i &lt; length; i += <span class="hljs-number">1</span><span class="hljs-keyword">) {</span>
 
-        if (_contextProperties.indexOf(keys[i]) !== -1) {
+        <span class="hljs-keyword">if</span> (_contextProperties.indexOf(<span class="hljs-literal">keys</span>[i]) !== -<span class="hljs-number">1</span><span class="hljs-keyword">) {</span>
 
-            this.context[keys[i]] = options[keys[i]];
+            this.<span class="hljs-literal">context</span>[<span class="hljs-literal">keys</span>[i]] = <span class="hljs-literal">options</span>[<span class="hljs-literal">keys</span>[i]];
 
-        } else if (Array.isArray(options[keys[i]]) &amp;&amp; typeof this.context[keys[i]] === &#x27;function&#x27;) {
+        <span class="hljs-keyword">}</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-constant">Array</span>.isArray(<span class="hljs-literal">options</span>[<span class="hljs-literal">keys</span>[i]]) &amp;&amp; typeof this.<span class="hljs-literal">context</span>[<span class="hljs-literal">keys</span>[i]] === <span class="hljs-string">'function'</span><span class="hljs-keyword">) {</span>
 
-            this.context[keys[i]].apply(this.context, options[keys[i]]);
+            this.<span class="hljs-literal">context</span>[<span class="hljs-literal">keys</span>[i]].apply(this.<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>[<span class="hljs-literal">keys</span>[i]]);
 
-        }
+        <span class="hljs-keyword">}</span>
 
-    }
+    <span class="hljs-keyword">}</span>
 
-    if (callback) {
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">(callback) {</span>
 
         callback.call(null, this);
 
-    }
+    <span class="hljs-keyword">}</span>
 
-    this.context.restore();
+    this.<span class="hljs-literal">context</span>.restore();
 
-};</code></pre>
+<span class="hljs-keyword">}</span>;</code></pre>
 
                                 </section>
 
@@ -1722,32 +1722,32 @@ stage.resizeForHDPI(2);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.resizeForHDPI = function (ratio) {
+                                    <pre><code class="hljs">Facade.prototype.resizeForHDPI = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ratio)</span> </span>{
 
-    if (ratio === undefined) {
+    <span class="hljs-keyword">if</span> (ratio === <span class="hljs-literal">undefined</span>) {
 
-        ratio = window.devicePixelRatio;
+        ratio = <span class="hljs-built_in">window</span>.devicePixelRatio;
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        ratio = parseFloat(ratio);
-
-    }
-
-    if (ratio &gt; 1) {
-
-        this.canvas.setAttribute(&#x27;style&#x27;, &#x27;width: &#x27; + this.width() + &#x27;px; height: &#x27; + this.height() + &#x27;px;&#x27;);
-
-        this.canvas.setAttribute(&#x27;width&#x27;, this.width() * ratio);
-        this.canvas.setAttribute(&#x27;height&#x27;, this.height() * ratio);
-
-        this.context.scale(ratio, ratio);
-
-        this.canvas.setAttribute(&#x27;data-resized-for-hdpi&#x27;, true);
+        ratio = <span class="hljs-built_in">parseFloat</span>(ratio);
 
     }
 
-    return this;
+    <span class="hljs-keyword">if</span> (ratio &gt; <span class="hljs-number">1</span>) {
+
+        <span class="hljs-keyword">this</span>.canvas.setAttribute(<span class="hljs-string">'style'</span>, <span class="hljs-string">'width: '</span> + <span class="hljs-keyword">this</span>.width() + <span class="hljs-string">'px; height: '</span> + <span class="hljs-keyword">this</span>.height() + <span class="hljs-string">'px;'</span>);
+
+        <span class="hljs-keyword">this</span>.canvas.setAttribute(<span class="hljs-string">'width'</span>, <span class="hljs-keyword">this</span>.width() * ratio);
+        <span class="hljs-keyword">this</span>.canvas.setAttribute(<span class="hljs-string">'height'</span>, <span class="hljs-keyword">this</span>.height() * ratio);
+
+        <span class="hljs-keyword">this</span>.context.scale(ratio, ratio);
+
+        <span class="hljs-keyword">this</span>.canvas.setAttribute(<span class="hljs-string">'data-resized-for-hdpi'</span>, <span class="hljs-literal">true</span>);
+
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -1806,11 +1806,11 @@ stage.resizeForHDPI(2);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.start = function () {
+                                    <pre><code class="hljs">Facade.prototype.start = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
+    <span class="hljs-keyword">this</span>._requestAnimation = _requestAnimationFrame(<span class="hljs-keyword">this</span>._animate.bind(<span class="hljs-keyword">this</span>));
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -1867,17 +1867,17 @@ stage.resizeForHDPI(2);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.stop = function () {
+                                    <pre><code class="hljs">Facade.prototype.stop = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    this.dt = null;
-    this.fps = null;
-    this.ftime = null;
+    <span class="hljs-keyword">this</span>.dt = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>.fps = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>.ftime = <span class="hljs-literal">null</span>;
 
-    _cancelAnimationFrame(this._requestAnimation);
+    _cancelAnimationFrame(<span class="hljs-keyword">this</span>._requestAnimation);
 
-    this._requestAnimation = null;
+    <span class="hljs-keyword">this</span>._requestAnimation = <span class="hljs-literal">null</span>;
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -1961,25 +1961,25 @@ console.log(stage.width(800)); // 800
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype.width = function (width) {
+                                    <pre><code class="hljs">Facade.prototype.width = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(width)</span> </span>{
 
-    if (width) {
+    <span class="hljs-keyword">if</span> (width) {
 
-        this._width = parseInt(width, 10);
+        <span class="hljs-keyword">this</span>._width = <span class="hljs-built_in">parseInt</span>(width, <span class="hljs-number">10</span>);
 
-        if (this.canvas.hasAttribute(&#x27;data-resized-for-hdpi&#x27;)) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'data-resized-for-hdpi'</span>)) {
 
-            this.resizeForHDPI();
+            <span class="hljs-keyword">this</span>.resizeForHDPI();
 
-        } else {
+        } <span class="hljs-keyword">else</span> {
 
-            this.canvas.setAttribute(&#x27;width&#x27;, this._width);
+            <span class="hljs-keyword">this</span>.canvas.setAttribute(<span class="hljs-string">'width'</span>, <span class="hljs-keyword">this</span>._width);
 
         }
 
     }
 
-    return this._width;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._width;
 
 };</code></pre>
 
@@ -2064,35 +2064,35 @@ console.log(stage.width(800)); // 800
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.prototype._animate = function (time) {
+                                    <pre><code class="hljs">Facade.prototype._animate = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(time)</span> </span>{
 
-    if (typeof this._callback === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._callback === <span class="hljs-string">'function'</span>) {
 
-        if (this.ftime) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ftime) {
 
-            this.dt = time - this.ftime;
+            <span class="hljs-keyword">this</span>.dt = time - <span class="hljs-keyword">this</span>.ftime;
 
-            this.fps = (1000 / this.dt).toFixed(2);
+            <span class="hljs-keyword">this</span>.fps = (<span class="hljs-number">1000</span> / <span class="hljs-keyword">this</span>.dt).toFixed(<span class="hljs-number">2</span>);
 
         }
 
-        this.ftime = time;
+        <span class="hljs-keyword">this</span>.ftime = time;
 
-        this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
+        <span class="hljs-keyword">this</span>._requestAnimation = _requestAnimationFrame(<span class="hljs-keyword">this</span>._animate.bind(<span class="hljs-keyword">this</span>));
 
-        this.context.save();
+        <span class="hljs-keyword">this</span>.context.save();
 
-        this._callback();
+        <span class="hljs-keyword">this</span>._callback();
 
-        this.context.restore();
+        <span class="hljs-keyword">this</span>.context.restore();
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        this.stop();
+        <span class="hljs-keyword">this</span>.stop();
 
     }
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -2150,18 +2150,18 @@ console.log(stage.width(800)); // 800
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity = function (options) {
+                                    <pre><code class="hljs">Facade.Entity = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    if (!(this instanceof Facade.Entity)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Entity)) {
 
-        return new Facade.Entity();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Entity();
 
     }
 
-    this._options = this._defaultOptions();
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
 };</code></pre>
 
@@ -2245,34 +2245,34 @@ console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype._defaultOptions = function (updated) {
+                                    <pre><code class="hljs">Facade.Entity.<span class="hljs-keyword">prototype</span>._defaultOptions = function (updated) {
 
     var options,
-        keys,
+        <span class="hljs-keyword">keys</span>,
         i,
-        length;
+        <span class="hljs-keyword">length</span>;
 
     options = {
-        x: 0,
-        y: 0,
-        anchor: &#x27;top/left&#x27;,
-        rotate: 0,
-        scale: 1
+        <span class="hljs-keyword">x</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-keyword">y</span>: <span class="hljs-number">0</span>,
+        anchor: <span class="hljs-string">'top/left'</span>,
+        rotate: <span class="hljs-number">0</span>,
+        scale: <span class="hljs-number">1</span>
     };
 
-    if (typeof updated === &#x27;object&#x27;) {
+    <span class="hljs-keyword">if</span> (typeof updated === <span class="hljs-string">'object'</span>) {
 
-        keys = Object.keys(updated);
+        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
 
-        for (i = 0, length = keys.length; i &lt; length; i += 1) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
 
-            options[keys[i]] = updated[keys[i]];
+            options[<span class="hljs-keyword">keys</span>[i]] = updated[<span class="hljs-keyword">keys</span>[i]];
 
         }
 
     }
 
-    return options;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -2358,33 +2358,33 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype._defaultMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Entity.<span class="hljs-keyword">prototype</span>._defaultMetrics = function (updated) {
 
     var metrics,
-        keys,
+        <span class="hljs-keyword">keys</span>,
         i,
-        length;
+        <span class="hljs-keyword">length</span>;
 
     metrics = {
-        x: null,
-        y: null,
+        <span class="hljs-keyword">x</span>: null,
+        <span class="hljs-keyword">y</span>: null,
         width: null,
         height: null
     };
 
-    if (typeof updated === &#x27;object&#x27;) {
+    <span class="hljs-keyword">if</span> (typeof updated === <span class="hljs-string">'object'</span>) {
 
-        keys = Object.keys(updated);
+        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
 
-        for (i = 0, length = keys.length; i &lt; length; i += 1) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
 
-            metrics[keys[i]] = updated[keys[i]];
+            metrics[<span class="hljs-keyword">keys</span>[i]] = updated[<span class="hljs-keyword">keys</span>[i]];
 
         }
 
     }
 
-    return metrics;
+    <span class="hljs-keyword">return</span> metrics;
 
 };</code></pre>
 
@@ -2482,41 +2482,41 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype._getAnchorPoint = function (options, metrics) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._getAnchorPoint = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options, metrics)</span> </span>{
 
-    var pos = [0, 0],
+    <span class="hljs-keyword">var</span> pos = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
         strokeWidthOffset;
 
-    if (options.anchor.match(/center$/)) {
+    <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/center$/</span>)) {
 
-        pos[0] = -metrics.width / 2;
+        pos[<span class="hljs-number">0</span>] = -metrics.width / <span class="hljs-number">2</span>;
 
-    } else if (options.anchor.match(/right$/)) {
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/right$/</span>)) {
 
-        pos[0] = -metrics.width;
-
-    }
-
-    if (options.anchor.match(/^center/)) {
-
-        pos[1] = -metrics.height / 2;
-
-    } else if (options.anchor.match(/^bottom/)) {
-
-        pos[1] = -metrics.height;
+        pos[<span class="hljs-number">0</span>] = -metrics.width;
 
     }
 
-    if (this instanceof Facade.Polygon) {
+    <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/^center/</span>)) {
 
-        strokeWidthOffset = this._getStrokeWidthOffset(options);
+        pos[<span class="hljs-number">1</span>] = -metrics.height / <span class="hljs-number">2</span>;
 
-        pos[0] = pos[0] + strokeWidthOffset;
-        pos[1] = pos[1] + strokeWidthOffset;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/^bottom/</span>)) {
+
+        pos[<span class="hljs-number">1</span>] = -metrics.height;
 
     }
 
-    return pos;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Polygon) {
+
+        strokeWidthOffset = <span class="hljs-keyword">this</span>._getStrokeWidthOffset(options);
+
+        pos[<span class="hljs-number">0</span>] = pos[<span class="hljs-number">0</span>] + strokeWidthOffset;
+        pos[<span class="hljs-number">1</span>] = pos[<span class="hljs-number">1</span>] + strokeWidthOffset;
+
+    }
+
+    <span class="hljs-keyword">return</span> pos;
 
 };</code></pre>
 
@@ -2603,17 +2603,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype._getStrokeWidthOffset = function (options) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._getStrokeWidthOffset = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    var strokeWidthOffset = 0;
+    <span class="hljs-keyword">var</span> strokeWidthOffset = <span class="hljs-number">0</span>;
 
-    if (options.lineWidth !== undefined) {
+    <span class="hljs-keyword">if</span> (options.lineWidth !== <span class="hljs-literal">undefined</span>) {
 
-        strokeWidthOffset = options.lineWidth / 2;
+        strokeWidthOffset = options.lineWidth / <span class="hljs-number">2</span>;
 
     }
 
-    return strokeWidthOffset;
+    <span class="hljs-keyword">return</span> strokeWidthOffset;
 
 };</code></pre>
 
@@ -2724,30 +2724,30 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
 
-    var anchor = this._getAnchorPoint(options, {
+    var anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(options, {
         x: metrics.x,
         y: metrics.y,
-        width: metrics.width / options.scale,
-        height: metrics.height / options.scale
+        <span class="hljs-variable">width</span>: metrics.<span class="hljs-variable">width</span> / options.<span class="hljs-built_in">scale</span>,
+        <span class="hljs-variable">height</span>: metrics.<span class="hljs-variable">height</span> / options.<span class="hljs-built_in">scale</span>
     });
 
-    context.translate.apply(context, anchor);
+    context.<span class="hljs-built_in">translate</span>.apply(context, anchor);
 
-    if (options.rotate) {
+    <span class="hljs-keyword">if</span> (options.<span class="hljs-built_in">rotate</span>) {
 
-        context.translate(-anchor[0], -anchor[1]);
-        context.rotate(options.rotate * _TO_RADIANS);
-        context.translate(anchor[0], anchor[1]);
+        context.<span class="hljs-built_in">translate</span>(-anchor[<span class="hljs-number">0</span>], -anchor[<span class="hljs-number">1</span>]);
+        context.<span class="hljs-built_in">rotate</span>(options.<span class="hljs-built_in">rotate</span> * _TO_RADIANS);
+        context.<span class="hljs-built_in">translate</span>(anchor[<span class="hljs-number">0</span>], anchor[<span class="hljs-number">1</span>]);
 
     }
 
-    if (options.scale !== 1) {
+    <span class="hljs-keyword">if</span> (options.<span class="hljs-built_in">scale</span> !== <span class="hljs-number">1</span>) {
 
-        context.translate(-anchor[0], -anchor[1]);
-        context.scale(options.scale, options.scale);
-        context.translate(anchor[0], anchor[1]);
+        context.<span class="hljs-built_in">translate</span>(-anchor[<span class="hljs-number">0</span>], -anchor[<span class="hljs-number">1</span>]);
+        context.<span class="hljs-built_in">scale</span>(options.<span class="hljs-built_in">scale</span>, options.<span class="hljs-built_in">scale</span>);
+        context.<span class="hljs-built_in">translate</span>(anchor[<span class="hljs-number">0</span>], anchor[<span class="hljs-number">1</span>]);
 
     }
 
@@ -2837,15 +2837,15 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype.getOption = function (key) {
+                                    <pre><code class="hljs">Facade.Entity.prototype.getOption = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(key)</span> </span>{
 
-    if (this._options[key] !== undefined) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._options[key] !== <span class="hljs-literal">undefined</span>) {
 
-        return this._options[key];
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._options[key];
 
     }
 
-    return undefined;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
 
 };</code></pre>
 
@@ -2904,20 +2904,20 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype.getAllOptions = function () {
+                                    <pre><code class="hljs">Facade.Entity.prototype.getAllOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
 
-    var options = {},
+    var options = <span class="hljs-cell">{}</span>,
         keys = Object.keys(this._options),
-        i,
-        length;
+        <span class="hljs-built_in">i</span>,
+        <span class="hljs-built_in">length</span>;
 
-    for (i = 0, length = keys.length; i &lt; length; i += 1) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = keys.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
 
         options[keys[i]] = this._options[keys[i]];
 
-    }
+    }</span>
 
-    return options;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -3029,43 +3029,43 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype._setOption = function (key, value, test) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._setOption = function (key, <span class="hljs-keyword">value</span>, test) {
 
-    if (this._options[key] !== undefined) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._options[key] !== undefined) {
 
-        if (typeof this._options[key] === &#x27;number&#x27; &amp;&amp; typeof value === &#x27;string&#x27;) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key] === <span class="hljs-string">'number'</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-keyword">value</span> === <span class="hljs-string">'string'</span>) {
 
-            if (value.match(_OPERATOR_TEST)) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">value</span>.match(_OPERATOR_TEST)) {
 
-                value = this._options[key] + parseFloat(value.replace(&#x27;=&#x27;, &#x27;&#x27;));
+                <span class="hljs-keyword">value</span> = <span class="hljs-keyword">this</span>._options[key] + parseFloat(<span class="hljs-keyword">value</span>.replace(<span class="hljs-string">'='</span>, <span class="hljs-string">''</span>));
 
-            } else {
+            } <span class="hljs-keyword">else</span> {
 
-                value = parseFloat(value);
+                <span class="hljs-keyword">value</span> = parseFloat(<span class="hljs-keyword">value</span>);
 
             }
 
         }
 
-        if (String(typeof this._options[key]) === String(typeof value)) {
+        <span class="hljs-keyword">if</span> (String(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key]) === String(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">value</span>)) {
 
-            if (!test) {
+            <span class="hljs-keyword">if</span> (!test) {
 
-                this._options[key] = value;
+                <span class="hljs-keyword">this</span>._options[key] = <span class="hljs-keyword">value</span>;
 
             }
 
-        } else {
+        } <span class="hljs-keyword">else</span> {
 
-            throw new Error(&#x27;The value for &#x27; + key + &#x27; (&#x27; + value + &#x27;) was a &#x27; + String(typeof value) + &#x27; not a &#x27; + String(typeof this._options[key]) + &#x27;.&#x27;);
+            <span class="hljs-function"><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title">Error</span><span class="hljs-params">(<span class="hljs-string">'The value for '</span> + key + <span class="hljs-string">' ('</span> + <span class="hljs-keyword">value</span> + <span class="hljs-string">') was a '</span> + String(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">value</span>)</span> + ' not a ' + <span class="hljs-title">String</span><span class="hljs-params">(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key])</span> + '.')</span>;
 
         }
 
-        return value;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">value</span>;
 
     }
 
-    return undefined;
+    <span class="hljs-keyword">return</span> undefined;
 
 };</code></pre>
 
@@ -3168,28 +3168,28 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype.setOptions = function (updated, test) {
+                                    <pre><code class="hljs">Facade.Entity.<span class="hljs-keyword">prototype</span>.setOptions = function (updated, test) {
 
     var options = this.getAllOptions(),
-        keys,
+        <span class="hljs-keyword">keys</span>,
         i,
-        length;
+        <span class="hljs-keyword">length</span>;
 
-    if (updated) {
+    <span class="hljs-keyword">if</span> (updated) {
 
-        keys = Object.keys(updated);
+        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
 
-        for (i = 0, length = keys.length; i &lt; length; i += 1) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
 
-            if (options[keys[i]] !== undefined) {
+            <span class="hljs-keyword">if</span> (options[<span class="hljs-keyword">keys</span>[i]] !== undefined) {
 
-                options[keys[i]] = this._setOption(keys[i], updated[keys[i]], test);
+                options[<span class="hljs-keyword">keys</span>[i]] = this._setOption(<span class="hljs-keyword">keys</span>[i], updated[<span class="hljs-keyword">keys</span>[i]], test);
 
             }
 
         }
 
-        if (!test) {
+        <span class="hljs-keyword">if</span> (!test) {
 
             this._setMetrics();
 
@@ -3197,7 +3197,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
     }
 
-    return options;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -3283,15 +3283,15 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype.getMetric = function (key) {
+                                    <pre><code class="hljs">Facade.Entity.prototype.getMetric = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(key)</span> </span>{
 
-    if (this._metrics[key] !== undefined) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._metrics[key] !== <span class="hljs-literal">undefined</span>) {
 
-        return this._metrics[key];
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._metrics[key];
 
     }
 
-    return undefined;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
 
 };</code></pre>
 
@@ -3350,20 +3350,20 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype.getAllMetrics = function () {
+                                    <pre><code class="hljs">Facade.Entity.prototype.getAllMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
 
-    var metrics = {},
+    var metrics = <span class="hljs-cell">{}</span>,
         keys = Object.keys(this._metrics),
-        i,
-        length;
+        <span class="hljs-built_in">i</span>,
+        <span class="hljs-built_in">length</span>;
 
-    for (i = 0, length = keys.length; i &lt; length; i += 1) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = keys.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
 
         metrics[keys[i]] = this._metrics[keys[i]];
 
-    }
+    }</span>
 
-    return metrics;
+    <span class="hljs-keyword">return</span> metrics;
 
 };</code></pre>
 
@@ -3459,22 +3459,22 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Entity.prototype.draw = function (facade, updated) {
+                                    <pre><code class="hljs">Facade.Entity.prototype.draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, updated)</span> </span>{
 
-    var options = this.setOptions(updated, true),
+    <span class="hljs-keyword">var</span> options = <span class="hljs-keyword">this</span>.setOptions(updated, <span class="hljs-literal">true</span>),
         metrics;
 
-    if (typeof this._configOptions === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
 
-        options = this._configOptions(options);
+        options = <span class="hljs-keyword">this</span>._configOptions(options);
 
     }
 
-    metrics = updated ? this._setMetrics(options) : this.getAllMetrics();
+    metrics = updated ? <span class="hljs-keyword">this</span>._setMetrics(options) : <span class="hljs-keyword">this</span>.getAllMetrics();
 
-    if (typeof this._draw === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._draw === <span class="hljs-string">'function'</span>) {
 
-        facade.renderWithContext(options, this._draw.bind(this, facade, options, metrics));
+        facade.renderWithContext(options, <span class="hljs-keyword">this</span>._draw.bind(<span class="hljs-keyword">this</span>, facade, options, metrics));
 
     }
 
@@ -3753,18 +3753,18 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Polygon = function (options) {
+                                    <pre><code class="hljs">Facade.Polygon = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    if (!(this instanceof Facade.Polygon)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Polygon)) {
 
-        return new Facade.Polygon(options);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Polygon(options);
 
     }
 
-    this._options = this._defaultOptions();
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
 };</code></pre>
 
@@ -3877,37 +3877,37 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Polygon.prototype._defaultOptions = function (updated) {
+                                    <pre><code class="hljs">Facade.Polygon.<span class="hljs-keyword">prototype</span>._defaultOptions = function (updated) {
 
     var options,
-        keys,
+        <span class="hljs-keyword">keys</span>,
         i,
-        length;
+        <span class="hljs-keyword">length</span>;
 
-    options = Facade.Entity.prototype._defaultOptions({
-        opacity: 100,
+    options = Facade.Entity.<span class="hljs-keyword">prototype</span>._defaultOptions({
+        opacity: <span class="hljs-number">100</span>,
         points: [],
-        fillStyle: &#x27;#000&#x27;,
-        strokeStyle: &#x27;&#x27;,
-        lineWidth: 0,
-        lineCap: &#x27;butt&#x27;,
-        lineJoin: &#x27;miter&#x27;,
+        fillStyle: <span class="hljs-string">'#000'</span>,
+        strokeStyle: <span class="hljs-string">''</span>,
+        lineWidth: <span class="hljs-number">0</span>,
+        lineCap: <span class="hljs-string">'butt'</span>,
+        lineJoin: <span class="hljs-string">'miter'</span>,
         closePath: true
     });
 
-    if (updated) {
+    <span class="hljs-keyword">if</span> (updated) {
 
-        keys = Object.keys(updated);
+        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
 
-        for (i = 0, length = keys.length; i &lt; length; i += 1) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
 
-            options[keys[i]] = updated[keys[i]];
+            options[<span class="hljs-keyword">keys</span>[i]] = updated[<span class="hljs-keyword">keys</span>[i]];
 
         }
 
     }
 
-    return options;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -4018,61 +4018,61 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Polygon.prototype._draw = function (facade, options, metrics) {
+                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.<span class="hljs-constant">Polygon</span>.prototype._draw = function (facade, <span class="hljs-literal">options</span>, <span class="hljs-keyword">metrics) {</span>
 
-    var context = facade.context,
+    var <span class="hljs-literal">context</span> = facade.<span class="hljs-literal">context</span>,
         i,
         length;
 
-    this._applyTransforms(context, options, metrics);
+    this._applyTransforms(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>, metrics);
 
-    if (options.points.length) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points.<span class="hljs-keyword">length) {</span>
 
-        context.beginPath();
+        <span class="hljs-literal">context</span>.beginPath();
 
-        for (i = 0, length = options.points.length; i &lt; length; i += 1) {
+        for (i = <span class="hljs-number">0</span>, length = <span class="hljs-literal">options</span>.points.length; i &lt; length; i += <span class="hljs-number">1</span><span class="hljs-keyword">) {</span>
 
-            if (options.points[i].length === 6) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points[i].length === <span class="hljs-number">6</span><span class="hljs-keyword">) {</span>
 
-                context.bezierCurveTo.apply(context, options.points[i]);
+                <span class="hljs-literal">context</span>.bezierCurveTo.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[i]);
 
-            } else if (options.points[i].length === 5) {
+            <span class="hljs-keyword">}</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points[i].length === <span class="hljs-number">5</span><span class="hljs-keyword">) {</span>
 
-                context.arc.apply(context, options.points[i]);
+                <span class="hljs-literal">context</span>.arc.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[i]);
 
-            } else if (options.points[i].length === 2) {
+            <span class="hljs-keyword">}</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points[i].length === <span class="hljs-number">2</span><span class="hljs-keyword">) {</span>
 
-                context.lineTo.apply(context, options.points[i]);
+                <span class="hljs-literal">context</span>.lineTo.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[i]);
 
-            }
+            <span class="hljs-keyword">}</span>
 
-        }
+        <span class="hljs-keyword">}</span>
 
-        if (options.closePath) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.<span class="hljs-keyword">closePath) {</span>
 
-            context.closePath();
+            <span class="hljs-literal">context</span>.closePath();
 
-        } else {
+        <span class="hljs-keyword">}</span> <span class="hljs-keyword">else {</span>
 
-            context.moveTo.apply(context, options.points[length - 1]);
+            <span class="hljs-literal">context</span>.moveTo.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[length - <span class="hljs-number">1</span>]);
 
-        }
+        <span class="hljs-keyword">}</span>
 
-        if (options.fillStyle) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.<span class="hljs-keyword">fillStyle) {</span>
 
-            context.fill();
+            <span class="hljs-literal">context</span>.fill();
 
-        }
+        <span class="hljs-keyword">}</span>
 
-        if (options.lineWidth &gt; 0) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.lineWidth &gt; <span class="hljs-number">0</span><span class="hljs-keyword">) {</span>
 
-            context.stroke();
+            <span class="hljs-literal">context</span>.stroke();
 
-        }
+        <span class="hljs-keyword">}</span>
 
-    }
+    <span class="hljs-keyword">}</span>
 
-};</code></pre>
+<span class="hljs-keyword">}</span>;</code></pre>
 
                                 </section>
 
@@ -4159,12 +4159,12 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Polygon.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs">Facade.Polygon.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> {</span>
 
-    options.translate = [ options.x, options.y ];
-    options.globalAlpha = options.opacity / 100;
+    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.<span class="hljs-keyword">x</span>, <span class="hljs-keyword">options</span>.<span class="hljs-keyword">y</span> ];
+    <span class="hljs-keyword">options</span>.globalAlpha = <span class="hljs-keyword">options</span>.opacity / <span class="hljs-number">100</span>;
 
-    return options;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
 
 };</code></pre>
 
@@ -4251,95 +4251,95 @@ console.log(polygon._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Polygon.prototype._setMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Polygon.prototype.<span class="hljs-variable">_setMetrics =</span> function (updated) {
 
-    var metrics = this._defaultMetrics(),
-        options = updated || this.getAllOptions(),
-        bounds = { top: null, right: null, bottom: null, left: null },
+    var <span class="hljs-variable">metrics =</span> this._defaultMetrics(),
+        <span class="hljs-variable">options =</span> updated || this.getAllOptions(),
+        <span class="hljs-variable">bounds =</span> { top: <span class="hljs-constant">null</span>, right: <span class="hljs-constant">null</span>, bottom: <span class="hljs-constant">null</span>, left: <span class="hljs-constant">null</span> },
         point,
         i,
         length,
         anchor,
-        strokeWidthOffset = this._getStrokeWidthOffset(options);
+        <span class="hljs-variable">strokeWidthOffset =</span> this._getStrokeWidthOffset(options);
 
-    if (typeof this._configOptions === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (typeof this.<span class="hljs-variable">_configOptions =</span>== 'function') {
 
-        options = this._configOptions(options);
+        <span class="hljs-variable">options =</span> this._configOptions(options);
 
     }
 
-    for (i = 0, length = options.points.length; i &lt; length; i += 1) {
+    for (<span class="hljs-variable">i =</span> <span class="hljs-number">0</span>, <span class="hljs-variable">length =</span> options.points.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        if (options.points[i].length === 2) { // Rect
+        <span class="hljs-keyword">if</span> (options.points[i].<span class="hljs-variable">length =</span>== <span class="hljs-number">2</span>) { // Rect
 
-            point = { x: options.points[i][0], y: options.points[i][1] };
+            <span class="hljs-variable">point =</span> { x: options.points[i][<span class="hljs-number">0</span>], y: options.points[i][<span class="hljs-number">1</span>] };
 
-        } else if (options.points[i].length === 5) { // Circle
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.points[i].<span class="hljs-variable">length =</span>== <span class="hljs-number">5</span>) { // Circle
 
-            metrics.width = options.points[i][2] * 2;
-            metrics.height = options.points[i][2] * 2;
+            metrics.<span class="hljs-variable">width =</span> options.points[i][<span class="hljs-number">2</span>] * <span class="hljs-number">2</span>;
+            metrics.<span class="hljs-variable">height =</span> options.points[i][<span class="hljs-number">2</span>] * <span class="hljs-number">2</span>;
 
-            point = {
-                x: options.points[i][0] - options.points[i][2],
-                y: options.points[i][1] - options.points[i][2]
+            <span class="hljs-variable">point =</span> {
+                x: options.points[i][<span class="hljs-number">0</span>] - options.points[i][<span class="hljs-number">2</span>],
+                y: options.points[i][<span class="hljs-number">1</span>] - options.points[i][<span class="hljs-number">2</span>]
             };
 
         }
 
-        if (point.x &lt; bounds.left || bounds.left === null) {
+        <span class="hljs-keyword">if</span> (point.x &lt; bounds.left || bounds.<span class="hljs-variable">left =</span>== <span class="hljs-constant">null</span>) {
 
-            bounds.left = point.x;
-
-        }
-
-        if (point.y &lt; bounds.top || bounds.top === null) {
-
-            bounds.top = point.y;
+            bounds.<span class="hljs-variable">left =</span> point.x;
 
         }
 
-        if (point.x &gt; bounds.right || bounds.right === null) {
+        <span class="hljs-keyword">if</span> (point.y &lt; bounds.top || bounds.<span class="hljs-variable">top =</span>== <span class="hljs-constant">null</span>) {
 
-            bounds.right = point.x;
+            bounds.<span class="hljs-variable">top =</span> point.y;
 
         }
 
-        if (point.y &gt; bounds.bottom || bounds.bottom === null) {
+        <span class="hljs-keyword">if</span> (point.x &gt; bounds.right || bounds.<span class="hljs-variable">right =</span>== <span class="hljs-constant">null</span>) {
 
-            bounds.bottom = point.y;
+            bounds.<span class="hljs-variable">right =</span> point.x;
+
+        }
+
+        <span class="hljs-keyword">if</span> (point.y &gt; bounds.bottom || bounds.<span class="hljs-variable">bottom =</span>== <span class="hljs-constant">null</span>) {
+
+            bounds.<span class="hljs-variable">bottom =</span> point.y;
 
         }
 
     }
 
-    metrics.x = options.x + bounds.left;
-    metrics.y = options.y + bounds.top;
+    metrics.<span class="hljs-variable">x =</span> options.x + bounds.left;
+    metrics.<span class="hljs-variable">y =</span> options.y + bounds.top;
 
-    if (metrics.width === null &amp;&amp; metrics.height === null) {
+    <span class="hljs-keyword">if</span> (metrics.<span class="hljs-variable">width =</span>== <span class="hljs-constant">null</span> &amp;&amp; metrics.<span class="hljs-variable">height =</span>== <span class="hljs-constant">null</span>) {
 
-        metrics.width = bounds.right - bounds.left;
-        metrics.height = bounds.bottom - bounds.top;
-
-    }
-
-    metrics.width = (metrics.width + strokeWidthOffset * 2) * options.scale;
-    metrics.height = (metrics.height + strokeWidthOffset * 2) * options.scale;
-
-    anchor = this._getAnchorPoint(options, metrics);
-
-    metrics.x = metrics.x + anchor[0] - strokeWidthOffset;
-    metrics.y = metrics.y + anchor[1] - strokeWidthOffset;
-
-    if (this instanceof Facade.Circle) {
-
-        metrics.x = metrics.x + options.radius;
-        metrics.y = metrics.y + options.radius;
+        metrics.<span class="hljs-variable">width =</span> bounds.right - bounds.left;
+        metrics.<span class="hljs-variable">height =</span> bounds.bottom - bounds.top;
 
     }
 
-    if (!updated) {
+    metrics.<span class="hljs-variable">width =</span> (metrics.width + strokeWidthOffset * <span class="hljs-number">2</span>) * options.scale;
+    metrics.<span class="hljs-variable">height =</span> (metrics.height + strokeWidthOffset * <span class="hljs-number">2</span>) * options.scale;
 
-        this._metrics = metrics;
+    <span class="hljs-variable">anchor =</span> this._getAnchorPoint(options, metrics);
+
+    metrics.<span class="hljs-variable">x =</span> metrics.x + anchor[<span class="hljs-number">0</span>] - strokeWidthOffset;
+    metrics.<span class="hljs-variable">y =</span> metrics.y + anchor[<span class="hljs-number">1</span>] - strokeWidthOffset;
+
+    <span class="hljs-keyword">if</span> (this instanceof Facade.Circle) {
+
+        metrics.<span class="hljs-variable">x =</span> metrics.x + options.radius;
+        metrics.<span class="hljs-variable">y =</span> metrics.y + options.radius;
+
+    }
+
+    <span class="hljs-keyword">if</span> (!updated) {
+
+        this.<span class="hljs-variable">_metrics =</span> metrics;
 
     }
 
@@ -4646,23 +4646,23 @@ console.log(polygon._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Circle = function (options) {
+                                    <pre><code class="hljs">Facade.Circle = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    if (!(this instanceof Facade.Circle)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Circle)) {
 
-        return new Facade.Circle(options);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Circle(options);
 
     }
 
-    this._options = this._defaultOptions({
-        radius: 0,
-        begin: 0,
-        end: 360,
-        counterclockwise: false
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions({
+        radius: <span class="hljs-number">0</span>,
+        begin: <span class="hljs-number">0</span>,
+        end: <span class="hljs-number">360</span>,
+        counterclockwise: <span class="hljs-literal">false</span>
     });
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
 };</code></pre>
 
@@ -4779,24 +4779,24 @@ console.log(polygon._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Circle.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.<span class="hljs-constant">Circle</span>.prototype._configOptions = function <span class="hljs-keyword">(options) {</span>
 
-    options.translate = [ options.x, options.y ];
-    options.globalAlpha = options.opacity / 100;
+    <span class="hljs-literal">options</span>.translate = [ <span class="hljs-literal">options</span>.x, <span class="hljs-literal">options</span>.y ];
+    <span class="hljs-literal">options</span>.globalAlpha = <span class="hljs-literal">options</span>.opacity / <span class="hljs-number">100</span>;
 
-    if (options.counterclockwise) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.<span class="hljs-keyword">counterclockwise) {</span>
 
-        options.points = [ [ 0, 0, options.radius, options.end * _TO_RADIANS, options.begin * _TO_RADIANS ] ];
+        <span class="hljs-literal">options</span>.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">options</span>.radius, <span class="hljs-literal">options</span>.end * _TO_RADIANS, <span class="hljs-literal">options</span>.begin * _TO_RADIANS ] ];
 
-    } else {
+    <span class="hljs-keyword">}</span> <span class="hljs-keyword">else {</span>
 
-        options.points = [ [ 0, 0, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];
+        <span class="hljs-literal">options</span>.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">options</span>.radius, <span class="hljs-literal">options</span>.begin * _TO_RADIANS, <span class="hljs-literal">options</span>.end * _TO_RADIANS ] ];
 
-    }
+    <span class="hljs-keyword">}</span>
 
-    return options;
+    return <span class="hljs-literal">options</span>;
 
-};</code></pre>
+<span class="hljs-keyword">}</span>;</code></pre>
 
                                 </section>
 
@@ -4892,14 +4892,14 @@ console.log(polygon._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Circle.prototype._getAnchorPoint = function (options, metrics) {
+                                    <pre><code class="hljs">Facade.Circle.<span class="hljs-keyword">prototype</span>._getAnchorPoint = function (options, metrics) {
 
-    var pos = Facade.Polygon.prototype._getAnchorPoint.call(this, options, metrics);
+    var <span class="hljs-keyword">pos</span> = Facade.Polygon.<span class="hljs-keyword">prototype</span>._getAnchorPoint.call(this, options, metrics);
 
-    pos[0] = pos[0] + options.radius;
-    pos[1] = pos[1] + options.radius;
+    <span class="hljs-keyword">pos</span>[<span class="hljs-number">0</span>] = <span class="hljs-keyword">pos</span>[<span class="hljs-number">0</span>] + options.radius;
+    <span class="hljs-keyword">pos</span>[<span class="hljs-number">1</span>] = <span class="hljs-keyword">pos</span>[<span class="hljs-number">1</span>] + options.radius;
 
-    return pos;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">pos</span>;
 
 };</code></pre>
 
@@ -4988,21 +4988,21 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Circle.prototype._setMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Circle.prototype._setMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var metrics = Facade.Polygon.prototype._setMetrics.call(this, updated),
-        options = updated || this.getAllOptions();
+    <span class="hljs-keyword">var</span> metrics = Facade.Polygon.prototype._setMetrics.call(<span class="hljs-keyword">this</span>, updated),
+        options = updated || <span class="hljs-keyword">this</span>.getAllOptions();
 
     metrics.x = metrics.x - options.radius;
     metrics.y = metrics.y - options.radius;
 
-    if (!updated) {
+    <span class="hljs-keyword">if</span> (!updated) {
 
-        this._metrics = metrics;
+        <span class="hljs-keyword">this</span>._metrics = metrics;
 
     }
 
-    return metrics;
+    <span class="hljs-keyword">return</span> metrics;
 
 };</code></pre>
 
@@ -5277,24 +5277,24 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Line = function (options) {
+                                    <pre><code class="hljs">Facade.Line = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    if (!(this instanceof Facade.Line)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Line)) {
 
-        return new Facade.Line(options);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Line(options);
 
     }
 
-    this._options = this._defaultOptions({
-        x1: 0,
-        y1: 0,
-        x2: 0,
-        y2: 0,
-        lineWidth: 1
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions({
+        x1: <span class="hljs-number">0</span>,
+        y1: <span class="hljs-number">0</span>,
+        x2: <span class="hljs-number">0</span>,
+        y2: <span class="hljs-number">0</span>,
+        lineWidth: <span class="hljs-number">1</span>
     });
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
 };</code></pre>
 
@@ -5407,15 +5407,15 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Line.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs">Facade.Line.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> {</span>
 
-    options.translate = [ options.x, options.y ];
-    options.globalAlpha = options.opacity / 100;
-    options.closePath = false;
+    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.<span class="hljs-keyword">x</span>, <span class="hljs-keyword">options</span>.<span class="hljs-keyword">y</span> ];
+    <span class="hljs-keyword">options</span>.globalAlpha = <span class="hljs-keyword">options</span>.opacity / <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">options</span>.closePath = false;
 
-    options.points = [ [ options.x1, options.y1 ], [ options.x2, options.y2 ] ];
+    <span class="hljs-keyword">options</span>.points = [ [ <span class="hljs-keyword">options</span>.x1, <span class="hljs-keyword">options</span>.y1 ], [ <span class="hljs-keyword">options</span>.x2, <span class="hljs-keyword">options</span>.y2 ] ];
 
-    return options;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
 
 };</code></pre>
 
@@ -5513,31 +5513,31 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Line.prototype._getAnchorPoint = function (options, metrics) {
+                                    <pre><code class="hljs">Facade.Line.prototype._getAnchorPoint = function (<span class="hljs-keyword">options</span>, metrics) {
 
-    var pos = [0, 0];
+    var pos = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>];
 
-    if (options.anchor.match(/center$/)) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/center$/</span>)) {
 
-        pos[0] = -(metrics.width / 2 - options.lineWidth / 2);
+        pos[<span class="hljs-number">0</span>] = -(metrics.width <span class="hljs-regexp">/ 2 - options.lineWidth /</span> <span class="hljs-number">2</span>);
 
-    } else if (options.anchor.match(/right$/)) {
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/right$/</span>)) {
 
-        pos[0] = -(metrics.width - options.lineWidth);
-
-    }
-
-    if (options.anchor.match(/^center/)) {
-
-        pos[1] = -(metrics.height / 2 - options.lineWidth / 2);
-
-    } else if (options.anchor.match(/^bottom/)) {
-
-        pos[1] = -(metrics.height - options.lineWidth);
+        pos[<span class="hljs-number">0</span>] = -(metrics.width - <span class="hljs-keyword">options</span>.lineWidth);
 
     }
 
-    return pos;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/^center/</span>)) {
+
+        pos[<span class="hljs-number">1</span>] = -(metrics.height <span class="hljs-regexp">/ 2 - options.lineWidth /</span> <span class="hljs-number">2</span>);
+
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/^bottom/</span>)) {
+
+        pos[<span class="hljs-number">1</span>] = -(metrics.height - <span class="hljs-keyword">options</span>.lineWidth);
+
+    }
+
+    <span class="hljs-keyword">return</span> pos;
 
 };</code></pre>
 
@@ -5801,21 +5801,21 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Rect = function (options) {
+                                    <pre><code class="hljs">Facade.Rect = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    if (!(this instanceof Facade.Rect)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Rect)) {
 
-        return new Facade.Rect(options);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Rect(options);
 
     }
 
-    this._options = this._defaultOptions({
-        width: 0,
-        height: 0
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions({
+        width: <span class="hljs-number">0</span>,
+        height: <span class="hljs-number">0</span>
     });
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
 };</code></pre>
 
@@ -5926,14 +5926,14 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Rect.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs">Facade.Rect.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> {</span>
 
-    options.translate = [ options.x, options.y ];
-    options.globalAlpha = options.opacity / 100;
+    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.<span class="hljs-keyword">x</span>, <span class="hljs-keyword">options</span>.<span class="hljs-keyword">y</span> ];
+    <span class="hljs-keyword">options</span>.globalAlpha = <span class="hljs-keyword">options</span>.opacity / <span class="hljs-number">100</span>;
 
-    options.points = [ [ 0, 0 ], [ options.width, 0 ], [ options.width, options.height ], [ 0, options.height ] ];
+    <span class="hljs-keyword">options</span>.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span> ], [ <span class="hljs-keyword">options</span>.width, <span class="hljs-number">0</span> ], [ <span class="hljs-keyword">options</span>.width, <span class="hljs-keyword">options</span>.height ], [ <span class="hljs-number">0</span>, <span class="hljs-keyword">options</span>.height ] ];
 
-    return options;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
 
 };</code></pre>
 
@@ -6339,34 +6339,34 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image = function (img, options) {
+                                    <pre><code class="hljs">Facade.Image = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(img, options)</span> </span>{
 
-    if (!(this instanceof Facade.Image)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Image)) {
 
-        return new Facade.Image(img, options);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Image(img, options);
 
     }
 
-    this._options = this._defaultOptions({
-        width: 0,
-        height: 0,
-        tileX: 1,
-        tileY: 1,
-        offsetX: 0,
-        offsetY: 0,
-        frames: [0],
-        speed: 120,
-        loop: true,
-        callback: function () { return undefined; }
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions({
+        width: <span class="hljs-number">0</span>,
+        height: <span class="hljs-number">0</span>,
+        tileX: <span class="hljs-number">1</span>,
+        tileY: <span class="hljs-number">1</span>,
+        offsetX: <span class="hljs-number">0</span>,
+        offsetY: <span class="hljs-number">0</span>,
+        frames: [<span class="hljs-number">0</span>],
+        speed: <span class="hljs-number">120</span>,
+        loop: <span class="hljs-literal">true</span>,
+        callback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
     });
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this.animating = false;
-    this.currentFrame = 0;
+    <span class="hljs-keyword">this</span>.animating = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">this</span>.currentFrame = <span class="hljs-number">0</span>;
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
-    this.load(img);
+    <span class="hljs-keyword">this</span>.load(img);
 
 };</code></pre>
 
@@ -6492,26 +6492,26 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype.load = function (source) {
+                                    <pre><code class="hljs">Facade.Image.prototype.load = function (<span class="hljs-keyword">source</span>) {
 
-    if (typeof source === &#x27;object&#x27; &amp;&amp; source.nodeType === 1) {
+    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">source</span> === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-keyword">source</span>.nodeType === <span class="hljs-number">1</span>) {
 
-        this.image = source;
+        <span class="hljs-keyword">this</span>.image = <span class="hljs-keyword">source</span>;
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        this.image = document.createElement(&#x27;img&#x27;);
-        this.image.setAttribute(&#x27;src&#x27;, source);
+        <span class="hljs-keyword">this</span>.image = document.createElement(<span class="hljs-string">'img'</span>);
+        <span class="hljs-keyword">this</span>.image.setAttribute(<span class="hljs-string">'src'</span>, <span class="hljs-keyword">source</span>);
 
     }
 
-    if (this.image.complete) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.image.complete) {
 
-        this._setMetrics();
+        <span class="hljs-keyword">this</span>._setMetrics();
 
-    } else {
+    } <span class="hljs-keyword">else</span> {
 
-        this.image.addEventListener(&#x27;load&#x27;, this._setMetrics.bind(this, null));
+        <span class="hljs-keyword">this</span>.image.addEventListener(<span class="hljs-string">'load'</span>, <span class="hljs-keyword">this</span>._setMetrics.bind(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">null</span>));
 
     }
 
@@ -6571,11 +6571,11 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype.play = function () {
+                                    <pre><code class="hljs">Facade.Image.prototype.play = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    this.animating = true;
+    <span class="hljs-keyword">this</span>.animating = <span class="hljs-literal">true</span>;
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -6631,11 +6631,11 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype.pause = function () {
+                                    <pre><code class="hljs">Facade.Image.prototype.pause = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    this.animating = false;
+    <span class="hljs-keyword">this</span>.animating = <span class="hljs-literal">false</span>;
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -6691,11 +6691,11 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype.reset = function () {
+                                    <pre><code class="hljs">Facade.Image.prototype.reset = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    this.currentFrame = 0;
+    <span class="hljs-keyword">this</span>.currentFrame = <span class="hljs-number">0</span>;
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -6751,13 +6751,13 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype.stop = function () {
+                                    <pre><code class="hljs">Facade.Image.prototype.stop = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    this.currentFrame = 0;
+    <span class="hljs-keyword">this</span>.currentFrame = <span class="hljs-number">0</span>;
 
-    this.animating = false;
+    <span class="hljs-keyword">this</span>.animating = <span class="hljs-literal">false</span>;
 
-    return this;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 
 };</code></pre>
 
@@ -6840,27 +6840,27 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs">Facade.Image.prototype._configOptions = function (options) {
 
-    options.translate = [ options.x, options.y ];
+    options.<span class="hljs-built_in">translate</span> = [ options.x, options.y ];
 
-    if (this.image &amp;&amp; this.image.complete) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span> &amp;&amp; <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.complete) {
 
-        if (!options.width) {
+        <span class="hljs-keyword">if</span> (!options.<span class="hljs-variable">width</span>) {
 
-            options.width = this.image.width;
+            options.<span class="hljs-variable">width</span> = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">width</span>;
 
         }
 
-        if (!options.height) {
+        <span class="hljs-keyword">if</span> (!options.<span class="hljs-variable">height</span>) {
 
-            options.height = this.image.height;
+            options.<span class="hljs-variable">height</span> = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">height</span>;
 
         }
 
     }
 
-    return options;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -6947,33 +6947,33 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype._setMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Image.prototype._setMetrics = function (updated) {
 
-    var metrics = this._defaultMetrics(),
-        options = updated || this.getAllOptions(),
+    var metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
+        <span class="hljs-keyword">options</span> = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
         anchor;
 
-    if (typeof this._configOptions === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
 
-        options = this._configOptions(options);
-
-    }
-
-    metrics.width = options.width * options.tileX * options.scale;
-    metrics.height = options.height * options.tileY * options.scale;
-
-    anchor = this._getAnchorPoint(options, metrics);
-
-    metrics.x = options.x + anchor[0];
-    metrics.y = options.y + anchor[1];
-
-    if (!updated) {
-
-        this._metrics = metrics;
+        <span class="hljs-keyword">options</span> = <span class="hljs-keyword">this</span>._configOptions(<span class="hljs-keyword">options</span>);
 
     }
 
-    return metrics;
+    metrics.width = <span class="hljs-keyword">options</span>.width * <span class="hljs-keyword">options</span>.tileX * <span class="hljs-keyword">options</span>.scale;
+    metrics.height = <span class="hljs-keyword">options</span>.height * <span class="hljs-keyword">options</span>.tileY * <span class="hljs-keyword">options</span>.scale;
+
+    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(<span class="hljs-keyword">options</span>, metrics);
+
+    metrics.x = <span class="hljs-keyword">options</span>.x + anchor[<span class="hljs-number">0</span>];
+    metrics.y = <span class="hljs-keyword">options</span>.y + anchor[<span class="hljs-number">1</span>];
+
+    <span class="hljs-keyword">if</span> (!updated) {
+
+        <span class="hljs-keyword">this</span>._metrics = metrics;
+
+    }
+
+    <span class="hljs-keyword">return</span> metrics;
 
 };</code></pre>
 
@@ -7084,29 +7084,29 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Image.prototype._draw = function (facade, options, metrics) {
+                                    <pre><code class="hljs">Facade.Image.prototype._draw = function (facade, options, metrics) {
 
     var context = facade.context,
         currentOffsetX = options.offsetX,
         currentOffsetY = options.offsetY,
-        currentWidth = options.width,
-        currentHeight = options.height,
-        originalWidth = this.image.width,
-        originalHeight = this.image.height,
+        currentWidth = options.<span class="hljs-variable">width</span>,
+        currentHeight = options.<span class="hljs-variable">height</span>,
+        originalWidth = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">width</span>,
+        originalHeight = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">height</span>,
         x,
         y;
 
-    if (this.image.complete) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.complete) {
 
-        this._applyTransforms(context, options, metrics);
+        <span class="hljs-keyword">this</span>._applyTransforms(context, options, metrics);
 
-        if (options.frames.length) {
+        <span class="hljs-keyword">if</span> (options.frames.length) {
 
-            currentOffsetX += options.frames[this.currentFrame] * options.width;
+            currentOffsetX += options.frames[<span class="hljs-keyword">this</span>.currentFrame] * options.<span class="hljs-variable">width</span>;
 
-            if (currentOffsetX + options.width &gt; originalWidth) {
+            <span class="hljs-keyword">if</span> (currentOffsetX + options.<span class="hljs-variable">width</span> &gt; originalWidth) {
 
-                currentOffsetY += Math.floor(currentOffsetX / originalWidth) * options.height;
+                currentOffsetY += Math.<span class="hljs-built_in">floor</span>(currentOffsetX / originalWidth) * options.<span class="hljs-variable">height</span>;
 
                 currentOffsetX = currentOffsetX % originalWidth;
 
@@ -7114,30 +7114,30 @@ console.log(image._setMetrics(updated));
 
         }
 
-        if (currentOffsetX + currentWidth &gt; originalWidth) {
+        <span class="hljs-keyword">if</span> (currentOffsetX + currentWidth &gt; originalWidth) {
 
             currentWidth = currentOffsetX + currentWidth - originalWidth;
 
         }
 
-        if (currentOffsetY + currentHeight &gt; originalHeight) {
+        <span class="hljs-keyword">if</span> (currentOffsetY + currentHeight &gt; originalHeight) {
 
             currentHeight = currentOffsetY + currentHeight - originalHeight;
 
         }
 
-        for (x = 0; x &lt; options.tileX; x += 1) {
+        <span class="hljs-keyword">for</span> (x = <span class="hljs-number">0</span>; x &lt; options.tileX; x += <span class="hljs-number">1</span>) {
 
-            for (y = 0; y &lt; options.tileY; y += 1) {
+            <span class="hljs-keyword">for</span> (y = <span class="hljs-number">0</span>; y &lt; options.tileY; y += <span class="hljs-number">1</span>) {
 
                 context.drawImage(
-                    this.image,
+                    <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>,
                     currentOffsetX,
                     currentOffsetY,
                     currentWidth,
                     currentHeight,
-                    options.width * x,
-                    options.height * y,
+                    options.<span class="hljs-variable">width</span> * x,
+                    options.<span class="hljs-variable">height</span> * y,
                     currentWidth,
                     currentHeight
                 );
@@ -7146,37 +7146,37 @@ console.log(image._setMetrics(updated));
 
         }
 
-        if (this.animating) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.animating) {
 
-            if (!this.ftime || facade.ftime - this.ftime &gt;= options.speed) {
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ftime || facade.ftime - <span class="hljs-keyword">this</span>.ftime &gt;= options.speed) {
 
-                if (this.ftime) {
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ftime) {
 
-                    this.currentFrame += 1;
+                    <span class="hljs-keyword">this</span>.currentFrame += <span class="hljs-number">1</span>;
 
                 }
 
-                this.ftime = facade.ftime;
+                <span class="hljs-keyword">this</span>.ftime = facade.ftime;
 
-                if (this.currentFrame &gt;= options.frames.length) {
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.currentFrame &gt;= options.frames.length) {
 
-                    if (options.loop) {
+                    <span class="hljs-keyword">if</span> (options.<span class="hljs-built_in">loop</span>) {
 
-                        this.currentFrame = 0;
+                        <span class="hljs-keyword">this</span>.currentFrame = <span class="hljs-number">0</span>;
 
-                    } else {
+                    } <span class="hljs-keyword">else</span> {
 
-                        this.currentFrame = options.frames.length - 1;
+                        <span class="hljs-keyword">this</span>.currentFrame = options.frames.length - <span class="hljs-number">1</span>;
 
-                        this.isAnimating = false;
+                        <span class="hljs-keyword">this</span>.isAnimating = <span class="hljs-keyword">false</span>;
 
                     }
 
                 }
 
-                if (typeof options.callback === &#x27;function&#x27;) {
+                <span class="hljs-keyword">if</span> (typeof options.callback === <span class="hljs-string">'function'</span>) {
 
-                    options.callback.call(this, options.frames[this.currentFrame]);
+                    options.callback.call(<span class="hljs-keyword">this</span>, options.frames[<span class="hljs-keyword">this</span>.currentFrame]);
 
                 }
 
@@ -7581,38 +7581,38 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Text = function (value, options) {
+                                    <pre><code class="hljs">Facade.Text = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value, options)</span> </span>{
 
-    if (!(this instanceof Facade.Text)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Text)) {
 
-        return new Facade.Text(value, options);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Text(value, options);
 
     }
 
-    this._options = this._defaultOptions({
-        opacity: 100,
-        width: 0,
-        fontFamily: &#x27;Arial&#x27;,
-        fontStyle: &#x27;normal&#x27;,
-        fontSize: 16,
-        lineHeight: 1,
-        textAlignment: &#x27;left&#x27;,
-        textBaseline: &#x27;top&#x27;,
-        fillStyle: &#x27;#000&#x27;,
-        strokeStyle: &#x27;#000&#x27;,
-        lineWidth: 0
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions({
+        opacity: <span class="hljs-number">100</span>,
+        width: <span class="hljs-number">0</span>,
+        fontFamily: <span class="hljs-string">'Arial'</span>,
+        fontStyle: <span class="hljs-string">'normal'</span>,
+        fontSize: <span class="hljs-number">16</span>,
+        lineHeight: <span class="hljs-number">1</span>,
+        textAlignment: <span class="hljs-string">'left'</span>,
+        textBaseline: <span class="hljs-string">'top'</span>,
+        fillStyle: <span class="hljs-string">'#000'</span>,
+        strokeStyle: <span class="hljs-string">'#000'</span>,
+        lineWidth: <span class="hljs-number">0</span>
     });
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this._maxLineWidth = 0;
+    <span class="hljs-keyword">this</span>._maxLineWidth = <span class="hljs-number">0</span>;
 
-    this._lines = [];
+    <span class="hljs-keyword">this</span>._lines = [];
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
-    if (value !== undefined) {
+    <span class="hljs-keyword">if</span> (value !== <span class="hljs-literal">undefined</span>) {
 
-        this.setText(value);
+        <span class="hljs-keyword">this</span>.setText(value);
 
     }
 
@@ -7736,31 +7736,31 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Text.prototype.setText = function (value) {
+                                    <pre><code class="hljs">Facade.Text.prototype.setText = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
 
-    var options = this.getAllOptions(),
+    <span class="hljs-keyword">var</span> options = <span class="hljs-keyword">this</span>.getAllOptions(),
         words = [],
-        currentWord = null,
-        currentLine = &#x27;&#x27;,
-        currentLineWidth = 0,
+        currentWord = <span class="hljs-literal">null</span>,
+        currentLine = <span class="hljs-string">''</span>,
+        currentLineWidth = <span class="hljs-number">0</span>,
         i,
         length;
 
-    this.value = value;
+    <span class="hljs-keyword">this</span>.value = value;
 
-    this._maxLineWidth = options.width;
+    <span class="hljs-keyword">this</span>._maxLineWidth = options.width;
 
-    this._lines = [];
+    <span class="hljs-keyword">this</span>._lines = [];
 
-    if (value) {
+    <span class="hljs-keyword">if</span> (value) {
 
-        words = String(value).match(/\n|[\S]+ ?/g);
+        words = <span class="hljs-built_in">String</span>(value).match(<span class="hljs-regexp">/\n|[\S]+ ?/g</span>);
 
     }
 
-    if (typeof this._configOptions === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
 
-        options = this._configOptions(options);
+        options = <span class="hljs-keyword">this</span>._configOptions(options);
 
     }
 
@@ -7768,24 +7768,24 @@ console.log(image._setMetrics(updated));
 
     _context.font = options.font;
 
-    while (words.length) {
+    <span class="hljs-keyword">while</span> (words.length) {
 
         currentWord = words.shift();
-        currentLineWidth = _context.measureText(currentLine + currentWord.replace(/\s$/, &#x27;&#x27;)).width;
+        currentLineWidth = _context.measureText(currentLine + currentWord.replace(<span class="hljs-regexp">/\s$/</span>, <span class="hljs-string">''</span>)).width;
 
-        if ((options.width &gt; 0 &amp;&amp; currentLineWidth &gt; options.width) || currentWord.match(/\n/)) {
+        <span class="hljs-keyword">if</span> ((options.width &gt; <span class="hljs-number">0</span> &amp;&amp; currentLineWidth &gt; options.width) || currentWord.match(<span class="hljs-regexp">/\n/</span>)) {
 
-            this._lines.push([currentLine.replace(/\s$/, &#x27;&#x27;), 0, this._lines.length * (options.fontSize * options.lineHeight)]);
+            <span class="hljs-keyword">this</span>._lines.push([currentLine.replace(<span class="hljs-regexp">/\s$/</span>, <span class="hljs-string">''</span>), <span class="hljs-number">0</span>, <span class="hljs-keyword">this</span>._lines.length * (options.fontSize * options.lineHeight)]);
 
-            currentLine = currentWord.replace(/\n/, &#x27;&#x27;);
+            currentLine = currentWord.replace(<span class="hljs-regexp">/\n/</span>, <span class="hljs-string">''</span>);
 
-        } else {
+        } <span class="hljs-keyword">else</span> {
 
             currentLine = currentLine + currentWord;
 
-            if (currentLineWidth &gt; this._maxLineWidth) {
+            <span class="hljs-keyword">if</span> (currentLineWidth &gt; <span class="hljs-keyword">this</span>._maxLineWidth) {
 
-                this._maxLineWidth = currentLineWidth;
+                <span class="hljs-keyword">this</span>._maxLineWidth = currentLineWidth;
 
             }
 
@@ -7793,19 +7793,19 @@ console.log(image._setMetrics(updated));
 
     }
 
-    this._lines.push([currentLine.replace(/\s$/, &#x27;&#x27;), 0, this._lines.length * (options.fontSize * options.lineHeight)]);
+    <span class="hljs-keyword">this</span>._lines.push([currentLine.replace(<span class="hljs-regexp">/\s$/</span>, <span class="hljs-string">''</span>), <span class="hljs-number">0</span>, <span class="hljs-keyword">this</span>._lines.length * (options.fontSize * options.lineHeight)]);
 
-    for (i = 0, length = this._lines.length; i &lt; length; i += 1) {
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = <span class="hljs-keyword">this</span>._lines.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        currentLineWidth = _context.measureText(this._lines[i][0]).width;
+        currentLineWidth = _context.measureText(<span class="hljs-keyword">this</span>._lines[i][<span class="hljs-number">0</span>]).width;
 
-        if (options.textAlignment === &#x27;center&#x27;) {
+        <span class="hljs-keyword">if</span> (options.textAlignment === <span class="hljs-string">'center'</span>) {
 
-            this._lines[i][1] = (this._maxLineWidth - currentLineWidth) / 2;
+            <span class="hljs-keyword">this</span>._lines[i][<span class="hljs-number">1</span>] = (<span class="hljs-keyword">this</span>._maxLineWidth - currentLineWidth) / <span class="hljs-number">2</span>;
 
-        } else if (options.textAlignment === &#x27;right&#x27;) {
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.textAlignment === <span class="hljs-string">'right'</span>) {
 
-            this._lines[i][1] = this._maxLineWidth - currentLineWidth;
+            <span class="hljs-keyword">this</span>._lines[i][<span class="hljs-number">1</span>] = <span class="hljs-keyword">this</span>._maxLineWidth - currentLineWidth;
 
         }
 
@@ -7813,9 +7813,9 @@ console.log(image._setMetrics(updated));
 
     _context.restore();
 
-    this._setMetrics();
+    <span class="hljs-keyword">this</span>._setMetrics();
 
-    return this._lines;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._lines;
 
 };</code></pre>
 
@@ -7926,27 +7926,27 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Text.prototype._draw = function (facade, options, metrics) {
+                                    <pre><code class="hljs">Facade.Text.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> {</span>
 
     var context = facade.context,
-        i,
-        length;
+        <span class="hljs-built_in">i</span>,
+        <span class="hljs-built_in">length</span>;
 
     this._applyTransforms(context, options, metrics);
 
-    for (i = 0, length = this._lines.length; i &lt; length; i += 1) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = this._lines.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
 
         if (options.fillStyle) {
 
             context.fillText.apply(context, this._lines[i]);
 
-        }
+        }</span>
 
-        if (options.lineWidth) {
+        <span class="hljs-keyword">if</span> (options.lineWidth) <span class="hljs-cell">{
 
             context.strokeText.apply(context, this._lines[i]);
 
-        }
+        }</span>
 
     }
 
@@ -8037,21 +8037,21 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Text.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.<span class="hljs-constant">Text</span>.prototype._configOptions = function <span class="hljs-keyword">(options) {</span>
 
-    options.translate = [ options.x, options.y ];
-    options.globalAlpha = options.opacity / 100;
-    options.font = options.fontStyle + &#x27; &#x27; + parseInt(options.fontSize, 10) + &#x27;px &#x27; + options.fontFamily;
+    <span class="hljs-literal">options</span>.translate = [ <span class="hljs-literal">options</span>.x, <span class="hljs-literal">options</span>.y ];
+    <span class="hljs-literal">options</span>.globalAlpha = <span class="hljs-literal">options</span>.opacity / <span class="hljs-number">100</span>;
+    <span class="hljs-literal">options</span>.font = <span class="hljs-literal">options</span>.fontStyle + <span class="hljs-string">' '</span> + parseInt(<span class="hljs-literal">options</span>.fontSize, <span class="hljs-number">10</span>) + <span class="hljs-string">'px '</span> + <span class="hljs-literal">options</span>.fontFamily;
 
-    if (options.width === 0) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.width === <span class="hljs-number">0</span><span class="hljs-keyword">) {</span>
 
-        options.width = this._maxLineWidth;
+        <span class="hljs-literal">options</span>.width = this._maxLineWidth;
 
-    }
+    <span class="hljs-keyword">}</span>
 
-    return options;
+    return <span class="hljs-literal">options</span>;
 
-};</code></pre>
+<span class="hljs-keyword">}</span>;</code></pre>
 
                                 </section>
 
@@ -8136,37 +8136,37 @@ console.log(text._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Text.prototype._setMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Text.prototype._setMetrics = function (updated) {
 
-    var metrics = this._defaultMetrics(),
-        options = updated || this.getAllOptions(),
+    var metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
+        <span class="hljs-keyword">options</span> = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
         anchor;
 
-    if (typeof this._configOptions === &#x27;function&#x27;) {
+    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
 
-        options = this._configOptions(options);
-
-    }
-
-    if (this._lines) {
-
-        metrics.width = options.width * options.scale;
-        metrics.height = this._lines.length * (options.fontSize * options.lineHeight) * options.scale;
+        <span class="hljs-keyword">options</span> = <span class="hljs-keyword">this</span>._configOptions(<span class="hljs-keyword">options</span>);
 
     }
 
-    anchor = this._getAnchorPoint(options, metrics);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._lines) {
 
-    metrics.x = options.x + anchor[0];
-    metrics.y = options.y + anchor[1];
-
-    if (!updated) {
-
-        this._metrics = metrics;
+        metrics.width = <span class="hljs-keyword">options</span>.width * <span class="hljs-keyword">options</span>.scale;
+        metrics.height = <span class="hljs-keyword">this</span>._lines.length * (<span class="hljs-keyword">options</span>.fontSize * <span class="hljs-keyword">options</span>.lineHeight) * <span class="hljs-keyword">options</span>.scale;
 
     }
 
-    return metrics;
+    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(<span class="hljs-keyword">options</span>, metrics);
+
+    metrics.x = <span class="hljs-keyword">options</span>.x + anchor[<span class="hljs-number">0</span>];
+    metrics.y = <span class="hljs-keyword">options</span>.y + anchor[<span class="hljs-number">1</span>];
+
+    <span class="hljs-keyword">if</span> (!updated) {
+
+        <span class="hljs-keyword">this</span>._metrics = metrics;
+
+    }
+
+    <span class="hljs-keyword">return</span> metrics;
 
 };</code></pre>
 
@@ -8326,20 +8326,20 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Group = function (options) {
+                                    <pre><code class="hljs">Facade.<span class="hljs-keyword">Group</span> = function (<span class="hljs-keyword">options</span>) {
 
-    if (!(this instanceof Facade.Group)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.<span class="hljs-keyword">Group</span>)) {
 
-        return new Facade.Group(options);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.<span class="hljs-keyword">Group</span>(<span class="hljs-keyword">options</span>);
 
     }
 
-    this._options = this._defaultOptions();
-    this._metrics = this._defaultMetrics();
+    <span class="hljs-keyword">this</span>._options = <span class="hljs-keyword">this</span>._defaultOptions();
+    <span class="hljs-keyword">this</span>._metrics = <span class="hljs-keyword">this</span>._defaultMetrics();
 
-    this._objects = [];
+    <span class="hljs-keyword">this</span>._objects = [];
 
-    this.setOptions(options);
+    <span class="hljs-keyword">this</span>.setOptions(<span class="hljs-keyword">options</span>);
 
 };</code></pre>
 
@@ -8462,19 +8462,19 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Group.prototype._draw = function (facade, options, metrics) {
+                                    <pre><code class="hljs">Facade.Group.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> {</span>
 
     var context = facade.context,
-        i,
-        length;
+        <span class="hljs-built_in">i</span>,
+        <span class="hljs-built_in">length</span>;
 
     this._applyTransforms(context, options, metrics);
 
-    for (i = 0, length = this._objects.length; i &lt; length; i += 1) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = this._objects.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
 
         facade.addToStage(this._objects[i]);
 
-    }
+    }</span>
 
 };</code></pre>
 
@@ -8563,11 +8563,11 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Group.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs">Facade.<span class="hljs-keyword">Group</span>.prototype._configOptions = function (<span class="hljs-keyword">options</span>) {
 
-    options.translate = [ options.x, options.y ];
+    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.x, <span class="hljs-keyword">options</span>.y ];
 
-    return options;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
 
 };</code></pre>
 
@@ -8652,32 +8652,32 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Group.prototype.addToGroup = function (obj) {
+                                    <pre><code class="hljs">Facade.Group.prototype.addToGroup = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(obj)</span> </span>{
 
-    var i,
+    <span class="hljs-keyword">var</span> i,
         length;
 
-    if (obj instanceof Facade.Entity) {
+    <span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">instanceof</span> Facade.Entity) {
 
-        if (!this.hasEntity(obj)) {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.hasEntity(obj)) {
 
-            this._objects.push(obj);
+            <span class="hljs-keyword">this</span>._objects.push(obj);
 
-            this._setMetrics();
-
-        }
-
-    } else if (Array.isArray(obj)) {
-
-        for (i = 0, length = obj.length; i &lt; length; i += 1) {
-
-            this.addToGroup(obj[i]);
+            <span class="hljs-keyword">this</span>._setMetrics();
 
         }
 
-    } else {
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(obj)) {
 
-        throw new Error(&#x27;Object passed to Facade.addToStage is not a valid Facade.js entity.&#x27;);
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = obj.length; i &lt; length; i += <span class="hljs-number">1</span>) {
+
+            <span class="hljs-keyword">this</span>.addToGroup(obj[i]);
+
+        }
+
+    } <span class="hljs-keyword">else</span> {
+
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Object passed to Facade.addToStage is not a valid Facade.js entity.'</span>);
 
     }
 
@@ -8763,9 +8763,9 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Group.prototype.hasEntity = function (obj) {
+                                    <pre><code class="hljs">Facade.Group.prototype.hasEntity = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(obj)</span> </span>{
 
-    return this._objects.indexOf(obj) !== -1;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._objects.indexOf(obj) !== -<span class="hljs-number">1</span>;
 
 };</code></pre>
 
@@ -8849,15 +8849,15 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Group.prototype.removeFromGroup = function (obj) {
+                                    <pre><code class="hljs">Facade.Group.prototype.removeFromGroup = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(obj)</span> </span>{
 
-    if (obj instanceof Facade.Entity) {
+    <span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">instanceof</span> Facade.Entity) {
 
-        if (this.hasEntity(obj)) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.hasEntity(obj)) {
 
-            this._objects.splice(this._objects.indexOf(obj), 1);
+            <span class="hljs-keyword">this</span>._objects.splice(<span class="hljs-keyword">this</span>._objects.indexOf(obj), <span class="hljs-number">1</span>);
 
-            this._setMetrics();
+            <span class="hljs-keyword">this</span>._setMetrics();
 
         }
 
@@ -8948,60 +8948,60 @@ console.log(group._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code>Facade.Group.prototype._setMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Group.prototype.<span class="hljs-variable">_setMetrics =</span> function (updated) {
 
-    var metrics = this._defaultMetrics(),
-        options = updated || this.getAllOptions(),
-        bounds = { top: null, right: null, bottom: null, left: null },
+    var <span class="hljs-variable">metrics =</span> this._defaultMetrics(),
+        <span class="hljs-variable">options =</span> updated || this.getAllOptions(),
+        <span class="hljs-variable">bounds =</span> { top: <span class="hljs-constant">null</span>, right: <span class="hljs-constant">null</span>, bottom: <span class="hljs-constant">null</span>, left: <span class="hljs-constant">null</span> },
         i,
         length,
         anchor,
         obj_metrics;
 
-    for (i = 0, length = this._objects.length; i &lt; length; i += 1) {
+    for (<span class="hljs-variable">i =</span> <span class="hljs-number">0</span>, <span class="hljs-variable">length =</span> this._objects.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        obj_metrics = this._objects[i].getAllMetrics();
+        <span class="hljs-variable">obj_metrics =</span> this._objects[i].getAllMetrics();
 
-        if (obj_metrics.x &lt; bounds.left || bounds.left === null) {
+        <span class="hljs-keyword">if</span> (obj_metrics.x &lt; bounds.left || bounds.<span class="hljs-variable">left =</span>== <span class="hljs-constant">null</span>) {
 
-            bounds.left = obj_metrics.x;
-
-        }
-
-        if (obj_metrics.y &lt; bounds.top || bounds.top === null) {
-
-            bounds.top = obj_metrics.y;
+            bounds.<span class="hljs-variable">left =</span> obj_metrics.x;
 
         }
 
-        if (obj_metrics.x + obj_metrics.width &gt; bounds.right || bounds.right === null) {
+        <span class="hljs-keyword">if</span> (obj_metrics.y &lt; bounds.top || bounds.<span class="hljs-variable">top =</span>== <span class="hljs-constant">null</span>) {
 
-            bounds.right = obj_metrics.x + obj_metrics.width;
+            bounds.<span class="hljs-variable">top =</span> obj_metrics.y;
 
         }
 
-        if (obj_metrics.y + obj_metrics.height &gt; bounds.bottom || bounds.bottom === null) {
+        <span class="hljs-keyword">if</span> (obj_metrics.x + obj_metrics.width &gt; bounds.right || bounds.<span class="hljs-variable">right =</span>== <span class="hljs-constant">null</span>) {
 
-            bounds.bottom = obj_metrics.y + obj_metrics.height;
+            bounds.<span class="hljs-variable">right =</span> obj_metrics.x + obj_metrics.width;
+
+        }
+
+        <span class="hljs-keyword">if</span> (obj_metrics.y + obj_metrics.height &gt; bounds.bottom || bounds.<span class="hljs-variable">bottom =</span>== <span class="hljs-constant">null</span>) {
+
+            bounds.<span class="hljs-variable">bottom =</span> obj_metrics.y + obj_metrics.height;
 
         }
 
     }
 
-    metrics.x = options.x + bounds.left;
-    metrics.y = options.y + bounds.top;
+    metrics.<span class="hljs-variable">x =</span> options.x + bounds.left;
+    metrics.<span class="hljs-variable">y =</span> options.y + bounds.top;
 
-    metrics.width = (bounds.right - bounds.left) * options.scale;
-    metrics.height = (bounds.bottom - bounds.top) * options.scale;
+    metrics.<span class="hljs-variable">width =</span> (bounds.right - bounds.left) * options.scale;
+    metrics.<span class="hljs-variable">height =</span> (bounds.bottom - bounds.top) * options.scale;
 
-    anchor = this._getAnchorPoint(options, metrics);
+    <span class="hljs-variable">anchor =</span> this._getAnchorPoint(options, metrics);
 
-    metrics.x = options.x + anchor[0];
-    metrics.y = options.y + anchor[1];
+    metrics.<span class="hljs-variable">x =</span> options.x + anchor[<span class="hljs-number">0</span>];
+    metrics.<span class="hljs-variable">y =</span> options.y + anchor[<span class="hljs-number">1</span>];
 
-    if (!updated) {
+    <span class="hljs-keyword">if</span> (!updated) {
 
-        this._metrics = metrics;
+        this.<span class="hljs-variable">_metrics =</span> metrics;
 
     }
 
