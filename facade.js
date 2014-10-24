@@ -764,27 +764,39 @@
 
         if (this._options[key] !== undefined) {
 
-            if (typeof this._options[key] === 'number' && typeof value === 'string') {
+            if (typeof this._options[key] === 'number') {
 
-                results = value.match(_OPERATOR_TEST);
+                if (typeof value === 'string') {
 
-                if (results) {
+                    results = value.match(_OPERATOR_TEST);
 
-                    value = parseFloat(value.replace(_OPERATOR_TEST, ''));
+                    if (results) {
 
-                    if (results[1] === '+') {
+                        value = parseFloat(value.replace(_OPERATOR_TEST, ''));
 
-                        value = this._options[key] + value;
+                        if (results[1] === '+') {
 
-                    } else if (results[1] === '-') {
+                            value = this._options[key] + value;
 
-                        value = this._options[key] - value;
+                        } else if (results[1] === '-') {
+
+                            value = this._options[key] - value;
+
+                        }
+
+                    } else {
+
+                        value = parseFloat(value);
 
                     }
 
-                } else {
+                }
 
-                    value = parseFloat(value);
+                if (isNaN(value)) {
+
+                    value = this._options[key];
+
+                    console.error('The value for ' + key + ' was not a valid number.');
 
                 }
 
