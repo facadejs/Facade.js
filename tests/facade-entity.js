@@ -375,12 +375,14 @@ casper.test.begin('Setting entity options with Entity.setOptions and integer ope
             height: 100,
             rotate: 0,
             scale: 1
-        }, 'Options were set correctly.');
+        }, 'Options were set correctly using a basic additive operator with a positive number.');
+
+    rect.setOptions({ x: 100, y: 100 }); // Reset X and Y coords.
 
     test.assertEquals(rect.setOptions({ x: '-=5', y: '-=5' }),
         {
-            x: 100,
-            y: 100,
+            x: 95,
+            y: 95,
             anchor: 'top/left',
             opacity: 100,
             points: [],
@@ -394,7 +396,30 @@ casper.test.begin('Setting entity options with Entity.setOptions and integer ope
             height: 100,
             rotate: 0,
             scale: 1
-        }, 'Options were set correctly.');
+        }, 'Options were set correctly using a basic subtractive operator with a positive number.');
+
+    rect.setOptions({ x: 100, y: 100 }); // Reset X and Y coords.
+
+    test.assertEquals(rect.setOptions({ x: '+=-5', y: '+=-5' }),
+        {
+            x: 95,
+            y: 95,
+            anchor: 'top/left',
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 100,
+            height: 100,
+            rotate: 0,
+            scale: 1
+        }, 'Options were set correctly using a basic additive operator with a negative number.');
+
+    rect.setOptions({ x: 100, y: 100 }); // Reset X and Y coords.
 
     test.done();
 

@@ -15,7 +15,7 @@
         _context,
         _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
         _TO_RADIANS = Math.PI / 180,
-        _OPERATOR_TEST = new RegExp('^[-+]=');
+        _OPERATOR_TEST = new RegExp('^([-+])=');
 
     if (String(typeof window) !== 'undefined') {
 
@@ -760,13 +760,27 @@
 
     Facade.Entity.prototype._setOption = function (key, value, test) {
 
+        var results;
+
         if (this._options[key] !== undefined) {
 
             if (typeof this._options[key] === 'number' && typeof value === 'string') {
 
-                if (value.match(_OPERATOR_TEST)) {
+                results = value.match(_OPERATOR_TEST);
 
-                    value = this._options[key] + parseFloat(value.replace('=', ''));
+                if (results) {
+
+                    value = parseFloat(value.replace(_OPERATOR_TEST, ''));
+
+                    if (results[1] === '+') {
+
+                        value = this._options[key] + value;
+
+                    } else if (results[1] === '-') {
+
+                        value = this._options[key] - value;
+
+                    }
 
                 } else {
 
