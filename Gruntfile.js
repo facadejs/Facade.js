@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        jslint: {
+        jshint: {
 
             client: {
                 src: ['facade.js', 'tests/**/*.js'],
@@ -74,14 +74,14 @@ module.exports = function (grunt) {
 
             default: {
                 files: ['facade.js', 'tests/**/*.js'],
-                tasks: ['jslint', 'uglify', 'shell:docs', 'shell:gzip', 'casperjs']
+                tasks: ['jshint', 'uglify', 'shell:docs', 'shell:gzip', 'casperjs']
             }
 
         }
 
     });
 
-    grunt.registerTask('default', [ 'jslint', 'uglify', 'doxdox', 'shell' ]);
+    grunt.registerTask('default', [ 'jshint', 'uglify', 'doxdox', 'shell' ]);
     grunt.registerTask('test', [ 'casperjs' ]);
 
 };

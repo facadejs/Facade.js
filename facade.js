@@ -6,7 +6,7 @@
  * Released under the MIT license
  */
 
-(function () {
+(function (window, document, undefined) {
 
     'use strict';
 
@@ -2465,4 +2465,4 @@
 
     }
 
-}());
+}(window, document));
