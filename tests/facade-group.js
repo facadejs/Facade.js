@@ -13,7 +13,7 @@ casper.test.begin('Group entity object created.', function suite(test) {
 
     var object = new Facade.Group();
 
-    test.assertType(Facade.Group, 'function', 'Group entity object extists.');
+    test.assertType(Facade.Group, 'function', 'Group entity object exists.');
     test.assertInstanceOf(Facade.Group, Facade.Entity, 'Group is an instance of Facade.Entity.');
     test.assertEquals(Facade.Group.constructor, Facade.Entity, 'Group\'s constructor is Facade.Entity.');
     test.assertInstanceOf(object, Facade.Group, 'Object is an instance of Facade.Group.');
@@ -133,6 +133,7 @@ casper.test.begin('Testing the existence of an entity within a Group.', function
 });
 
 casper.test.begin('Remove Facade.js entity from Group.', function suite(test) {
+
     'use strict';
 
     var group = new Facade.Group(),

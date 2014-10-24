@@ -13,7 +13,7 @@ casper.test.begin('Entity object created.', function suite(test) {
 
     var object = new Facade.Entity();
 
-    test.assertType(Facade.Entity, 'function', 'Entity object extists.');
+    test.assertType(Facade.Entity, 'function', 'Entity object exists.');
     test.assertInstanceOf(object, Facade.Entity, 'Object is an instance of Facade.Entity.');
 
     test.done();
@@ -352,7 +352,7 @@ casper.test.begin('Setting entity options with Entity.setOptions', function suit
 
 });
 
-casper.test.begin('Setting entity options with Entity.setOptions and interger operators', function suite(test) {
+casper.test.begin('Setting entity options with Entity.setOptions and integer operators', function suite(test) {
 
     'use strict';
 

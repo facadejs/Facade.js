@@ -13,7 +13,7 @@ casper.test.begin('Line entity object created.', function suite(test) {
 
     var object = new Facade.Line();
 
-    test.assertType(Facade.Line, 'function', 'Line entity object extists.');
+    test.assertType(Facade.Line, 'function', 'Line entity object exists.');
     test.assertInstanceOf(Facade.Line, Facade.Entity, 'Line is an instance of Facade.Entity.');
     test.assertInstanceOf(Facade.Line, Facade.Polygon, 'Line is an instance of Facade.Polygon.');
     test.assertEquals(Facade.Line.constructor, Facade.Polygon, 'Line\'s constructor is Facade.Polygon.');

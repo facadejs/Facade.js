@@ -13,7 +13,7 @@ casper.test.begin('Text entity object created.', function suite(test) {
 
     var object = new Facade.Text();
 
-    test.assertType(Facade.Text, 'function', 'Text entity object extists.');
+    test.assertType(Facade.Text, 'function', 'Text entity object exists.');
     test.assertInstanceOf(Facade.Text, Facade.Entity, 'Text is an instance of Facade.Entity.');
     test.assertEquals(Facade.Text.constructor, Facade.Entity, 'Text\'s constructor is Facade.Entity.');
     test.assertInstanceOf(object, Facade.Text, 'Object is an instance of Facade.Text.');
