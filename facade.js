@@ -119,7 +119,7 @@
 
         } catch (e) {
 
-            throw new Error('Object passed to Facade.js was not a valid canvas element.');
+            console.error('Object passed to Facade.js was not a valid canvas element.');
 
         }
 
@@ -156,7 +156,7 @@
 
         } else {
 
-            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+            console.error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
         }
 
@@ -207,7 +207,7 @@
 
         } else {
 
-            throw new Error('Parameter passed to Facade.draw is not a valid function.');
+            console.error('Parameter passed to Facade.draw is not a valid function.');
 
         }
 
@@ -800,7 +800,7 @@
 
             } else {
 
-                throw new Error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + String(typeof this._options[key]) + '.');
+                console.error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + String(typeof this._options[key]) + '.');
 
             }
 
@@ -2341,7 +2341,7 @@
 
         } else {
 
-            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+            console.error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
         }
 
