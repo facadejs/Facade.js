@@ -11,8 +11,8 @@
         "grunt-contrib-jshint": "0.10.0",
         "grunt-contrib-uglify": "0.6.0",
         "grunt-contrib-watch": "0.6.1",
-        "grunt-doxdox": "0.0.3",
-        "grunt-notify": "0.3.1",
+        "grunt-doxdox": "0.0.5",
+        "grunt-notify": "0.4.1",
         "grunt-shell": "1.1.1",
         "matchdep": "0.3.0"
     },

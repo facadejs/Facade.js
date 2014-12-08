@@ -48,7 +48,7 @@ module.exports = function (grunt) {
 
         doxdox: {
 
-            dev: {
+            bootstrap: {
 
                 input: 'facade.js',
                 output: 'docs/index.html',
