@@ -13,7 +13,7 @@ casper.test.begin('Entity object created.', function suite(test) {
 
     var object = new Facade.Entity();
 
-    test.assertType(Facade.Entity, 'function', 'Entity object extists.');
+    test.assertType(Facade.Entity, 'function', 'Entity object exists.');
     test.assertInstanceOf(object, Facade.Entity, 'Object is an instance of Facade.Entity.');
 
     test.done();
@@ -352,7 +352,7 @@ casper.test.begin('Setting entity options with Entity.setOptions', function suit
 
 });
 
-casper.test.begin('Setting entity options with Entity.setOptions and interger operators', function suite(test) {
+casper.test.begin('Setting entity options with Entity.setOptions and integer operators.', function suite(test) {
 
     'use strict';
 
@@ -375,12 +375,14 @@ casper.test.begin('Setting entity options with Entity.setOptions and interger op
             height: 100,
             rotate: 0,
             scale: 1
-        }, 'Options were set correctly.');
+        }, 'Options were set correctly using a basic additive operator with a positive number.');
+
+    rect.setOptions({ x: 100, y: 100 }); // Reset X and Y coords.
 
     test.assertEquals(rect.setOptions({ x: '-=5', y: '-=5' }),
         {
-            x: 100,
-            y: 100,
+            x: 95,
+            y: 95,
             anchor: 'top/left',
             opacity: 100,
             points: [],
@@ -394,7 +396,60 @@ casper.test.begin('Setting entity options with Entity.setOptions and interger op
             height: 100,
             rotate: 0,
             scale: 1
-        }, 'Options were set correctly.');
+        }, 'Options were set correctly using a basic subtractive operator with a positive number.');
+
+    rect.setOptions({ x: 100, y: 100 }); // Reset X and Y coords.
+
+    test.assertEquals(rect.setOptions({ x: '+=-5', y: '+=-5' }),
+        {
+            x: 95,
+            y: 95,
+            anchor: 'top/left',
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 100,
+            height: 100,
+            rotate: 0,
+            scale: 1
+        }, 'Options were set correctly using a basic additive operator with a negative number.');
+
+    rect.setOptions({ x: 100, y: 100 }); // Reset X and Y coords.
+
+    test.done();
+
+});
+
+casper.test.begin('Setting number values with a NaN.', function suite(test) {
+
+    'use strict';
+
+    var rect = new Facade.Rect({ x: 100, y: 100, width: 100, height: 100 });
+
+    test.assertEquals(rect.setOptions({ x: NaN, y: 200 }),
+        {
+            x: 100,
+            y: 200,
+            anchor: 'top/left',
+            opacity: 100,
+            points: [],
+            fillStyle: '#000',
+            strokeStyle: '',
+            lineWidth: 0,
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            closePath: true,
+            width: 100,
+            height: 100,
+            rotate: 0,
+            scale: 1
+        }, 'NaN values should not get set through Entity.setOption.');
+
 
     test.done();
 

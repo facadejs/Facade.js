@@ -13,7 +13,7 @@ casper.test.begin('Circle entity object created.', function suite(test) {
 
     var object = new Facade.Circle();
 
-    test.assertType(Facade.Circle, 'function', 'Circle entity object extists.');
+    test.assertType(Facade.Circle, 'function', 'Circle entity object exists.');
     test.assertInstanceOf(Facade.Circle, Facade.Entity, 'Circle is an instance of Facade.Entity.');
     test.assertInstanceOf(Facade.Circle, Facade.Polygon, 'Circle is an instance of Facade.Polygon.');
     test.assertEquals(Facade.Circle.constructor, Facade.Polygon, 'Circle\'s constructor is Facade.Polygon.');

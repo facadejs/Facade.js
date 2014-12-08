@@ -5,7 +5,7 @@
     "main": "facade.js",
     "license": "MIT",
     "ignore": [
-        "docs/header.html",
+        "docs/template.hbs",
         "tests/",
         ".gitignore",
         ".jslintrc",

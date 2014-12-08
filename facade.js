@@ -6,7 +6,7 @@
  * Released under the MIT license
  */
 
-(function () {
+(function (window, document, undefined) {
 
     'use strict';
 
@@ -15,7 +15,7 @@
         _context,
         _contextProperties = [ 'fillStyle', 'font', 'globalAlpha', 'globalCompositeOperation', 'lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'shadowBlur', 'shadowColor', 'shadowOffsetX', 'shadowOffsetY', 'strokeStyle', 'textAlign', 'textBaseline' ],
         _TO_RADIANS = Math.PI / 180,
-        _OPERATOR_TEST = new RegExp('^[-+]=');
+        _OPERATOR_TEST = new RegExp('^([-+])=');
 
     if (String(typeof window) !== 'undefined') {
 
@@ -43,9 +43,9 @@
      * @property {Integer} dt Current time in milliseconds since last canvas draw.
      * @property {Integer} fps Current frames per second.
      * @property {Integer} ftime Time of last canvas draw.
-     * @param {Object|String?} canvas Reference to an HTML canvas element or a unique name.
-     * @param {Integer?} width Width of the canvas.
-     * @param {Integer?} height Height of the canvas.
+     * @param {Object|String} [canvas] Reference to an HTML canvas element or a unique name.
+     * @param {Integer} [width] Width of the canvas.
+     * @param {Integer} [height] Height of the canvas.
      * @return {Object} New Facade.js object.
      * @public
      */
@@ -119,7 +119,7 @@
 
         } catch (e) {
 
-            throw new Error('Object passed to Facade.js was not a valid canvas element.');
+            console.error('Object passed to Facade.js was not a valid canvas element.');
 
         }
 
@@ -156,7 +156,7 @@
 
         } else {
 
-            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+            console.error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
         }
 
@@ -207,7 +207,7 @@
 
         } else {
 
-            throw new Error('Parameter passed to Facade.draw is not a valid function.');
+            console.error('Parameter passed to Facade.draw is not a valid function.');
 
         }
 
@@ -220,8 +220,8 @@
      *
      *     console.log(stage.exportBase64('image/png', 100));
      *
-     * @param {String?} type Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)
-     * @param {Integer?} quality Number between 0 and 100.
+     * @param {String} [type] Image format: <code>image/png</code> (Default), <code>image/jpeg</code>, <code>image/webp</code> (Google Chrome Only)
+     * @param {Integer} [quality] Number between 0 and 100.
      * @return {String} Base64 encoded string.
      * @public
      */
@@ -254,7 +254,7 @@
      *     console.log(stage.height()); // 300
      *     console.log(stage.height(600)); // 600
      *
-     * @param {Integer?} height Height in pixels.
+     * @param {Integer} [height] Height in pixels.
      * @return {Integer} Height in pixels.
      * @public
      */
@@ -287,7 +287,7 @@
      *     stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});
      *
      * @param {Object} options Object containing context property and/or method names with corresponding values.
-     * @param {Function?} callback Function to be called when context options have been rendered to the canvas.
+     * @param {Function} [callback] Function to be called when context options have been rendered to the canvas.
      * @return {void}
      * @public
      */
@@ -330,7 +330,7 @@
      *     stage.resizeForHDPI();
      *     stage.resizeForHDPI(2);
      *
-     * @param {Integer?} ratio Ratio to scale the canvas.
+     * @param {Integer} [ratio] Ratio to scale the canvas.
      * @return {Object} Facade.js object.
      * @public
      */
@@ -410,7 +410,7 @@
      *     console.log(stage.width()); // 400
      *     console.log(stage.width(800)); // 800
      *
-     * @param {Integer?} width Width in pixels.
+     * @param {Integer} [width] Width in pixels.
      * @return {Integer} Width in pixels.
      * @public
      */
@@ -760,17 +760,43 @@
 
     Facade.Entity.prototype._setOption = function (key, value, test) {
 
+        var results;
+
         if (this._options[key] !== undefined) {
 
-            if (typeof this._options[key] === 'number' && typeof value === 'string') {
+            if (typeof this._options[key] === 'number') {
 
-                if (value.match(_OPERATOR_TEST)) {
+                if (typeof value === 'string') {
 
-                    value = this._options[key] + parseFloat(value.replace('=', ''));
+                    results = value.match(_OPERATOR_TEST);
 
-                } else {
+                    if (results) {
 
-                    value = parseFloat(value);
+                        value = parseFloat(value.replace(_OPERATOR_TEST, ''));
+
+                        if (results[1] === '+') {
+
+                            value = this._options[key] + value;
+
+                        } else if (results[1] === '-') {
+
+                            value = this._options[key] - value;
+
+                        }
+
+                    } else {
+
+                        value = parseFloat(value);
+
+                    }
+
+                }
+
+                if (isNaN(value)) {
+
+                    value = this._options[key];
+
+                    console.error('The value for ' + key + ' was not a valid number.');
 
                 }
 
@@ -786,7 +812,7 @@
 
             } else {
 
-                throw new Error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + String(typeof this._options[key]) + '.');
+                console.error('The value for ' + key + ' (' + value + ') was a ' + String(typeof value) + ' not a ' + String(typeof this._options[key]) + '.');
 
             }
 
@@ -803,8 +829,8 @@
      *
      *     console.log(text.setOptions({ fontFamily: 'Georgia', fontSize: 20 }));
      *
-     * @param {Object?} updated The options to update. Does not need to be entire set of options.
-     * @param {Boolean?} test Flag to determine if options are to be persisted in the entity or just returned.
+     * @param {Object} [updated] The options to update. Does not need to be entire set of options.
+     * @param {Boolean} [test] Flag to determine if options are to be persisted in the entity or just returned.
      * @return {Object} Updated options.
      * @public
      */
@@ -936,20 +962,20 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @param {Object?} options Options to create the polygon with.
-     * @param {Integer?} options.x X coordinate to position the polygon. <i>Default:</i> 0
-     * @param {Integer?} options.y Y coordinate to position the polygon. <i>Default:</i> 0
-     * @param {String?} options.anchor Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Integer?} options.rotate Degrees to rotate the polygon. <i>Default:</i> 0
-     * @param {Integer?} options.scale A float representing the scale of a polygon. <i>Default:</i> 1
-     * @param {Integer?} options.opacity Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100
-     * @param {Array?} options.points Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
-     * @param {String?} options.fillStyle Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {String?} options.strokeStyle Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
-     * @param {String?} options.lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-     * @param {String?} options.lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @param {Boolean?} options.closePath Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
+     * @param {Object} [options] Options to create the polygon with.
+     * @param {Integer} [options.x] X coordinate to position the polygon. <i>Default:</i> 0
+     * @param {Integer} [options.y] Y coordinate to position the polygon. <i>Default:</i> 0
+     * @param {String} [options.anchor] Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer} [options.rotate] Degrees to rotate the polygon. <i>Default:</i> 0
+     * @param {Integer} [options.scale] A float representing the scale of a polygon. <i>Default:</i> 1
+     * @param {Integer} [options.opacity] Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {Array} [options.points] Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.
+     * @param {String} [options.fillStyle] Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String} [options.strokeStyle] Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer} [options.lineWidth] Width of the stroke. <i>Default:</i> 0
+     * @param {String} [options.lineCap] The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @param {String} [options.lineJoin] The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @param {Boolean} [options.closePath] Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true
      * @return {Object} New Facade.Polygon object.
      * @public
      */
@@ -1113,7 +1139,7 @@
      *     console.log(polygon._setMetrics());
      *     console.log(polygon._setMetrics(options));
      *
-     * @param {Object?} updated Custom options used to render the polygon.
+     * @param {Object} [updated] Custom options used to render the polygon.
      * @return {Object} Object with metrics as key-value pairs.
      * @private
      */
@@ -1227,22 +1253,22 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @param {Object?} options Options to create the circle with.
-     * @param {Integer?} options.x X coordinate to position the circle. <i>Default:</i> 0
-     * @param {Integer?} options.y Y coordinate to position the circle. <i>Default:</i> 0
-     * @param {String?} options.anchor Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Integer?} options.rotate Degrees to rotate the circle. <i>Default:</i> 0
-     * @param {Integer?} options.scale A float representing the scale of a circle. <i>Default:</i> 1
-     * @param {Integer?} options.opacity Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
-     * @param {String?} options.fillStyle Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {String?} options.strokeStyle Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
-     * @param {String?} options.lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-     * @param {String?} options.lineJoin The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @param {Integer?} options.radius Radius of the circle. <i>Default:</i> 0
-     * @param {Integer?} options.start Degree at which the circle begins. <i>Default:</i> 0
-     * @param {Integer?} options.end Degree at which the circle ends. <i>Default:</i> 360
-     * @param {Boolean?} options.counterclockwise Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
+     * @param {Object} [options] Options to create the circle with.
+     * @param {Integer} [options.x] X coordinate to position the circle. <i>Default:</i> 0
+     * @param {Integer} [options.y] Y coordinate to position the circle. <i>Default:</i> 0
+     * @param {String} [options.anchor] Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer} [options.rotate] Degrees to rotate the circle. <i>Default:</i> 0
+     * @param {Integer} [options.scale] A float representing the scale of a circle. <i>Default:</i> 1
+     * @param {Integer} [options.opacity] Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {String} [options.fillStyle] Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String} [options.strokeStyle] Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer} [options.lineWidth] Width of the stroke. <i>Default:</i> 0
+     * @param {String} [options.lineCap] The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @param {String} [options.lineJoin] The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @param {Integer} [options.radius] Radius of the circle. <i>Default:</i> 0
+     * @param {Integer} [options.start] Degree at which the circle begins. <i>Default:</i> 0
+     * @param {Integer} [options.end] Degree at which the circle ends. <i>Default:</i> 360
+     * @param {Boolean} [options.counterclockwise] Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false
      * @return {Object} New Facade.Circle object.
      * @public
      */
@@ -1331,7 +1357,7 @@
      *     console.log(circle._setMetrics());
      *     console.log(circle._setMetrics(options));
      *
-     * @param {Object?} updated Custom options used to render the circle.
+     * @param {Object} [updated] Custom options used to render the circle.
      * @return {Object} Object with metrics as key-value pairs.
      * @private
      */
@@ -1367,20 +1393,20 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @param {Object?} options Options to create the line with.
-     * @param {Integer?} options.x X coordinate to position the line. <i>Default:</i> 0
-     * @param {Integer?} options.y Y coordinate to position the line. <i>Default:</i> 0
-     * @param {String?} options.anchor Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Integer?} options.rotate Degrees to rotate the line. <i>Default:</i> 0
-     * @param {Integer?} options.scale A float representing the scale of a line. <i>Default:</i> 1
-     * @param {Integer?} options.opacity Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
-     * @param {String?} options.strokeStyle Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
-     * @param {String?} options.lineCap The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
-     * @param {Integer?} options.x1 X coordinate where line begins. <i>Default:</i> 0
-     * @param {Integer?} options.y1 Y coordinate where line begins. <i>Default:</i> 0
-     * @param {Integer?} options.x2 X coordinate where line ends. <i>Default:</i> 0
-     * @param {Integer?} options.y2 Y coordinate where line ends. <i>Default:</i> 0
+     * @param {Object} [options] Options to create the line with.
+     * @param {Integer} [options.x] X coordinate to position the line. <i>Default:</i> 0
+     * @param {Integer} [options.y] Y coordinate to position the line. <i>Default:</i> 0
+     * @param {String} [options.anchor] Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer} [options.rotate] Degrees to rotate the line. <i>Default:</i> 0
+     * @param {Integer} [options.scale] A float representing the scale of a line. <i>Default:</i> 1
+     * @param {Integer} [options.opacity] Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {String} [options.strokeStyle] Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer} [options.lineWidth] Width of the stroke. <i>Default:</i> 0
+     * @param {String} [options.lineCap] The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul>
+     * @param {Integer} [options.x1] X coordinate where line begins. <i>Default:</i> 0
+     * @param {Integer} [options.y1] Y coordinate where line begins. <i>Default:</i> 0
+     * @param {Integer} [options.x2] X coordinate where line ends. <i>Default:</i> 0
+     * @param {Integer} [options.y2] Y coordinate where line ends. <i>Default:</i> 0
      * @return {Object} New Facade.Line object.
      * @public
      */
@@ -1488,19 +1514,19 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @param {Object?} options Options to create the rectangle with.
-     * @param {Integer?} options.x X coordinate to position the rectangle. <i>Default:</i> 0
-     * @param {Integer?} options.y Y coordinate to position the rectangle. <i>Default:</i> 0
-     * @param {String?} options.anchor Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Integer?} options.rotate Degrees to rotate the rectangle. <i>Default:</i> 0
-     * @param {Integer?} options.scale A float representing the scale of a rectangle. <i>Default:</i> 1
-     * @param {Integer?} options.opacity Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
-     * @param {String?} options.fillStyle Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {String?} options.strokeStyle Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
-     * @param {String?} options.lineJoin The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
-     * @param {Integer?} options.width Width of the rectangle. <i>Default:</i> 0
-     * @param {Integer?} options.height Height of the rectangle. <i>Default:</i> 0
+     * @param {Object} [options] Options to create the rectangle with.
+     * @param {Integer} [options.x] X coordinate to position the rectangle. <i>Default:</i> 0
+     * @param {Integer} [options.y] Y coordinate to position the rectangle. <i>Default:</i> 0
+     * @param {String} [options.anchor] Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer} [options.rotate] Degrees to rotate the rectangle. <i>Default:</i> 0
+     * @param {Integer} [options.scale] A float representing the scale of a rectangle. <i>Default:</i> 1
+     * @param {Integer} [options.opacity] Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {String} [options.fillStyle] Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String} [options.strokeStyle] Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer} [options.lineWidth] Width of the stroke. <i>Default:</i> 0
+     * @param {String} [options.lineJoin] The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul>
+     * @param {Integer} [options.width] Width of the rectangle. <i>Default:</i> 0
+     * @param {Integer} [options.height] Height of the rectangle. <i>Default:</i> 0
      * @return {Object} New Facade.Rect object.
      * @public
      */
@@ -1563,22 +1589,22 @@
      *     });
      *
      * @param {Object|String} source Local image file or reference to an HTML image element.
-     * @param {Object?} options Options to create the image with.
-     * @param {Integer?} options.x X coordinate to position an image. <i>Default:</i> 0
-     * @param {Integer?} options.y Y coordinate to position an image. <i>Default:</i> 0
-     * @param {String?} options.anchor Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Integer?} options.rotate Degrees to rotate the image. <i>Default:</i> 0
-     * @param {Integer?} options.scale A float representing the scale of an image. <i>Default:</i> 1
-     * @param {Integer?} options.width Width of the image. <i>Default:</i> 0
-     * @param {Integer?} options.height Height of the image. <i>Default:</i> 0
-     * @param {Integer?} options.tileX Number of times to tile the image horizontally. <i>Default:</i> 1
-     * @param {Integer?} options.tileY Number of times to tile the image vertically. <i>Default:</i> 1
-     * @param {Integer?} options.offsetX Starting X coordinate within the image. <i>Default:</i> 0
-     * @param {Integer?} options.offsetY Starting Y coordinate within the image. <i>Default:</i> 0
-     * @param {Array?} options.frames Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]
-     * @param {Integer?} options.speed Speed of sprite animation. <i>Default:</i> 120
-     * @param {Boolean?} options.loop Determines if the animation should loop. <i>Default:</i> true
-     * @param {Function?} options.callback Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
+     * @param {Object} [options] Options to create the image with.
+     * @param {Integer} [options.x] X coordinate to position an image. <i>Default:</i> 0
+     * @param {Integer} [options.y] Y coordinate to position an image. <i>Default:</i> 0
+     * @param {String} [options.anchor] Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer} [options.rotate] Degrees to rotate the image. <i>Default:</i> 0
+     * @param {Integer} [options.scale] A float representing the scale of an image. <i>Default:</i> 1
+     * @param {Integer} [options.width] Width of the image. <i>Default:</i> 0
+     * @param {Integer} [options.height] Height of the image. <i>Default:</i> 0
+     * @param {Integer} [options.tileX] Number of times to tile the image horizontally. <i>Default:</i> 1
+     * @param {Integer} [options.tileY] Number of times to tile the image vertically. <i>Default:</i> 1
+     * @param {Integer} [options.offsetX] Starting X coordinate within the image. <i>Default:</i> 0
+     * @param {Integer} [options.offsetY] Starting Y coordinate within the image. <i>Default:</i> 0
+     * @param {Array} [options.frames] Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]
+     * @param {Integer} [options.speed] Speed of sprite animation. <i>Default:</i> 120
+     * @param {Boolean} [options.loop] Determines if the animation should loop. <i>Default:</i> true
+     * @param {Function} [options.callback] Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
      * @property {Object} image Reference to the image element.
      * @property {Boolean} animating Boolean state of the animation.
      * @property {Integer} currentFrame Current frame of animation.
@@ -1770,7 +1796,7 @@
      *     console.log(image._setMetrics());
      *     console.log(image._setMetrics(updated));
      *
-     * @param {Object?} updated Custom options used to render the image.
+     * @param {Object} [updated] Custom options used to render the image.
      * @return {Object} Object with metrics as key-value pairs.
      * @private
      */
@@ -1933,24 +1959,24 @@
      *         anchor: 'top/left'
      *     });
      *
-     * @param {Object?} value Value of the text object.
-     * @param {Object?} options Options to create the text entity with.
-     * @param {Integer?} options.x X coordinate to position a text object. <i>Default:</i> 0
-     * @param {Integer?} options.y Y coordinate to position a text object. <i>Default:</i> 0
-     * @param {String?} options.anchor Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Integer?} options.rotate Degrees to rotate the text object. <i>Default:</i> 0
-     * @param {Integer?} options.scale A float representing the scale of a text object. <i>Default:</i> 1
-     * @param {Integer?} options.opacity Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100
-     * @param {Integer?} options.width Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0
-     * @param {String?} options.fontFamily Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
-     * @param {String?} options.fontStyle Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
-     * @param {Integer?} options.fontSize Font size in pixels. <i>Default:</i> 30
-     * @param {String?} options.lineHeight Line height of the text. <i>Default:</i> 1
-     * @param {String?} options.textAlignment Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
-     * @param {String?} options.textBaseline Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
-     * @param {String?} options.fillStyle Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {String?} options.strokeStyle Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
-     * @param {Integer?} options.lineWidth Width of the stroke. <i>Default:</i> 0
+     * @param {Object} [value] Value of the text object.
+     * @param {Object} [options] Options to create the text entity with.
+     * @param {Integer} [options.x] X coordinate to position a text object. <i>Default:</i> 0
+     * @param {Integer} [options.y] Y coordinate to position a text object. <i>Default:</i> 0
+     * @param {String} [options.anchor] Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer} [options.rotate] Degrees to rotate the text object. <i>Default:</i> 0
+     * @param {Integer} [options.scale] A float representing the scale of a text object. <i>Default:</i> 1
+     * @param {Integer} [options.opacity] Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100
+     * @param {Integer} [options.width] Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0
+     * @param {String} [options.fontFamily] Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"
+     * @param {String} [options.fontStyle] Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul>
+     * @param {Integer} [options.fontSize] Font size in pixels. <i>Default:</i> 30
+     * @param {String} [options.lineHeight] Line height of the text. <i>Default:</i> 1
+     * @param {String} [options.textAlignment] Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul>
+     * @param {String} [options.textBaseline] Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul>
+     * @param {String} [options.fillStyle] Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {String} [options.strokeStyle] Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul>
+     * @param {Integer} [options.lineWidth] Width of the stroke. <i>Default:</i> 0
      * @property {String} value Current value of the text object.
      * @return {Object} New Facade.Text object.
      * @public
@@ -2163,7 +2189,7 @@
      *     console.log(text._setMetrics());
      *     console.log(text._setMetrics(updated));
      *
-     * @param {Object?} updated Custom options used to render the text entity.
+     * @param {Object} [updated] Custom options used to render the text entity.
      * @return {Object} Object with metrics as key-value pairs.
      * @private
      */
@@ -2212,12 +2238,12 @@
      *     group.addToGroup(line);
      *     group.addToGroup(rect);
      *
-     * @param {Object?} options Options to create the group with.
-     * @param {Integer?} options.x X coordinate to position a group. <i>Default:</i> 0
-     * @param {Integer?} options.y Y coordinate to position a group. <i>Default:</i> 0
-     * @param {String?} options.anchor Position to anchor the group. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Integer?} options.rotate Degrees to rotate the group. <i>Default:</i> 0
-     * @param {Integer?} options.scale A float representing the scale of a group. <i>Default:</i> 1
+     * @param {Object} [options] Options to create the group with.
+     * @param {Integer} [options.x] X coordinate to position a group. <i>Default:</i> 0
+     * @param {Integer} [options.y] Y coordinate to position a group. <i>Default:</i> 0
+     * @param {String} [options.anchor] Position to anchor the group. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
+     * @param {Integer} [options.rotate] Degrees to rotate the group. <i>Default:</i> 0
+     * @param {Integer} [options.scale] A float representing the scale of a group. <i>Default:</i> 1
      * @return {Object} New Facade.Group object.
      * @public
      */
@@ -2327,7 +2353,7 @@
 
         } else {
 
-            throw new Error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+            console.error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
 
         }
 
@@ -2381,7 +2407,7 @@
      *     console.log(group._setMetrics());
      *     console.log(group._setMetrics(updated));
      *
-     * @param {Object?} updated Custom options used to render the group.
+     * @param {Object} [updated] Custom options used to render the group.
      * @return {Object} Object with metrics as key-value pairs.
      * @private
      */
@@ -2465,4 +2491,4 @@
 
     }
 
-}());
+}(window, document));

@@ -20,7 +20,7 @@ setTimeout(function () { // Wait for test image (35 byte spacer.gif)
 
         var object = new Facade.Image();
 
-        test.assertType(Facade.Image, 'function', 'Image entity object extists.');
+        test.assertType(Facade.Image, 'function', 'Image entity object exists.');
         test.assertInstanceOf(Facade.Image, Facade.Entity, 'Image is an instance of Facade.Entity.');
         test.assertEquals(Facade.Image.constructor, Facade.Entity, 'Image\'s constructor is Facade.Entity.');
         test.assertInstanceOf(object, Facade.Image, 'Object is an instance of Facade.Image.');
@@ -50,8 +50,8 @@ setTimeout(function () { // Wait for test image (35 byte spacer.gif)
             height: null
         }, 'Default metrics have been set correctly.');
 
-        test.assertEquals(object.animating, false, 'Intial animating status.');
-        test.assertEquals(object.currentFrame, 0, 'Intial current frame.');
+        test.assertEquals(object.animating, false, 'Initial animating status.');
+        test.assertEquals(object.currentFrame, 0, 'Initial current frame.');
 
         test.done();
 
