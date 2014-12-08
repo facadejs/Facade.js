@@ -764,7 +764,7 @@ header a:hover {
 
 
                                             <p>
-                                                <b>canvas</b>
+                                                <b>[canvas]</b>
                                                     <code>Object</code>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
@@ -775,7 +775,7 @@ header a:hover {
 
 
                                             <p>
-                                                <b>width</b>
+                                                <b>[width]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -785,7 +785,7 @@ header a:hover {
 
 
                                             <p>
-                                                <b>height</b>
+                                                <b>[height]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -911,24 +911,24 @@ var stage = new Facade(&#39;stage&#39;, 500, 300);
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs"><span class="hljs-function">function <span class="hljs-title">Facade</span><span class="hljs-params">(canvas, width, height)</span> </span>{
+                                    <pre><code class="hljs"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Facade</span><span class="hljs-params">(canvas, width, height)</span> </span>{
 
-    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> instanceof Facade)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade)) {
 
-        <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title">Facade</span><span class="hljs-params">(canvas, width, height)</span></span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade(canvas, width, height);
 
     }
 
-    <span class="hljs-keyword">this</span>.dt = <span class="hljs-keyword">null</span>;
-    <span class="hljs-keyword">this</span>.fps = <span class="hljs-keyword">null</span>;
-    <span class="hljs-keyword">this</span>.ftime = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">this</span>.dt = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>.fps = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>.ftime = <span class="hljs-literal">null</span>;
 
-    <span class="hljs-keyword">this</span>._callback = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">this</span>._callback = <span class="hljs-literal">null</span>;
 
-    <span class="hljs-keyword">this</span>._requestAnimation = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">this</span>._requestAnimation = <span class="hljs-literal">null</span>;
 
-    <span class="hljs-keyword">this</span>._width = <span class="hljs-keyword">null</span>;
-    <span class="hljs-keyword">this</span>._height = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">this</span>._width = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>._height = <span class="hljs-literal">null</span>;
 
     <span class="hljs-keyword">if</span> (canvas &amp;&amp; <span class="hljs-keyword">typeof</span> canvas === <span class="hljs-string">'object'</span> &amp;&amp; canvas.nodeType === <span class="hljs-number">1</span>) {
 
@@ -936,7 +936,7 @@ var stage = new Facade(&#39;stage&#39;, 500, 300);
 
     } <span class="hljs-keyword">else</span> {
 
-        <span class="hljs-keyword">this</span>.canvas = document.createElement(<span class="hljs-string">'canvas'</span>);
+        <span class="hljs-keyword">this</span>.canvas = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'canvas'</span>);
 
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> canvas === <span class="hljs-string">'string'</span>) {
 
@@ -950,9 +950,9 @@ var stage = new Facade(&#39;stage&#39;, 500, 300);
 
         <span class="hljs-keyword">this</span>.width(width);
 
-    } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'width'</span>)</span>) </span>{
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'width'</span>)) {
 
-        <span class="hljs-keyword">this</span>._width = parseInt(<span class="hljs-keyword">this</span>.canvas.getAttribute(<span class="hljs-string">'width'</span>), <span class="hljs-number">10</span>);
+        <span class="hljs-keyword">this</span>._width = <span class="hljs-built_in">parseInt</span>(<span class="hljs-keyword">this</span>.canvas.getAttribute(<span class="hljs-string">'width'</span>), <span class="hljs-number">10</span>);
 
     } <span class="hljs-keyword">else</span> {
 
@@ -964,9 +964,9 @@ var stage = new Facade(&#39;stage&#39;, 500, 300);
 
         <span class="hljs-keyword">this</span>.height(height);
 
-    } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'height'</span>)</span>) </span>{
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.canvas.hasAttribute(<span class="hljs-string">'height'</span>)) {
 
-        <span class="hljs-keyword">this</span>._height = parseInt(<span class="hljs-keyword">this</span>.canvas.getAttribute(<span class="hljs-string">'height'</span>), <span class="hljs-number">10</span>);
+        <span class="hljs-keyword">this</span>._height = <span class="hljs-built_in">parseInt</span>(<span class="hljs-keyword">this</span>.canvas.getAttribute(<span class="hljs-string">'height'</span>), <span class="hljs-number">10</span>);
 
     } <span class="hljs-keyword">else</span> {
 
@@ -980,7 +980,7 @@ var stage = new Facade(&#39;stage&#39;, 500, 300);
 
     } <span class="hljs-keyword">catch</span> (e) {
 
-        <span class="hljs-function"><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title">Error</span><span class="hljs-params">(<span class="hljs-string">'Object passed to Facade.js was not a valid canvas element.'</span>)</span></span>;
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Object passed to Facade.js was not a valid canvas element.'</span>);
 
     }
 
@@ -1008,7 +1008,8 @@ var stage = new Facade(&#39;stage&#39;, 500, 300);
 
 
 
-                                        <p><code>Object</code>  New Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.js object.</p>
 
 
 
@@ -1114,7 +1115,7 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
     } <span class="hljs-keyword">else</span> {
 
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Object passed to Facade.addToStage is not a valid Facade.js entity.'</span>);
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Object passed to Facade.addToStage is not a valid Facade.js entity.'</span>);
 
     }
 
@@ -1132,7 +1133,8 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
 
 
-                                        <p><code>Object</code>  Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js object.</p>
 
 
 
@@ -1193,7 +1195,8 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
 
 
-                                        <p><code>Object</code>  Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js object.</p>
 
 
 
@@ -1273,15 +1276,15 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
                                     <pre><code class="hljs">Facade.prototype.draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
 
-    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">callback</span> === <span class="hljs-string">'function'</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback === <span class="hljs-string">'function'</span>) {
 
-        <span class="hljs-keyword">this</span>._callback = <span class="hljs-keyword">callback</span>;
+        <span class="hljs-keyword">this</span>._callback = callback;
 
         <span class="hljs-keyword">this</span>.start();
 
     } <span class="hljs-keyword">else</span> {
 
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">'Parameter passed to Facade.draw is not a valid function.'</span>);
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Parameter passed to Facade.draw is not a valid function.'</span>);
 
     }
 
@@ -1297,7 +1300,8 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
 
 
-                                        <p><code>Object</code>  Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js object.</p>
 
 
 
@@ -1334,7 +1338,7 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>type</b>
+                                                <b>[type]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -1344,7 +1348,7 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>quality</b>
+                                                <b>[quality]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -1384,15 +1388,15 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs"><span class="hljs-type">Facade</span>.prototype.exportBase64 = function (<span class="hljs-class"><span class="hljs-keyword">type</span>, <span class="hljs-title">quality</span>) {</span>
+                                    <pre><code class="hljs">Facade.prototype.exportBase64 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(type, quality)</span> </span>{
 
-    <span class="hljs-keyword">if</span> (!<span class="hljs-class"><span class="hljs-keyword">type</span>) {</span>
+    <span class="hljs-keyword">if</span> (!type) {
 
-        <span class="hljs-class"><span class="hljs-keyword">type</span> =</span> <span class="hljs-symbol">'image</span>/png';
+        type = <span class="hljs-string">'image/png'</span>;
 
     }
 
-    <span class="hljs-keyword">if</span> (typeof quality === <span class="hljs-symbol">'numbe</span>r') {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> quality === <span class="hljs-string">'number'</span>) {
 
         quality = quality / <span class="hljs-number">100</span>;
 
@@ -1402,7 +1406,7 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
     }
 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.canvas.toDataURL(<span class="hljs-class"><span class="hljs-keyword">type</span>, <span class="hljs-title">quality</span>);</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.canvas.toDataURL(type, quality);
 
 };</code></pre>
 
@@ -1416,7 +1420,8 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
 
 
-                                        <p><code>String</code>  Base64 encoded string.</p>
+                                        <p><code>String</code> </p>
+                                        <p>Base64 encoded string.</p>
 
 
 
@@ -1451,7 +1456,7 @@ stage.addToStage(circle, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>height</b>
+                                                <b>[height]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -1520,7 +1525,8 @@ console.log(stage.height(600)); // 600
 
 
 
-                                        <p><code>Integer</code>  Height in pixels.</p>
+                                        <p><code>Integer</code> </p>
+                                        <p>Height in pixels.</p>
 
 
 
@@ -1566,7 +1572,7 @@ console.log(stage.height(600)); // 600
 
 
                                             <p>
-                                                <b>callback</b>
+                                                <b>[callback]</b>
                                                     <code>Function</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -1606,37 +1612,37 @@ console.log(stage.height(600)); // 600
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.prototype.renderWithContext = function (<span class="hljs-literal">options</span>, <span class="hljs-keyword">callback) {</span>
+                                    <pre><code class="hljs">Facade.prototype.renderWithContext = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options, callback)</span> </span>{
 
-    var <span class="hljs-literal">keys</span> = <span class="hljs-constant">Object</span>.<span class="hljs-literal">keys</span>(<span class="hljs-literal">options</span>),
+    <span class="hljs-keyword">var</span> keys = <span class="hljs-built_in">Object</span>.keys(options),
         i,
         length;
 
-    this.<span class="hljs-literal">context</span>.save();
+    <span class="hljs-keyword">this</span>.context.save();
 
-    for (i = <span class="hljs-number">0</span>, length = <span class="hljs-literal">keys</span>.length; i &lt; length; i += <span class="hljs-number">1</span><span class="hljs-keyword">) {</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = keys.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        <span class="hljs-keyword">if</span> (_contextProperties.indexOf(<span class="hljs-literal">keys</span>[i]) !== -<span class="hljs-number">1</span><span class="hljs-keyword">) {</span>
+        <span class="hljs-keyword">if</span> (_contextProperties.indexOf(keys[i]) !== -<span class="hljs-number">1</span>) {
 
-            this.<span class="hljs-literal">context</span>[<span class="hljs-literal">keys</span>[i]] = <span class="hljs-literal">options</span>[<span class="hljs-literal">keys</span>[i]];
+            <span class="hljs-keyword">this</span>.context[keys[i]] = options[keys[i]];
 
-        <span class="hljs-keyword">}</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-constant">Array</span>.isArray(<span class="hljs-literal">options</span>[<span class="hljs-literal">keys</span>[i]]) &amp;&amp; typeof this.<span class="hljs-literal">context</span>[<span class="hljs-literal">keys</span>[i]] === <span class="hljs-string">'function'</span><span class="hljs-keyword">) {</span>
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(options[keys[i]]) &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>.context[keys[i]] === <span class="hljs-string">'function'</span>) {
 
-            this.<span class="hljs-literal">context</span>[<span class="hljs-literal">keys</span>[i]].apply(this.<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>[<span class="hljs-literal">keys</span>[i]]);
+            <span class="hljs-keyword">this</span>.context[keys[i]].apply(<span class="hljs-keyword">this</span>.context, options[keys[i]]);
 
-        <span class="hljs-keyword">}</span>
+        }
 
-    <span class="hljs-keyword">}</span>
+    }
 
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">(callback) {</span>
+    <span class="hljs-keyword">if</span> (callback) {
 
-        callback.call(null, this);
+        callback.call(<span class="hljs-literal">null</span>, <span class="hljs-keyword">this</span>);
 
-    <span class="hljs-keyword">}</span>
+    }
 
-    this.<span class="hljs-literal">context</span>.restore();
+    <span class="hljs-keyword">this</span>.context.restore();
 
-<span class="hljs-keyword">}</span>;</code></pre>
+};</code></pre>
 
                                 </section>
 
@@ -1648,7 +1654,8 @@ console.log(stage.height(600)); // 600
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -1683,7 +1690,7 @@ console.log(stage.height(600)); // 600
 
 
                                             <p>
-                                                <b>ratio</b>
+                                                <b>[ratio]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -1759,7 +1766,8 @@ stage.resizeForHDPI(2);
 
 
 
-                                        <p><code>Object</code>  Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js object.</p>
 
 
 
@@ -1820,7 +1828,8 @@ stage.resizeForHDPI(2);
 
 
 
-                                        <p><code>Object</code>  Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js object.</p>
 
 
 
@@ -1887,7 +1896,8 @@ stage.resizeForHDPI(2);
 
 
 
-                                        <p><code>Object</code>  Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js object.</p>
 
 
 
@@ -1922,7 +1932,7 @@ stage.resizeForHDPI(2);
 
 
                                             <p>
-                                                <b>width</b>
+                                                <b>[width]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -1991,7 +2001,8 @@ console.log(stage.width(800)); // 800
 
 
 
-                                        <p><code>Integer</code>  Width in pixels.</p>
+                                        <p><code>Integer</code> </p>
+                                        <p>Width in pixels.</p>
 
 
 
@@ -2104,7 +2115,8 @@ console.log(stage.width(800)); // 800
 
 
 
-                                        <p><code>Object</code>  Facade.js object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js object.</p>
 
 
 
@@ -2171,7 +2183,8 @@ console.log(stage.width(800)); // 800
 
 
 
-                                        <p><code>Object</code>  New Facade.Entity object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Entity object.</p>
 
 
 
@@ -2245,28 +2258,28 @@ console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Entity.<span class="hljs-keyword">prototype</span>._defaultOptions = function (updated) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._defaultOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var options,
-        <span class="hljs-keyword">keys</span>,
+    <span class="hljs-keyword">var</span> options,
+        keys,
         i,
-        <span class="hljs-keyword">length</span>;
+        length;
 
     options = {
-        <span class="hljs-keyword">x</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-keyword">y</span>: <span class="hljs-number">0</span>,
+        x: <span class="hljs-number">0</span>,
+        y: <span class="hljs-number">0</span>,
         anchor: <span class="hljs-string">'top/left'</span>,
         rotate: <span class="hljs-number">0</span>,
         scale: <span class="hljs-number">1</span>
     };
 
-    <span class="hljs-keyword">if</span> (typeof updated === <span class="hljs-string">'object'</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> updated === <span class="hljs-string">'object'</span>) {
 
-        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
+        keys = <span class="hljs-built_in">Object</span>.keys(updated);
 
-        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = keys.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-            options[<span class="hljs-keyword">keys</span>[i]] = updated[<span class="hljs-keyword">keys</span>[i]];
+            options[keys[i]] = updated[keys[i]];
 
         }
 
@@ -2284,7 +2297,8 @@ console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));
 
 
 
-                                        <p><code>Object</code>  Default set of options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Default set of options.</p>
 
 
 
@@ -2358,27 +2372,27 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Entity.<span class="hljs-keyword">prototype</span>._defaultMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._defaultMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var metrics,
-        <span class="hljs-keyword">keys</span>,
+    <span class="hljs-keyword">var</span> metrics,
+        keys,
         i,
-        <span class="hljs-keyword">length</span>;
+        length;
 
     metrics = {
-        <span class="hljs-keyword">x</span>: null,
-        <span class="hljs-keyword">y</span>: null,
-        width: null,
-        height: null
+        x: <span class="hljs-literal">null</span>,
+        y: <span class="hljs-literal">null</span>,
+        width: <span class="hljs-literal">null</span>,
+        height: <span class="hljs-literal">null</span>
     };
 
-    <span class="hljs-keyword">if</span> (typeof updated === <span class="hljs-string">'object'</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> updated === <span class="hljs-string">'object'</span>) {
 
-        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
+        keys = <span class="hljs-built_in">Object</span>.keys(updated);
 
-        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = keys.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-            metrics[<span class="hljs-keyword">keys</span>[i]] = updated[<span class="hljs-keyword">keys</span>[i]];
+            metrics[keys[i]] = updated[keys[i]];
 
         }
 
@@ -2396,7 +2410,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Object</code>  Default set of metrics.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Default set of metrics.</p>
 
 
 
@@ -2530,7 +2545,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Array</code>  Array with the x and y anchor positions.</p>
+                                        <p><code>Array</code> </p>
+                                        <p>Array with the x and y anchor positions.</p>
 
 
 
@@ -2625,7 +2641,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Integer</code>  Integer representing the stroke width offset.</p>
+                                        <p><code>Integer</code> </p>
+                                        <p>Integer representing the stroke width offset.</p>
 
 
 
@@ -2724,30 +2741,30 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Entity.prototype._applyTransforms = function (context, options, metrics) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._applyTransforms = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(context, options, metrics)</span> </span>{
 
-    var anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(options, {
+    <span class="hljs-keyword">var</span> anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(options, {
         x: metrics.x,
         y: metrics.y,
-        <span class="hljs-variable">width</span>: metrics.<span class="hljs-variable">width</span> / options.<span class="hljs-built_in">scale</span>,
-        <span class="hljs-variable">height</span>: metrics.<span class="hljs-variable">height</span> / options.<span class="hljs-built_in">scale</span>
+        width: metrics.width / options.scale,
+        height: metrics.height / options.scale
     });
 
-    context.<span class="hljs-built_in">translate</span>.apply(context, anchor);
+    context.translate.apply(context, anchor);
 
-    <span class="hljs-keyword">if</span> (options.<span class="hljs-built_in">rotate</span>) {
+    <span class="hljs-keyword">if</span> (options.rotate) {
 
-        context.<span class="hljs-built_in">translate</span>(-anchor[<span class="hljs-number">0</span>], -anchor[<span class="hljs-number">1</span>]);
-        context.<span class="hljs-built_in">rotate</span>(options.<span class="hljs-built_in">rotate</span> * _TO_RADIANS);
-        context.<span class="hljs-built_in">translate</span>(anchor[<span class="hljs-number">0</span>], anchor[<span class="hljs-number">1</span>]);
+        context.translate(-anchor[<span class="hljs-number">0</span>], -anchor[<span class="hljs-number">1</span>]);
+        context.rotate(options.rotate * _TO_RADIANS);
+        context.translate(anchor[<span class="hljs-number">0</span>], anchor[<span class="hljs-number">1</span>]);
 
     }
 
-    <span class="hljs-keyword">if</span> (options.<span class="hljs-built_in">scale</span> !== <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">if</span> (options.scale !== <span class="hljs-number">1</span>) {
 
-        context.<span class="hljs-built_in">translate</span>(-anchor[<span class="hljs-number">0</span>], -anchor[<span class="hljs-number">1</span>]);
-        context.<span class="hljs-built_in">scale</span>(options.<span class="hljs-built_in">scale</span>, options.<span class="hljs-built_in">scale</span>);
-        context.<span class="hljs-built_in">translate</span>(anchor[<span class="hljs-number">0</span>], anchor[<span class="hljs-number">1</span>]);
+        context.translate(-anchor[<span class="hljs-number">0</span>], -anchor[<span class="hljs-number">1</span>]);
+        context.scale(options.scale, options.scale);
+        context.translate(anchor[<span class="hljs-number">0</span>], anchor[<span class="hljs-number">1</span>]);
 
     }
 
@@ -2765,7 +2782,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -2857,7 +2875,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Object</code> <code>Function</code> <code>String</code> <code>Integer</code>  Value of the option requested.</p>
+                                        <p><code>Object</code> <code>Function</code> <code>String</code> <code>Integer</code> </p>
+                                        <p>Value of the option requested.</p>
 
 
 
@@ -2904,18 +2923,18 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Entity.prototype.getAllOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+                                    <pre><code class="hljs">Facade.Entity.prototype.getAllOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    var options = <span class="hljs-cell">{}</span>,
-        keys = Object.keys(this._options),
-        <span class="hljs-built_in">i</span>,
-        <span class="hljs-built_in">length</span>;
+    <span class="hljs-keyword">var</span> options = {},
+        keys = <span class="hljs-built_in">Object</span>.keys(<span class="hljs-keyword">this</span>._options),
+        i,
+        length;
 
-    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = keys.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = keys.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        options[keys[i]] = this._options[keys[i]];
+        options[keys[i]] = <span class="hljs-keyword">this</span>._options[keys[i]];
 
-    }</span>
+    }
 
     <span class="hljs-keyword">return</span> options;
 
@@ -2927,7 +2946,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Object</code>  Object containing all options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Object containing all options.</p>
 
 
 
@@ -3029,43 +3049,69 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Entity.prototype._setOption = function (key, <span class="hljs-keyword">value</span>, test) {
+                                    <pre><code class="hljs">Facade.Entity.prototype._setOption = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(key, value, test)</span> </span>{
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._options[key] !== undefined) {
+    <span class="hljs-keyword">var</span> results;
 
-        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key] === <span class="hljs-string">'number'</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-keyword">value</span> === <span class="hljs-string">'string'</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._options[key] !== <span class="hljs-literal">undefined</span>) {
 
-            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">value</span>.match(_OPERATOR_TEST)) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key] === <span class="hljs-string">'number'</span>) {
 
-                <span class="hljs-keyword">value</span> = <span class="hljs-keyword">this</span>._options[key] + parseFloat(<span class="hljs-keyword">value</span>.replace(<span class="hljs-string">'='</span>, <span class="hljs-string">''</span>));
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> value === <span class="hljs-string">'string'</span>) {
 
-            } <span class="hljs-keyword">else</span> {
+                results = value.match(_OPERATOR_TEST);
 
-                <span class="hljs-keyword">value</span> = parseFloat(<span class="hljs-keyword">value</span>);
+                <span class="hljs-keyword">if</span> (results) {
+
+                    value = <span class="hljs-built_in">parseFloat</span>(value.replace(_OPERATOR_TEST, <span class="hljs-string">''</span>));
+
+                    <span class="hljs-keyword">if</span> (results[<span class="hljs-number">1</span>] === <span class="hljs-string">'+'</span>) {
+
+                        value = <span class="hljs-keyword">this</span>._options[key] + value;
+
+                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (results[<span class="hljs-number">1</span>] === <span class="hljs-string">'-'</span>) {
+
+                        value = <span class="hljs-keyword">this</span>._options[key] - value;
+
+                    }
+
+                } <span class="hljs-keyword">else</span> {
+
+                    value = <span class="hljs-built_in">parseFloat</span>(value);
+
+                }
+
+            }
+
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(value)) {
+
+                value = <span class="hljs-keyword">this</span>._options[key];
+
+                <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'The value for '</span> + key + <span class="hljs-string">' was not a valid number.'</span>);
 
             }
 
         }
 
-        <span class="hljs-keyword">if</span> (String(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key]) === String(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">value</span>)) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">String</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key]) === <span class="hljs-built_in">String</span>(<span class="hljs-keyword">typeof</span> value)) {
 
             <span class="hljs-keyword">if</span> (!test) {
 
-                <span class="hljs-keyword">this</span>._options[key] = <span class="hljs-keyword">value</span>;
+                <span class="hljs-keyword">this</span>._options[key] = value;
 
             }
 
         } <span class="hljs-keyword">else</span> {
 
-            <span class="hljs-function"><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title">Error</span><span class="hljs-params">(<span class="hljs-string">'The value for '</span> + key + <span class="hljs-string">' ('</span> + <span class="hljs-keyword">value</span> + <span class="hljs-string">') was a '</span> + String(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">value</span>)</span> + ' not a ' + <span class="hljs-title">String</span><span class="hljs-params">(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key])</span> + '.')</span>;
+            <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'The value for '</span> + key + <span class="hljs-string">' ('</span> + value + <span class="hljs-string">') was a '</span> + <span class="hljs-built_in">String</span>(<span class="hljs-keyword">typeof</span> value) + <span class="hljs-string">' not a '</span> + <span class="hljs-built_in">String</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._options[key]) + <span class="hljs-string">'.'</span>);
 
         }
 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">value</span>;
+        <span class="hljs-keyword">return</span> value;
 
     }
 
-    <span class="hljs-keyword">return</span> undefined;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
 
 };</code></pre>
 
@@ -3081,7 +3127,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Object</code> <code>Function</code> <code>String</code> <code>Integer</code>  Returns value of the updated option.</p>
+                                        <p><code>Object</code> <code>Function</code> <code>String</code> <code>Integer</code> </p>
+                                        <p>Returns value of the updated option.</p>
 
 
 
@@ -3118,7 +3165,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
                                             <p>
-                                                <b>updated</b>
+                                                <b>[updated]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3128,7 +3175,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
                                             <p>
-                                                <b>test</b>
+                                                <b>[test]</b>
                                                     <code>Boolean</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3168,22 +3215,22 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Entity.<span class="hljs-keyword">prototype</span>.setOptions = function (updated, test) {
+                                    <pre><code class="hljs">Facade.Entity.prototype.setOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated, test)</span> </span>{
 
-    var options = this.getAllOptions(),
-        <span class="hljs-keyword">keys</span>,
+    <span class="hljs-keyword">var</span> options = <span class="hljs-keyword">this</span>.getAllOptions(),
+        keys,
         i,
-        <span class="hljs-keyword">length</span>;
+        length;
 
     <span class="hljs-keyword">if</span> (updated) {
 
-        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
+        keys = <span class="hljs-built_in">Object</span>.keys(updated);
 
-        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = keys.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-            <span class="hljs-keyword">if</span> (options[<span class="hljs-keyword">keys</span>[i]] !== undefined) {
+            <span class="hljs-keyword">if</span> (options[keys[i]] !== <span class="hljs-literal">undefined</span>) {
 
-                options[<span class="hljs-keyword">keys</span>[i]] = this._setOption(<span class="hljs-keyword">keys</span>[i], updated[<span class="hljs-keyword">keys</span>[i]], test);
+                options[keys[i]] = <span class="hljs-keyword">this</span>._setOption(keys[i], updated[keys[i]], test);
 
             }
 
@@ -3191,7 +3238,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
         <span class="hljs-keyword">if</span> (!test) {
 
-            this._setMetrics();
+            <span class="hljs-keyword">this</span>._setMetrics();
 
         }
 
@@ -3211,7 +3258,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Object</code>  Updated options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Updated options.</p>
 
 
 
@@ -3303,7 +3351,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Integer</code>  Value of the metric requested.</p>
+                                        <p><code>Integer</code> </p>
+                                        <p>Value of the metric requested.</p>
 
 
 
@@ -3350,18 +3399,18 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Entity.prototype.getAllMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+                                    <pre><code class="hljs">Facade.Entity.prototype.getAllMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 
-    var metrics = <span class="hljs-cell">{}</span>,
-        keys = Object.keys(this._metrics),
-        <span class="hljs-built_in">i</span>,
-        <span class="hljs-built_in">length</span>;
+    <span class="hljs-keyword">var</span> metrics = {},
+        keys = <span class="hljs-built_in">Object</span>.keys(<span class="hljs-keyword">this</span>._metrics),
+        i,
+        length;
 
-    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = keys.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = keys.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        metrics[keys[i]] = this._metrics[keys[i]];
+        metrics[keys[i]] = <span class="hljs-keyword">this</span>._metrics[keys[i]];
 
-    }</span>
+    }
 
     <span class="hljs-keyword">return</span> metrics;
 
@@ -3373,7 +3422,8 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));
 
 
 
-                                        <p><code>Object</code>  Object containing all metrics.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Object containing all metrics.</p>
 
 
 
@@ -3490,7 +3540,8 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -3551,7 +3602,7 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options</b>
+                                                <b>[options]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3561,7 +3612,7 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.x</b>
+                                                <b>[options.x]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3571,7 +3622,7 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.y</b>
+                                                <b>[options.y]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3581,17 +3632,17 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.anchor</b>
+                                                <b>[options.anchor]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+                                            <p>Position to anchor the polygon. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.rotate</b>
+                                                <b>[options.rotate]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3601,7 +3652,7 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.scale</b>
+                                                <b>[options.scale]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3611,7 +3662,7 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.opacity</b>
+                                                <b>[options.opacity]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3621,7 +3672,7 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.points</b>
+                                                <b>[options.points]</b>
                                                     <code>Array</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3631,27 +3682,27 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.fillStyle</b>
+                                                <b>[options.fillStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.strokeStyle</b>
+                                                <b>[options.strokeStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Color of a polygon&#39;s stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.lineWidth</b>
+                                                <b>[options.lineWidth]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3661,27 +3712,27 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>options.lineCap</b>
+                                                <b>[options.lineCap]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
+                                            <p>The style of line cap. <i>Default:</i> &quot;butt&quot;<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.lineJoin</b>
+                                                <b>[options.lineJoin]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
+                                            <p>The style of line join. <i>Default:</i> &quot;miter&quot;<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.closePath</b>
+                                                <b>[options.closePath]</b>
                                                     <code>Boolean</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -3802,7 +3853,8 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
 
-                                        <p><code>Object</code>  New Facade.Polygon object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Polygon object.</p>
 
 
 
@@ -3877,14 +3929,14 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Polygon.<span class="hljs-keyword">prototype</span>._defaultOptions = function (updated) {
+                                    <pre><code class="hljs">Facade.Polygon.prototype._defaultOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var options,
-        <span class="hljs-keyword">keys</span>,
+    <span class="hljs-keyword">var</span> options,
+        keys,
         i,
-        <span class="hljs-keyword">length</span>;
+        length;
 
-    options = Facade.Entity.<span class="hljs-keyword">prototype</span>._defaultOptions({
+    options = Facade.Entity.prototype._defaultOptions({
         opacity: <span class="hljs-number">100</span>,
         points: [],
         fillStyle: <span class="hljs-string">'#000'</span>,
@@ -3892,16 +3944,16 @@ entity.draw(stage, { x: 100, y: 100 });
         lineWidth: <span class="hljs-number">0</span>,
         lineCap: <span class="hljs-string">'butt'</span>,
         lineJoin: <span class="hljs-string">'miter'</span>,
-        closePath: true
+        closePath: <span class="hljs-literal">true</span>
     });
 
     <span class="hljs-keyword">if</span> (updated) {
 
-        <span class="hljs-keyword">keys</span> = Object.<span class="hljs-keyword">keys</span>(updated);
+        keys = <span class="hljs-built_in">Object</span>.keys(updated);
 
-        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, <span class="hljs-keyword">length</span> = <span class="hljs-keyword">keys</span>.<span class="hljs-keyword">length</span>; i &lt; <span class="hljs-keyword">length</span>; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = keys.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-            options[<span class="hljs-keyword">keys</span>[i]] = updated[<span class="hljs-keyword">keys</span>[i]];
+            options[keys[i]] = updated[keys[i]];
 
         }
 
@@ -3919,7 +3971,8 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
 
-                                        <p><code>Object</code>  Default set of options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Default set of options.</p>
 
 
 
@@ -4018,61 +4071,61 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.<span class="hljs-constant">Polygon</span>.prototype._draw = function (facade, <span class="hljs-literal">options</span>, <span class="hljs-keyword">metrics) {</span>
+                                    <pre><code class="hljs">Facade.Polygon.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> </span>{
 
-    var <span class="hljs-literal">context</span> = facade.<span class="hljs-literal">context</span>,
+    <span class="hljs-keyword">var</span> context = facade.context,
         i,
         length;
 
-    this._applyTransforms(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>, metrics);
+    <span class="hljs-keyword">this</span>._applyTransforms(context, options, metrics);
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points.<span class="hljs-keyword">length) {</span>
+    <span class="hljs-keyword">if</span> (options.points.length) {
 
-        <span class="hljs-literal">context</span>.beginPath();
+        context.beginPath();
 
-        for (i = <span class="hljs-number">0</span>, length = <span class="hljs-literal">options</span>.points.length; i &lt; length; i += <span class="hljs-number">1</span><span class="hljs-keyword">) {</span>
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = options.points.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-            <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points[i].length === <span class="hljs-number">6</span><span class="hljs-keyword">) {</span>
+            <span class="hljs-keyword">if</span> (options.points[i].length === <span class="hljs-number">6</span>) {
 
-                <span class="hljs-literal">context</span>.bezierCurveTo.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[i]);
+                context.bezierCurveTo.apply(context, options.points[i]);
 
-            <span class="hljs-keyword">}</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points[i].length === <span class="hljs-number">5</span><span class="hljs-keyword">) {</span>
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.points[i].length === <span class="hljs-number">5</span>) {
 
-                <span class="hljs-literal">context</span>.arc.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[i]);
+                context.arc.apply(context, options.points[i]);
 
-            <span class="hljs-keyword">}</span> <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.points[i].length === <span class="hljs-number">2</span><span class="hljs-keyword">) {</span>
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.points[i].length === <span class="hljs-number">2</span>) {
 
-                <span class="hljs-literal">context</span>.lineTo.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[i]);
+                context.lineTo.apply(context, options.points[i]);
 
-            <span class="hljs-keyword">}</span>
+            }
 
-        <span class="hljs-keyword">}</span>
+        }
 
-        <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.<span class="hljs-keyword">closePath) {</span>
+        <span class="hljs-keyword">if</span> (options.closePath) {
 
-            <span class="hljs-literal">context</span>.closePath();
+            context.closePath();
 
-        <span class="hljs-keyword">}</span> <span class="hljs-keyword">else {</span>
+        } <span class="hljs-keyword">else</span> {
 
-            <span class="hljs-literal">context</span>.moveTo.apply(<span class="hljs-literal">context</span>, <span class="hljs-literal">options</span>.points[length - <span class="hljs-number">1</span>]);
+            context.moveTo.apply(context, options.points[length - <span class="hljs-number">1</span>]);
 
-        <span class="hljs-keyword">}</span>
+        }
 
-        <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.<span class="hljs-keyword">fillStyle) {</span>
+        <span class="hljs-keyword">if</span> (options.fillStyle) {
 
-            <span class="hljs-literal">context</span>.fill();
+            context.fill();
 
-        <span class="hljs-keyword">}</span>
+        }
 
-        <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.lineWidth &gt; <span class="hljs-number">0</span><span class="hljs-keyword">) {</span>
+        <span class="hljs-keyword">if</span> (options.lineWidth &gt; <span class="hljs-number">0</span>) {
 
-            <span class="hljs-literal">context</span>.stroke();
+            context.stroke();
 
-        <span class="hljs-keyword">}</span>
+        }
 
-    <span class="hljs-keyword">}</span>
+    }
 
-<span class="hljs-keyword">}</span>;</code></pre>
+};</code></pre>
 
                                 </section>
 
@@ -4086,7 +4139,8 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -4159,12 +4213,12 @@ entity.draw(stage, { x: 100, y: 100 });
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Polygon.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> {</span>
+                                    <pre><code class="hljs">Facade.Polygon.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.<span class="hljs-keyword">x</span>, <span class="hljs-keyword">options</span>.<span class="hljs-keyword">y</span> ];
-    <span class="hljs-keyword">options</span>.globalAlpha = <span class="hljs-keyword">options</span>.opacity / <span class="hljs-number">100</span>;
+    options.translate = [ options.x, options.y ];
+    options.globalAlpha = options.opacity / <span class="hljs-number">100</span>;
 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -4176,7 +4230,8 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
 
-                                        <p><code>Object</code>  Converted options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Converted options.</p>
 
 
 
@@ -4212,7 +4267,7 @@ entity.draw(stage, { x: 100, y: 100 });
 
 
                                             <p>
-                                                <b>updated</b>
+                                                <b>[updated]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4251,99 +4306,99 @@ console.log(polygon._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Polygon.prototype.<span class="hljs-variable">_setMetrics =</span> function (updated) {
+                                    <pre><code class="hljs">Facade.Polygon.prototype._setMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var <span class="hljs-variable">metrics =</span> this._defaultMetrics(),
-        <span class="hljs-variable">options =</span> updated || this.getAllOptions(),
-        <span class="hljs-variable">bounds =</span> { top: <span class="hljs-constant">null</span>, right: <span class="hljs-constant">null</span>, bottom: <span class="hljs-constant">null</span>, left: <span class="hljs-constant">null</span> },
+    <span class="hljs-keyword">var</span> metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
+        options = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
+        bounds = { top: <span class="hljs-literal">null</span>, right: <span class="hljs-literal">null</span>, bottom: <span class="hljs-literal">null</span>, left: <span class="hljs-literal">null</span> },
         point,
         i,
         length,
         anchor,
-        <span class="hljs-variable">strokeWidthOffset =</span> this._getStrokeWidthOffset(options);
+        strokeWidthOffset = <span class="hljs-keyword">this</span>._getStrokeWidthOffset(options);
 
-    <span class="hljs-keyword">if</span> (typeof this.<span class="hljs-variable">_configOptions =</span>== 'function') {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
 
-        <span class="hljs-variable">options =</span> this._configOptions(options);
+        options = <span class="hljs-keyword">this</span>._configOptions(options);
 
     }
 
-    for (<span class="hljs-variable">i =</span> <span class="hljs-number">0</span>, <span class="hljs-variable">length =</span> options.points.length; i &lt; length; i += <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = options.points.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        <span class="hljs-keyword">if</span> (options.points[i].<span class="hljs-variable">length =</span>== <span class="hljs-number">2</span>) { // Rect
+        <span class="hljs-keyword">if</span> (options.points[i].length === <span class="hljs-number">2</span>) { <span class="hljs-comment">// Rect</span>
 
-            <span class="hljs-variable">point =</span> { x: options.points[i][<span class="hljs-number">0</span>], y: options.points[i][<span class="hljs-number">1</span>] };
+            point = { x: options.points[i][<span class="hljs-number">0</span>], y: options.points[i][<span class="hljs-number">1</span>] };
 
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.points[i].<span class="hljs-variable">length =</span>== <span class="hljs-number">5</span>) { // Circle
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.points[i].length === <span class="hljs-number">5</span>) { <span class="hljs-comment">// Circle</span>
 
-            metrics.<span class="hljs-variable">width =</span> options.points[i][<span class="hljs-number">2</span>] * <span class="hljs-number">2</span>;
-            metrics.<span class="hljs-variable">height =</span> options.points[i][<span class="hljs-number">2</span>] * <span class="hljs-number">2</span>;
+            metrics.width = options.points[i][<span class="hljs-number">2</span>] * <span class="hljs-number">2</span>;
+            metrics.height = options.points[i][<span class="hljs-number">2</span>] * <span class="hljs-number">2</span>;
 
-            <span class="hljs-variable">point =</span> {
+            point = {
                 x: options.points[i][<span class="hljs-number">0</span>] - options.points[i][<span class="hljs-number">2</span>],
                 y: options.points[i][<span class="hljs-number">1</span>] - options.points[i][<span class="hljs-number">2</span>]
             };
 
         }
 
-        <span class="hljs-keyword">if</span> (point.x &lt; bounds.left || bounds.<span class="hljs-variable">left =</span>== <span class="hljs-constant">null</span>) {
+        <span class="hljs-keyword">if</span> (point.x &lt; bounds.left || bounds.left === <span class="hljs-literal">null</span>) {
 
-            bounds.<span class="hljs-variable">left =</span> point.x;
-
-        }
-
-        <span class="hljs-keyword">if</span> (point.y &lt; bounds.top || bounds.<span class="hljs-variable">top =</span>== <span class="hljs-constant">null</span>) {
-
-            bounds.<span class="hljs-variable">top =</span> point.y;
+            bounds.left = point.x;
 
         }
 
-        <span class="hljs-keyword">if</span> (point.x &gt; bounds.right || bounds.<span class="hljs-variable">right =</span>== <span class="hljs-constant">null</span>) {
+        <span class="hljs-keyword">if</span> (point.y &lt; bounds.top || bounds.top === <span class="hljs-literal">null</span>) {
 
-            bounds.<span class="hljs-variable">right =</span> point.x;
+            bounds.top = point.y;
 
         }
 
-        <span class="hljs-keyword">if</span> (point.y &gt; bounds.bottom || bounds.<span class="hljs-variable">bottom =</span>== <span class="hljs-constant">null</span>) {
+        <span class="hljs-keyword">if</span> (point.x &gt; bounds.right || bounds.right === <span class="hljs-literal">null</span>) {
 
-            bounds.<span class="hljs-variable">bottom =</span> point.y;
+            bounds.right = point.x;
+
+        }
+
+        <span class="hljs-keyword">if</span> (point.y &gt; bounds.bottom || bounds.bottom === <span class="hljs-literal">null</span>) {
+
+            bounds.bottom = point.y;
 
         }
 
     }
 
-    metrics.<span class="hljs-variable">x =</span> options.x + bounds.left;
-    metrics.<span class="hljs-variable">y =</span> options.y + bounds.top;
+    metrics.x = options.x + bounds.left;
+    metrics.y = options.y + bounds.top;
 
-    <span class="hljs-keyword">if</span> (metrics.<span class="hljs-variable">width =</span>== <span class="hljs-constant">null</span> &amp;&amp; metrics.<span class="hljs-variable">height =</span>== <span class="hljs-constant">null</span>) {
+    <span class="hljs-keyword">if</span> (metrics.width === <span class="hljs-literal">null</span> &amp;&amp; metrics.height === <span class="hljs-literal">null</span>) {
 
-        metrics.<span class="hljs-variable">width =</span> bounds.right - bounds.left;
-        metrics.<span class="hljs-variable">height =</span> bounds.bottom - bounds.top;
+        metrics.width = bounds.right - bounds.left;
+        metrics.height = bounds.bottom - bounds.top;
 
     }
 
-    metrics.<span class="hljs-variable">width =</span> (metrics.width + strokeWidthOffset * <span class="hljs-number">2</span>) * options.scale;
-    metrics.<span class="hljs-variable">height =</span> (metrics.height + strokeWidthOffset * <span class="hljs-number">2</span>) * options.scale;
+    metrics.width = (metrics.width + strokeWidthOffset * <span class="hljs-number">2</span>) * options.scale;
+    metrics.height = (metrics.height + strokeWidthOffset * <span class="hljs-number">2</span>) * options.scale;
 
-    <span class="hljs-variable">anchor =</span> this._getAnchorPoint(options, metrics);
+    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(options, metrics);
 
-    metrics.<span class="hljs-variable">x =</span> metrics.x + anchor[<span class="hljs-number">0</span>] - strokeWidthOffset;
-    metrics.<span class="hljs-variable">y =</span> metrics.y + anchor[<span class="hljs-number">1</span>] - strokeWidthOffset;
+    metrics.x = metrics.x + anchor[<span class="hljs-number">0</span>] - strokeWidthOffset;
+    metrics.y = metrics.y + anchor[<span class="hljs-number">1</span>] - strokeWidthOffset;
 
-    <span class="hljs-keyword">if</span> (this instanceof Facade.Circle) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Circle) {
 
-        metrics.<span class="hljs-variable">x =</span> metrics.x + options.radius;
-        metrics.<span class="hljs-variable">y =</span> metrics.y + options.radius;
+        metrics.x = metrics.x + options.radius;
+        metrics.y = metrics.y + options.radius;
 
     }
 
     <span class="hljs-keyword">if</span> (!updated) {
 
-        this.<span class="hljs-variable">_metrics =</span> metrics;
+        <span class="hljs-keyword">this</span>._metrics = metrics;
 
     }
 
-    return metrics;
+    <span class="hljs-keyword">return</span> metrics;
 
 };</code></pre>
 
@@ -4355,7 +4410,8 @@ console.log(polygon._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  Object with metrics as key-value pairs.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Object with metrics as key-value pairs.</p>
 
 
 
@@ -4420,7 +4476,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options</b>
+                                                <b>[options]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4430,7 +4486,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.x</b>
+                                                <b>[options.x]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4440,7 +4496,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.y</b>
+                                                <b>[options.y]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4450,17 +4506,17 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.anchor</b>
+                                                <b>[options.anchor]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+                                            <p>Position to anchor the circle. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.rotate</b>
+                                                <b>[options.rotate]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4470,7 +4526,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.scale</b>
+                                                <b>[options.scale]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4480,7 +4536,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.opacity</b>
+                                                <b>[options.opacity]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4490,27 +4546,27 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.fillStyle</b>
+                                                <b>[options.fillStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.strokeStyle</b>
+                                                <b>[options.strokeStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Color of a circle&#39;s stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.lineWidth</b>
+                                                <b>[options.lineWidth]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4520,27 +4576,27 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.lineCap</b>
+                                                <b>[options.lineCap]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
+                                            <p>The style of line cap. <i>Default:</i> &quot;butt&quot;<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.lineJoin</b>
+                                                <b>[options.lineJoin]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>The style of line join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
+                                            <p>The style of line join. <i>Default:</i> &quot;miter&quot;<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.radius</b>
+                                                <b>[options.radius]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4550,7 +4606,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.start</b>
+                                                <b>[options.start]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4560,7 +4616,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.end</b>
+                                                <b>[options.end]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4570,7 +4626,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.counterclockwise</b>
+                                                <b>[options.counterclockwise]</b>
                                                     <code>Boolean</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -4704,7 +4760,8 @@ console.log(polygon._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  New Facade.Circle object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Circle object.</p>
 
 
 
@@ -4779,24 +4836,24 @@ console.log(polygon._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.<span class="hljs-constant">Circle</span>.prototype._configOptions = function <span class="hljs-keyword">(options) {</span>
+                                    <pre><code class="hljs">Facade.Circle.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    <span class="hljs-literal">options</span>.translate = [ <span class="hljs-literal">options</span>.x, <span class="hljs-literal">options</span>.y ];
-    <span class="hljs-literal">options</span>.globalAlpha = <span class="hljs-literal">options</span>.opacity / <span class="hljs-number">100</span>;
+    options.translate = [ options.x, options.y ];
+    options.globalAlpha = options.opacity / <span class="hljs-number">100</span>;
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.<span class="hljs-keyword">counterclockwise) {</span>
+    <span class="hljs-keyword">if</span> (options.counterclockwise) {
 
-        <span class="hljs-literal">options</span>.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">options</span>.radius, <span class="hljs-literal">options</span>.end * _TO_RADIANS, <span class="hljs-literal">options</span>.begin * _TO_RADIANS ] ];
+        options.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, options.radius, options.end * _TO_RADIANS, options.begin * _TO_RADIANS ] ];
 
-    <span class="hljs-keyword">}</span> <span class="hljs-keyword">else {</span>
+    } <span class="hljs-keyword">else</span> {
 
-        <span class="hljs-literal">options</span>.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">options</span>.radius, <span class="hljs-literal">options</span>.begin * _TO_RADIANS, <span class="hljs-literal">options</span>.end * _TO_RADIANS ] ];
+        options.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, options.radius, options.begin * _TO_RADIANS, options.end * _TO_RADIANS ] ];
 
-    <span class="hljs-keyword">}</span>
+    }
 
-    return <span class="hljs-literal">options</span>;
+    <span class="hljs-keyword">return</span> options;
 
-<span class="hljs-keyword">}</span>;</code></pre>
+};</code></pre>
 
                                 </section>
 
@@ -4806,7 +4863,8 @@ console.log(polygon._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  Converted options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Converted options.</p>
 
 
 
@@ -4892,14 +4950,14 @@ console.log(polygon._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Circle.<span class="hljs-keyword">prototype</span>._getAnchorPoint = function (options, metrics) {
+                                    <pre><code class="hljs">Facade.Circle.prototype._getAnchorPoint = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options, metrics)</span> </span>{
 
-    var <span class="hljs-keyword">pos</span> = Facade.Polygon.<span class="hljs-keyword">prototype</span>._getAnchorPoint.call(this, options, metrics);
+    <span class="hljs-keyword">var</span> pos = Facade.Polygon.prototype._getAnchorPoint.call(<span class="hljs-keyword">this</span>, options, metrics);
 
-    <span class="hljs-keyword">pos</span>[<span class="hljs-number">0</span>] = <span class="hljs-keyword">pos</span>[<span class="hljs-number">0</span>] + options.radius;
-    <span class="hljs-keyword">pos</span>[<span class="hljs-number">1</span>] = <span class="hljs-keyword">pos</span>[<span class="hljs-number">1</span>] + options.radius;
+    pos[<span class="hljs-number">0</span>] = pos[<span class="hljs-number">0</span>] + options.radius;
+    pos[<span class="hljs-number">1</span>] = pos[<span class="hljs-number">1</span>] + options.radius;
 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">pos</span>;
+    <span class="hljs-keyword">return</span> pos;
 
 };</code></pre>
 
@@ -4913,7 +4971,8 @@ console.log(polygon._setMetrics(options));
 
 
 
-                                        <p><code>Array</code>  Array with the x and y anchor positions.</p>
+                                        <p><code>Array</code> </p>
+                                        <p>Array with the x and y anchor positions.</p>
 
 
 
@@ -4949,7 +5008,7 @@ console.log(polygon._setMetrics(options));
 
 
                                             <p>
-                                                <b>updated</b>
+                                                <b>[updated]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5014,7 +5073,8 @@ console.log(circle._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  Object with metrics as key-value pairs.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Object with metrics as key-value pairs.</p>
 
 
 
@@ -5075,7 +5135,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options</b>
+                                                <b>[options]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5085,7 +5145,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.x</b>
+                                                <b>[options.x]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5095,7 +5155,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.y</b>
+                                                <b>[options.y]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5105,17 +5165,17 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.anchor</b>
+                                                <b>[options.anchor]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Position to anchor the line. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+                                            <p>Position to anchor the line. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.rotate</b>
+                                                <b>[options.rotate]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5125,7 +5185,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.scale</b>
+                                                <b>[options.scale]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5135,7 +5195,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.opacity</b>
+                                                <b>[options.opacity]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5145,17 +5205,17 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.strokeStyle</b>
+                                                <b>[options.strokeStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.lineWidth</b>
+                                                <b>[options.lineWidth]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5165,17 +5225,17 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.lineCap</b>
+                                                <b>[options.lineCap]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>The style of line cap. <i>Default:</i> "butt"<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
+                                            <p>The style of line cap. <i>Default:</i> &quot;butt&quot;<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.x1</b>
+                                                <b>[options.x1]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5185,7 +5245,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.y1</b>
+                                                <b>[options.y1]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5195,7 +5255,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.x2</b>
+                                                <b>[options.x2]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5205,7 +5265,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.y2</b>
+                                                <b>[options.y2]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5332,7 +5392,8 @@ console.log(circle._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  New Facade.Line object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Line object.</p>
 
 
 
@@ -5407,15 +5468,15 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Line.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> {</span>
+                                    <pre><code class="hljs">Facade.Line.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.<span class="hljs-keyword">x</span>, <span class="hljs-keyword">options</span>.<span class="hljs-keyword">y</span> ];
-    <span class="hljs-keyword">options</span>.globalAlpha = <span class="hljs-keyword">options</span>.opacity / <span class="hljs-number">100</span>;
-    <span class="hljs-keyword">options</span>.closePath = false;
+    options.translate = [ options.x, options.y ];
+    options.globalAlpha = options.opacity / <span class="hljs-number">100</span>;
+    options.closePath = <span class="hljs-literal">false</span>;
 
-    <span class="hljs-keyword">options</span>.points = [ [ <span class="hljs-keyword">options</span>.x1, <span class="hljs-keyword">options</span>.y1 ], [ <span class="hljs-keyword">options</span>.x2, <span class="hljs-keyword">options</span>.y2 ] ];
+    options.points = [ [ options.x1, options.y1 ], [ options.x2, options.y2 ] ];
 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -5427,7 +5488,8 @@ console.log(circle._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  Converted options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Converted options.</p>
 
 
 
@@ -5513,27 +5575,27 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Line.prototype._getAnchorPoint = function (<span class="hljs-keyword">options</span>, metrics) {
+                                    <pre><code class="hljs">Facade.Line.prototype._getAnchorPoint = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options, metrics)</span> </span>{
 
-    var pos = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>];
+    <span class="hljs-keyword">var</span> pos = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>];
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/center$/</span>)) {
+    <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/center$/</span>)) {
 
-        pos[<span class="hljs-number">0</span>] = -(metrics.width <span class="hljs-regexp">/ 2 - options.lineWidth /</span> <span class="hljs-number">2</span>);
+        pos[<span class="hljs-number">0</span>] = -(metrics.width / <span class="hljs-number">2</span> - options.lineWidth / <span class="hljs-number">2</span>);
 
-    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/right$/</span>)) {
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/right$/</span>)) {
 
-        pos[<span class="hljs-number">0</span>] = -(metrics.width - <span class="hljs-keyword">options</span>.lineWidth);
+        pos[<span class="hljs-number">0</span>] = -(metrics.width - options.lineWidth);
 
     }
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/^center/</span>)) {
+    <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/^center/</span>)) {
 
-        pos[<span class="hljs-number">1</span>] = -(metrics.height <span class="hljs-regexp">/ 2 - options.lineWidth /</span> <span class="hljs-number">2</span>);
+        pos[<span class="hljs-number">1</span>] = -(metrics.height / <span class="hljs-number">2</span> - options.lineWidth / <span class="hljs-number">2</span>);
 
-    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">options</span>.anchor.match(<span class="hljs-regexp">/^bottom/</span>)) {
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (options.anchor.match(<span class="hljs-regexp">/^bottom/</span>)) {
 
-        pos[<span class="hljs-number">1</span>] = -(metrics.height - <span class="hljs-keyword">options</span>.lineWidth);
+        pos[<span class="hljs-number">1</span>] = -(metrics.height - options.lineWidth);
 
     }
 
@@ -5551,7 +5613,8 @@ console.log(circle._setMetrics(options));
 
 
 
-                                        <p><code>Array</code>  Array with the x and y anchor positions.</p>
+                                        <p><code>Array</code> </p>
+                                        <p>Array with the x and y anchor positions.</p>
 
 
 
@@ -5610,7 +5673,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options</b>
+                                                <b>[options]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5620,7 +5683,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.x</b>
+                                                <b>[options.x]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5630,7 +5693,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.y</b>
+                                                <b>[options.y]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5640,17 +5703,17 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.anchor</b>
+                                                <b>[options.anchor]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Position to anchor the rectangle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+                                            <p>Position to anchor the rectangle. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.rotate</b>
+                                                <b>[options.rotate]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5660,7 +5723,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.scale</b>
+                                                <b>[options.scale]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5670,7 +5733,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.opacity</b>
+                                                <b>[options.opacity]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5680,27 +5743,27 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.fillStyle</b>
+                                                <b>[options.fillStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.strokeStyle</b>
+                                                <b>[options.strokeStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Color of a rectangle&#39;s stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.lineWidth</b>
+                                                <b>[options.lineWidth]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5710,17 +5773,17 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.lineJoin</b>
+                                                <b>[options.lineJoin]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>The style of rectangle join. <i>Default:</i> "miter"<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
+                                            <p>The style of rectangle join. <i>Default:</i> &quot;miter&quot;<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.width</b>
+                                                <b>[options.width]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5730,7 +5793,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.height</b>
+                                                <b>[options.height]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -5851,7 +5914,8 @@ console.log(circle._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  New Facade.Rect object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Rect object.</p>
 
 
 
@@ -5926,14 +5990,14 @@ console.log(circle._setMetrics(options));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Rect.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> {</span>
+                                    <pre><code class="hljs">Facade.Rect.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.<span class="hljs-keyword">x</span>, <span class="hljs-keyword">options</span>.<span class="hljs-keyword">y</span> ];
-    <span class="hljs-keyword">options</span>.globalAlpha = <span class="hljs-keyword">options</span>.opacity / <span class="hljs-number">100</span>;
+    options.translate = [ options.x, options.y ];
+    options.globalAlpha = options.opacity / <span class="hljs-number">100</span>;
 
-    <span class="hljs-keyword">options</span>.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span> ], [ <span class="hljs-keyword">options</span>.width, <span class="hljs-number">0</span> ], [ <span class="hljs-keyword">options</span>.width, <span class="hljs-keyword">options</span>.height ], [ <span class="hljs-number">0</span>, <span class="hljs-keyword">options</span>.height ] ];
+    options.points = [ [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span> ], [ options.width, <span class="hljs-number">0</span> ], [ options.width, options.height ], [ <span class="hljs-number">0</span>, options.height ] ];
 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -5945,7 +6009,8 @@ console.log(circle._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  Converted options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Converted options.</p>
 
 
 
@@ -6022,7 +6087,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options</b>
+                                                <b>[options]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6032,7 +6097,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.x</b>
+                                                <b>[options.x]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6042,7 +6107,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.y</b>
+                                                <b>[options.y]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6052,17 +6117,17 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.anchor</b>
+                                                <b>[options.anchor]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+                                            <p>Position to anchor the image. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.rotate</b>
+                                                <b>[options.rotate]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6072,7 +6137,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.scale</b>
+                                                <b>[options.scale]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6082,7 +6147,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.width</b>
+                                                <b>[options.width]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6092,7 +6157,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.height</b>
+                                                <b>[options.height]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6102,7 +6167,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.tileX</b>
+                                                <b>[options.tileX]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6112,7 +6177,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.tileY</b>
+                                                <b>[options.tileY]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6122,7 +6187,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.offsetX</b>
+                                                <b>[options.offsetX]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6132,7 +6197,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.offsetY</b>
+                                                <b>[options.offsetY]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6142,7 +6207,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.frames</b>
+                                                <b>[options.frames]</b>
                                                     <code>Array</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6152,7 +6217,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.speed</b>
+                                                <b>[options.speed]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6162,7 +6227,7 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.loop</b>
+                                                <b>[options.loop]</b>
                                                     <code>Boolean</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6172,11 +6237,11 @@ console.log(circle._setMetrics(options));
 
 
                                             <p>
-                                                <b>options.callback</b>
+                                                <b>[options.callback]</b>
                                                     <code>Function</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`</p>
+                                            <p>Function called for every frame of a sprite animation. <i>Default:</i> <code>function (frame) { };</code></p>
 
 
 
@@ -6416,7 +6481,8 @@ console.log(circle._setMetrics(options));
 
 
 
-                                        <p><code>Object</code>  New Facade.Image object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Image object.</p>
 
 
 
@@ -6492,16 +6558,16 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Image.prototype.load = function (<span class="hljs-keyword">source</span>) {
+                                    <pre><code class="hljs">Facade.Image.prototype.load = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(source)</span> </span>{
 
-    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">source</span> === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-keyword">source</span>.nodeType === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> source === <span class="hljs-string">'object'</span> &amp;&amp; source.nodeType === <span class="hljs-number">1</span>) {
 
-        <span class="hljs-keyword">this</span>.image = <span class="hljs-keyword">source</span>;
+        <span class="hljs-keyword">this</span>.image = source;
 
     } <span class="hljs-keyword">else</span> {
 
-        <span class="hljs-keyword">this</span>.image = document.createElement(<span class="hljs-string">'img'</span>);
-        <span class="hljs-keyword">this</span>.image.setAttribute(<span class="hljs-string">'src'</span>, <span class="hljs-keyword">source</span>);
+        <span class="hljs-keyword">this</span>.image = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'img'</span>);
+        <span class="hljs-keyword">this</span>.image.setAttribute(<span class="hljs-string">'src'</span>, source);
 
     }
 
@@ -6511,7 +6577,7 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
     } <span class="hljs-keyword">else</span> {
 
-        <span class="hljs-keyword">this</span>.image.addEventListener(<span class="hljs-string">'load'</span>, <span class="hljs-keyword">this</span>._setMetrics.bind(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">null</span>));
+        <span class="hljs-keyword">this</span>.image.addEventListener(<span class="hljs-string">'load'</span>, <span class="hljs-keyword">this</span>._setMetrics.bind(<span class="hljs-keyword">this</span>, <span class="hljs-literal">null</span>));
 
     }
 
@@ -6525,7 +6591,8 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -6585,7 +6652,8 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
 
 
-                                        <p><code>Object</code>  Facade.js image object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js image object.</p>
 
 
 
@@ -6645,7 +6713,8 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
 
 
-                                        <p><code>Object</code>  Facade.js image object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js image object.</p>
 
 
 
@@ -6705,7 +6774,8 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
 
 
-                                        <p><code>Object</code>  Facade.js image object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js image object.</p>
 
 
 
@@ -6767,7 +6837,8 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
 
 
-                                        <p><code>Object</code>  Facade.js image object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Facade.js image object.</p>
 
 
 
@@ -6840,21 +6911,21 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Image.prototype._configOptions = function (options) {
+                                    <pre><code class="hljs">Facade.Image.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    options.<span class="hljs-built_in">translate</span> = [ options.x, options.y ];
+    options.translate = [ options.x, options.y ];
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span> &amp;&amp; <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.complete) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.image &amp;&amp; <span class="hljs-keyword">this</span>.image.complete) {
 
-        <span class="hljs-keyword">if</span> (!options.<span class="hljs-variable">width</span>) {
+        <span class="hljs-keyword">if</span> (!options.width) {
 
-            options.<span class="hljs-variable">width</span> = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">width</span>;
+            options.width = <span class="hljs-keyword">this</span>.image.width;
 
         }
 
-        <span class="hljs-keyword">if</span> (!options.<span class="hljs-variable">height</span>) {
+        <span class="hljs-keyword">if</span> (!options.height) {
 
-            options.<span class="hljs-variable">height</span> = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">height</span>;
+            options.height = <span class="hljs-keyword">this</span>.image.height;
 
         }
 
@@ -6872,7 +6943,8 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
 
 
-                                        <p><code>Object</code>  Converted options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Converted options.</p>
 
 
 
@@ -6908,7 +6980,7 @@ console.log(image.load(&#39;images/sprite.png&#39;));
 
 
                                             <p>
-                                                <b>updated</b>
+                                                <b>[updated]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -6947,25 +7019,25 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Image.prototype._setMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Image.prototype._setMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
-        <span class="hljs-keyword">options</span> = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
+    <span class="hljs-keyword">var</span> metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
+        options = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
         anchor;
 
-    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
 
-        <span class="hljs-keyword">options</span> = <span class="hljs-keyword">this</span>._configOptions(<span class="hljs-keyword">options</span>);
+        options = <span class="hljs-keyword">this</span>._configOptions(options);
 
     }
 
-    metrics.width = <span class="hljs-keyword">options</span>.width * <span class="hljs-keyword">options</span>.tileX * <span class="hljs-keyword">options</span>.scale;
-    metrics.height = <span class="hljs-keyword">options</span>.height * <span class="hljs-keyword">options</span>.tileY * <span class="hljs-keyword">options</span>.scale;
+    metrics.width = options.width * options.tileX * options.scale;
+    metrics.height = options.height * options.tileY * options.scale;
 
-    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(<span class="hljs-keyword">options</span>, metrics);
+    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(options, metrics);
 
-    metrics.x = <span class="hljs-keyword">options</span>.x + anchor[<span class="hljs-number">0</span>];
-    metrics.y = <span class="hljs-keyword">options</span>.y + anchor[<span class="hljs-number">1</span>];
+    metrics.x = options.x + anchor[<span class="hljs-number">0</span>];
+    metrics.y = options.y + anchor[<span class="hljs-number">1</span>];
 
     <span class="hljs-keyword">if</span> (!updated) {
 
@@ -6985,7 +7057,8 @@ console.log(image._setMetrics(updated));
 
 
 
-                                        <p><code>Object</code>  Object with metrics as key-value pairs.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Object with metrics as key-value pairs.</p>
 
 
 
@@ -7084,29 +7157,29 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Image.prototype._draw = function (facade, options, metrics) {
+                                    <pre><code class="hljs">Facade.Image.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> </span>{
 
-    var context = facade.context,
+    <span class="hljs-keyword">var</span> context = facade.context,
         currentOffsetX = options.offsetX,
         currentOffsetY = options.offsetY,
-        currentWidth = options.<span class="hljs-variable">width</span>,
-        currentHeight = options.<span class="hljs-variable">height</span>,
-        originalWidth = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">width</span>,
-        originalHeight = <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.<span class="hljs-variable">height</span>,
+        currentWidth = options.width,
+        currentHeight = options.height,
+        originalWidth = <span class="hljs-keyword">this</span>.image.width,
+        originalHeight = <span class="hljs-keyword">this</span>.image.height,
         x,
         y;
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>.complete) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.image.complete) {
 
         <span class="hljs-keyword">this</span>._applyTransforms(context, options, metrics);
 
         <span class="hljs-keyword">if</span> (options.frames.length) {
 
-            currentOffsetX += options.frames[<span class="hljs-keyword">this</span>.currentFrame] * options.<span class="hljs-variable">width</span>;
+            currentOffsetX += options.frames[<span class="hljs-keyword">this</span>.currentFrame] * options.width;
 
-            <span class="hljs-keyword">if</span> (currentOffsetX + options.<span class="hljs-variable">width</span> &gt; originalWidth) {
+            <span class="hljs-keyword">if</span> (currentOffsetX + options.width &gt; originalWidth) {
 
-                currentOffsetY += Math.<span class="hljs-built_in">floor</span>(currentOffsetX / originalWidth) * options.<span class="hljs-variable">height</span>;
+                currentOffsetY += <span class="hljs-built_in">Math</span>.floor(currentOffsetX / originalWidth) * options.height;
 
                 currentOffsetX = currentOffsetX % originalWidth;
 
@@ -7131,13 +7204,13 @@ console.log(image._setMetrics(updated));
             <span class="hljs-keyword">for</span> (y = <span class="hljs-number">0</span>; y &lt; options.tileY; y += <span class="hljs-number">1</span>) {
 
                 context.drawImage(
-                    <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span>,
+                    <span class="hljs-keyword">this</span>.image,
                     currentOffsetX,
                     currentOffsetY,
                     currentWidth,
                     currentHeight,
-                    options.<span class="hljs-variable">width</span> * x,
-                    options.<span class="hljs-variable">height</span> * y,
+                    options.width * x,
+                    options.height * y,
                     currentWidth,
                     currentHeight
                 );
@@ -7160,7 +7233,7 @@ console.log(image._setMetrics(updated));
 
                 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.currentFrame &gt;= options.frames.length) {
 
-                    <span class="hljs-keyword">if</span> (options.<span class="hljs-built_in">loop</span>) {
+                    <span class="hljs-keyword">if</span> (options.loop) {
 
                         <span class="hljs-keyword">this</span>.currentFrame = <span class="hljs-number">0</span>;
 
@@ -7168,13 +7241,13 @@ console.log(image._setMetrics(updated));
 
                         <span class="hljs-keyword">this</span>.currentFrame = options.frames.length - <span class="hljs-number">1</span>;
 
-                        <span class="hljs-keyword">this</span>.isAnimating = <span class="hljs-keyword">false</span>;
+                        <span class="hljs-keyword">this</span>.isAnimating = <span class="hljs-literal">false</span>;
 
                     }
 
                 }
 
-                <span class="hljs-keyword">if</span> (typeof options.callback === <span class="hljs-string">'function'</span>) {
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.callback === <span class="hljs-string">'function'</span>) {
 
                     options.callback.call(<span class="hljs-keyword">this</span>, options.frames[<span class="hljs-keyword">this</span>.currentFrame]);
 
@@ -7200,7 +7273,8 @@ console.log(image._setMetrics(updated));
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -7269,7 +7343,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>value</b>
+                                                <b>[value]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7279,7 +7353,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options</b>
+                                                <b>[options]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7289,7 +7363,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.x</b>
+                                                <b>[options.x]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7299,7 +7373,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.y</b>
+                                                <b>[options.y]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7309,17 +7383,17 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.anchor</b>
+                                                <b>[options.anchor]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Position to anchor the text object. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+                                            <p>Position to anchor the text object. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.rotate</b>
+                                                <b>[options.rotate]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7329,7 +7403,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.scale</b>
+                                                <b>[options.scale]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7339,7 +7413,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.opacity</b>
+                                                <b>[options.opacity]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7349,7 +7423,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.width</b>
+                                                <b>[options.width]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7359,27 +7433,27 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.fontFamily</b>
+                                                <b>[options.fontFamily]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> "Arial"</p>
+                                            <p>Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> &quot;Arial&quot;</p>
 
 
 
 
                                             <p>
-                                                <b>options.fontStyle</b>
+                                                <b>[options.fontStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Font style of the text. <i>Default:</i> "normal"<br><ul><li>normal</li><li>bold</li><li>italic</li></ul></p>
+                                            <p>Font style of the text. <i>Default:</i> &quot;normal&quot;<br><ul><li>normal</li><li>bold</li><li>italic</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.fontSize</b>
+                                                <b>[options.fontSize]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7389,7 +7463,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.lineHeight</b>
+                                                <b>[options.lineHeight]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7399,47 +7473,47 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.textAlignment</b>
+                                                <b>[options.textAlignment]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Horizontal alignment of the text. <i>Default:</i> "left"<br><ul><li>left</li><li>center</li><li>right</li></ul></p>
+                                            <p>Horizontal alignment of the text. <i>Default:</i> &quot;left&quot;<br><ul><li>left</li><li>center</li><li>right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.textBaseline</b>
+                                                <b>[options.textBaseline]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Baseline to set the vertical alignment of the text drawn. <i>Default:</i> "top"<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul></p>
+                                            <p>Baseline to set the vertical alignment of the text drawn. <i>Default:</i> &quot;top&quot;<br><ul><li>top</li><li>hanging</li><li>middle</li><li>alphabetic</li><li>ideographic</li><li>bottom</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.fillStyle</b>
+                                                <b>[options.fillStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.strokeStyle</b>
+                                                <b>[options.strokeStyle]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> "#000"<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+                                            <p>Color of a text object&#39;s stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.lineWidth</b>
+                                                <b>[options.lineWidth]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -7662,7 +7736,8 @@ console.log(image._setMetrics(updated));
 
 
 
-                                        <p><code>Object</code>  New Facade.Text object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Text object.</p>
 
 
 
@@ -7827,7 +7902,8 @@ console.log(image._setMetrics(updated));
 
 
 
-                                        <p><code>Array</code>  An array of lines and the position to render using <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#fillText()">fillText()</a> and <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#strokeText()">strokeText()</a>.</p>
+                                        <p><code>Array</code> </p>
+                                        <p>An array of lines and the position to render using <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#fillText()">fillText()</a> and <a href="https://developer.mozilla.org/en-US/docs/Drawing_text_using_a_canvas#strokeText()">strokeText()</a>.</p>
 
 
 
@@ -7926,27 +8002,27 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Text.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> {</span>
+                                    <pre><code class="hljs">Facade.Text.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> </span>{
 
-    var context = facade.context,
-        <span class="hljs-built_in">i</span>,
-        <span class="hljs-built_in">length</span>;
+    <span class="hljs-keyword">var</span> context = facade.context,
+        i,
+        length;
 
-    this._applyTransforms(context, options, metrics);
+    <span class="hljs-keyword">this</span>._applyTransforms(context, options, metrics);
 
-    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = this._lines.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = <span class="hljs-keyword">this</span>._lines.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        if (options.fillStyle) {
+        <span class="hljs-keyword">if</span> (options.fillStyle) {
 
-            context.fillText.apply(context, this._lines[i]);
+            context.fillText.apply(context, <span class="hljs-keyword">this</span>._lines[i]);
 
-        }</span>
+        }
 
-        <span class="hljs-keyword">if</span> (options.lineWidth) <span class="hljs-cell">{
+        <span class="hljs-keyword">if</span> (options.lineWidth) {
 
-            context.strokeText.apply(context, this._lines[i]);
+            context.strokeText.apply(context, <span class="hljs-keyword">this</span>._lines[i]);
 
-        }</span>
+        }
 
     }
 
@@ -7964,7 +8040,8 @@ console.log(image._setMetrics(updated));
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -8037,21 +8114,21 @@ console.log(image._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs"><span class="hljs-constant">Facade</span>.<span class="hljs-constant">Text</span>.prototype._configOptions = function <span class="hljs-keyword">(options) {</span>
+                                    <pre><code class="hljs">Facade.Text.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    <span class="hljs-literal">options</span>.translate = [ <span class="hljs-literal">options</span>.x, <span class="hljs-literal">options</span>.y ];
-    <span class="hljs-literal">options</span>.globalAlpha = <span class="hljs-literal">options</span>.opacity / <span class="hljs-number">100</span>;
-    <span class="hljs-literal">options</span>.font = <span class="hljs-literal">options</span>.fontStyle + <span class="hljs-string">' '</span> + parseInt(<span class="hljs-literal">options</span>.fontSize, <span class="hljs-number">10</span>) + <span class="hljs-string">'px '</span> + <span class="hljs-literal">options</span>.fontFamily;
+    options.translate = [ options.x, options.y ];
+    options.globalAlpha = options.opacity / <span class="hljs-number">100</span>;
+    options.font = options.fontStyle + <span class="hljs-string">' '</span> + <span class="hljs-built_in">parseInt</span>(options.fontSize, <span class="hljs-number">10</span>) + <span class="hljs-string">'px '</span> + options.fontFamily;
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-literal">options</span>.width === <span class="hljs-number">0</span><span class="hljs-keyword">) {</span>
+    <span class="hljs-keyword">if</span> (options.width === <span class="hljs-number">0</span>) {
 
-        <span class="hljs-literal">options</span>.width = this._maxLineWidth;
+        options.width = <span class="hljs-keyword">this</span>._maxLineWidth;
 
-    <span class="hljs-keyword">}</span>
+    }
 
-    return <span class="hljs-literal">options</span>;
+    <span class="hljs-keyword">return</span> options;
 
-<span class="hljs-keyword">}</span>;</code></pre>
+};</code></pre>
 
                                 </section>
 
@@ -8061,7 +8138,8 @@ console.log(image._setMetrics(updated));
 
 
 
-                                        <p><code>Object</code>  Converted options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Converted options.</p>
 
 
 
@@ -8097,7 +8175,7 @@ console.log(image._setMetrics(updated));
 
 
                                             <p>
-                                                <b>updated</b>
+                                                <b>[updated]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -8136,29 +8214,29 @@ console.log(text._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Text.prototype._setMetrics = function (updated) {
+                                    <pre><code class="hljs">Facade.Text.prototype._setMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
-        <span class="hljs-keyword">options</span> = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
+    <span class="hljs-keyword">var</span> metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
+        options = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
         anchor;
 
-    <span class="hljs-keyword">if</span> (typeof <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>._configOptions === <span class="hljs-string">'function'</span>) {
 
-        <span class="hljs-keyword">options</span> = <span class="hljs-keyword">this</span>._configOptions(<span class="hljs-keyword">options</span>);
+        options = <span class="hljs-keyword">this</span>._configOptions(options);
 
     }
 
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._lines) {
 
-        metrics.width = <span class="hljs-keyword">options</span>.width * <span class="hljs-keyword">options</span>.scale;
-        metrics.height = <span class="hljs-keyword">this</span>._lines.length * (<span class="hljs-keyword">options</span>.fontSize * <span class="hljs-keyword">options</span>.lineHeight) * <span class="hljs-keyword">options</span>.scale;
+        metrics.width = options.width * options.scale;
+        metrics.height = <span class="hljs-keyword">this</span>._lines.length * (options.fontSize * options.lineHeight) * options.scale;
 
     }
 
-    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(<span class="hljs-keyword">options</span>, metrics);
+    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(options, metrics);
 
-    metrics.x = <span class="hljs-keyword">options</span>.x + anchor[<span class="hljs-number">0</span>];
-    metrics.y = <span class="hljs-keyword">options</span>.y + anchor[<span class="hljs-number">1</span>];
+    metrics.x = options.x + anchor[<span class="hljs-number">0</span>];
+    metrics.y = options.y + anchor[<span class="hljs-number">1</span>];
 
     <span class="hljs-keyword">if</span> (!updated) {
 
@@ -8178,7 +8256,8 @@ console.log(text._setMetrics(updated));
 
 
 
-                                        <p><code>Object</code>  Object with metrics as key-value pairs.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Object with metrics as key-value pairs.</p>
 
 
 
@@ -8223,7 +8302,7 @@ console.log(text._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options</b>
+                                                <b>[options]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -8233,7 +8312,7 @@ console.log(text._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.x</b>
+                                                <b>[options.x]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -8243,7 +8322,7 @@ console.log(text._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.y</b>
+                                                <b>[options.y]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -8253,17 +8332,17 @@ console.log(text._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.anchor</b>
+                                                <b>[options.anchor]</b>
                                                     <code>String</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
-                                            <p>Position to anchor the group. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+                                            <p>Position to anchor the group. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
 
 
 
 
                                             <p>
-                                                <b>options.rotate</b>
+                                                <b>[options.rotate]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -8273,7 +8352,7 @@ console.log(text._setMetrics(updated));
 
 
                                             <p>
-                                                <b>options.scale</b>
+                                                <b>[options.scale]</b>
                                                     <code>Integer</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -8326,11 +8405,11 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.<span class="hljs-keyword">Group</span> = function (<span class="hljs-keyword">options</span>) {
+                                    <pre><code class="hljs">Facade.Group = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.<span class="hljs-keyword">Group</span>)) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Facade.Group)) {
 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.<span class="hljs-keyword">Group</span>(<span class="hljs-keyword">options</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Facade.Group(options);
 
     }
 
@@ -8339,7 +8418,7 @@ group.addToGroup(rect);
 
     <span class="hljs-keyword">this</span>._objects = [];
 
-    <span class="hljs-keyword">this</span>.setOptions(<span class="hljs-keyword">options</span>);
+    <span class="hljs-keyword">this</span>.setOptions(options);
 
 };</code></pre>
 
@@ -8361,7 +8440,8 @@ group.addToGroup(rect);
 
 
 
-                                        <p><code>Object</code>  New Facade.Group object.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>New Facade.Group object.</p>
 
 
 
@@ -8462,19 +8542,19 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Group.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> {</span>
+                                    <pre><code class="hljs">Facade.Group.prototype._draw = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(facade, options, metrics)</span> </span>{
 
-    var context = facade.context,
-        <span class="hljs-built_in">i</span>,
-        <span class="hljs-built_in">length</span>;
+    <span class="hljs-keyword">var</span> context = facade.context,
+        i,
+        length;
 
-    this._applyTransforms(context, options, metrics);
+    <span class="hljs-keyword">this</span>._applyTransforms(context, options, metrics);
 
-    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">length</span> = this._objects.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> &lt; <span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span> += <span class="hljs-number">1</span>) <span class="hljs-cell">{
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = <span class="hljs-keyword">this</span>._objects.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        facade.addToStage(this._objects[i]);
+        facade.addToStage(<span class="hljs-keyword">this</span>._objects[i]);
 
-    }</span>
+    }
 
 };</code></pre>
 
@@ -8490,7 +8570,8 @@ group.addToGroup(rect);
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -8563,11 +8644,11 @@ group.addToGroup(rect);
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.<span class="hljs-keyword">Group</span>.prototype._configOptions = function (<span class="hljs-keyword">options</span>) {
+                                    <pre><code class="hljs">Facade.Group.prototype._configOptions = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
 
-    <span class="hljs-keyword">options</span>.translate = [ <span class="hljs-keyword">options</span>.x, <span class="hljs-keyword">options</span>.y ];
+    options.translate = [ options.x, options.y ];
 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">options</span>;
+    <span class="hljs-keyword">return</span> options;
 
 };</code></pre>
 
@@ -8579,7 +8660,8 @@ group.addToGroup(rect);
 
 
 
-                                        <p><code>Object</code>  Converted options.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Converted options.</p>
 
 
 
@@ -8677,7 +8759,7 @@ group.addToGroup(rect);
 
     } <span class="hljs-keyword">else</span> {
 
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Object passed to Facade.addToStage is not a valid Facade.js entity.'</span>);
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Object passed to Facade.addToStage is not a valid Facade.js entity.'</span>);
 
     }
 
@@ -8691,7 +8773,8 @@ group.addToGroup(rect);
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -8777,7 +8860,8 @@ group.addToGroup(rect);
 
 
 
-                                        <p><code>Boolean</code>  Boolean result of the test.</p>
+                                        <p><code>Boolean</code> </p>
+                                        <p>Boolean result of the test.</p>
 
 
 
@@ -8873,7 +8957,8 @@ group.addToGroup(rect);
 
 
 
-                                        <p><code>void</code>  </p>
+                                        <p></p>
+                                        
 
 
 
@@ -8909,7 +8994,7 @@ group.addToGroup(rect);
 
 
                                             <p>
-                                                <b>updated</b>
+                                                <b>[updated]</b>
                                                     <code>Object</code>
                                                     <span class="label label-default">Optional</span>
                                             </p>
@@ -8948,64 +9033,64 @@ console.log(group._setMetrics(updated));
 
                                     <h3>Code</h3>
 
-                                    <pre><code class="hljs">Facade.Group.prototype.<span class="hljs-variable">_setMetrics =</span> function (updated) {
+                                    <pre><code class="hljs">Facade.Group.prototype._setMetrics = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(updated)</span> </span>{
 
-    var <span class="hljs-variable">metrics =</span> this._defaultMetrics(),
-        <span class="hljs-variable">options =</span> updated || this.getAllOptions(),
-        <span class="hljs-variable">bounds =</span> { top: <span class="hljs-constant">null</span>, right: <span class="hljs-constant">null</span>, bottom: <span class="hljs-constant">null</span>, left: <span class="hljs-constant">null</span> },
+    <span class="hljs-keyword">var</span> metrics = <span class="hljs-keyword">this</span>._defaultMetrics(),
+        options = updated || <span class="hljs-keyword">this</span>.getAllOptions(),
+        bounds = { top: <span class="hljs-literal">null</span>, right: <span class="hljs-literal">null</span>, bottom: <span class="hljs-literal">null</span>, left: <span class="hljs-literal">null</span> },
         i,
         length,
         anchor,
         obj_metrics;
 
-    for (<span class="hljs-variable">i =</span> <span class="hljs-number">0</span>, <span class="hljs-variable">length =</span> this._objects.length; i &lt; length; i += <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, length = <span class="hljs-keyword">this</span>._objects.length; i &lt; length; i += <span class="hljs-number">1</span>) {
 
-        <span class="hljs-variable">obj_metrics =</span> this._objects[i].getAllMetrics();
+        obj_metrics = <span class="hljs-keyword">this</span>._objects[i].getAllMetrics();
 
-        <span class="hljs-keyword">if</span> (obj_metrics.x &lt; bounds.left || bounds.<span class="hljs-variable">left =</span>== <span class="hljs-constant">null</span>) {
+        <span class="hljs-keyword">if</span> (obj_metrics.x &lt; bounds.left || bounds.left === <span class="hljs-literal">null</span>) {
 
-            bounds.<span class="hljs-variable">left =</span> obj_metrics.x;
-
-        }
-
-        <span class="hljs-keyword">if</span> (obj_metrics.y &lt; bounds.top || bounds.<span class="hljs-variable">top =</span>== <span class="hljs-constant">null</span>) {
-
-            bounds.<span class="hljs-variable">top =</span> obj_metrics.y;
+            bounds.left = obj_metrics.x;
 
         }
 
-        <span class="hljs-keyword">if</span> (obj_metrics.x + obj_metrics.width &gt; bounds.right || bounds.<span class="hljs-variable">right =</span>== <span class="hljs-constant">null</span>) {
+        <span class="hljs-keyword">if</span> (obj_metrics.y &lt; bounds.top || bounds.top === <span class="hljs-literal">null</span>) {
 
-            bounds.<span class="hljs-variable">right =</span> obj_metrics.x + obj_metrics.width;
+            bounds.top = obj_metrics.y;
 
         }
 
-        <span class="hljs-keyword">if</span> (obj_metrics.y + obj_metrics.height &gt; bounds.bottom || bounds.<span class="hljs-variable">bottom =</span>== <span class="hljs-constant">null</span>) {
+        <span class="hljs-keyword">if</span> (obj_metrics.x + obj_metrics.width &gt; bounds.right || bounds.right === <span class="hljs-literal">null</span>) {
 
-            bounds.<span class="hljs-variable">bottom =</span> obj_metrics.y + obj_metrics.height;
+            bounds.right = obj_metrics.x + obj_metrics.width;
+
+        }
+
+        <span class="hljs-keyword">if</span> (obj_metrics.y + obj_metrics.height &gt; bounds.bottom || bounds.bottom === <span class="hljs-literal">null</span>) {
+
+            bounds.bottom = obj_metrics.y + obj_metrics.height;
 
         }
 
     }
 
-    metrics.<span class="hljs-variable">x =</span> options.x + bounds.left;
-    metrics.<span class="hljs-variable">y =</span> options.y + bounds.top;
+    metrics.x = options.x + bounds.left;
+    metrics.y = options.y + bounds.top;
 
-    metrics.<span class="hljs-variable">width =</span> (bounds.right - bounds.left) * options.scale;
-    metrics.<span class="hljs-variable">height =</span> (bounds.bottom - bounds.top) * options.scale;
+    metrics.width = (bounds.right - bounds.left) * options.scale;
+    metrics.height = (bounds.bottom - bounds.top) * options.scale;
 
-    <span class="hljs-variable">anchor =</span> this._getAnchorPoint(options, metrics);
+    anchor = <span class="hljs-keyword">this</span>._getAnchorPoint(options, metrics);
 
-    metrics.<span class="hljs-variable">x =</span> options.x + anchor[<span class="hljs-number">0</span>];
-    metrics.<span class="hljs-variable">y =</span> options.y + anchor[<span class="hljs-number">1</span>];
+    metrics.x = options.x + anchor[<span class="hljs-number">0</span>];
+    metrics.y = options.y + anchor[<span class="hljs-number">1</span>];
 
     <span class="hljs-keyword">if</span> (!updated) {
 
-        this.<span class="hljs-variable">_metrics =</span> metrics;
+        <span class="hljs-keyword">this</span>._metrics = metrics;
 
     }
 
-    return metrics;
+    <span class="hljs-keyword">return</span> metrics;
 
 };</code></pre>
 
@@ -9017,7 +9102,8 @@ console.log(group._setMetrics(updated));
 
 
 
-                                        <p><code>Object</code>  Object with metrics as key-value pairs.</p>
+                                        <p><code>Object</code> </p>
+                                        <p>Object with metrics as key-value pairs.</p>
 
 
 

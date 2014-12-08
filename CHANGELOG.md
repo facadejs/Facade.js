@@ -1,5 +1,15 @@
 #Changelog
 
+##0.3.0-beta.7 (December 8, 2014)
+
+- Updated JSDoc notation for optional parameters/properties.
+- Added protection for NaN values passed through setOptions.
+- Switched to console.error for error reporting.
+- Added support for additive inverse operations.
+- Switched to jshint.
+- Added window, document and undefined to the function declaration.
+- Updated packages.
+
 ##0.3.0-beta.6 (October 2, 2014)
 
 - Fixed issue when clearing a canvas with no width/height attributes.
