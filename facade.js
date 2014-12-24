@@ -1558,7 +1558,7 @@
      * @param {Object|String} source Local image file or reference to an HTML image element.
      * @param {Object} [options] Options to create the image with.
      * @param {String} [options.anchor] Position to anchor the image. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
-     * @param {Function} Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { } [options.callback];`
+     * @param {Function} [options.callback] Function called for every frame of a sprite animation. <i>Default:</i> `function (frame) { };`
      * @param {Array} [options.frames] Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]
      * @param {Integer} [options.height] Height of the image. <i>Default:</i> 0
      * @param {Boolean} [options.loop] Determines if the animation should loop. <i>Default:</i> true
