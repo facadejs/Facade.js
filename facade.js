@@ -130,7 +130,7 @@
      * @example stage.addToStage(circle);
      * @example stage.addToStage(circle, { x: 100, y: 100 });
      * @param {Object|Array} obj Facade.js entity or an array of entities.
-     * @param {Object} options Temporary options for rendering a Facade.js entity (or multiple entities).
+     * @param {Object} [options] Temporary options for rendering a Facade.js entity (or multiple entities).
      * @return {Object} Facade.js object.
      * @public
      */
@@ -181,13 +181,15 @@
     /**
      * Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or available polyfill.
      *
-     *     stage.draw(function () {
+     * ```
+     * stage.draw(function () {
      *
-     *         this.clear();
+     *     this.clear();
      *
-     *         this.addToStage(circle, { x: 100, y: 100 });
+     *     this.addToStage(circle, { x: 100, y: 100 });
      *
-     *     });
+     * });
+     * ```
      *
      * @param {Function} callback Function callback.
      * @return {Object} Facade.js object.
@@ -929,15 +931,17 @@
     /**
      * Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.
      *
-     *     var polygon = new Facade.Polygon({
-     *         x: 0,
-     *         y: 0,
-     *         points: [ [100, 0], [200, 100], [100, 200], [0, 100] ],
-     *         lineWidth: 10,
-     *         strokeStyle: '#333E4B',
-     *         fillStyle: '#1C73A8',
-     *         anchor: 'top/left'
-     *     });
+     * ```
+     * var polygon = new Facade.Polygon({
+     *     x: 0,
+     *     y: 0,
+     *     points: [ [100, 0], [200, 100], [100, 200], [0, 100] ],
+     *     lineWidth: 10,
+     *     strokeStyle: '#333E4B',
+     *     fillStyle: '#1C73A8',
+     *     anchor: 'top/left'
+     * });
+     * ```
      *
      * @param {Object} [options] Options to create the polygon with.
      * @param {String} [options.anchor] Position to anchor the polygon. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
@@ -1216,15 +1220,17 @@
     /**
      * Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.
      *
-     *     var circle = new Facade.Circle({
-     *         x: 0,
-     *         y: 0,
-     *         radius: 100,
-     *         lineWidth: 10,
-     *         strokeStyle: '#333E4B',
-     *         fillStyle: '#1C73A8',
-     *         anchor: 'top/left'
-     *     });
+     * ```
+     * var circle = new Facade.Circle({
+     *     x: 0,
+     *     y: 0,
+     *     radius: 100,
+     *     lineWidth: 10,
+     *     strokeStyle: '#333E4B',
+     *     fillStyle: '#1C73A8',
+     *     anchor: 'top/left'
+     * });
+     * ```
      *
      * @param {Object} [options] Options to create the circle with.
      * @param {String} [options.anchor] Position to anchor the circle. <i>Default:</i> "top/left"<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul>
