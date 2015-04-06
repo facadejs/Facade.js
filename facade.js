@@ -284,7 +284,7 @@
      * @example stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});
      * @param {Object} options Object containing context property and/or method names with corresponding values.
      * @param {Function} [callback] Function to be called when context options have been rendered to the canvas.
-     * @return {void}
+     * @return {Void}
      * @public
      */
 
@@ -651,7 +651,7 @@
      * @param {Object} context Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
      * @param {Object} options Facade.Entity options.
      * @param {Object} metrics Facade.Entity metrics.
-     * @return {void}
+     * @return {Void}
      * @private
      */
 
@@ -903,7 +903,7 @@
      * @example entity.draw(stage, { x: 100, y: 100 });
      * @param {Object} facade Facade.js object.
      * @param {Object} updated Temporary options for rendering a Facade.js entity.
-     * @return {void}
+     * @return {Void}
      * @public
      */
 
@@ -1033,7 +1033,7 @@
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the polygon.
      * @param {Object} metrics Metrics used to render the polygon.
-     * @return {void}
+     * @return {Void}
      * @private
      */
 
@@ -1629,7 +1629,7 @@
      * @example console.log(image.load(document.querySelector('img')));
      * @example console.log(image.load('images/sprite.png'));
      * @param {Object|String} source A reference to an image tag or an image URL.
-     * @return {void}
+     * @return {Void}
      * @public
      */
 
@@ -1804,7 +1804,7 @@
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the image.
      * @param {Object} metrics Metrics used to render the image.
-     * @return {void}
+     * @return {Void}
      * @private
      */
 
@@ -2090,7 +2090,7 @@
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the text entity.
      * @param {Object} metrics Metrics used to render the text entity.
-     * @return {void}
+     * @return {Void}
      * @private
      */
 
@@ -2240,7 +2240,7 @@
      * @param {Object} facade Facade.js object.
      * @param {Object} options Options used to render the group.
      * @param {Object} metrics Metrics used to render the group.
-     * @return {void}
+     * @return {Void}
      * @private
      */
 
@@ -2282,7 +2282,7 @@
      *
      * @example group.addToGroup(circle);
      * @param {Object|Array} obj Facade.js entity or an array of entities.
-     * @return {void}
+     * @return {Void}
      * @public
      */
 
@@ -2337,7 +2337,7 @@
      *
      * @example group.removeFromGroup(circle);
      * @param {Object} obj Facade.js entity.
-     * @return {void}
+     * @return {Void}
      * @public
      */
 
