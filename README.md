@@ -1,18 +1,18 @@
 [![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js) [![](https://david-dm.org/facadejs/Facade.js/dev-status.svg)](https://david-dm.org/facadejs/Facade.js/#info=devDependencies)
 
-#Facade.js 0.3.0-beta
+# Facade.js 0.3.0-beta
 
 > Drawing shapes, images and text in HTML5 canvas made easy.
 
-##Demos
+## Demos
 
 Editable demos are available at <http://play.facadejs.com/>.
 
-##Documentation
+## Documentation
 
 The documentation for version 0.3.0-beta can be found at <http://docs.facadejs.com/0.3.0-beta/>.
 
-##Getting Started
+## Getting Started
 
 First include the Facade.js script (15kb minified, 3kb gzipped):
 
@@ -56,7 +56,7 @@ stage.draw(function () {
 });
 ```
 
-##Install
+## Install
 
 Facade.js can be installed using [bower](http://bower.io):
 
@@ -70,7 +70,7 @@ or with [npm](https://www.npmjs.org):
 $ npm install facade.js
 ```
 
-##Build
+## Build
 
 To build Facade.js first install dependencies.
 
@@ -93,7 +93,7 @@ $ grunt shell:docs # Rebuild documentation
 $ grunt shell:gzip # Gzip facade.min.js and stores the result in facade.min.js.gzip
 ```
 
-##Run Tests
+## Run Tests
 
 Tests are built in [casperjs](http://casperjs.org/) and validates the values used to render entities on the canvas.
 
@@ -101,10 +101,10 @@ Tests are built in [casperjs](http://casperjs.org/) and validates the values use
 $ npm test
 ```
 
-##CDN
+## CDN
 
 <http://cdn.facadejs.com/0.3.0-beta/facade.min.js>
 
-##Browser Support
+## Browser Support
 
 Facade.js works in Chrome 10+, Safari 6+, Firefox 4+, Opera 15+, and Internet Explorer 10+. By way of an additional [polyfill](https://gist.github.com/paulirish/1579671) for [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/DOM/window.requestAnimationFrame) support can be added for Internet Explorer 9 and older versions of Safari, Firefox, and Opera.
