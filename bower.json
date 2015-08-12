@@ -1,32 +1,32 @@
 {
-    "name": "facade.js",
-    "description": "Drawing shapes, images and text in HTML5 canvas made easy.",
-    "version": "0.3.0-beta.7",
-    "main": "facade.js",
-    "license": "MIT",
-    "ignore": [
-        "docs/template.hbs",
-        "tests/",
-        ".gitignore",
-        ".jslintrc",
-        ".travis.yml",
-        "Gruntfile.js",
-        "*.json"
-    ],
-    "keywords": [
-        "canvas",
-        "drawing"
-    ],
-    "authors": [
-        {
-            "name": "Scott Doxey",
-            "email": "hello@scottdoxey.com",
-            "homepage": "http://scottdoxey.com/"
-        }
-    ],
-    "homepage": "http://facadejs.com/",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/facadejs/Facade.js.git"
+  "name": "facade.js",
+  "description": "Drawing shapes, images and text in HTML5 canvas made easy.",
+  "version": "0.3.0-beta.7",
+  "main": "facade.js",
+  "license": "MIT",
+  "ignore": [
+    "docs/template.hbs",
+    "tests/",
+    ".gitignore",
+    ".jslintrc",
+    ".travis.yml",
+    "Gruntfile.js",
+    "*.json"
+  ],
+  "keywords": [
+    "canvas",
+    "drawing"
+  ],
+  "authors": [
+    {
+      "name": "Scott Doxey",
+      "email": "hello@scottdoxey.com",
+      "homepage": "http://scottdoxey.com/"
     }
+  ],
+  "homepage": "http://facadejs.com/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/facadejs/Facade.js.git"
+  }
 }
