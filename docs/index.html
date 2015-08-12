@@ -561,9 +561,7 @@ pre .hljs {
                         <p>Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.</p>
 
 
-                        <pre><code>var stage = new Facade(document.querySelector('canvas'));
-var stage = new Facade('stage', 500, 300);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -660,6 +658,20 @@ var stage = new Facade('stage', 500, 300);</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-keyword">var</span> stage = <span class="hljs-keyword">new</span> Facade(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'canvas'</span>));</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-keyword">var</span> stage = <span class="hljs-keyword">new</span> Facade(<span class="hljs-string">'stage'</span>, <span class="hljs-number">500</span>, <span class="hljs-number">300</span>);</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -683,15 +695,13 @@ var stage = new Facade('stage', 500, 300);</code></pre>
                     <div class="method scope-public">
 
                         <h2 id="facade.js-facade.prototype.addtostage">
-                            <a href="#facade.js-facade.prototype.addtostage" class="permalink">#</a> Facade.addToStage(obj, options)
+                            <a href="#facade.js-facade.prototype.addtostage" class="permalink">#</a> Facade.addToStage(obj[, options])
                         </h2>
 
                         <p>Draws a Facade.js entity (or multiple entities) to the stage.</p>
 
 
-                        <pre><code>stage.addToStage(circle);
-stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -712,6 +722,7 @@ stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
                                 <p>
                                     <b>options</b>
                                         <code>Object</code>
+                                        <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Temporary options for rendering a Facade.js entity (or multiple entities).</p>
@@ -721,6 +732,20 @@ stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">stage.addToStage(circle);</code></pre>
+
+
+                                <pre><code class="hljs javascript">stage.addToStage(circle, { x: <span class="hljs-number">100</span>, y: <span class="hljs-number">100</span> });</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -752,10 +777,20 @@ stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
                         <p>Clears the canvas.</p>
 
 
-                        <pre><code> stage.clear();</code></pre>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">stage.clear();</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -787,13 +822,14 @@ stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
                         <p>Sets a callback function to run in a loop using <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a> or available polyfill.</p>
 
 
-                        <pre><code>stage.draw(function () {
+                        <pre><code>stage.draw(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
 
-    this.clear();
+    <span class="hljs-keyword">this</span>.clear();
 
-    this.addToStage(circle, { x: 100, y: 100 });
+    <span class="hljs-keyword">this</span>.addToStage(circle, { x: <span class="hljs-number">100</span>, y: <span class="hljs-number">100</span> });
 
-});</code></pre>
+});
+</code></pre>
 
 
 
@@ -845,8 +881,7 @@ stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
                         <p>Exports a base64 encoded representation of the current rendered canvas.</p>
 
 
-                        <pre><code>console.log(stage.exportBase64('image/png', 100));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -879,6 +914,17 @@ stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(stage.exportBase64(<span class="hljs-string">'image/png'</span>, <span class="hljs-number">100</span>));</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -908,9 +954,7 @@ stage.addToStage(circle, { x: 100, y: 100 });</code></pre>
                         <p>Gets and sets the canvas height.</p>
 
 
-                        <pre><code>console.log(stage.height()); // 300
-console.log(stage.height(600)); // 600</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -931,6 +975,20 @@ console.log(stage.height(600)); // 600</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(stage.height()); <span class="hljs-comment">// 300</span></code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(stage.height(<span class="hljs-number">600</span>)); <span class="hljs-comment">// 600</span></code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -962,8 +1020,7 @@ console.log(stage.height(600)); // 600</code></pre>
                         <p>Applies key-value pairs to appropriate <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> properties and methods.</p>
 
 
-                        <pre><code>stage.renderWithContext({ fillStyle: '#f00', globalAlpha: 0.5, fillRect: [ 0, 0, 100, 100 ]});</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -995,6 +1052,17 @@ console.log(stage.height(600)); // 600</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">stage.renderWithContext({ fillStyle: <span class="hljs-string">'#f00'</span>, globalAlpha: <span class="hljs-number">0.5</span>, fillRect: [ <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span> ]});</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -1002,6 +1070,7 @@ console.log(stage.height(600)); // 600</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -1022,9 +1091,7 @@ console.log(stage.height(600)); // 600</code></pre>
                         <p>Resizes the canvas width and height to be multiplied by the pixel ratio of the device to allow for sub-pixel aliasing. Canvas tag maintains original width and height through CSS. Must be called before creating/adding any Facade entities as scaling is applied to the canvas context.</p>
 
 
-                        <pre><code>stage.resizeForHDPI();
-stage.resizeForHDPI(2);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1045,6 +1112,20 @@ stage.resizeForHDPI(2);</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">stage.resizeForHDPI();</code></pre>
+
+
+                                <pre><code class="hljs javascript">stage.resizeForHDPI(<span class="hljs-number">2</span>);</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1076,10 +1157,20 @@ stage.resizeForHDPI(2);</code></pre>
                         <p>Starts the callback supplied in <code>Facade.draw</code>.</p>
 
 
-                        <pre><code>stage.start();</code></pre>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">stage.start();</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1111,10 +1202,20 @@ stage.resizeForHDPI(2);</code></pre>
                         <p>Stops the callback supplied in <code>Facade.draw</code>.</p>
 
 
-                        <pre><code>stage.stop();</code></pre>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">stage.stop();</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1146,9 +1247,7 @@ stage.resizeForHDPI(2);</code></pre>
                         <p>Gets and sets the canvas width.</p>
 
 
-                        <pre><code>console.log(stage.width()); // 400
-console.log(stage.width(800)); // 800</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1169,6 +1268,20 @@ console.log(stage.width(800)); // 800</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(stage.width()); <span class="hljs-comment">// 400</span></code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(stage.width(<span class="hljs-number">800</span>)); <span class="hljs-comment">// 800</span></code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1201,8 +1314,7 @@ console.log(stage.width(800)); // 800</code></pre>
                         <p>Method called by <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.requestAnimationFrame" target="_blank">requestAnimationFrame</a>. Sets <code>Facade.dt</code>, <code>Facade.fps</code> and  <code>Facade.ftime</code>.</p>
 
 
-                        <pre><code>this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1222,6 +1334,17 @@ console.log(stage.width(800)); // 800</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-keyword">this</span>._requestAnimation = _requestAnimationFrame(<span class="hljs-keyword">this</span>._animate.bind(<span class="hljs-keyword">this</span>));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1288,9 +1411,7 @@ console.log(stage.width(800)); // 800</code></pre>
                         <p>Returns a default set of options common to all Facade.js entities.</p>
 
 
-                        <pre><code>console.log(Facade.Entity.prototype._defaultOptions());
-console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1310,6 +1431,20 @@ console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));</code></
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(Facade.Entity.prototype._defaultOptions());</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(Facade.Entity.prototype._defaultOptions({ lineWidth: <span class="hljs-number">0</span> }));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1342,9 +1477,7 @@ console.log(Facade.Entity.prototype._defaultOptions({ lineWidth: 0 }));</code></
                         <p>Returns a default set of metrics common to all Facade.js entities.</p>
 
 
-                        <pre><code>console.log(Facade.Entity.prototype._defaultMetrics());
-console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1364,6 +1497,20 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(Facade.Entity.prototype._defaultMetrics());</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(Facade.Entity.prototype._defaultMetrics({ scale: <span class="hljs-literal">null</span> }));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1396,8 +1543,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Returns an array of the x and y anchor positions based on given options and metrics.</p>
 
 
-                        <pre><code>console.log(rect._getAnchorPoint(options, metrics));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1426,6 +1572,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(rect._getAnchorPoint(options, metrics));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1458,8 +1615,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Returns an integer for the stroke width offset. Used to calculate metrics.</p>
 
 
-                        <pre><code>console.log(rect._getStrokeWidthOffset(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1479,6 +1635,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(rect._getStrokeWidthOffset(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1511,8 +1678,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Applies transforms (translate, rotate and scale) to an entity.</p>
 
 
-                        <pre><code>console.log(rect._applyTransforms(context, options, metrics));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1552,6 +1718,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(rect._applyTransforms(context, options, metrics));</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -1559,6 +1736,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -1579,8 +1757,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Retrieves the value of a given option. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
 
-                        <pre><code>console.log(text.getOption('value'));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1600,6 +1777,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text.getOption(<span class="hljs-string">'value'</span>));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1634,10 +1822,20 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Retrieves the value of all options. Only retrieves options set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
 
-                        <pre><code>console.log(text.getAllOptions());</code></pre>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text.getAllOptions());</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1670,8 +1868,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Sets an option for a given entity.</p>
 
 
-                        <pre><code>console.log(text._setOption('value', 'Hello world!'));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1714,6 +1911,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text._setOption(<span class="hljs-string">'value'</span>, <span class="hljs-string">'Hello world!'</span>));</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -1746,8 +1954,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Sets a group of options as key-value pairs to an entity.</p>
 
 
-                        <pre><code>console.log(text.setOptions({ fontFamily: 'Georgia', fontSize: 20 }));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1780,6 +1987,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text.setOptions({ fontFamily: <span class="hljs-string">'Georgia'</span>, fontSize: <span class="hljs-number">20</span> }));</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -1809,8 +2027,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Retrieves the value of a given metric. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
 
-                        <pre><code>console.log(text.getMetric('width'));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1830,6 +2047,17 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text.getMetric(<span class="hljs-string">'width'</span>));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1861,10 +2089,20 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Retrieves the value of all metrics. Only retrieves metrics set when creating a new Facade.js entity or using <a href="#facade.entity.prototype.setoptions"><code>setOptions</code></a> not through temporary options set when using <a href="#facade.addtostage"><code>Facade.addToStage</code></a>.</p>
 
 
-                        <pre><code>console.log(text.getAllMetrics());</code></pre>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text.getAllMetrics());</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -1896,9 +2134,7 @@ console.log(Facade.Entity.prototype._defaultMetrics({ scale: null }));</code></p
                         <p>Renders an entity to a canvas.</p>
 
 
-                        <pre><code>entity.draw(stage);
-entity.draw(stage, { x: 100, y: 100 });</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -1929,6 +2165,20 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">entity.draw(stage);</code></pre>
+
+
+                                <pre><code class="hljs javascript">entity.draw(stage, { x: <span class="hljs-number">100</span>, y: <span class="hljs-number">100</span> });</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -1936,6 +2186,7 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -1956,15 +2207,16 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                         <p>Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.</p>
 
 
-                        <pre><code>var polygon = new Facade.Polygon({
-    x: 0,
-    y: 0,
-    points: [ [100, 0], [200, 100], [100, 200], [0, 100] ],
-    lineWidth: 10,
-    strokeStyle: '#333E4B',
-    fillStyle: '#1C73A8',
-    anchor: 'top/left'
-});</code></pre>
+                        <pre><code><span class="hljs-keyword">var</span> polygon = <span class="hljs-keyword">new</span> Facade.Polygon({
+    x: <span class="hljs-number">0</span>,
+    y: <span class="hljs-number">0</span>,
+    points: [ [<span class="hljs-number">100</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">200</span>, <span class="hljs-number">100</span>], [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">100</span>] ],
+    lineWidth: <span class="hljs-number">10</span>,
+    strokeStyle: <span class="hljs-string">'#333E4B'</span>,
+    fillStyle: <span class="hljs-string">'#1C73A8'</span>,
+    anchor: <span class="hljs-string">'top/left'</span>
+});
+</code></pre>
 
 
 
@@ -1984,26 +2236,6 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
 
 
                                 <p>
-                                    <b>options.x</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>X coordinate to position the polygon. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.y</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate to position the polygon. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.anchor</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
@@ -2014,42 +2246,12 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
 
 
                                 <p>
-                                    <b>options.rotate</b>
-                                        <code>Integer</code>
+                                    <b>options.closePath</b>
+                                        <code>Boolean</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Degrees to rotate the polygon. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.scale</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>A float representing the scale of a polygon. <i>Default:</i> 1</p>
-
-
-
-                                <p>
-                                    <b>options.opacity</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100</p>
-
-
-
-                                <p>
-                                    <b>options.points</b>
-                                        <code>Array</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
+                                <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
 
 
 
@@ -2060,26 +2262,6 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                                 </p>
 
                                 <p>Fill color for the polygon. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.strokeStyle</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.lineWidth</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Width of the stroke. <i>Default:</i> 0</p>
 
 
 
@@ -2104,12 +2286,82 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
 
 
                                 <p>
-                                    <b>options.closePath</b>
-                                        <code>Boolean</code>
+                                    <b>options.lineWidth</b>
+                                        <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Boolean to determine if the polygon should be self closing or not. <i>Default:</i> true</p>
+                                <p>Width of the stroke. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.opacity</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Opacity of the polygon. Integer between 0 and 100. <i>Default:</i> 100</p>
+
+
+
+                                <p>
+                                    <b>options.points</b>
+                                        <code>Array</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Multi-dimensional array of points used to render a polygon. Point arrays with 2 values is rendered as a line, 5 values is rendered as an arc and 6 values is rendered as a bezier curve.</p>
+
+
+
+                                <p>
+                                    <b>options.rotate</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Degrees to rotate the polygon. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.scale</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>A float representing the scale of a polygon. <i>Default:</i> 1</p>
+
+
+
+                                <p>
+                                    <b>options.strokeStyle</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Color of a polygon's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.x</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>X coordinate to position the polygon. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate to position the polygon. <i>Default:</i> 0</p>
 
 
 
@@ -2148,8 +2400,7 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                         <p>Returns a default set of options common to all Facade.js polygon entities.</p>
 
 
-                        <pre><code>console.log(Facade.Polygon.prototype._defaultOptions());</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2169,6 +2420,17 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(Facade.Polygon.prototype._defaultOptions());</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -2201,8 +2463,7 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                         <p>Renders a polygon entity to a canvas.</p>
 
 
-                        <pre><code>polygon._draw(facade, options, metrics);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2242,6 +2503,17 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">polygon._draw(facade, options, metrics);</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -2249,6 +2521,7 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -2270,8 +2543,7 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                         <p>Custom configuration for options specific to a polygon entity.</p>
 
 
-                        <pre><code>console.log(polygon._configOptions(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2291,6 +2563,17 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(polygon._configOptions(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -2323,9 +2606,7 @@ entity.draw(stage, { x: 100, y: 100 });</code></pre>
                         <p>Set metrics based on the polygon's options.</p>
 
 
-                        <pre><code>console.log(polygon._setMetrics());
-console.log(polygon._setMetrics(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2346,6 +2627,20 @@ console.log(polygon._setMetrics(options));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(polygon._setMetrics());</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(polygon._setMetrics(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -2377,15 +2672,16 @@ console.log(polygon._setMetrics(options));</code></pre>
                         <p>Create a circle object. Inherits all methods from <b>Facade.Polygon</b>.</p>
 
 
-                        <pre><code>var circle = new Facade.Circle({
-    x: 0,
-    y: 0,
-    radius: 100,
-    lineWidth: 10,
-    strokeStyle: '#333E4B',
-    fillStyle: '#1C73A8',
-    anchor: 'top/left'
-});</code></pre>
+                        <pre><code><span class="hljs-keyword">var</span> circle = <span class="hljs-keyword">new</span> Facade.Circle({
+    x: <span class="hljs-number">0</span>,
+    y: <span class="hljs-number">0</span>,
+    radius: <span class="hljs-number">100</span>,
+    lineWidth: <span class="hljs-number">10</span>,
+    strokeStyle: <span class="hljs-string">'#333E4B'</span>,
+    fillStyle: <span class="hljs-string">'#1C73A8'</span>,
+    anchor: <span class="hljs-string">'top/left'</span>
+});
+</code></pre>
 
 
 
@@ -2405,26 +2701,6 @@ console.log(polygon._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.x</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>X coordinate to position the circle. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.y</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate to position the circle. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.anchor</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
@@ -2435,32 +2711,22 @@ console.log(polygon._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.rotate</b>
-                                        <code>Integer</code>
+                                    <b>options.counterclockwise</b>
+                                        <code>Boolean</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Degrees to rotate the circle. <i>Default:</i> 0</p>
+                                <p>Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false</p>
 
 
 
                                 <p>
-                                    <b>options.scale</b>
+                                    <b>options.end</b>
                                         <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>A float representing the scale of a circle. <i>Default:</i> 1</p>
-
-
-
-                                <p>
-                                    <b>options.opacity</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100</p>
+                                <p>Degree at which the circle ends. <i>Default:</i> 360</p>
 
 
 
@@ -2471,26 +2737,6 @@ console.log(polygon._setMetrics(options));</code></pre>
                                 </p>
 
                                 <p>Fill color for the circle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.strokeStyle</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.lineWidth</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Width of the stroke. <i>Default:</i> 0</p>
 
 
 
@@ -2515,12 +2761,52 @@ console.log(polygon._setMetrics(options));</code></pre>
 
 
                                 <p>
+                                    <b>options.lineWidth</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Width of the stroke. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.opacity</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Opacity of the circle. Integer between 0 and 100. <i>Default:</i> 100</p>
+
+
+
+                                <p>
                                     <b>options.radius</b>
                                         <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Radius of the circle. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.rotate</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Degrees to rotate the circle. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.scale</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>A float representing the scale of a circle. <i>Default:</i> 1</p>
 
 
 
@@ -2535,22 +2821,32 @@ console.log(polygon._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.end</b>
-                                        <code>Integer</code>
+                                    <b>options.strokeStyle</b>
+                                        <code>String</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Degree at which the circle ends. <i>Default:</i> 360</p>
+                                <p>Color of a circle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
                                 <p>
-                                    <b>options.counterclockwise</b>
-                                        <code>Boolean</code>
+                                    <b>options.x</b>
+                                        <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Boolean determining if the circle will be drawn in a counter clockwise direction. <i>Default:</i> false</p>
+                                <p>X coordinate to position the circle. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate to position the circle. <i>Default:</i> 0</p>
 
 
 
@@ -2589,8 +2885,7 @@ console.log(polygon._setMetrics(options));</code></pre>
                         <p>Custom configuration for options specific to a circle entity.</p>
 
 
-                        <pre><code>console.log(circle._configOptions(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2610,6 +2905,17 @@ console.log(polygon._setMetrics(options));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(circle._configOptions(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -2642,8 +2948,7 @@ console.log(polygon._setMetrics(options));</code></pre>
                         <p>Returns an array of the x and y anchor positions based on given options and metrics.</p>
 
 
-                        <pre><code>console.log(circle._getAnchorPoint(options, metrics));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2672,6 +2977,17 @@ console.log(polygon._setMetrics(options));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(circle._getAnchorPoint(options, metrics));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -2704,9 +3020,7 @@ console.log(polygon._setMetrics(options));</code></pre>
                         <p>Set metrics based on the circle's options.</p>
 
 
-                        <pre><code>console.log(circle._setMetrics());
-console.log(circle._setMetrics(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2727,6 +3041,20 @@ console.log(circle._setMetrics(options));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(circle._setMetrics());</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(circle._setMetrics(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -2786,32 +3114,42 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.x</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>X coordinate to position the line. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.y</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate to position the line. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.anchor</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Position to anchor the line. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.lineCap</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>The style of line cap. <i>Default:</i> &quot;butt&quot;<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.lineWidth</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Width of the stroke. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.opacity</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100</p>
 
 
 
@@ -2836,42 +3174,12 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.opacity</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Opacity of the line. Integer between 0 and 100. <i>Default:</i> 100</p>
-
-
-
-                                <p>
                                     <b>options.strokeStyle</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Color of a line. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.lineWidth</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Width of the stroke. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.lineCap</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>The style of line cap. <i>Default:</i> &quot;butt&quot;<br><ul><li>butt</li><li>round</li><li>square</li></ul></p>
 
 
 
@@ -2886,16 +3194,6 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.y1</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate where line begins. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.x2</b>
                                         <code>Integer</code>
                                         <span class="label label-default">Optional</span>
@@ -2906,12 +3204,42 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
+                                    <b>options.x</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>X coordinate to position the line. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y1</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate where line begins. <i>Default:</i> 0</p>
+
+
+
+                                <p>
                                     <b>options.y2</b>
                                         <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Y coordinate where line ends. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate to position the line. <i>Default:</i> 0</p>
 
 
 
@@ -2950,8 +3278,7 @@ console.log(circle._setMetrics(options));</code></pre>
                         <p>Custom configuration for options specific to a line entity.</p>
 
 
-                        <pre><code>console.log(line._configOptions(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -2971,6 +3298,17 @@ console.log(circle._setMetrics(options));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(line._configOptions(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3003,8 +3341,7 @@ console.log(circle._setMetrics(options));</code></pre>
                         <p>Returns an array of the x and y anchor positions based on given options and metrics.</p>
 
 
-                        <pre><code>console.log(line._getAnchorPoint(options, metrics));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -3033,6 +3370,17 @@ console.log(circle._setMetrics(options));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(line._getAnchorPoint(options, metrics));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3093,32 +3441,62 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.x</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>X coordinate to position the rectangle. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.y</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate to position the rectangle. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.anchor</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Position to anchor the rectangle. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.fillStyle</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.height</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Height of the rectangle. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.lineJoin</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>The style of rectangle join. <i>Default:</i> &quot;miter&quot;<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.lineWidth</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Width of the stroke. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.opacity</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100</p>
 
 
 
@@ -3143,52 +3521,12 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.opacity</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Opacity of the rectangle. Integer between 0 and 100. <i>Default:</i> 100</p>
-
-
-
-                                <p>
-                                    <b>options.fillStyle</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Fill color for the rectangle. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
                                     <b>options.strokeStyle</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Color of a rectangle's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.lineWidth</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Width of the stroke. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.lineJoin</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>The style of rectangle join. <i>Default:</i> &quot;miter&quot;<br><ul><li>miter</li><li>round</li><li>bevel</li></ul></p>
 
 
 
@@ -3203,12 +3541,22 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.height</b>
+                                    <b>options.x</b>
                                         <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Height of the rectangle. <i>Default:</i> 0</p>
+                                <p>X coordinate to position the rectangle. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate to position the rectangle. <i>Default:</i> 0</p>
 
 
 
@@ -3247,8 +3595,7 @@ console.log(circle._setMetrics(options));</code></pre>
                         <p>Custom configuration for options specific to a rectangle entity.</p>
 
 
-                        <pre><code>console.log(rect._configOptions(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -3268,6 +3615,17 @@ console.log(circle._setMetrics(options));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(rect._configOptions(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3335,26 +3693,6 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.x</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>X coordinate to position an image. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.y</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate to position an image. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.anchor</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
@@ -3365,32 +3703,22 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.rotate</b>
-                                        <code>Integer</code>
+                                    <b>options.callback</b>
+                                        <code>Function</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Degrees to rotate the image. <i>Default:</i> 0</p>
+                                <p>Function called for every frame of a sprite animation. <i>Default:</i> <code>function (frame) { };</code></p>
 
 
 
                                 <p>
-                                    <b>options.scale</b>
-                                        <code>Integer</code>
+                                    <b>options.frames</b>
+                                        <code>Array</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>A float representing the scale of an image. <i>Default:</i> 1</p>
-
-
-
-                                <p>
-                                    <b>options.width</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Width of the image. <i>Default:</i> 0</p>
+                                <p>Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]</p>
 
 
 
@@ -3405,22 +3733,12 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.tileX</b>
-                                        <code>Integer</code>
+                                    <b>options.loop</b>
+                                        <code>Boolean</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Number of times to tile the image horizontally. <i>Default:</i> 1</p>
-
-
-
-                                <p>
-                                    <b>options.tileY</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Number of times to tile the image vertically. <i>Default:</i> 1</p>
+                                <p>Determines if the animation should loop. <i>Default:</i> true</p>
 
 
 
@@ -3445,12 +3763,22 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.frames</b>
-                                        <code>Array</code>
+                                    <b>options.rotate</b>
+                                        <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Array of frame numbers (integers starting at 0) for sprite animation. <i>Default:</i> [0]</p>
+                                <p>Degrees to rotate the image. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.scale</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>A float representing the scale of an image. <i>Default:</i> 1</p>
 
 
 
@@ -3465,22 +3793,52 @@ console.log(circle._setMetrics(options));</code></pre>
 
 
                                 <p>
-                                    <b>options.loop</b>
-                                        <code>Boolean</code>
+                                    <b>options.tileX</b>
+                                        <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Determines if the animation should loop. <i>Default:</i> true</p>
+                                <p>Number of times to tile the image horizontally. <i>Default:</i> 1</p>
 
 
 
                                 <p>
-                                    <b>options.callback</b>
-                                        <code>Function</code>
+                                    <b>options.tileY</b>
+                                        <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Function called for every frame of a sprite animation. <i>Default:</i> <code>function (frame) { };</code></p>
+                                <p>Number of times to tile the image vertically. <i>Default:</i> 1</p>
+
+
+
+                                <p>
+                                    <b>options.width</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Width of the image. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.x</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>X coordinate to position an image. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate to position an image. <i>Default:</i> 0</p>
 
 
 
@@ -3553,9 +3911,7 @@ console.log(circle._setMetrics(options));</code></pre>
                         <p>Loads either a reference to an image tag or an image URL into a Facade.Image entity.</p>
 
 
-                        <pre><code>console.log(image.load(document.querySelector('img')));
-console.log(image.load('images/sprite.png'));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -3578,6 +3934,20 @@ console.log(image.load('images/sprite.png'));</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(image.load(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'img'</span>)));</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(image.load(<span class="hljs-string">'images/sprite.png'</span>));</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -3585,6 +3955,7 @@ console.log(image.load('images/sprite.png'));</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -3605,10 +3976,20 @@ console.log(image.load('images/sprite.png'));</code></pre>
                         <p>Starts an image sprite animation.</p>
 
 
-                        <p>image.play();</p>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">image.play();</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3640,10 +4021,20 @@ console.log(image.load('images/sprite.png'));</code></pre>
                         <p>Pauses an image sprite animation.</p>
 
 
-                        <p>image.pause();</p>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">image.pause();</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3675,10 +4066,20 @@ console.log(image.load('images/sprite.png'));</code></pre>
                         <p>Resets an image sprite animation to the first frame.</p>
 
 
-                        <p>image.reset();</p>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">image.reset();</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3710,10 +4111,20 @@ console.log(image.load('images/sprite.png'));</code></pre>
                         <p>Stops and resets an image sprite animation.</p>
 
 
-                        <p>image.stop();</p>
+                        
 
 
 
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">image.stop();</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3746,8 +4157,7 @@ console.log(image.load('images/sprite.png'));</code></pre>
                         <p>Custom configuration for options specific to a image entity.</p>
 
 
-                        <pre><code>console.log(image._configOptions(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -3767,6 +4177,17 @@ console.log(image.load('images/sprite.png'));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(image._configOptions(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3799,9 +4220,7 @@ console.log(image.load('images/sprite.png'));</code></pre>
                         <p>Set metrics based on the image's options.</p>
 
 
-                        <pre><code>console.log(image._setMetrics());
-console.log(image._setMetrics(updated));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -3822,6 +4241,20 @@ console.log(image._setMetrics(updated));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(image._setMetrics());</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(image._setMetrics(updated));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -3854,8 +4287,7 @@ console.log(image._setMetrics(updated));</code></pre>
                         <p>Renders an image entity to a canvas.</p>
 
 
-                        <pre><code>image._draw(facade, options, metrics);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -3895,6 +4327,17 @@ console.log(image._setMetrics(updated));</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">image._draw(facade, options, metrics);</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -3902,6 +4345,7 @@ console.log(image._setMetrics(updated));</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -3959,32 +4403,82 @@ console.log(image._setMetrics(updated));</code></pre>
 
 
                                 <p>
-                                    <b>options.x</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>X coordinate to position a text object. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.y</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate to position a text object. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.anchor</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
                                 <p>Position to anchor the text object. <i>Default:</i> &quot;top/left&quot;<br><ul><li>top/left</li><li>top/center</li><li>top/right</li><li>center/left</li><li>center</li><li>center/right</li><li>bottom/left</li><li>bottom/center</li><li>bottom/right</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.fillStyle</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.fontFamily</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> &quot;Arial&quot;</p>
+
+
+
+                                <p>
+                                    <b>options.fontSize</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Font size in pixels. <i>Default:</i> 30</p>
+
+
+
+                                <p>
+                                    <b>options.fontStyle</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Font style of the text. <i>Default:</i> &quot;normal&quot;<br><ul><li>normal</li><li>bold</li><li>italic</li></ul></p>
+
+
+
+                                <p>
+                                    <b>options.lineHeight</b>
+                                        <code>String</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Line height of the text. <i>Default:</i> 1</p>
+
+
+
+                                <p>
+                                    <b>options.lineWidth</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Width of the stroke. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.opacity</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100</p>
 
 
 
@@ -4009,62 +4503,12 @@ console.log(image._setMetrics(updated));</code></pre>
 
 
                                 <p>
-                                    <b>options.opacity</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Opacity of the text object. Integer between 0 and 100. <i>Default:</i> 100</p>
-
-
-
-                                <p>
-                                    <b>options.width</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.fontFamily</b>
+                                    <b>options.strokeStyle</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Sets the font family of the text. Only one font can be specified at a time. <i>Default:</i> &quot;Arial&quot;</p>
-
-
-
-                                <p>
-                                    <b>options.fontStyle</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Font style of the text. <i>Default:</i> &quot;normal&quot;<br><ul><li>normal</li><li>bold</li><li>italic</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.fontSize</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Font size in pixels. <i>Default:</i> 30</p>
-
-
-
-                                <p>
-                                    <b>options.lineHeight</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Line height of the text. <i>Default:</i> 1</p>
+                                <p>Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
 
 
 
@@ -4089,32 +4533,32 @@ console.log(image._setMetrics(updated));</code></pre>
 
 
                                 <p>
-                                    <b>options.fillStyle</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Fill color for the text object. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.strokeStyle</b>
-                                        <code>String</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Color of a text object's stroke. Can be a text representation of a color, HEX, RGB(a), HSL(a). <i>Default:</i> &quot;#000&quot;<br><ul><li>HTML Colors: red, green, blue, etc.</li><li>HEX: #f00, #ff0000</li><li>RGB(a): rgb(255, 0, 0), rgba(0, 255, 0, 0.5)</li><li>HSL(a): hsl(100, 100%, 50%), hsla(100, 100%, 50%, 0.5)</li></ul></p>
-
-
-
-                                <p>
-                                    <b>options.lineWidth</b>
+                                    <b>options.width</b>
                                         <code>Integer</code>
                                         <span class="label label-default">Optional</span>
                                 </p>
 
-                                <p>Width of the stroke. <i>Default:</i> 0</p>
+                                <p>Max width of the text object. Will cause text to wrap onto a new line if necessary. No wrapping will occur if the value is set to 0. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.x</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>X coordinate to position a text object. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate to position a text object. <i>Default:</i> 0</p>
 
 
 
@@ -4169,8 +4613,7 @@ console.log(image._setMetrics(updated));</code></pre>
                         <p>Sets the text entities value.</p>
 
 
-                        <pre><code>console.log(text.setText('Lorem ipsum dolor sit amet'));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4190,6 +4633,17 @@ console.log(image._setMetrics(updated));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text.setText(<span class="hljs-string">'Lorem ipsum dolor sit amet'</span>));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -4222,8 +4676,7 @@ console.log(image._setMetrics(updated));</code></pre>
                         <p>Renders a text entity to a canvas.</p>
 
 
-                        <pre><code>text._draw(facade, options, metrics);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4263,6 +4716,17 @@ console.log(image._setMetrics(updated));</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">text._draw(facade, options, metrics);</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -4270,6 +4734,7 @@ console.log(image._setMetrics(updated));</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -4291,8 +4756,7 @@ console.log(image._setMetrics(updated));</code></pre>
                         <p>Custom configuration for options specific to a text entity.</p>
 
 
-                        <pre><code>console.log(text._configOptions(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4312,6 +4776,17 @@ console.log(image._setMetrics(updated));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text._configOptions(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -4344,9 +4819,7 @@ console.log(image._setMetrics(updated));</code></pre>
                         <p>Set metrics based on the text's options.</p>
 
 
-                        <pre><code>console.log(text._setMetrics());
-console.log(text._setMetrics(updated));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4367,6 +4840,20 @@ console.log(text._setMetrics(updated));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text._setMetrics());</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(text._setMetrics(updated));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -4423,26 +4910,6 @@ group.addToGroup(rect);</code></pre>
 
 
                                 <p>
-                                    <b>options.x</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>X coordinate to position a group. <i>Default:</i> 0</p>
-
-
-
-                                <p>
-                                    <b>options.y</b>
-                                        <code>Integer</code>
-                                        <span class="label label-default">Optional</span>
-                                </p>
-
-                                <p>Y coordinate to position a group. <i>Default:</i> 0</p>
-
-
-
-                                <p>
                                     <b>options.anchor</b>
                                         <code>String</code>
                                         <span class="label label-default">Optional</span>
@@ -4469,6 +4936,26 @@ group.addToGroup(rect);</code></pre>
                                 </p>
 
                                 <p>A float representing the scale of a group. <i>Default:</i> 1</p>
+
+
+
+                                <p>
+                                    <b>options.x</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>X coordinate to position a group. <i>Default:</i> 0</p>
+
+
+
+                                <p>
+                                    <b>options.y</b>
+                                        <code>Integer</code>
+                                        <span class="label label-default">Optional</span>
+                                </p>
+
+                                <p>Y coordinate to position a group. <i>Default:</i> 0</p>
 
 
 
@@ -4507,8 +4994,7 @@ group.addToGroup(rect);</code></pre>
                         <p>Renders a group of entities to a canvas.</p>
 
 
-                        <pre><code>group._draw(stage, options, metrics);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4548,6 +5034,17 @@ group.addToGroup(rect);</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">group._draw(stage, options, metrics);</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -4555,6 +5052,7 @@ group.addToGroup(rect);</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -4576,8 +5074,7 @@ group.addToGroup(rect);</code></pre>
                         <p>Custom configuration for options specific to a group entity.</p>
 
 
-                        <pre><code>console.log(group._configOptions(options));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4597,6 +5094,17 @@ group.addToGroup(rect);</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(group._configOptions(options));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -4628,8 +5136,7 @@ group.addToGroup(rect);</code></pre>
                         <p>Adds a Facade.js entity to a group.</p>
 
 
-                        <pre><code>group.addToGroup(circle);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4652,6 +5159,17 @@ group.addToGroup(rect);</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">group.addToGroup(circle);</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -4659,6 +5177,7 @@ group.addToGroup(rect);</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -4679,8 +5198,7 @@ group.addToGroup(rect);</code></pre>
                         <p>Tests the existence of an entity within a group.</p>
 
 
-                        <pre><code>group.addToGroup(circle);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4700,6 +5218,17 @@ group.addToGroup(rect);</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">group.addToGroup(circle);</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
@@ -4731,8 +5260,7 @@ group.addToGroup(rect);</code></pre>
                         <p>Removes a Facade.js entity from a group.</p>
 
 
-                        <pre><code>group.removeFromGroup(circle);</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4754,6 +5282,17 @@ group.addToGroup(rect);</code></pre>
 
 
 
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript">group.removeFromGroup(circle);</code></pre>
+
+
+                        </section>
+
+
                         <section class="returns">
 
                             <h3>Returns</h3>
@@ -4761,6 +5300,7 @@ group.addToGroup(rect);</code></pre>
 
 
                                     <p>
+                                            <code>Void</code>
                                     </p>
 
                                     
@@ -4782,9 +5322,7 @@ group.addToGroup(rect);</code></pre>
                         <p>Set metrics based on the groups's entities and options.</p>
 
 
-                        <pre><code>console.log(group._setMetrics());
-console.log(group._setMetrics(updated));</code></pre>
-
+                        
 
 
                         <section class="parameters">
@@ -4805,6 +5343,20 @@ console.log(group._setMetrics(updated));</code></pre>
                         </section>
 
 
+
+
+                        <section class="examples">
+
+                            <h3>Examples</h3>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(group._setMetrics());</code></pre>
+
+
+                                <pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(group._setMetrics(updated));</code></pre>
+
+
+                        </section>
 
 
                         <section class="returns">
