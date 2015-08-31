@@ -1,17 +1,11 @@
 {
   "name": "facade.js",
   "description": "Drawing shapes, images and text in HTML5 canvas made easy.",
-  "version": "0.3.0-beta.7",
+  "version": "0.4.0-edge",
   "main": "facade.js",
   "license": "MIT",
   "ignore": [
-    "docs/template.hbs",
-    "tests/",
-    ".gitignore",
-    ".jslintrc",
-    ".travis.yml",
-    "Gruntfile.js",
-    "*.json"
+    "tests/"
   ],
   "keywords": [
     "canvas",
@@ -28,5 +22,6 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/facadejs/Facade.js.git"
-  }
+  },
+  "private": true
 }
