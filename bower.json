@@ -5,7 +5,7 @@
   "main": "facade.js",
   "license": "MIT",
   "ignore": [
-    "tests/"
+    "test/"
   ],
   "keywords": [
     "canvas",
