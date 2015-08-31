@@ -8,7 +8,7 @@ describe('facade.js', function () {
 
     it('creates a new object', function () {
 
-        chai.expect(new Facade).to.be.an('object');
+        chai.expect(new Facade()).to.be.an('object');
         chai.expect(Facade()).to.be.an('object');
 
     });
