@@ -5,6 +5,7 @@
   "main": "facade.js",
   "license": "MIT",
   "devDependencies": {
+    "benchmark": "1.0.0",
     "chai": "3.2.0",
     "coveralls": "2.11.4",
     "grunt": "0.4.5",

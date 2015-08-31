@@ -8,7 +8,7 @@ module.exports = function (grunt) {
                 options: {
                     run: true
                 },
-                src: ['./test/**/*.html']
+                src: ['./test/index.html']
             }
         }
     });
