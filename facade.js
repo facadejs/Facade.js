@@ -369,6 +369,8 @@
 
     Facade.prototype.start = function () {
 
+        this.stop();
+
         this._requestAnimation = _requestAnimationFrame(this._animate.bind(this));
 
         return this;
