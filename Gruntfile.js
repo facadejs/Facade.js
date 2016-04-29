@@ -48,14 +48,12 @@ module.exports = function (grunt) {
 
         doxdox: {
 
-            bootstrap: {
-
+            markdown: {
                 input: 'facade.js',
-                output: 'docs/index.html',
+                output: 'docs/README.md',
                 config: {
-                    layout: 'docs/template.hbs'
+                    layout: 'Markdown'
                 }
-
             }
 
         },
