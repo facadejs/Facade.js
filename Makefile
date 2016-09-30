@@ -1,4 +1,6 @@
+BIN=./node_modules/.bin
+
 test:
-	./node_modules/.bin/grunt mocha
+	$(BIN)/mocha test/specs/**/*.js
 
 .PHONY: test
