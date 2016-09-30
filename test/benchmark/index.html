@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1">
+<title>Benchmark Tests</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="page-header">
+
+        <h1>Benchmark Tests</h1>
+
+    </div>
+
+    <script src="../../facade.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.2/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/benchmark/2.1.1/benchmark.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <div class="tests">
+
+        <div class="test">
+
+            <h3>Base Facade.js Object</h3>
+
+            <p><button class="btn btn-primary">Run Tests</button></p>
+
+            <ul></ul>
+
+            <script>
+
+            (() => {
+
+                const $test = $(document.currentScript).closest('.test');
+
+                const suite = new Benchmark.Suite;
+
+                suite.add('create object with no parameters', () => {
+
+                    const stage = Facade();
+
+                });
+
+                suite.add('create object with parameters', () => {
+
+                    const stage = Facade('stage', 400, 400);
+
+                });
+
+                suite.on('cycle', event => {
+
+                    $test.find('ul').append(`<li>${event.target}</li>`);
+
+                }).on('complete', function () {
+
+                    $test.find('ul').append(`<li><mark><b>Fastest is</b> ${this.filter('fastest').map('name').join(', ')}</mark></li>`);
+
+                });
+
+                $test.find('button').on('click', () => {
+
+                    suite.run({
+                        'async': true
+                    });
+
+                });
+
+                $test.find('button').append(` <span class="badge">${suite.length}</span>`);
+
+            }());
+
+            </script>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
