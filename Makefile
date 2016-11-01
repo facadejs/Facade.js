@@ -1,7 +1,9 @@
+BIN=node_modules/.bin
+
 test:
-	grunt test
+	$(BIN)/grunt test
 
 docs:
-	grunt doxdox
+	$(BIN)/grunt doxdox
 
 .PHONY: docs
