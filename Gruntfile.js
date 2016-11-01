@@ -46,18 +46,6 @@ module.exports = function (grunt) {
 
         },
 
-        doxdox: {
-
-            markdown: {
-                input: 'facade.js',
-                output: 'docs/README.md',
-                config: {
-                    layout: 'Markdown'
-                }
-            }
-
-        },
-
         shell: {
 
             gzip: {
@@ -79,7 +67,7 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('default', [ 'jshint', 'uglify', 'doxdox', 'shell' ]);
+    grunt.registerTask('default', [ 'jshint', 'uglify', 'shell' ]);
     grunt.registerTask('test', [ 'casperjs' ]);
 
 };
