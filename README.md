@@ -2,9 +2,9 @@
 
 # Facade.js 0.3.0-beta
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/facadejs/Facade.js.svg)](https://greenkeeper.io/)
-
 > Drawing shapes, images and text in HTML5 canvas made easy.
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/facadejs/Facade.js.svg)](https://greenkeeper.io/)
 
 ## Demos
 
