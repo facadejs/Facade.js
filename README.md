@@ -1,9 +1,8 @@
-[![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js) [![](https://david-dm.org/facadejs/Facade.js/dev-status.svg)](https://david-dm.org/facadejs/Facade.js/#info=devDependencies)
-
 # Facade.js 0.3.0-beta
 
 > Drawing shapes, images and text in HTML5 canvas made easy.
 
+[![](https://api.travis-ci.org/facadejs/Facade.js.svg)](https://travis-ci.org/facadejs/Facade.js) [![](https://david-dm.org/facadejs/Facade.js/dev-status.svg)](https://david-dm.org/facadejs/Facade.js/#info=devDependencies)
 [![Greenkeeper badge](https://badges.greenkeeper.io/facadejs/Facade.js.svg)](https://greenkeeper.io/)
 
 ## Demos
