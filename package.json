@@ -5,15 +5,15 @@
   "main": "facade.js",
   "license": "MIT",
   "devDependencies": {
-    "casperjs": "1.1.3",
-    "grunt": "1.0.1",
-    "grunt-casperjs": "2.2.1",
-    "grunt-contrib-jshint": "1.1.0",
-    "grunt-contrib-uglify": "2.2.0",
-    "grunt-contrib-watch": "1.0.0",
-    "grunt-notify": "0.4.5",
-    "grunt-shell": "2.1.0",
-    "load-grunt-tasks": "3.5.2"
+    "casperjs": "^1.1.3",
+    "grunt": "^1.0.1",
+    "grunt-casperjs": "^2.2.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^2.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-notify": "^0.4.5",
+    "grunt-shell": "^2.1.0",
+    "load-grunt-tasks": "^3.5.2"
   },
   "scripts": {
     "test": "make test"
